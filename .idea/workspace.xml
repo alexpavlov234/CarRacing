@@ -4,22 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Иницииране на проекта.">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/images/car-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/images/dodge-challenger-srt-hellcat.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Car.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Race.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/RaceHasCarAndDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Track.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/login.fxml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Добавени са модели, изображения и страница за вход. Добавено е разпределение на файловете на проекта.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/car-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/cars.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/main-screen.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,20 +44,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/alexp/Downloads/openjfx-19_windows-x64_bin-sdk.zip",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.5046083"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexp/Documents/Projects/CarRacing/src/main/resources/hristov/mihail/carracing&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5046083&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alexp\Documents\Projects\CarRacing\src\main\resources\hristov\mihail\carracing" />
       <recent name="C:\Users\alexp\Documents\Projects\CarRacing\src\main\java\hristov\mihail\carracing\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -97,7 +95,10 @@
       <option name="presentableId" value="Default" />
       <updated>1664474907738</updated>
       <workItem from="1664474909747" duration="4913000" />
-      <workItem from="1664480373777" duration="2737000" />
+      <workItem from="1664480373777" duration="3549000" />
+      <workItem from="1664695232477" duration="4632000" />
+      <workItem from="1664704441013" duration="1026000" />
+      <workItem from="1664705551624" duration="1203000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -106,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664475033076</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Добавени са модели, изображения и страница за вход. Добавено е разпределение на файловете на проекта.">
+      <created>1664483305790</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1664483305790</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +133,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Иницииране на проекта." />
-    <option name="LAST_COMMIT_MESSAGE" value="Иницииране на проекта." />
+    <MESSAGE value="Добавени са модели, изображения и страница за вход. Добавено е разпределение на файловете на проекта." />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавени са модели, изображения и страница за вход. Добавено е разпределение на файловете на проекта." />
   </component>
 </project>

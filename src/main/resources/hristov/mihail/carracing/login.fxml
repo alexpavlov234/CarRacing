@@ -19,7 +19,7 @@
         <children>
             <AnchorPane prefHeight="503.0" prefWidth="382.0" style="-fx-background-color: #0C39FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
-            <ImageView fx:id="backgroundImageView" fitHeight="503.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="backgroundImageView" fitHeight="509.0" fitWidth="389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0" />
                     <ImageView fx:id="imageView" fitHeight="76.0" fitWidth="138.0" layoutX="154.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@images/car-icon.png" />
@@ -37,7 +37,7 @@
                     </Label>
                 </children>
             </AnchorPane>
-            <VBox layoutX="466.0" layoutY="132.0" prefHeight="240.0" prefWidth="306.0" AnchorPane.bottomAnchor="131.0" AnchorPane.topAnchor="132.0">
+            <VBox layoutX="466.0" layoutY="132.0" prefHeight="240.0" prefWidth="306.0" AnchorPane.bottomAnchor="131.0" AnchorPane.rightAnchor="81.60000000000002" AnchorPane.topAnchor="132.0">
                 <children>
                     <TextField fx:id="txtUsername" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Потребителско име или имейл" />
             <Pane prefHeight="13.0" prefWidth="306.0" />

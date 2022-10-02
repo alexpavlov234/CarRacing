@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.MainScreenController">
+
+        <left>
+            <VBox prefHeight="503.0" prefWidth="190.0" spacing="5">
+         <AnchorPane prefHeight="191.0" prefWidth="206.0" style="-fx-background-color: #0C39FF;">
+            <children>
+               <Label alignment="CENTER" layoutX="16.0" layoutY="118.0" prefHeight="23.0" prefWidth="173.0" text="Car Racers" textFill="WHITE" AnchorPane.bottomAnchor="60.0">
+                  <font>
+                     <Font name="Segoe UI" size="18.0" />
+                  </font>
+               </Label>
+               <Label alignment="CENTER" layoutY="156.0" prefHeight="23.0" prefWidth="205.0" text="Управление на състезания" textFill="WHITE" AnchorPane.bottomAnchor="23.19999999999999">
+                  <font>
+                     <Font name="Segoe UI" size="12.0" />
+                  </font>
+               </Label>
+               <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="67.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="66.8" AnchorPane.rightAnchor="67.6" AnchorPane.topAnchor="30.0">
+                  <image>
+                     <Image url="@car-icon.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+                <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" text="Коли" userData="cars.fxml">
+            <VBox.margin>
+               <Insets left="5.0" right="5.0" />
+            </VBox.margin></Button>
+                <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" text="Състезания" userData="/sample/view_2.fxml">
+            <VBox.margin>
+               <Insets left="5.0" right="5.0" />
+            </VBox.margin></Button>
+                <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" text="Състезатели" userData="/sample/view_3.fxml">
+            <VBox.margin>
+               <Insets left="5.0" right="5.0" />
+            </VBox.margin></Button>
+         <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" prefWidth="206.0" text="Писти" userData="/sample/view_3.fxml">
+            <VBox.margin>
+               <Insets left="5.0" right="5.0" />
+            </VBox.margin></Button>
+            </VBox>
+        </left>
+        <center>
+            <fx:include source="cars.fxml" />
+        </center>
+    </BorderPane>
