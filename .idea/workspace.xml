@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Добавени са модели, изображения и страница за вход. Добавено е разпределение на файловете на проекта.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Поправен бъг в HelloApplication.java.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +44,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/apavlov/AppData/Local/SceneBuilder/SceneBuilder.exe",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.5046083",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
@@ -95,6 +94,8 @@
       <workItem from="1664705551624" duration="1203000" />
       <workItem from="1664707797943" duration="920000" />
       <workItem from="1664901678167" duration="4472000" />
+      <workItem from="1665729988423" duration="372000" />
+      <workItem from="1665730380279" duration="1371000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -110,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664483305790</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Поправен бъг в HelloApplication.java.">
+      <created>1665730206354</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1665730206354</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +138,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Иницииране на проекта." />
     <MESSAGE value="Добавени са модели, изображения и страница за вход. Добавено е разпределение на файловете на проекта." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавени са модели, изображения и страница за вход. Добавено е разпределение на файловете на проекта." />
+    <MESSAGE value="Поправен бъг в HelloApplication.java." />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправен бъг в HelloApplication.java." />
   </component>
 </project>
