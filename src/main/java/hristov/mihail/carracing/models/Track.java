@@ -43,8 +43,12 @@ public class Track
     }
 
 
-    public Track(int idTrack_, String trackName_, int trackLength_, String trackLocation_)
-    {
+    public Track(String trackName_, int trackLength_, String trackLocation_) {
+        this._trackName = trackName_;
+        this._trackLength = trackLength_;
+        this._trackLocation = trackLocation_;
+    }
+    public Track(int idTrack_, String trackName_, int trackLength_, String trackLocation_) {
         this._idTrack = idTrack_;
         this._trackName = trackName_;
         this._trackLength = trackLength_;

@@ -9,11 +9,12 @@ import java.util.Calendar;
 import java.util.Map;
 
 public class Database {
-    String url = "";
-    String user = "";
-    String password = "";
+    // Полетата са private, защото да не може да се променят от обект.
+    private static String url = "";
+    private static String user = "";
+    private static String password = "";
 
-    public ResultSet executeQuery(String sql) {
+    public static ResultSet executeQuery(String sql) {
         try {
             Connection myConnection = DriverManager.getConnection(url, user, password);
             Statement myStatement = myConnection.createStatement();

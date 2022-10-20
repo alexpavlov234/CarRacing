@@ -1,7 +1,6 @@
 package hristov.mihail.carracing.models;
 
-public class User
-{
+public class User {
     private int _idUser;
     public int getidUser()
     {
