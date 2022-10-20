@@ -6,10 +6,13 @@ package hristov.mihail.carracing.controllers;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import hristov.mihail.carracing.models.Track;
 import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.TrackService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,6 +55,14 @@ public class LoginController {
     @FXML
     void handleButtonAction(MouseEvent event) {
 
+    }
+    @FXML
+    void login(ActionEvent event) throws SQLException {
+        System.out.println(23);
+        Track track = new Track(1, "MonteCarlo", 32, "MonteCarlo");
+        TrackService.addTrack(track);
+        track.setTrackLength(23);
+        TrackService.updateTrack(track);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

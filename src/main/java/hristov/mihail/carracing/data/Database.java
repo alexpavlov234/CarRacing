@@ -10,9 +10,21 @@ import java.util.Map;
 
 public class Database {
     // Полетата са private, защото да не може да се променят от обект.
-    private static String url = "";
-    private static String user = "";
-    private static String password = "";
+    private static final String url = "jdbc:mysql://localhost:3306/carracers";
+    private static final String user = "root";
+    private static final String password = "BiBi123@&";
+
+    public static void execute(String sql) throws SQLException {
+
+            Connection myConnection = DriverManager.getConnection(url, user, password);
+            Statement myStatement = myConnection.createStatement();
+            //ВАЖНОООООООООООООООООООООООООО
+            //executeQuery -> execute
+            myStatement.execute(sql);
+
+
+
+    }
 
     public static ResultSet executeQuery(String sql) {
         try {
@@ -313,23 +325,23 @@ public class Database {
                 }
 
                 @Override
-                public void setFetchDirection(int direction) throws SQLException {
-
-                }
-
-                @Override
                 public int getFetchDirection() throws SQLException {
                     return 0;
                 }
 
                 @Override
-                public void setFetchSize(int rows) throws SQLException {
+                public void setFetchDirection(int direction) throws SQLException {
 
                 }
 
                 @Override
                 public int getFetchSize() throws SQLException {
                     return 0;
+                }
+
+                @Override
+                public void setFetchSize(int rows) throws SQLException {
+
                 }
 
                 @Override
