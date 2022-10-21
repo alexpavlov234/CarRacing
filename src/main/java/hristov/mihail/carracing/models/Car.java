@@ -1,75 +1,77 @@
 package hristov.mihail.carracing.models;
 
-public class Car
-{
-    private int _idCar;
-    public int getidCar()
-    {
-        return this._idCar;
-    }
-    public void setidCar(int value)
-    {
-        this._idCar = value;
+public class Car {
+    private int idCar;
+    private String modelCar;
+    private String brandCar;
+    private String engineCar;
+    private String fuelCar;
+    private int horsepowerCar;
+    private String imagePathCar;
+
+    public Car(int IdCar, String ModelCar, String BrandCar, String EngineCar, String FuelCar, int HorsepowerCar, String ImagePathCar) {
+        this.idCar = IdCar;
+        this.modelCar = ModelCar;
+        this.brandCar = BrandCar;
+        this.engineCar = EngineCar;
+        this.fuelCar = FuelCar;
+        this.horsepowerCar = HorsepowerCar;
+        this.imagePathCar = ImagePathCar;
     }
 
-    private String _modelCar;
-    public String getmodelCar()
-    {
-        return this._modelCar;
-    }
-    public void setmodelCar(String value)
-    {
-        this._modelCar = value;
+    public int getIdCar() {
+        return this.idCar;
     }
 
-    private String _brandCar;
-    public String getbrandCar()
-    {
-        return this._brandCar;
-    }
-    public void setbrandCar(String value)
-    {
-        this._brandCar = value;
+    public void setIdCar(int value) {
+        this.idCar = value;
     }
 
-    private int _mileageCar;
-    public int getmileageCar()
-    {
-        return this._mileageCar;
-    }
-    public void setmileageCar(int value)
-    {
-        this._mileageCar = value;
+    public String getModelCar() {
+        return this.modelCar;
     }
 
-    private java.sql.Date _serviceDate;
-    public java.sql.Date getserviceDate()
-    {
-        return this._serviceDate;
-    }
-    public void setserviceDate(java.sql.Date value)
-    {
-        this._serviceDate = value;
+    public void setModelCar(String value) {
+        this.modelCar = value;
     }
 
-    private String _imagePathCar;
-    public String getimagePathCar()
-    {
-        return this._imagePathCar;
-    }
-    public void setimagePathCar(String value)
-    {
-        this._imagePathCar = value;
+    public String getBrandCar() {
+        return this.brandCar;
     }
 
+    public void setBrandCar(String value) {
+        this.brandCar = value;
+    }
 
-    public Car(int idCar_,String modelCar_,String brandCar_,int mileageCar_,java.sql.Date serviceDate_,String imagePathCar_,Object CHARACTER_)
-    {
-        this._idCar = idCar_;
-        this._modelCar = modelCar_;
-        this._brandCar = brandCar_;
-        this._mileageCar = mileageCar_;
-        this._serviceDate = serviceDate_;
-        this._imagePathCar = imagePathCar_;
+    public String getEngineCar() {
+        return this.engineCar;
+    }
+
+    public void setEngineCar(String value) {
+        this.engineCar = value;
+    }
+
+    public String getFuelCar() {
+        return this.fuelCar;
+    }
+
+    public void setFuelCar(String value) {
+        this.fuelCar = value;
+    }
+
+    public int getHorsepowerCar() {
+        return this.horsepowerCar;
+    }
+
+    public void setHorsepowerCar(int value) {
+        this.horsepowerCar = value;
+    }
+
+    public String getImagePathCar() {
+        return this.imagePathCar;
+    }
+
+    public void setImagePathCar(String value) {
+        this.imagePathCar = value;
     }
 }

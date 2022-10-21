@@ -14,16 +14,17 @@ public class Database {
     private static final String user = "root";
     private static final String password = "BiBi123@&";
 
-    public static void execute(String sql) throws SQLException {
-
+    public static void execute(String sql)  {
+        try {
             Connection myConnection = DriverManager.getConnection(url, user, password);
             Statement myStatement = myConnection.createStatement();
             //ВАЖНОООООООООООООООООООООООООО
             //executeQuery -> execute
+
             myStatement.execute(sql);
-
-
-
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static ResultSet executeQuery(String sql) {

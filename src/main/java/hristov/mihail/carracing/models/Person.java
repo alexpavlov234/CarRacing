@@ -1,97 +1,87 @@
 package hristov.mihail.carracing.models;
 
-public class Person
-{
-    private int _idPerson;
-    public int getidPerson()
-    {
-        return this._idPerson;
-    }
-    public void setidPerson(int value)
-    {
-        this._idPerson = value;
+public class Person {
+    private int idPerson;
+    private String firstNamePerson;
+    private String middleNamePerson;
+    private String lastNamePerson;
+    private int agePerson;
+    private String nationalityPerson;
+    private int pointsPerson;
+    private String imagePathPerson;
+
+    public Person(int idPerson, String firstNamePerson, String middleNamePerson, String lastNamePerson, int agePerson, String nationalityPerson, int pointsPerson, String imagePathPerson) {
+        this.idPerson = idPerson;
+        this.firstNamePerson = firstNamePerson;
+        this.middleNamePerson = middleNamePerson;
+        this.lastNamePerson = lastNamePerson;
+        this.agePerson = agePerson;
+        this.nationalityPerson = nationalityPerson;
+        this.pointsPerson = pointsPerson;
+        this.imagePathPerson = imagePathPerson;
     }
 
-    private String _firstNamePerson;
-    public String getfirstNamePerson()
-    {
-        return this._firstNamePerson;
-    }
-    public void setfirstNamePerson(String value)
-    {
-        this._firstNamePerson = value;
+    public int getIdPerson() {
+        return this.idPerson;
     }
 
-    private String _middleNamePerson;
-    public String getmiddleNamePerson()
-    {
-        return this._middleNamePerson;
-    }
-    public void setmiddleNamePerson(String value)
-    {
-        this._middleNamePerson = value;
+    public void setIdPerson(int value) {
+        this.idPerson = value;
     }
 
-    private String _lastNamePerson;
-    public String getlastNamePerson()
-    {
-        return this._lastNamePerson;
-    }
-    public void setlastNamePerson(String value)
-    {
-        this._lastNamePerson = value;
+    public String getFirstNamePerson() {
+        return this.firstNamePerson;
     }
 
-    private int _agePerson;
-    public int getagePerson()
-    {
-        return this._agePerson;
-    }
-    public void setagePerson(int value)
-    {
-        this._agePerson = value;
+    public void setFirstNamePerson(String value) {
+        this.firstNamePerson = value;
     }
 
-    private String _nationalityPerson;
-    public String getnationalityPerson()
-    {
-        return this._nationalityPerson;
-    }
-    public void setnationalityPerson(String value)
-    {
-        this._nationalityPerson = value;
+    public String getMiddleNamePerson() {
+        return this.middleNamePerson;
     }
 
-    private int _pointsPerson;
-    public int getpointsPerson()
-    {
-        return this._pointsPerson;
-    }
-    public void setpointsPerson(int value)
-    {
-        this._pointsPerson = value;
+    public void setMiddleNamePerson(String value) {
+        this.middleNamePerson = value;
     }
 
-    private String _imagePathPerson;
-    public String getimagePathPerson()
-    {
-        return this._imagePathPerson;
-    }
-    public void setimagePathPerson(String value)
-    {
-        this._imagePathPerson = value;
+    public String getLastNamePerson() {
+        return this.lastNamePerson;
     }
 
+    public void setLastNamePerson(String value) {
+        this.lastNamePerson = value;
+    }
 
-    public Person(int idPerson_,String firstNamePerson_,String middleNamePerson_,String lastNamePerson_,int agePerson_,String nationalityPerson_,int pointsPerson_,String imagePathPerson_)
-    {
-        this._idPerson = idPerson_;
-        this._firstNamePerson = firstNamePerson_;
-        this._middleNamePerson = middleNamePerson_;
-        this._lastNamePerson = lastNamePerson_;
-        this._agePerson = agePerson_;
-        this._nationalityPerson = nationalityPerson_;
-        this._pointsPerson = pointsPerson_;
-        this._imagePathPerson = imagePathPerson_;
+    public int getAgePerson() {
+        return this.agePerson;
+    }
+
+    public void setAgePerson(int value) {
+        this.agePerson = value;
+    }
+
+    public String getNationalityPerson() {
+        return this.nationalityPerson;
+    }
+
+    public void setNationalityPerson(String value) {
+        this.nationalityPerson = value;
+    }
+
+    public int getPointsPerson() {
+        return this.pointsPerson;
+    }
+
+    public void setPointsPerson(int value) {
+        this.pointsPerson = value;
+    }
+
+    public String getImagePathPerson() {
+        return this.imagePathPerson;
+    }
+
+    public void setImagePathPerson(String value) {
+        this.imagePathPerson = value;
     }
 }

@@ -1,75 +1,67 @@
 package hristov.mihail.carracing.models;
 
-public class Race
-{
-    private int _idRace;
-    public int getidRace()
-    {
-        return this._idRace;
-    }
-    public void setidRace(int value)
-    {
-        this._idRace = value;
+public class Race {
+    private int idRace;
+    private int trackRace;
+    private java.sql.Date dateRace;
+    private int lapsRace;
+    private int pointsRace;
+    private int participantsRace;
+
+    public Race(int IdRace, int TrackRace, java.sql.Date DateRace, int LapsRace, int PointsRace, int ParticipantsRace) {
+        this.idRace = IdRace;
+        this.trackRace = TrackRace;
+        this.dateRace = DateRace;
+        this.lapsRace = LapsRace;
+        this.pointsRace = PointsRace;
+        this.participantsRace = ParticipantsRace;
     }
 
-    private int _trackRace;
-    public int gettrackRace()
-    {
-        return this._trackRace;
-    }
-    public void settrackRace(int value)
-    {
-        this._trackRace = value;
+    public int getIdRace() {
+        return this.idRace;
     }
 
-    private java.sql.Date _dateRace;
-    public java.sql.Date getdateRace()
-    {
-        return this._dateRace;
-    }
-    public void setdateRace(java.sql.Date value)
-    {
-        this._dateRace = value;
+    public void setIdRace(int value) {
+        this.idRace = value;
     }
 
-    private int _mileageRace;
-    public int getmileageRace()
-    {
-        return this._mileageRace;
-    }
-    public void setmileageRace(int value)
-    {
-        this._mileageRace = value;
+    public int getTrackRace() {
+        return this.trackRace;
     }
 
-    private int _lengthRace;
-    public int getlengthRace()
-    {
-        return this._lengthRace;
-    }
-    public void setlengthRace(int value)
-    {
-        this._lengthRace = value;
+    public void setTrackRace(int value) {
+        this.trackRace = value;
     }
 
-    private int _pointsRace;
-    public int getpointsRace()
-    {
-        return this._pointsRace;
-    }
-    public void setpointsRace(int value)
-    {
-        this._pointsRace = value;
+    public java.sql.Date getDateRace() {
+        return this.dateRace;
     }
 
+    public void setDateRace(java.sql.Date value) {
+        this.dateRace = value;
+    }
 
-    public Race(int idRace_, int trackRace_, java.sql.Date dateRace_, int mileageRace_, int lengthRace_, int pointsRace_)
-    {
-        this._idRace = idRace_;
-        this._trackRace = trackRace_;
-        this._dateRace = dateRace_;
-        this._mileageRace = mileageRace_;
-        this._lengthRace = lengthRace_;
-        this._pointsRace = pointsRace_;
+    public int getLapsRace() {
+        return this.lapsRace;
+    }
+
+    public void setLapsRace(int value) {
+        this.lapsRace = value;
+    }
+
+    public int getPointsRace() {
+        return this.pointsRace;
+    }
+
+    public void setPointsRace(int value) {
+        this.pointsRace = value;
+    }
+
+    public int getParticipantsRace() {
+        return this.participantsRace;
+    }
+
+    public void setParticipantsRace(int value) {
+        this.participantsRace = value;
     }
 }
