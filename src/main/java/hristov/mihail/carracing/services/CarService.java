@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CarService {
     public static void addCar(Car car) {
-        Database.execute("INSERT INTO Car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "'," + car.getFuelCar() + "," + car.getHorsepowerCar() + ");");
+        Database.execute("INSERT INTO Car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar, imagePathCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "'," + car.getFuelCar() + "," + car.getHorsepowerCar() + "'," + car.getImagePathCar() +");");
         //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
     }
 
@@ -18,7 +18,7 @@ public class CarService {
 //        //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
 //        Car car = null;
 //        try {
-//            car = new Car(resultSet.getString("nameCar"), Integer.parseInt(resultSet.getString("lengthCar")), resultSet.getString("locationCar"));
+//            car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), resultSet.getString("imagePathCar"));
 //        } catch (SQLException e) {
 //            //TODO: Екран за грешка
 //        }
@@ -27,7 +27,7 @@ public class CarService {
 //
 //    public static void updateCar(Car car) {
 //        //'
-//        Database.execute("UPDATE car SET nameCar = '" + car.getCarName() + "', lengthCar = " + car.getCarLength() + ", locationCar =' " + car.getCarLocation() + "'  WHERE idCar =" + car.getIdCar() + ";");
+//        Database.execute("UPDATE car SET modelCar = '" + car.getModelCar() + "', brandCar = " + car.getBrandCar() + ", engineCar =' " + car.getEngineCar() + ", fuelCar =' " + car.getFuelCar() + ", horsepowerCar = " + car.getHorsepowerCar() +"  WHERE idCar =" + car.getIdCar() + ";");
 //        //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
 //    }
 //
@@ -42,7 +42,7 @@ public class CarService {
 //        ArrayList<Car> allCars = new ArrayList<>();
 //        try {
 //            while ((resultSet.next())) {
-//                Car car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("nameCar"), Integer.parseInt(resultSet.getString("lengthCar")), resultSet.getString("locationCar"));
+//                Car car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getString("horsepowerCar"));
 //                allCars.add(car);
 //            }
 //        } catch (SQLException e) {
