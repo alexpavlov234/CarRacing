@@ -81,13 +81,13 @@ create table if not exists user
     emailUser     varchar(45) not null,
     passUser      varchar(45) not null,
     typeUser      varchar(45) not null,
-    userHasDriver int         not null,
-    primary key (idUser, userHasDriver),
+    userHasPerson int         not null,
+    primary key (idUser, userHasPerson),
     constraint fk_user_driver1
-        foreign key (userHasDriver) references person (idPerson)
+        foreign key (userHasPerson) references person (idPerson)
 );
 
 create index fk_user_driver1_idx
-    on user (userHasDriver);
+    on user (userHasPerson);
 
 

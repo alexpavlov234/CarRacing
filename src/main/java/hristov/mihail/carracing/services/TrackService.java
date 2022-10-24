@@ -18,7 +18,7 @@ public class TrackService {
         //INSERT INTO Track (nameTrack, lengthTrack, locationTrack) VALUES ('Monte Carlo',456,'Dupnica');
         Track track = null;
         try {
-            track = new Track(resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
+            track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
         } catch (SQLException e) {
             //TODO: Екран за грешка
         }

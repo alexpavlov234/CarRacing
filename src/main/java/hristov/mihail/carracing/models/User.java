@@ -5,14 +5,14 @@ public class User {
     private String emailUser;
     private String passUser;
     private String typeUser;
-    private int userHasDriver;
+    private int userHasPerson;
 
-    public User(int idUser, String emailUser, String passUser, String typeUser, int userHasDriver) {
+    public User(int idUser, String emailUser, String passUser, String typeUser, int userHasPerson) {
         this.idUser = idUser;
         this.emailUser = emailUser;
         this.passUser = passUser;
         this.typeUser = typeUser;
-        this.userHasDriver = userHasDriver;
+        this.userHasPerson = userHasPerson;
     }
 
     public int getIdUser() {
@@ -47,11 +47,11 @@ public class User {
         this.typeUser = value;
     }
 
-    public int getUserHasDriver() {
-        return this.userHasDriver;
+    public int getUserHasPerson() {
+        return this.userHasPerson;
     }
 
-    public void setUserHasDriver(int value) {
-        this.userHasDriver = value;
+    public void setUserHasPerson(int value) {
+        this.userHasPerson = value;
     }
 }
