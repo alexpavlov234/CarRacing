@@ -20,9 +20,9 @@ create table if not exists person
     firstNamePerson   varchar(45)  not null,
     middleNamePerson  varchar(45)  null,
     lastNamePerson    varchar(45)  not null,
-    agePerson         int          not null,
-    nationalityPerson varchar(45)  not null,
-    pointsPerson      int          not null,
+    agePerson         int          null,
+    nationalityPerson varchar(45)  null,
+    pointsPerson      int          null,
     imagePathPerson   varchar(100) null
 )
     auto_increment = 12;
