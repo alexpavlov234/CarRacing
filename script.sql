@@ -1,3 +1,5 @@
+create schema if not exists carracers;
+use carracers;
 create table if not exists car
 (
     idCar         int auto_increment
