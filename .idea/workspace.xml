@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Създаден е първият service клас.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_10_2022___11_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_10_2022___11_05__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
     </list>
@@ -136,7 +135,7 @@
       <workItem from="1666334569165" duration="5927000" />
       <workItem from="1666380565923" duration="2186000" />
       <workItem from="1666627627525" duration="2457000" />
-      <workItem from="1666730783635" duration="2294000" />
+      <workItem from="1666730783635" duration="3002000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -180,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666296952688</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Създаден е PersonService.">
+      <created>1666733170241</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1666733170241</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,7 +212,8 @@
     <MESSAGE value="Премахната е библиотеката JMetro." />
     <MESSAGE value="Работещ TrackService." />
     <MESSAGE value="Подобрен TrackService и създаден клас за тестване." />
-    <option name="LAST_COMMIT_MESSAGE" value="Подобрен TrackService и създаден клас за тестване." />
+    <MESSAGE value="Създаден е PersonService." />
+    <option name="LAST_COMMIT_MESSAGE" value="Създаден е PersonService." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

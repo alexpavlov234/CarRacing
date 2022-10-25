@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CarService {
     public static void addCar(Car car) {
-        Database.execute("INSERT INTO Car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar, imagePathCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "'," + car.getFuelCar() + "," + car.getHorsepowerCar() + "'," + car.getImagePathCar() + ");");
+        Database.execute("INSERT INTO Car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar, imagePathCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "','" + car.getFuelCar() + "'," + car.getHorsepowerCar() + ",'" + car.getImagePathCar() + "');");
         //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
     }
 
