@@ -23,7 +23,17 @@ public class UserService {
         }
         return user;
     }
-
+    public static User getUser(String emailUser) {
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM user WHERE (emailUser == " + emailUser + ");");
+        //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
+        User user = null;
+        try {
+            user = new User(Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), Integer.parseInt(resultSet.getString("userHasPerson")));
+        } catch (SQLException e) {
+            //TODO: Екран за грешка
+        }
+        return user;
+    }
     public static void updateUser(User user) {
         //'
         Database.execute("UPDATE user SET emailUser = '" + user.getEmailUser() + "', passUser = '" + user.getPassUser() + "', typeUser =' " + user.getTypeUser() + "', userHasPerson = " + user.getUserHasPerson() + "  WHERE idUser =" + user.getIdUser() + ";");

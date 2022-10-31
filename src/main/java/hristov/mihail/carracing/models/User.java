@@ -15,6 +15,18 @@ public class User {
         this.userHasPerson = userHasPerson;
     }
 
+    public User(String emailUser, String passUser, String typeUser, int userHasPerson) {
+        this.emailUser = emailUser;
+        this.passUser = passUser;
+        this.typeUser = typeUser;
+        this.userHasPerson = userHasPerson;
+    }
+
+    public User(String emailUser, String passUser) {
+        this.emailUser = emailUser;
+        this.passUser = passUser;
+    }
+
     public int getIdUser() {
         return this.idUser;
     }

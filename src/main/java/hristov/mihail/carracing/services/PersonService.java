@@ -29,6 +29,17 @@ public class PersonService {
         return person;
     }
 
+    public static Person getLastPerson(){
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM person ORDER BY idPerson DESC LIMIT 1;");
+
+        Person person = null;
+        try {
+            person = new Person(Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePathPerson"));
+        } catch (SQLException e) {
+            //TODO: Екран за грешка
+        }
+        return person;
+    }
     public static void updatePerson(Person person) {
         //'
         Database.execute("UPDATE person SET firstNamePerson = '" + person.getFirstNamePerson() + "', middleNamePerson = '" + person.getMiddleNamePerson() + "', lastNamePerson = '" + person.getLastNamePerson() + "', ageCar = " + person.getAgePerson() + ", nationalityPerson = '" + person.getNationalityPerson() + "', pointsPerson = " + person.getPointsPerson() + "  WHERE idPerson =" + person.getIdPerson() + ";");

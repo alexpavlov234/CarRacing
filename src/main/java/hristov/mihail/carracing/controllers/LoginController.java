@@ -1,19 +1,16 @@
-/**
- * Sample Skeleton for 'login.fxml' Controller Class
- */
-
 package hristov.mihail.carracing.controllers;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import hristov.mihail.carracing.models.Track;
+import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.User;
-import hristov.mihail.carracing.services.TrackService;
+import hristov.mihail.carracing.services.LoginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -21,58 +18,77 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class LoginController {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
 
-    @FXML // fx:id="btnForgot"
-    private Label btnForgot; // Value injected by FXMLLoader
+    @FXML
+    private ImageView backgroundImageView;
 
-    @FXML // fx:id="btnSignin"
-    private Button btnSignin; // Value injected by FXMLLoader
+    @FXML
+    private TextField emailField;
 
-    @FXML // fx:id="btnSignup"
-    private Button btnSignup; // Value injected by FXMLLoader
+    @FXML
+    private ImageView imageView;
 
-    @FXML // fx:id="lblErrors"
-    private Label lblErrors; // Value injected by FXMLLoader
+    @FXML
+    private Label lblErrors;
 
-    @FXML // fx:id="txtPassword"
-    private PasswordField txtPassword; // Value injected by FXMLLoader
+    @FXML
+    private Button loginButton;
 
-    @FXML // fx:id="backgroundImageView"
-    private ImageView backgroundImageView; // Value injected by FXMLLoader
+    @FXML
+    private PasswordField passwordField;
 
-    @FXML // fx:id="txtUsername"
-    private TextField txtUsername; // Value injected by FXMLLoader
-    @FXML // fx:id="imageView"
-    private ImageView imageView; // Value injected by FXMLLoader
+    @FXML
+    private Button registerButton;
+
     @FXML
     void handleButtonAction(MouseEvent event) {
 
     }
+
     @FXML
-    void login(ActionEvent event) throws SQLException {
-        System.out.println(23);
-        Track track = new Track(1, "MonteCarlo", 32, "MonteCarlo");
-        TrackService.addTrack(track);
-        track.setTrackLength(23);
-        TrackService.updateTrack(track);
+    void login(ActionEvent event) {
+        User user = new User(emailField.getText().trim(),passwordField.getText() );
+        LoginService.loginUser(user);
     }
+
+    @FXML
+    void openRegisterScreen(ActionEvent event) {
+        try {
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            stage.setTitle("Регистрация");
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception e){
+            //TODO: Екран за грешка
+        }
+    }
+
+
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert btnForgot != null : "fx:id=\"btnForgot\" was not injected: check your FXML file 'login.fxml'.";
-        assert btnSignin != null : "fx:id=\"btnSignin\" was not injected: check your FXML file 'login.fxml'.";
-        assert btnSignup != null : "fx:id=\"btnSignup\" was not injected: check your FXML file 'login.fxml'.";
+        assert backgroundImageView != null : "fx:id=\"backgroundImageView\" was not injected: check your FXML file 'login.fxml'.";
+        assert emailField != null : "fx:id=\"emailField\" was not injected: check your FXML file 'login.fxml'.";
+        assert imageView != null : "fx:id=\"imageView\" was not injected: check your FXML file 'login.fxml'.";
         assert lblErrors != null : "fx:id=\"lblErrors\" was not injected: check your FXML file 'login.fxml'.";
-        assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'login.fxml'.";
-        assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'login.fxml'.";
+        assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'login.fxml'.";
+        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'login.fxml'.";
+        assert registerButton != null : "fx:id=\"registerButton\" was not injected: check your FXML file 'login.fxml'.";
+
 
         File file = new File("src/main/java/hristov/mihail/carracing/images/car-icon.png");
         Image image = new Image(file.toURI().toString());
