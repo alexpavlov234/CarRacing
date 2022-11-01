@@ -1,4 +1,4 @@
-create schema if not exists carracers;
+create database if not exists carracers;
 use carracers;
 create table if not exists car
 (
@@ -83,13 +83,13 @@ create table if not exists user
     emailUser     varchar(45) not null,
     passUser      varchar(45) not null,
     typeUser      varchar(45) not null,
-    userHasPerson int         not null,
-    primary key (idUser, userHasPerson),
+    userHasDriver int         not null,
+    primary key (idUser, userHasDriver),
     constraint fk_user_driver1
-        foreign key (userHasPerson) references person (idPerson)
+        foreign key (userHasDriver) references person (idPerson)
 );
 
 create index fk_user_driver1_idx
-    on user (userHasPerson);
+    on user (userHasDriver);
 
 
