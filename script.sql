@@ -68,8 +68,8 @@ create table if not exists race_has_car_and_driver
         foreign key (idDriver) references person (idPerson),
     constraint fk_Race_has_Car_and_Driver_Race1
         foreign key (idRace) references race (idRace)
-)
-    auto_increment = 12;
+);
+
 
 create index fk_Race_has_Car_and_Driver_Car1_idx
     on race_has_car_and_driver (idCar);
@@ -80,16 +80,16 @@ create index fk_Race_has_Car_and_Driver_Driver1_idx
 create table if not exists user
 (
     idUser        int auto_increment,
-    emailUser     varchar(45) not null,
+    emailUser     varchar(45) not null unique,
     passUser      varchar(45) not null,
     typeUser      varchar(45) not null,
-    userHasDriver int         not null,
-    primary key (idUser, userHasDriver),
+    userHasPerson int         not null,
+    primary key (idUser, userHasPerson),
     constraint fk_user_driver1
-        foreign key (userHasDriver) references person (idPerson)
+        foreign key (userHasPerson) references person (idPerson)
 );
 
 create index fk_user_driver1_idx
-    on user (userHasDriver);
+    on user (userHasPerson);
 
 

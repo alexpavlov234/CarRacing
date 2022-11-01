@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.LoginService;
+import hristov.mihail.carracing.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,8 +57,8 @@ public class LoginController {
 
     @FXML
     void login(ActionEvent event) {
-        User user = new User(emailField.getText().trim(),passwordField.getText() );
-        LoginService.loginUser(user);
+        User user = UserService.getUser(emailField.getText().trim());
+        LoginService.loginUser(user, passwordField.getText());
     }
 
     @FXML

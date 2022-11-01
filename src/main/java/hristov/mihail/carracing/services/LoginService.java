@@ -5,8 +5,10 @@ import hristov.mihail.carracing.models.User;
 public class LoginService {
     private static User user = null;
 
-    public static void loginUser(User loggedUser) {
-        if (loggedUser.getPassUser().equals(UserService.getUser(loggedUser.getIdUser()).getPassUser())) {
+    public static void loginUser(User loggedUser, String password) {
+
+
+        if (loggedUser.getPassUser().equals(password)) {
             user = loggedUser;
         }
     }

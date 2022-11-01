@@ -93,7 +93,7 @@ public class RegisterController {
 
     @FXML
     void registerUser(ActionEvent event) {
-        try {
+       try {
             if (firstNameField.getText().trim().contains(" ") || secondNameField.getText().trim().contains(" ")) {
                 System.out.println("Invalid name!");
                 throw new Exception();
@@ -111,11 +111,11 @@ public class RegisterController {
                 System.out.println("Invalid email!");
                 throw new Exception();
             }
-        } catch (Exception e) {
+       } catch (Exception e) {
 
             //TODO: Екран за грешка
         }
-        firstNameField.getText().trim();
+
     }
 
     public static boolean validateEmail(String emailAddress) {
