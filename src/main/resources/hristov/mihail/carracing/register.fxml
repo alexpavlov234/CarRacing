@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="503.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RegisterController">
+<AnchorPane prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #0b0629;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RegisterController">
 
         <children>
             <AnchorPane prefHeight="503.0" prefWidth="382.0" style="-fx-background-color: #0C39FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -39,19 +39,19 @@
             </AnchorPane>
             <VBox layoutX="467.0" layoutY="63.0" prefHeight="364.0" prefWidth="306.0" AnchorPane.bottomAnchor="76.0" AnchorPane.rightAnchor="80.60000000000002" AnchorPane.topAnchor="63.0">
                 <children>
-            <TextField fx:id="firstNameField" prefHeight="34.0" prefWidth="275.0" promptText="Име" />
+            <TextField fx:id="firstNameField" prefHeight="34.0" prefWidth="275.0" promptText="Име" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px;" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
-            <TextField fx:id="secondNameField" prefHeight="34.0" prefWidth="275.0" promptText="Фамилия" />
+            <TextField fx:id="secondNameField" prefHeight="34.0" prefWidth="275.0" promptText="Фамилия" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px;" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
-                    <TextField fx:id="emailField" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Имейл" />
+                    <TextField fx:id="emailField" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Имейл" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px;" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
-                    <PasswordField fx:id="passwordField" layoutX="7.0" layoutY="61.0" prefHeight="34.0" prefWidth="275.0" promptText="Парола" />
+                    <PasswordField fx:id="passwordField" layoutX="7.0" layoutY="61.0" prefHeight="34.0" prefWidth="275.0" promptText="Парола" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px;" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
-            <PasswordField fx:id="confirmPasswordField" prefHeight="34.0" prefWidth="275.0" promptText="Повторете паролата" />
+            <PasswordField fx:id="confirmPasswordField" prefHeight="34.0" prefWidth="275.0" promptText="Повторете паролата" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px;" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="306.0">
                <children>
-                          <Button fx:id="registerButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registerUser" prefHeight="34.0" text="Регистрация" />
+                          <Button fx:id="registerButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registerUser" prefHeight="34.0" prefWidth="721.0" text="Регистрация" />
                </children>
             </HBox>
             <StackPane prefHeight="54.0" prefWidth="306.0">

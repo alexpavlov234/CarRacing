@@ -69,11 +69,11 @@ public class RegisterController {
     @FXML
     void openLoginScreen(ActionEvent event) {
         try {
-           Stage stage = (Stage) loginButton.getScene().getWindow();
+            Stage stage = (Stage) loginButton.getScene().getWindow();
 
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
 
-          Scene  scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(fxmlLoader.load());
 
             stage.setTitle("Вход");
             stage.setScene(scene);
@@ -93,7 +93,7 @@ public class RegisterController {
 
     @FXML
     void registerUser(ActionEvent event) {
-       try {
+        try {
             if (firstNameField.getText().trim().contains(" ") || secondNameField.getText().trim().contains(" ")) {
                 System.out.println("Invalid name!");
                 throw new Exception();
@@ -111,7 +111,7 @@ public class RegisterController {
                 System.out.println("Invalid email!");
                 throw new Exception();
             }
-       } catch (Exception e) {
+        } catch (Exception e) {
 
             //TODO: Екран за грешка
         }

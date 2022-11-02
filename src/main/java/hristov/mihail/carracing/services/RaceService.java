@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class RaceService {
 //    public static void addRace(Race race) {
-//        Database.execute("INSERT INTO Race (trackRace, dataRace, lapsRace, pointsRace, participantsRace) VALUES ('" + race.getTrackRace() + "','" + race.getDataRace() + "','" + race.getEngineRace() + "'," + race.getFuelRace() + "," + race.getHorsepowerRace() + "'," + race.getImagePathRace() + ");");
+//        Database.execute("INSERT INTO Race (trackRace, dataRace, lapsRace, pointsRace, participantsRace) VALUES ('" + race.getTrackRace() + "'," + race.getDateRace() + ",'" + race.getEngineRace() + "'," + race.getFuelRace() + "," + race.getHorsepowerRace() + "'," + race.getImagePathRace() + ");");
 //        //INSERT INTO Race (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
 //    }
 //
