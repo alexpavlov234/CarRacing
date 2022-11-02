@@ -44,7 +44,7 @@
                     <PasswordField fx:id="passwordField" layoutX="7.0" layoutY="61.0" prefHeight="34.0" prefWidth="275.0" promptText="Парола" />
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="306.0">
                <children>
-                          <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="137.0" text="Вход" />
+                          <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="342.0" text="Вход" />
                </children>
             </HBox>
             <StackPane prefHeight="54.0" prefWidth="306.0">

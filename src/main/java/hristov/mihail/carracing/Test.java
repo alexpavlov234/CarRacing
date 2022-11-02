@@ -13,7 +13,7 @@ public class Test {
     public static void main(String[] args){
 
         Track track = new Track("Baku", 200, "Baku");
-Person person = PersonService.getLastPerson();
+        Person person = PersonService.getLastPerson();
         User user = new User("alexpave23@gmail.com", "Mihail123@&", "User", PersonService.getLastPerson().getIdPerson());
         System.out.println(UserService.getUser("mihailhristov234@gmail.com".trim()).getIdUser());
         ArrayList<Track> tracks = TrackService.getAllTrack();
