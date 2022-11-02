@@ -58,7 +58,7 @@ public class LoginController {
     @FXML
     void login(ActionEvent event) {
         User user = UserService.getUser(emailField.getText().trim());
-        LoginService.loginUser(user, passwordField.getText());
+        LoginService.loginUser(user, passwordField.getText(), (Stage) registerButton.getScene().getWindow());
     }
 
     @FXML

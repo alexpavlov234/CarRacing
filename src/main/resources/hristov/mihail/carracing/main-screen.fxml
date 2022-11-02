@@ -10,46 +10,63 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.MainScreenController">
+<BorderPane fx:id="mainBorderPane" prefHeight="492.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.MainScreenController">
 
         <left>
-            <VBox prefHeight="503.0" prefWidth="190.0" spacing="5">
-         <AnchorPane prefHeight="191.0" prefWidth="206.0" style="-fx-background-color: #0C39FF;">
-            <children>
-               <Label alignment="CENTER" layoutX="16.0" layoutY="118.0" prefHeight="23.0" prefWidth="173.0" text="Car Racers" textFill="WHITE" AnchorPane.bottomAnchor="60.0">
-                  <font>
-                     <Font name="Segoe UI" size="18.0" />
-                  </font>
-               </Label>
-               <Label alignment="CENTER" layoutY="156.0" prefHeight="23.0" prefWidth="205.0" text="Управление на състезания" textFill="WHITE" AnchorPane.bottomAnchor="23.19999999999999">
-                  <font>
-                     <Font name="Segoe UI" size="12.0" />
-                  </font>
-               </Label>
-               <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="67.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="66.8" AnchorPane.rightAnchor="67.6" AnchorPane.topAnchor="30.0">
-                  <image>
-                     <Image url="@car-icon.png" />
-                  </image>
-               </ImageView>
-            </children>
-         </AnchorPane>
-                <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" text="Коли" userData="cars.fxml">
-            <VBox.margin>
-               <Insets left="5.0" right="5.0" />
-            </VBox.margin></Button>
-                <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" text="Състезания" userData="/sample/view_2.fxml">
-            <VBox.margin>
-               <Insets left="5.0" right="5.0" />
-            </VBox.margin></Button>
-                <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" text="Състезатели" userData="/sample/view_3.fxml">
-            <VBox.margin>
-               <Insets left="5.0" right="5.0" />
-            </VBox.margin></Button>
-         <Button maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" prefWidth="206.0" text="Писти" userData="/sample/view_3.fxml">
-            <VBox.margin>
-               <Insets left="5.0" right="5.0" />
-            </VBox.margin></Button>
-            </VBox>
+      <AnchorPane style="-fx-background-color: #041142;">
+         <children>
+            <AnchorPane prefHeight="191.0" prefWidth="206.0" style="-fx-background-color: #0C39FF;">
+               <children>
+                  <Label alignment="CENTER" layoutX="16.0" layoutY="118.0" prefHeight="23.0" prefWidth="173.0" text="Car Racers" textFill="WHITE" AnchorPane.bottomAnchor="60.0">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutY="156.0" prefHeight="23.0" prefWidth="205.0" text="Управление на състезания" textFill="WHITE" AnchorPane.bottomAnchor="23.19999999999999">
+                     <font>
+                        <Font name="Segoe UI" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="67.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="66.8" AnchorPane.rightAnchor="67.6" AnchorPane.topAnchor="30.0">
+                     <image>
+                        <Image url="@car-icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+                  <VBox layoutY="193.0" prefHeight="182.0" prefWidth="206.0" spacing="5" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="193.0">
+               <children>
+                         <Button fx:id="carScreenButton" maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView" prefHeight="40.0" text="Коли" userData="cars.fxml">
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                         <Button fx:id="raceScreenButton" maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView1" prefHeight="40.0" text="Състезания" userData="/sample/view_2.fxml">
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                         <Button fx:id="personScreenButton" maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView2" prefHeight="40.0" text="Състезатели" userData="/sample/view_3.fxml">
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="tracksScreenButton" maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView3" prefHeight="40.0" prefWidth="206.0" text="Писти" userData="/sample/view_3.fxml">
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+                  </VBox>
+            <AnchorPane layoutY="415.0" prefHeight="77.0" prefWidth="206.0">
+               <children>
+                  <Button fx:id="exitUserButton" layoutX="140.0" layoutY="40.0" mnemonicParsing="false" onAction="#exitUser" prefHeight="26.0" prefWidth="61.0" text="Изход" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="14.0" />
+                  <Label fx:id="profileNameLabel" layoutX="14.0" layoutY="21.0" prefHeight="38.0" prefWidth="102.0" text="Профил" textFill="WHITE" />
+                  <Button fx:id="profileUserButton" layoutX="142.0" layoutY="11.0" mnemonicParsing="false" onAction="#exitUser" prefHeight="25.0" prefWidth="61.0" text="Профил" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
         </left>
         <center>
             <fx:include source="cars.fxml" />

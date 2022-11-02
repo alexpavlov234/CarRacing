@@ -18,11 +18,13 @@ public class PersonService {
     }
 
     public static Person getPerson(int idPerson) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM person WHERE (idPerson == " + idPerson + ");");
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM person WHERE (idPerson = " + idPerson + ");");
         //INSERT INTO Person (namePerson, lengthPerson, locationPerson) VALUES ('Monte Personlo',456,'Dupnica');
         Person person = null;
+
         try {
-            person = new Person(Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePathPerson"));
+            resultSet.next();
+            person = new Person(resultSet.getString("idPerson")==null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson")==null ? 0 :Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson")==null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePathPerson"));
         } catch (SQLException e) {
             //TODO: Екран за грешка
         }
