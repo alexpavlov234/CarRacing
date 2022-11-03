@@ -14,7 +14,7 @@ public class CarService {
     }
 
     public static Car getCar(int idCar) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (idCar == " + idCar + ");");
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (idCar = " + idCar + ");");
         //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
         Car car = null;
         try {

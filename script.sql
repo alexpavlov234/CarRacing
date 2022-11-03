@@ -10,8 +10,7 @@ create table if not exists car
     fuelCar       varchar(45)  not null,
     horsepowerCar int          not null,
     imagePathCar  varchar(100) null
-)
-    auto_increment = 12;
+);
 
 create table if not exists person
 (
@@ -24,8 +23,7 @@ create table if not exists person
     nationalityPerson varchar(45)  null,
     pointsPerson      int          null,
     imagePathPerson   varchar(100) null
-)
-    auto_increment = 12;
+);
 
 create table if not exists track
 (
@@ -48,8 +46,8 @@ create table if not exists race
     primary key (idRace, trackRace),
     constraint fk_race_track1
         foreign key (trackRace) references track (idTrack)
-)
-    auto_increment = 7;
+);
+
 
 create index fk_race_track1_idx
     on race (trackRace);

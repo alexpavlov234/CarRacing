@@ -9,6 +9,23 @@ public class Car {
     private int horsepowerCar;
     private String imagePathCar;
 
+    public Car(String modelCar, String brandCar, String engineCar, String fuelCar, int horsepowerCar) {
+        this.modelCar = modelCar;
+        this.brandCar = brandCar;
+        this.engineCar = engineCar;
+        this.fuelCar = fuelCar;
+        this.horsepowerCar = horsepowerCar;
+    }
+
+    public Car(String modelCar, String brandCar, String engineCar, String fuelCar, int horsepowerCar, String imagePathCar) {
+        this.modelCar = modelCar;
+        this.brandCar = brandCar;
+        this.engineCar = engineCar;
+        this.fuelCar = fuelCar;
+        this.horsepowerCar = horsepowerCar;
+        this.imagePathCar = imagePathCar;
+    }
+
     public Car(int IdCar, String ModelCar, String BrandCar, String EngineCar, String FuelCar, int HorsepowerCar, String ImagePathCar) {
         this.idCar = IdCar;
         this.modelCar = ModelCar;
