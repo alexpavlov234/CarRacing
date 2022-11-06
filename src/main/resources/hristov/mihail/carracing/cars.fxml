@@ -16,9 +16,9 @@
       </Label>
       <TableView fx:id="table" layoutX="14.0" layoutY="55.0" prefHeight="335.0" prefWidth="572.0" AnchorPane.bottomAnchor="53.80000000000001" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0">
         <columns>
-          <TableColumn fx:id="model" editable="false" prefWidth="85.0" style="-fx-alignment: CENTER-LEFT;" resizable="false" text="Модел" />
-          <TableColumn fx:id="brand" editable="false" prefWidth="259.0" style="-fx-alignment: CENTER-LEFT;" resizable="false" text="Марка" />
-            <TableColumn fx:id="actions" editable="false" maxWidth="1.7976931348623157E308" prefWidth="293.0" resizable="false" text="Действия" />
+          <TableColumn fx:id="model" editable="false" prefWidth="208.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" text="Модел" />
+          <TableColumn fx:id="brand" editable="false" prefWidth="228.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" text="Марка" />
+            <TableColumn fx:id="actions" editable="false" maxWidth="1.7976931348623157E308" prefWidth="201.0" resizable="false" style="-fx-alignment: CENTER;" text="Действия" />
         </columns>
       </TableView>
       <Button fx:id="addCar" layoutX="600.0" layoutY="418.0" mnemonicParsing="false" onAction="#addCar" text="Добави" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />

@@ -19,12 +19,14 @@ public class UserService {
         try {
             //TODO: Задължително
             resultSet.next();
-            user = new User(resultSet.getString("idUser")==null ? 0 :Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"),resultSet.getString("userHasPerson")==null ? 0 : Integer.parseInt(resultSet.getString("userHasPerson")));
+            user = new User(resultSet.getString("idUser") == null ? 0 : Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getString("userHasPerson") == null ? 0 : Integer.parseInt(resultSet.getString("userHasPerson")));
         } catch (SQLException e) {
             //TODO: Екран за грешка
+            e.printStackTrace();
         }
         return user;
     }
+
     public static User getUser(String emailUser) {
 
         //TODO: Да проверим къде трябва да има кавички
@@ -42,6 +44,7 @@ public class UserService {
         }
         return user;
     }
+
     public static void updateUser(User user) {
         //'
         Database.execute("UPDATE user SET emailUser = '" + user.getEmailUser() + "', passUser = '" + user.getPassUser() + "', typeUser =' " + user.getTypeUser() + "', userHasPerson = " + user.getUserHasPerson() + "  WHERE idUser =" + user.getIdUser() + ";");

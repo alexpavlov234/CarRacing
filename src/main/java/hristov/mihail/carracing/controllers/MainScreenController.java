@@ -48,6 +48,9 @@ public class MainScreenController {
     private Button tracksScreenButton;
 
     @FXML
+    private Button rankingScreenButton;
+
+    @FXML
     void exitUser(ActionEvent event) {
         try {
             LoginService.logoutUser();
@@ -60,7 +63,7 @@ public class MainScreenController {
             stage.setTitle("Вход");
             stage.setScene(scene);
             stage.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             //TODO: Екран за грешка
         }
     }
@@ -69,6 +72,7 @@ public class MainScreenController {
     void handleShowView(ActionEvent event) {
         loadFXML("cars.fxml");
     }
+
     @FXML
     private void handleShowView1(ActionEvent e) {
         loadFXML("races.fxml");
@@ -78,11 +82,11 @@ public class MainScreenController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(url));
             mainBorderPane.setCenter(fxmlLoader.load());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleShowView2(ActionEvent e) {
         loadFXML("/sample/view_2.fxml");
@@ -91,6 +95,11 @@ public class MainScreenController {
     @FXML
     private void handleShowView3(ActionEvent e) {
         loadFXML("/sample/view_3.fxml");
+    }
+
+    @FXML
+    private void handleShowView4(ActionEvent e) {
+        loadFXML("/sample/view_4.fxml");
     }
 
     @FXML
@@ -104,7 +113,7 @@ public class MainScreenController {
         assert raceScreenButton != null : "fx:id=\"raceScreenButton\" was not injected: check your FXML file 'main-screen.fxml'.";
         assert tracksScreenButton != null : "fx:id=\"tracksScreenButton\" was not injected: check your FXML file 'main-screen.fxml'.";
         Person loggedPerson = PersonService.getPerson(LoginService.getUser().getUserHasPerson());
-        profileNameLabel.setText("Здравей, \n"  +  loggedPerson.getFirstNamePerson() + " " + loggedPerson.getLastNamePerson());
+        profileNameLabel.setText("Здравей, \n" + loggedPerson.getFirstNamePerson() + " " + loggedPerson.getLastNamePerson());
     }
 
 }

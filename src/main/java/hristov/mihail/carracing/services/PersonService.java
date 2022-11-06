@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class PersonService {
     public static void addPerson(Person person) {
-        Database.execute("INSERT INTO Person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, imagePathPerson) VALUES ('" + person.getFirstNamePerson() + "','" + person.getMiddleNamePerson() + "','" + person.getLastNamePerson() + "'," + person.getAgePerson() + ",'" + person.getNationalityPerson() + "'," + person.getPointsPerson() + ",'" + person.getImagePathPerson() + "');");
+        Database.execute("INSERT INTO Person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, image) VALUES ('" + person.getFirstNamePerson() + "','" + person.getMiddleNamePerson() + "','" + person.getLastNamePerson() + "'," + person.getAgePerson() + ",'" + person.getNationalityPerson() + "'," + person.getPointsPerson() + ",'" + person.getImagePathPerson() + "');");
         //INSERT INTO Person (namePerson, lengthPerson, locationPerson) VALUES ('Monte Personlo',456,'Dupnica');
     }
 
@@ -24,26 +24,29 @@ public class PersonService {
 
         try {
             resultSet.next();
-            person = new Person(resultSet.getString("idPerson")==null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson")==null ? 0 :Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson")==null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePathPerson"));
+            person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePerson"));
         } catch (SQLException e) {
+            e.printStackTrace();
             //TODO: Екран за грешка
         }
         return person;
     }
 
-    public static Person getLastPerson(){
+    public static Person getLastPerson() {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM person ORDER BY idPerson DESC LIMIT 1;");
 
         Person person = null;
-       try {
-           resultSet.next();
-           //TODO: Проверка за null стойности
-            person = new Person(resultSet.getString("idPerson")==null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson")==null ? 0 :Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson")==null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePathPerson"));
- } catch (SQLException e) {
-         //TODO: Екран за грешка
- }
+        try {
+            resultSet.next();
+            //TODO: Проверка за null стойности
+            person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePerson"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //TODO: Екран за грешка
+        }
         return person;
     }
+
     public static void updatePerson(Person person) {
         //'
         Database.execute("UPDATE person SET firstNamePerson = '" + person.getFirstNamePerson() + "', middleNamePerson = '" + person.getMiddleNamePerson() + "', lastNamePerson = '" + person.getLastNamePerson() + "', ageCar = " + person.getAgePerson() + ", nationalityPerson = '" + person.getNationalityPerson() + "', pointsPerson = " + person.getPointsPerson() + "  WHERE idPerson =" + person.getIdPerson() + ";");
@@ -61,7 +64,7 @@ public class PersonService {
         ArrayList<Person> allPersons = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-                Person person = new Person(Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePathPerson"));
+                Person person = new Person(Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePerson"));
                 allPersons.add(person);
             }
         } catch (SQLException e) {

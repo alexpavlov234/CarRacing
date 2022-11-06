@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="270.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.EditCarController">
+<AnchorPane prefHeight="270.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.CarModalController">
    <children>
       <Label fx:id="labelCarName" layoutX="14.0" layoutY="19.0" text="Кола" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
          <font>
@@ -71,6 +71,11 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="applyChangeButton" layoutX="631.0" layoutY="232.0" mnemonicParsing="false" onAction="#applyChanges" text="Приложи" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <HBox layoutX="462.0" layoutY="231.0" spacing="5.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Button fx:id="uploadImageButton" mnemonicParsing="false" onAction="#uploadImage" text="Качи изображение" />
+            <Button fx:id="applyChangeButton" mnemonicParsing="false" onAction="#applyChanges" text="Приложи" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

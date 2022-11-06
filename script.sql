@@ -9,7 +9,7 @@ create table if not exists car
     engineCar     varchar(45)  not null,
     fuelCar       varchar(45)  not null,
     horsepowerCar int          not null,
-    imagePathCar  varchar(100) null
+    imageCar mediumblob null
 );
 
 create table if not exists person
@@ -22,7 +22,7 @@ create table if not exists person
     agePerson         int          null,
     nationalityPerson varchar(45)  null,
     pointsPerson      int          null,
-    imagePathPerson   varchar(100) null
+    imagePerson   mediumblob null
 );
 
 create table if not exists track
@@ -32,7 +32,7 @@ create table if not exists track
     nameTrack      varchar(45)  not null,
     lengthTrack    int          not null,
     locationTrack  varchar(45)  not null,
-    imagePathTrack varchar(100) null
+    imageTrack mediumblob null
 );
 
 create table if not exists race

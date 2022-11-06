@@ -14,7 +14,7 @@ public class Database {
     private static final String user = "root";
     private static final String password = "BiBi123@&";
 
-    public static void execute(String sql)  {
+    public static void execute(String sql) {
         try {
             Connection myConnection = DriverManager.getConnection(url, user, password);
             Statement myStatement = myConnection.createStatement();
@@ -22,6 +22,14 @@ public class Database {
             //executeQuery -> execute
 
             myStatement.execute(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -993,4 +1001,15 @@ public class Database {
         }
     }
 
+    public static Blob createBlob() {
+
+        try {
+            Connection myConnection = DriverManager.getConnection(url, user, password);
+            Blob blobData = myConnection.createBlob();
+            return blobData;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

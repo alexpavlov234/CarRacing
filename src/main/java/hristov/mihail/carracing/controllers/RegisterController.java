@@ -61,6 +61,18 @@ public class RegisterController {
     @FXML
     private TextField secondNameField;
 
+    public static boolean isValidPassword(String password) {
+        String regex = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
+    public static boolean validateEmail(String emailAddress) {
+        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        return Pattern.compile(regexPattern).matcher(emailAddress).matches();
+    }
+
     @FXML
     void handleButtonAction(MouseEvent event) {
 
@@ -82,13 +94,6 @@ public class RegisterController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static boolean isValidPassword(String password) {
-        String regex = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
     }
 
     @FXML
@@ -113,17 +118,9 @@ public class RegisterController {
             }
         } catch (Exception e) {
 
-            //TODO: Екран за грешка
+            e.printStackTrace();
         }
 
-    }
-
-    public static boolean validateEmail(String emailAddress) {
-        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
-                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-        return Pattern.compile(regexPattern)
-                .matcher(emailAddress)
-                .matches();
     }
 
     @FXML

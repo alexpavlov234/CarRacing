@@ -26,8 +26,8 @@ public class LoginService {
                 stage.setScene(scene);
                 stage.show();
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,5 +1,7 @@
 package hristov.mihail.carracing.models;
 
+import java.sql.Blob;
+
 public class Car {
     private int idCar;
     private String modelCar;
@@ -7,7 +9,7 @@ public class Car {
     private String engineCar;
     private String fuelCar;
     private int horsepowerCar;
-    private String imagePathCar;
+    private java.sql.Blob imageCar;
 
     public Car(String modelCar, String brandCar, String engineCar, String fuelCar, int horsepowerCar) {
         this.modelCar = modelCar;
@@ -17,23 +19,33 @@ public class Car {
         this.horsepowerCar = horsepowerCar;
     }
 
-    public Car(String modelCar, String brandCar, String engineCar, String fuelCar, int horsepowerCar, String imagePathCar) {
+    public Car(String modelCar, String brandCar, String engineCar, String fuelCar, int horsepowerCar, Blob imageCar) {
         this.modelCar = modelCar;
         this.brandCar = brandCar;
         this.engineCar = engineCar;
         this.fuelCar = fuelCar;
         this.horsepowerCar = horsepowerCar;
-        this.imagePathCar = imagePathCar;
+        this.imageCar = imageCar;
     }
 
-    public Car(int IdCar, String ModelCar, String BrandCar, String EngineCar, String FuelCar, int HorsepowerCar, String ImagePathCar) {
+
+    public Car(int IdCar, String ModelCar, String BrandCar, String EngineCar, String FuelCar, int HorsepowerCar, Blob imageCar) {
         this.idCar = IdCar;
         this.modelCar = ModelCar;
         this.brandCar = BrandCar;
         this.engineCar = EngineCar;
         this.fuelCar = FuelCar;
         this.horsepowerCar = HorsepowerCar;
-        this.imagePathCar = ImagePathCar;
+        this.imageCar = imageCar;
+    }
+
+    public Car(int IdCar, String ModelCar, String BrandCar, String EngineCar, String FuelCar, int HorsepowerCar) {
+        this.idCar = IdCar;
+        this.modelCar = ModelCar;
+        this.brandCar = BrandCar;
+        this.engineCar = EngineCar;
+        this.fuelCar = FuelCar;
+        this.horsepowerCar = HorsepowerCar;
     }
 
     public int getIdCar() {
@@ -84,11 +96,11 @@ public class Car {
         this.horsepowerCar = value;
     }
 
-    public String getImagePathCar() {
-        return this.imagePathCar;
+    public Blob getImageCar() {
+        return this.imageCar;
     }
 
-    public void setImagePathCar(String value) {
-        this.imagePathCar = value;
+    public void setImageCar(Blob value) {
+        this.imageCar = value;
     }
 }

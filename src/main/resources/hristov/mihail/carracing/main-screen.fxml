@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" prefHeight="492.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.MainScreenController">
+<BorderPane fx:id="mainBorderPane" prefHeight="594.0" prefWidth="874.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.MainScreenController">
 
         <left>
       <AnchorPane style="-fx-background-color: #041142;">
@@ -56,9 +56,14 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
+                  <Button fx:id="rankingScreenButton" maxHeight="60.0" maxWidth="1.7976931348623157E308" onAction="#handleShowView4" prefHeight="40.0" prefWidth="206.0" text="Класация" userData="/sample/view_3.fxml">
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
                   </VBox>
-            <AnchorPane layoutY="415.0" prefHeight="77.0" prefWidth="206.0">
+            <AnchorPane layoutY="517.0" prefHeight="77.0" prefWidth="206.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
                   <Button fx:id="exitUserButton" layoutX="140.0" layoutY="40.0" mnemonicParsing="false" onAction="#exitUser" prefHeight="26.0" prefWidth="61.0" text="Изход" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="14.0" />
                   <Label fx:id="profileNameLabel" layoutX="14.0" layoutY="21.0" prefHeight="38.0" prefWidth="102.0" text="Профил" textFill="WHITE" />

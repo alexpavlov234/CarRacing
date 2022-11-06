@@ -15,10 +15,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -54,8 +51,7 @@ public class CarsController {
         model.setCellValueFactory(new PropertyValueFactory<Car, String>("modelCar"));
         actions.setCellValueFactory(new PropertyValueFactory<Car, String>("fuelCar"));
 
-        Callback<TableColumn<Car, String>, TableCell<Car, String>> cellFactory
-                = //
+        Callback<TableColumn<Car, String>, TableCell<Car, String>> cellFactory = //
                 new Callback<TableColumn<Car, String>, TableCell<Car, String>>() {
                     @Override
                     public TableCell call(final TableColumn<Car, String> param) {
@@ -85,16 +81,13 @@ public class CarsController {
 
                                         try {
                                             Stage stage = new Stage();
-                                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("edit-car.fxml"));
-
-
+                                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
 
 
                                             Scene scene = new Scene(fxmlLoader.load());
                                             //dialogController.setUser(car.getIdCar());
-                                            EditCarController dialogController =
-                                                    fxmlLoader.<EditCarController>getController();
-                                            dialogController.setUser(car);
+                                            CarModalController dialogController = fxmlLoader.getController();
+                                            dialogController.setCar(car);
                                             stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                             stage.setScene(scene);
                                             stage.show();
@@ -119,15 +112,14 @@ public class CarsController {
         actions.setCellFactory(cellFactory);
         table.setItems(carObservableList);
     }
+
     @FXML
     void addCar(ActionEvent event) {
 
 
         try {
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("add-car.fxml"));
-
-
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
 
 
             Scene scene = new Scene(fxmlLoader.load());
