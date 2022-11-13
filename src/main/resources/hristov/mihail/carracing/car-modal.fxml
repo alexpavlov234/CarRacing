@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="270.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.CarModalController">
+<AnchorPane prefHeight="270.0" prefWidth="683.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.CarModalController">
    <children>
-      <Label fx:id="labelCarName" layoutX="14.0" layoutY="19.0" text="Кола" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
+      <Label fx:id="labelCarName" layoutX="14.0" layoutY="19.0" styleClass="labelWhite" text="Кола" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
          <font>
             <Font name="Segoe UI" size="21.0" />
          </font>
       </Label>
-      <ImageView fx:id="carImageView" fitHeight="198.0" fitWidth="294.0" layoutX="249.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <ImageView fx:id="carImageView" fitHeight="198.0" fitWidth="294.0" layoutX="249.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="image" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <VBox layoutX="14.0" layoutY="75.0" prefHeight="150.0" prefWidth="359.0" spacing="5.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label" prefHeight="2.0" prefWidth="48.0" text="Марка:">
+                  <Label fx:id="label" prefHeight="2.0" prefWidth="48.0" styleClass="labelWhite" text="Марка:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -31,7 +31,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label1" prefHeight="2.0" prefWidth="48.0" text="Модел:">
+                  <Label fx:id="label1" prefHeight="2.0" prefWidth="48.0" styleClass="labelWhite" text="Модел:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -41,7 +41,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label2" prefHeight="18.0" prefWidth="66.0" text="Двигател:">
+                  <Label fx:id="label2" prefHeight="18.0" prefWidth="66.0" styleClass="labelWhite" text="Двигател:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -51,7 +51,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label3" prefHeight="18.0" prefWidth="86.0" text="Конски сили:">
+                  <Label fx:id="label3" prefHeight="18.0" prefWidth="86.0" styleClass="labelWhite" text="Конски сили:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -61,7 +61,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="356.0" spacing="10.0">
                <children>
-                  <Label fx:id="label4" prefHeight="18.0" prefWidth="252.0" text="Вместимост на резервоара за гориво:">
+                  <Label fx:id="label4" prefHeight="18.0" prefWidth="252.0" styleClass="labelWhite" text="Вместимост на резервоара за гориво:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>

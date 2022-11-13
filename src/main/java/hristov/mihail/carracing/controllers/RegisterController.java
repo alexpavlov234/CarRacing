@@ -92,7 +92,22 @@ public class RegisterController {
             stage.show();
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(e.getMessage());
+            stage1.setTitle("Системна грешка");
+            stage1.setScene(scene);
+            stage1.show();
         }
     }
 
@@ -118,7 +133,22 @@ public class RegisterController {
             }
         } catch (Exception e) {
 
-            e.printStackTrace();
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(e.getMessage());
+            stage1.setTitle("Системна грешка");
+            stage1.setScene(scene);
+            stage1.show();
         }
 
     }

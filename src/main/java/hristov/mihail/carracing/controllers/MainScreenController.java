@@ -64,7 +64,22 @@ public class MainScreenController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            //TODO: Екран за грешка
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(e.getMessage());
+            stage1.setTitle("Системна грешка");
+            stage1.setScene(scene);
+            stage1.show();
         }
     }
 
@@ -83,7 +98,22 @@ public class MainScreenController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(url));
             mainBorderPane.setCenter(fxmlLoader.load());
         } catch (IOException e) {
-            e.printStackTrace();
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(e.getMessage());
+            stage1.setTitle("Системна грешка");
+            stage1.setScene(scene);
+            stage1.show();
         }
     }
 
@@ -112,7 +142,7 @@ public class MainScreenController {
         assert mainBorderPane != null : "fx:id=\"mainBorderPane\" was not injected: check your FXML file 'main-screen.fxml'.";
         assert raceScreenButton != null : "fx:id=\"raceScreenButton\" was not injected: check your FXML file 'main-screen.fxml'.";
         assert tracksScreenButton != null : "fx:id=\"tracksScreenButton\" was not injected: check your FXML file 'main-screen.fxml'.";
-        Person loggedPerson = PersonService.getPerson(LoginService.getUser().getUserHasPerson());
+        Person loggedPerson = PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson());
         profileNameLabel.setText("Здравей, \n" + loggedPerson.getFirstNamePerson() + " " + loggedPerson.getLastNamePerson());
     }
 

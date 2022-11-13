@@ -1,25 +1,21 @@
 package hristov.mihail.carracing;
 
 import hristov.mihail.carracing.models.Person;
-import hristov.mihail.carracing.models.Track;
-import hristov.mihail.carracing.models.User;
-import hristov.mihail.carracing.services.PersonService;
-import hristov.mihail.carracing.services.TrackService;
-import hristov.mihail.carracing.services.UserService;
+import hristov.mihail.carracing.services.*;
 
 import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args){
+        Person person = new Person(5,"Misho", "Benkoveca", "Skisho", 18,"bulgarin", 100, null);
 
-        Track track = new Track("Baku", 200, "Baku");
-        Person person = PersonService.getLastPerson();
-        User user = new User("alexpave23@gmail.com", "Mihail123@&", "User", PersonService.getLastPerson().getIdPerson());
-        System.out.println(UserService.getUser("mihailhristov234@gmail.com".trim()).getIdUser());
-        ArrayList<Track> tracks = TrackService.getAllTrack();
-        for (Track track2 : tracks) {
-            System.out.println(track2.getIdTrack());
-        }
-
+      // PersonService.addPerson(person);
+        //PersonService.addPerson("Saki", null);
+PersonService.updatePerson(person);
+ArrayList<Person> people = PersonService.getAllPerson();
+        System.out.println(people);
+        System.out.println(PersonService.getLastPerson().getFirstNamePerson());
+        System.out.println(PersonService.getPerson(2).getFirstNamePerson());
+        //PersonService.deletePerson();
     }
 }

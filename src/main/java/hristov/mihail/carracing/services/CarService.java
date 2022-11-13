@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class CarService {
     public static void addCar(Car car) {
-        Database.execute("INSERT INTO Car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "','" + car.getFuelCar() + "'," + car.getHorsepowerCar() + ");");
+        Database.execute("INSERT INTO car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "','" + car.getFuelCar() + "'," + car.getHorsepowerCar() + ");");
         //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
     }
 

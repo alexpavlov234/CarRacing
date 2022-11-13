@@ -9,11 +9,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.services.CarService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -102,15 +105,47 @@ public class CarModalController {
 
 
             try {
-                FileInputStream fileInputStream = new FileInputStream(file);
-                storeImage = CarService.setImageCar();
-                storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                storeImage.setInt(2, this.car.getIdCar());
-                storeImage.execute();
+
+                    FileInputStream fileInputStream = new FileInputStream(file);
+                    storeImage = CarService.setImageCar();
+                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                    storeImage.setInt(2, this.car.getIdCar());
+                    storeImage.execute();
+
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                Stage stage1 = new Stage();
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                //messageController.setLoggedUser(car.getIdCar());
+                WarningController messageController = fxmlLoader.getController();
+                messageController.setErrorMessage(e.getMessage());
+                stage1.setTitle("Системна грешка");
+                stage1.setScene(scene);
+                stage1.show();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                Stage stage1 = new Stage();
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                //messageController.setLoggedUser(car.getIdCar());
+                WarningController messageController = fxmlLoader.getController();
+                messageController.setErrorMessage(e.getMessage());
+                stage1.setTitle("Системна грешка");
+                stage1.setScene(scene);
+                stage1.show();
             }
             CarService.updateCar(car);
         }
@@ -126,9 +161,39 @@ public class CarModalController {
             //storeImage.execute();
             carImageView.setImage(new Image(fileInputStream));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(e.getMessage());
+            stage1.setTitle("Системна грешка");
+            stage1.setScene(scene);
+            stage1.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+
+
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(e.getMessage());
+            stage1.setTitle("Системна грешка");
+            stage1.setScene(scene);
+            stage1.show();
         }
 
     }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #0b0629;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RegisterController">
+<AnchorPane prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #0b0629;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RegisterController">
 
         <children>
             <AnchorPane prefHeight="503.0" prefWidth="382.0" style="-fx-background-color: #0C39FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -39,7 +39,7 @@
             </AnchorPane>
             <VBox layoutX="467.0" layoutY="63.0" prefHeight="364.0" prefWidth="306.0" AnchorPane.bottomAnchor="76.0" AnchorPane.rightAnchor="80.60000000000002" AnchorPane.topAnchor="63.0">
                 <children>
-            <TextField fx:id="firstNameField" prefHeight="34.0" prefWidth="275.0" promptText="Име" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px;" />
+            <TextField fx:id="firstNameField" prefHeight="34.0" prefWidth="275.0" promptText="Име" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px; -fx-text-fill: white;" stylesheets="@style.css" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
             <TextField fx:id="secondNameField" prefHeight="34.0" prefWidth="275.0" promptText="Фамилия" style="-fx-background-color: transparent; -fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: white; -fx-border-radius: 6px;" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
@@ -57,7 +57,7 @@
             <StackPane prefHeight="54.0" prefWidth="306.0">
                <children>
                           <Separator prefHeight="7.0" prefWidth="275.0" />
-                          <Label alignment="CENTER" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #fff;" text="или" textFill="#5b5a5a">
+                          <Label alignment="CENTER" prefHeight="23.0" prefWidth="31.0" styleClass="labelOr" text="или" textFill="#5b5a5a">
                               <font>
                                   <Font name="Segoe UI" size="12.0" />
                               </font>

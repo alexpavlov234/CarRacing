@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class UserService {
     public static void addUser(User user) {
-        Database.execute("INSERT INTO User (emailUser, passUser, typeUser, userHasPerson) VALUES ('" + user.getEmailUser() + "','" + user.getPassUser() + "','" + user.getTypeUser() + "', " + user.getUserHasPerson() + ");");
+        Database.execute("INSERT INTO user (emailUser, passUser, typeUser, userHasPerson) VALUES ('" + user.getEmailUser() + "','" + user.getPassUser() + "','" + user.getTypeUser() + "', " + user.getUserHasPerson() + ");");
     }
 
     public static User getUser(int idUser) {

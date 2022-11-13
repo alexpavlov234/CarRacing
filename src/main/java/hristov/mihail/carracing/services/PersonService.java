@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class PersonService {
     public static void addPerson(Person person) {
-        Database.execute("INSERT INTO Person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, image) VALUES ('" + person.getFirstNamePerson() + "','" + person.getMiddleNamePerson() + "','" + person.getLastNamePerson() + "'," + person.getAgePerson() + ",'" + person.getNationalityPerson() + "'," + person.getPointsPerson() + ",'" + person.getImagePathPerson() + "');");
+        Database.execute("INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, imagePerson) VALUES ('" + person.getFirstNamePerson() + "','" + person.getMiddleNamePerson() + "','" + person.getLastNamePerson() + "'," + person.getAgePerson() + ",'" + person.getNationalityPerson() + "'," + person.getPointsPerson() + ",'" + person.getImagePathPerson() + "');");
         //INSERT INTO Person (namePerson, lengthPerson, locationPerson) VALUES ('Monte Personlo',456,'Dupnica');
     }
 
     public static void addPerson(String firstNamePerson, String lastNamePerson) {
-        Database.execute("INSERT INTO Person (firstNamePerson, lastNamePerson) VALUES ('" + firstNamePerson + "','" + lastNamePerson + "');");
+        Database.execute("INSERT INTO person (firstNamePerson, lastNamePerson) VALUES ('" + firstNamePerson + "','" + lastNamePerson + "');");
     }
 
     public static Person getPerson(int idPerson) {
@@ -49,7 +49,7 @@ public class PersonService {
 
     public static void updatePerson(Person person) {
         //'
-        Database.execute("UPDATE person SET firstNamePerson = '" + person.getFirstNamePerson() + "', middleNamePerson = '" + person.getMiddleNamePerson() + "', lastNamePerson = '" + person.getLastNamePerson() + "', ageCar = " + person.getAgePerson() + ", nationalityPerson = '" + person.getNationalityPerson() + "', pointsPerson = " + person.getPointsPerson() + "  WHERE idPerson =" + person.getIdPerson() + ";");
+        Database.execute("UPDATE person SET firstNamePerson = '" + person.getFirstNamePerson() + "', middleNamePerson = '" + person.getMiddleNamePerson() + "', lastNamePerson = '" + person.getLastNamePerson() + "', agePerson = " + person.getAgePerson() + ", nationalityPerson = '" + person.getNationalityPerson() + "', pointsPerson = " + person.getPointsPerson() + "  WHERE idPerson =" + person.getIdPerson() + ";");
         //INSERT INTO Person (namePerson, lengthPerson, locationPerson) VALUES ('Monte Personlo',456,'Dupnica');
     }
 

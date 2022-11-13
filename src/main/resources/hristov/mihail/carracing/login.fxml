@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="503.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.LoginController">
+<AnchorPane prefHeight="503.0" prefWidth="854.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.LoginController">
 
         <children>
             <AnchorPane prefHeight="503.0" prefWidth="382.0" style="-fx-background-color: #0C39FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -42,6 +42,7 @@
                     <TextField fx:id="emailField" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Имейл" />
             <Pane prefHeight="13.0" prefWidth="306.0" />
                     <PasswordField fx:id="passwordField" layoutX="7.0" layoutY="61.0" prefHeight="34.0" prefWidth="275.0" promptText="Парола" />
+            <Pane prefHeight="8.0" prefWidth="306.0" />
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="306.0">
                <children>
                           <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="342.0" text="Вход" />
@@ -50,7 +51,7 @@
             <StackPane prefHeight="54.0" prefWidth="306.0">
                <children>
                           <Separator prefHeight="7.0" prefWidth="275.0" />
-                          <Label alignment="CENTER" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #fff;" text="или" textFill="#5b5a5a">
+                          <Label alignment="CENTER" prefHeight="23.0" prefWidth="31.0" styleClass="labelOr" text="или" textFill="#5b5a5a">
                               <font>
                                   <Font name="Segoe UI" size="12.0" />
                               </font>
@@ -58,11 +59,6 @@
                </children>
             </StackPane>
                     <Button fx:id="registerButton" layoutX="4.0" layoutY="214.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openRegisterScreen" prefHeight="34.0" text="Регистрация" />
-                    <Label fx:id="lblErrors" alignment="CENTER" layoutX="8.0" layoutY="95.0" prefHeight="23.0" prefWidth="275.0" textFill="#ff6354">
-                        <font>
-                            <Font name="Segoe UI" size="10.0" />
-                        </font>
-                    </Label>
                 </children>
             </VBox>
             <Label alignment="CENTER" layoutX="747.0" layoutY="466.0" prefHeight="23.0" prefWidth="93.0" text="Версия 1.0.0" textFill="#a6b1cc" AnchorPane.bottomAnchor="14.0">
