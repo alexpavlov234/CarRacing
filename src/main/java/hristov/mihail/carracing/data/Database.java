@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Database {
     // Полетата са private, защото да не може да се променят от обект.
-    private static final String url = "jdbc:mysql://sql8.freemysqlhosting.net:3306/sql8549137";
-    private static final String user = "sql8549137";
-    private static final String password = "Yw7gRUMVaW";
+    private static final String url = "jdbc:mysql://localhost:3306/carracers";
+    private static final String user = "root";
+    private static final String password = "Mihail100404H";
 
     public static void execute(String sql) {
         try {

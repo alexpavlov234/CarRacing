@@ -57,6 +57,7 @@ public class WarningController {
         messageController.setErrorMessage(text);
         stage1.setTitle(windowTitle);
         stage1.setScene(scene);
+        stage1.setResizable(false);
         stage1.show();
     }
     @FXML

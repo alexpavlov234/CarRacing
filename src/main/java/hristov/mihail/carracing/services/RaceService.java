@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class RaceService {
     public static void addRace(Race race) {
-        Database.execute("INSERT INTO Race (trackRace, dataRace, lapsRace, pointsRace, participantsRace) VALUES (" + race.getTrackRace() + "," + race.getDateRace() + "," + race.getLapsRace() + "," + race.getPointsRace() + "," + race.getParticipantsRace() + ");");
+        Database.execute("INSERT INTO Race (trackRace, dateRace, lapsRace, pointsRace, participantsRace) VALUES (" + race.getTrackRace() + ",'" + race.getDateRace() + "'," + race.getLapsRace() + "," + race.getPointsRace() + "," + race.getParticipantsRace() + ");");
         //INSERT INTO Race (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
     }
 
@@ -19,7 +19,7 @@ public class RaceService {
         //INSERT INTO Race (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
         Race race = null;
         try {
-            race = new Race(Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("trackRace")), resultSet.getDate("dateRace"), Integer.parseInt(resultSet.getString("lapsRace")), Integer.parseInt(resultSet.getString("pointsRace")), Integer.parseInt(resultSet.getString("participantsRace")));
+            race = new Race(Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("trackRace")), resultSet.getString("dateRace"), Integer.parseInt(resultSet.getString("lapsRace")), Integer.parseInt(resultSet.getString("pointsRace")), Integer.parseInt(resultSet.getString("participantsRace")));
         } catch (SQLException e) {
             //TODO: Екран за грешка
         }
@@ -28,7 +28,7 @@ public class RaceService {
 
     public static void updateRace(Race race) {
         //'
-        Database.execute("UPDATE race SET trackRace = " + race.getTrackRace() + ", dateRace = " + race.getDateRace() + ", lapsRace = " + race.getLapsRace() + ", pointsRace = " + race.getPointsRace() + ", participantsRace = " + race.getParticipantsRace() + "  WHERE idRace =  " + race.getIdRace() + ";");
+        Database.execute("UPDATE race SET trackRace = " + race.getTrackRace() + ", dateRace = '" + race.getDateRace() + "', lapsRace = " + race.getLapsRace() + ", pointsRace = " + race.getPointsRace() + ", participantsRace = " + race.getParticipantsRace() + "  WHERE idRace =  " + race.getIdRace() + ";");
         //INSERT INTO Race (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
     }
 
@@ -43,7 +43,7 @@ public class RaceService {
         ArrayList<Race> allRaces = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-                Race race = new Race(Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("trackRace")), resultSet.getDate("dateRace"), Integer.parseInt(resultSet.getString("lapsRace")), Integer.parseInt(resultSet.getString("pointsRace")), Integer.parseInt(resultSet.getString("participantsRace")));
+                Race race = new Race(Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("trackRace")), resultSet.getString("dateRace"), Integer.parseInt(resultSet.getString("lapsRace")), Integer.parseInt(resultSet.getString("pointsRace")), Integer.parseInt(resultSet.getString("participantsRace")));
                 allRaces.add(race);
             }
         } catch (SQLException e) {

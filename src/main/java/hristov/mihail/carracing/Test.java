@@ -1,21 +1,20 @@
 package hristov.mihail.carracing;
 
 import hristov.mihail.carracing.models.Person;
+import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.services.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args){
-        Person person = new Person(5,"Misho", "Benkoveca", "Skisho", 18,"bulgarin", 100, null);
 
-      // PersonService.addPerson(person);
-        //PersonService.addPerson("Saki", null);
-PersonService.updatePerson(person);
-ArrayList<Person> people = PersonService.getAllPerson();
-        System.out.println(people);
-        System.out.println(PersonService.getLastPerson().getFirstNamePerson());
-        System.out.println(PersonService.getPerson(2).getFirstNamePerson());
-        //PersonService.deletePerson();
+
+//        RaceService.addRace(new Race(1, 1, "2022-11-14", 10, 142, 8));
+
+//        RaceService.deleteRace(2);
+
+        RaceService.updateRace(new Race(3, 1, "2022-11-14", 12, 142, 8));
     }
 }
