@@ -1,5 +1,6 @@
 package hristov.mihail.carracing.services;
 
+import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.User;
 
@@ -40,7 +41,7 @@ public class UserService {
             resultSet.next();
             user = new User(Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), Integer.parseInt(resultSet.getString("userHasPerson")));
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
         }
         return user;
     }

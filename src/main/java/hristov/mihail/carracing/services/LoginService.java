@@ -38,7 +38,7 @@ public class LoginService {
                 stage1.show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
         }
     }
 
