@@ -21,7 +21,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label" prefHeight="2.0" prefWidth="48.0" styleClass="labelWhite" text="Марка:">
+                  <Label fx:id="label" prefHeight="0.0" prefWidth="90.0" styleClass="labelWhite" text="Марка:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -31,7 +31,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label1" prefHeight="2.0" prefWidth="48.0" styleClass="labelWhite" text="Модел:">
+                  <Label fx:id="label1" prefHeight="0.0" prefWidth="90.0" styleClass="labelWhite" text="Модел:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -41,7 +41,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label2" prefHeight="18.0" prefWidth="66.0" styleClass="labelWhite" text="Двигател:">
+                  <Label fx:id="label2" prefHeight="0.0" prefWidth="90.0" styleClass="labelWhite" text="Двигател:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -51,7 +51,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="435.0" spacing="10.0">
                <children>
-                  <Label fx:id="label3" prefHeight="18.0" prefWidth="86.0" styleClass="labelWhite" text="Конски сили:">
+                  <Label fx:id="label3" prefHeight="0.0" prefWidth="90.0" styleClass="labelWhite" text="Конски сили:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -61,12 +61,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="356.0" spacing="10.0">
                <children>
-                  <Label fx:id="label4" prefHeight="18.0" prefWidth="252.0" styleClass="labelWhite" text="Вместимост на резервоара за гориво:">
+                  <Label fx:id="label4" prefHeight="0.0" prefWidth="90.0" styleClass="labelWhite" text="Тип гориво:">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="fuelCarField" prefHeight="26.0" prefWidth="78.0" />
+                  <TextField fx:id="fuelCarField" prefHeight="27.0" prefWidth="151.0" />
                </children>
             </HBox>
          </children>

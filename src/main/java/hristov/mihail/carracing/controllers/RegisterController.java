@@ -1,30 +1,26 @@
 package hristov.mihail.carracing.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import hristov.mihail.carracing.HelloApplication;
-import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.PersonService;
 import hristov.mihail.carracing.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class RegisterController {
 
@@ -59,23 +55,49 @@ public class RegisterController {
     private Button registerButton;
 
     @FXML
-    private TextField secondNameField;
-
-    public static boolean isValidPassword(String password) {
-        String regex = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
-    }
-
-    public static boolean validateEmail(String emailAddress) {
-        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-        return Pattern.compile(regexPattern).matcher(emailAddress).matches();
-    }
+    private TextField lastNameField;
+    @FXML
+    private Label wrongConfirmPasswordLabel;
 
     @FXML
-    void handleButtonAction(MouseEvent event) {
+    private Label wrongEmailLabel;
 
+    @FXML
+    private Label wrongNameLabel;
+
+    @FXML
+    private Label wrongPasswordLabel;
+
+
+    public boolean isValidPassword(String password) {
+        String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+
+        if (!password.matches(regexPattern)) {
+            passwordField.setStyle("-fx-border-color: red");
+            confirmPasswordField.setStyle("-fx-border-color: red");
+            wrongPasswordLabel.setText("Въведете валидна парола!");
+        }
+        return password.matches(regexPattern);
+    }
+
+    public boolean isValidName(String name) {
+        String regexPattern = "[А-ЯЁ][-А-яЁё]+";
+
+        if (!name.matches(regexPattern)) {
+            firstNameField.setStyle("-fx-border-color: red");
+            lastNameField.setStyle("-fx-border-color: red");
+            wrongNameLabel.setText("Въведете коректни имена на кирилица!");
+        }
+        return name.matches(regexPattern);
+    }
+
+    public boolean isValidEmail(String emailAddress) {
+        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        if (!Pattern.compile(regexPattern).matcher(emailAddress).matches()) {
+            emailField.setStyle("-fx-border-color: red");
+            wrongEmailLabel.setText("Въведете валиден имейл!");
+        }
+        return Pattern.compile(regexPattern).matcher(emailAddress).matches();
     }
 
     @FXML
@@ -99,22 +121,30 @@ public class RegisterController {
     @FXML
     void registerUser(ActionEvent event) {
         try {
-            if (firstNameField.getText().trim().contains(" ") || secondNameField.getText().trim().contains(" ")) {
-                System.out.println("Invalid name!");
-                throw new Exception();
-            } else if (validateEmail(emailField.getText().trim()) || isValidPassword(passwordField.getText())) {
-                if (passwordField.getText().equals(confirmPasswordField.getText())) {
-                    PersonService.addPerson(firstNameField.getText().trim(), secondNameField.getText().trim());
-                    User user = new User(emailField.getText().trim(), passwordField.getText(), "User", PersonService.getLastPerson().getIdPerson());
-                    UserService.addUser(user);
-                } else {
-                    System.out.println("Invalid pass!");
-                    throw new Exception();
+            if (firstNameField.getText().trim().contains(" ") || lastNameField.getText().trim().contains(" ") || firstNameField.equals(null) || lastNameField.equals(null) || firstNameField.equals("") || lastNameField.equals("")) {
 
+                firstNameField.setStyle("-fx-border-color: red");
+                lastNameField.setStyle("-fx-border-color: red");
+                wrongNameLabel.setText("Въведете коректни имена!");
+
+            } else if (isValidEmail(emailField.getText().trim()) && isValidPassword(passwordField.getText())) {
+                if (isValidName(firstNameField.getText().trim()) && isValidName(lastNameField.getText().trim())) {
+                    if (passwordField.getText().equals(confirmPasswordField.getText())) {
+                        PersonService.addPerson(firstNameField.getText().trim(), lastNameField.getText().trim());
+                        User user = new User(emailField.getText().trim(), passwordField.getText(), "User", PersonService.getLastPerson().getIdPerson());
+                        if(UserService.getUser(user.getEmailUser()).equals(null)) {
+                            UserService.addUser(user);
+                            openLoginScreen(event);
+                        } else {
+                            WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител");
+                        }
+
+                    } else {
+                        passwordField.setStyle("-fx-border-color: red");
+                        confirmPasswordField.setStyle("-fx-border-color: red");
+                        wrongPasswordLabel.setText("Паролите не съвпадат!");
+                    }
                 }
-            } else {
-                System.out.println("Invalid email!");
-                throw new Exception();
             }
         } catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка");
@@ -132,7 +162,62 @@ public class RegisterController {
         assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'register.fxml'.";
         assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'register.fxml'.";
         assert registerButton != null : "fx:id=\"registerButton\" was not injected: check your FXML file 'register.fxml'.";
-        assert secondNameField != null : "fx:id=\"secondNameField\" was not injected: check your FXML file 'register.fxml'.";
+        assert lastNameField != null : "fx:id=\"lastNameField\" was not injected: check your FXML file 'register.fxml'.";
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            firstNameField.setStyle("-fx-border-color: white");
+            lastNameField.setStyle("-fx-border-color: white");
+            confirmPasswordField.setStyle("-fx-border-color: white");
+            passwordField.setStyle("-fx-border-color: white;");
+            emailField.setStyle("-fx-border-color: white");
+            wrongConfirmPasswordLabel.setText(null);
+            wrongEmailLabel.setText(null);
+            wrongNameLabel.setText(null);
+            wrongPasswordLabel.setText(null);
+        });
+        emailField.textProperty().addListener((observable, oldValue, newValue) -> {
+            firstNameField.setStyle("-fx-border-color: white");
+            lastNameField.setStyle("-fx-border-color: white");
+            confirmPasswordField.setStyle("-fx-border-color: white");
+            passwordField.setStyle("-fx-border-color: white;");
+            emailField.setStyle("-fx-border-color: white");
+            wrongConfirmPasswordLabel.setText(null);
+            wrongEmailLabel.setText(null);
+            wrongNameLabel.setText(null);
+            wrongPasswordLabel.setText(null);
+        });
+        confirmPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            firstNameField.setStyle("-fx-border-color: white");
+            lastNameField.setStyle("-fx-border-color: white");
+            confirmPasswordField.setStyle("-fx-border-color: white");
+            passwordField.setStyle("-fx-border-color: white;");
+            emailField.setStyle("-fx-border-color: white");
+            wrongConfirmPasswordLabel.setText(null);
+            wrongEmailLabel.setText(null);
+            wrongNameLabel.setText(null);
+            wrongPasswordLabel.setText(null);
+        });
+        firstNameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            firstNameField.setStyle("-fx-border-color: white");
+            lastNameField.setStyle("-fx-border-color: white");
+            confirmPasswordField.setStyle("-fx-border-color: white");
+            passwordField.setStyle("-fx-border-color: white;");
+            emailField.setStyle("-fx-border-color: white");
+            wrongConfirmPasswordLabel.setText(null);
+            wrongEmailLabel.setText(null);
+            wrongNameLabel.setText(null);
+            wrongPasswordLabel.setText(null);
+        });
+        lastNameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            firstNameField.setStyle("-fx-border-color: white");
+            lastNameField.setStyle("-fx-border-color: white");
+            confirmPasswordField.setStyle("-fx-border-color: white");
+            passwordField.setStyle("-fx-border-color: white;");
+            emailField.setStyle("-fx-border-color: white");
+            wrongConfirmPasswordLabel.setText(null);
+            wrongEmailLabel.setText(null);
+            wrongNameLabel.setText(null);
+            wrongPasswordLabel.setText(null);
+        });
         File file = new File("src/main/java/hristov/mihail/carracing/images/car-icon.png");
         Image image = new Image(file.toURI().toString());
         imageView.setImage(image);

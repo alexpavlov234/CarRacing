@@ -12,18 +12,22 @@ create table if not exists car
     imageCar mediumblob null
 );
 
-create table if not exists person
+create table person
 (
     idPerson          int auto_increment
         primary key,
-    firstNamePerson   varchar(45)  not null,
-    middleNamePerson  varchar(45)  null,
-    lastNamePerson    varchar(45)  not null,
-    agePerson         int          null,
-    nationalityPerson varchar(45)  null,
-    pointsPerson      int          null,
-    imagePerson   mediumblob null
+    firstNamePerson   varchar(45) not null,
+    middleNamePerson  varchar(45) null,
+    lastNamePerson    varchar(45) not null,
+    agePerson         int         null,
+    nationalityPerson varchar(45) null,
+    pointsPerson      int         null,
+    imagePerson       mediumblob  null,
+    carPerson         int         null,
+    constraint carPerson
+        foreign key (carPerson) references car (idCar)
 );
+
 
 create table if not exists track
 (

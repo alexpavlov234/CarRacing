@@ -40,9 +40,10 @@
             <VBox layoutX="466.0" layoutY="132.0" prefHeight="240.0" prefWidth="306.0" AnchorPane.bottomAnchor="131.0" AnchorPane.rightAnchor="81.60000000000002" AnchorPane.topAnchor="132.0">
                 <children>
                     <TextField fx:id="emailField" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Имейл" />
-            <Pane prefHeight="13.0" prefWidth="306.0" />
+            <Label fx:id="wrongEmailLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="325.0" textFill="RED" textOverrun="CLIP" />
                     <PasswordField fx:id="passwordField" layoutX="7.0" layoutY="61.0" prefHeight="34.0" prefWidth="275.0" promptText="Парола" />
             <Pane prefHeight="8.0" prefWidth="306.0" />
+            <Label fx:id="wrongPasswordLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="325.0" textFill="RED" textOverrun="CLIP" />
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="306.0">
                <children>
                           <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="342.0" text="Вход" />

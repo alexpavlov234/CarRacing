@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class LoginService {
     private static User user = null;
 
-    public static void loginUser(User loggedUser, String password, Stage stage) {
+    public static boolean loginUser(User loggedUser, String password, Stage stage) {
         try {
             if (loggedUser.getPassUser().equals(password)) {
                 user = loggedUser;
@@ -24,22 +24,15 @@ public class LoginService {
                 stage.setTitle("Управление на автомобилни състезания");
                 stage.setScene(scene);
                 stage.show();
+                return true;
             } else {
-                Stage stage1 = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-                Scene scene = new Scene(fxmlLoader.load());
-                //messageController.setLoggedUser(car.getIdCar());
-                WarningController messageController = fxmlLoader.getController();
-                messageController.setErrorMessage("Въведената парола е невалидна!");
-                stage1.setTitle("Грешна парола");
-                stage1.setScene(scene);
-                stage1.show();
+                return false;
             }
         } catch (Exception e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
+
+            return false;
         }
+
     }
 
     public static User getLoggedUser() {

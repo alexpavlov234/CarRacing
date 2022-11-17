@@ -10,6 +10,7 @@ import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.LoginService;
 import hristov.mihail.carracing.services.UserService;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -52,14 +55,27 @@ public class LoginController {
     private Button registerButton;
 
     @FXML
+    private Label wrongPasswordLabel;
+
+    @FXML
     void handleButtonAction(MouseEvent event) {
 
     }
 
     @FXML
     void login(ActionEvent event) {
-        User user = UserService.getUser(emailField.getText().trim());
-        LoginService.loginUser(user, passwordField.getText(), (Stage) registerButton.getScene().getWindow());
+        if (passwordField.getText().equals(null) || passwordField.getText().equals("") || emailField.getText().equals(null) || emailField.getText().equals("")){
+            passwordField.setStyle("-fx-border-color: red;");
+            emailField.setStyle("-fx-border-color: red");
+            wrongPasswordLabel.setText("Моля въведете данни за вход!");
+        } else {
+            User user = UserService.getUser(emailField.getText().trim());
+            if (!LoginService.loginUser(user, passwordField.getText(), (Stage) registerButton.getScene().getWindow())) {
+                passwordField.setStyle("-fx-border-color: red;");
+                emailField.setStyle("-fx-border-color: red");
+                wrongPasswordLabel.setText("Грешни данни за вход!");
+            }
+        }
     }
 
     @FXML
@@ -74,7 +90,7 @@ public class LoginController {
             stage.setTitle("Регистрация");
             stage.setScene(scene);
             stage.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             Stage stage1 = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
 
@@ -95,8 +111,8 @@ public class LoginController {
     }
 
 
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert backgroundImageView != null : "fx:id=\"backgroundImageView\" was not injected: check your FXML file 'login.fxml'.";
         assert emailField != null : "fx:id=\"emailField\" was not injected: check your FXML file 'login.fxml'.";
@@ -105,8 +121,31 @@ public class LoginController {
         assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'login.fxml'.";
         assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'login.fxml'.";
         assert registerButton != null : "fx:id=\"registerButton\" was not injected: check your FXML file 'login.fxml'.";
-
-
+       emailField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                login(new ActionEvent());
+                }
+            }
+        });passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    login(new ActionEvent());
+                }
+            }
+        });
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            passwordField.setStyle("-fx-border-color: white;");
+            emailField.setStyle("-fx-border-color: white");
+            wrongPasswordLabel.setText(null);
+        });
+        emailField.textProperty().addListener((observable, oldValue, newValue) -> {
+            passwordField.setStyle("-fx-border-color: white;");
+            emailField.setStyle("-fx-border-color: white");
+            wrongPasswordLabel.setText(null);
+        });
         File file = new File("src/main/java/hristov/mihail/carracing/images/car-icon.png");
         Image image = new Image(file.toURI().toString());
         imageView.setImage(image);

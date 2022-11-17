@@ -40,8 +40,8 @@ public class UserService {
             //TODO: Задължително
             resultSet.next();
             user = new User(Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), Integer.parseInt(resultSet.getString("userHasPerson")));
-        } catch (SQLException e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
+        } catch (Exception e) {
+           //TODO: Да обсъдим
         }
         return user;
     }
