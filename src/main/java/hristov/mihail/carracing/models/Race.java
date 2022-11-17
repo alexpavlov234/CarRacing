@@ -3,12 +3,12 @@ package hristov.mihail.carracing.models;
 public class Race {
     private int idRace;
     private int trackRace;
-    private java.sql.Date dateRace;
+    private String dateRace;
     private int lapsRace;
     private int pointsRace;
     private int participantsRace;
 
-    public Race(int IdRace, int TrackRace, java.sql.Date DateRace, int LapsRace, int PointsRace, int ParticipantsRace) {
+    public Race(int IdRace, int TrackRace, String DateRace, int LapsRace, int PointsRace, int ParticipantsRace) {
         this.idRace = IdRace;
         this.trackRace = TrackRace;
         this.dateRace = DateRace;
@@ -33,11 +33,11 @@ public class Race {
         this.trackRace = value;
     }
 
-    public java.sql.Date getDateRace() {
+    public String getDateRace() {
         return this.dateRace;
     }
 
-    public void setDateRace(java.sql.Date value) {
+    public void setDateRace(String value) {
         this.dateRace = value;
     }
 
