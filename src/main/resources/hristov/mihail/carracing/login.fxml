@@ -8,8 +8,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -37,19 +35,14 @@
                     </Label>
                 </children>
             </AnchorPane>
-            <VBox layoutX="466.0" layoutY="132.0" prefHeight="240.0" prefWidth="306.0" AnchorPane.bottomAnchor="131.0" AnchorPane.rightAnchor="81.60000000000002" AnchorPane.topAnchor="132.0">
+            <VBox layoutX="465.0" layoutY="145.0" prefHeight="214.0" prefWidth="306.0" AnchorPane.bottomAnchor="144.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="145.0">
                 <children>
                     <TextField fx:id="emailField" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Имейл" />
             <Label fx:id="wrongEmailLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="325.0" textFill="RED" textOverrun="CLIP" />
                     <PasswordField fx:id="passwordField" layoutX="7.0" layoutY="61.0" prefHeight="34.0" prefWidth="275.0" promptText="Парола" />
-            <Pane prefHeight="8.0" prefWidth="306.0" />
             <Label fx:id="wrongPasswordLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="325.0" textFill="RED" textOverrun="CLIP" />
-            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="306.0">
-               <children>
-                          <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="342.0" text="Вход" />
-               </children>
-            </HBox>
-            <StackPane prefHeight="54.0" prefWidth="306.0">
+                    <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="306.0" text="Вход" />
+            <StackPane prefHeight="34.0" prefWidth="306.0">
                <children>
                           <Separator prefHeight="7.0" prefWidth="275.0" />
                           <Label alignment="CENTER" prefHeight="23.0" prefWidth="31.0" styleClass="labelOr" text="или" textFill="#5b5a5a">

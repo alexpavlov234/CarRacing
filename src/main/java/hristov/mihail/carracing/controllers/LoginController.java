@@ -3,6 +3,7 @@ package hristov.mihail.carracing.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import hristov.mihail.carracing.HelloApplication;
@@ -58,6 +59,9 @@ public class LoginController {
     private Label wrongPasswordLabel;
 
     @FXML
+    private Label wrongEmailLabel;
+
+    @FXML
     void handleButtonAction(MouseEvent event) {
 
     }
@@ -70,10 +74,16 @@ public class LoginController {
             wrongPasswordLabel.setText("Моля въведете данни за вход!");
         } else {
             User user = UserService.getUser(emailField.getText().trim());
-            if (!LoginService.loginUser(user, passwordField.getText(), (Stage) registerButton.getScene().getWindow())) {
-                passwordField.setStyle("-fx-border-color: red;");
-                emailField.setStyle("-fx-border-color: red");
-                wrongPasswordLabel.setText("Грешни данни за вход!");
+            if(Objects.isNull(user)){
+                emailField.setStyle("-fx-border-color: red;");
+
+                wrongEmailLabel.setText("Грешен имейл!");
+            } else {
+                if (!LoginService.loginUser(user, passwordField.getText(), (Stage) registerButton.getScene().getWindow())) {
+                    passwordField.setStyle("-fx-border-color: red;");
+
+                    wrongPasswordLabel.setText("Грешна парола!");
+                }
             }
         }
     }
@@ -139,12 +149,14 @@ public class LoginController {
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
             passwordField.setStyle("-fx-border-color: white;");
             emailField.setStyle("-fx-border-color: white");
+            wrongEmailLabel.setText(null);
             wrongPasswordLabel.setText(null);
         });
         emailField.textProperty().addListener((observable, oldValue, newValue) -> {
             passwordField.setStyle("-fx-border-color: white;");
             emailField.setStyle("-fx-border-color: white");
             wrongPasswordLabel.setText(null);
+            wrongEmailLabel.setText(null);
         });
         File file = new File("src/main/java/hristov/mihail/carracing/images/car-icon.png");
         Image image = new Image(file.toURI().toString());

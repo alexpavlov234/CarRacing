@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Ще се насера :)">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/script.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/WarningController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/WarningController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/car-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/car-modal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/register.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +27,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -151,7 +142,9 @@
       <workItem from="1668370884562" duration="2667000" />
       <workItem from="1668412824006" duration="4210000" />
       <workItem from="1668451931113" duration="794000" />
-      <workItem from="1668713542829" duration="6558000" />
+      <workItem from="1668713542829" duration="7056000" />
+      <workItem from="1668720682378" duration="315000" />
+      <workItem from="1668756929324" duration="3744000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -209,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668451988688</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни.">
+      <created>1668720452228</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668720452228</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,14 +239,15 @@
     <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :)." />
     <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :). Добавен е css файл с дизайн на системата." />
     <MESSAGE value="Ще се насера :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ще се насера :)" />
+    <MESSAGE value="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни." />
+    <option name="LAST_COMMIT_MESSAGE" value="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java</url>
-          <line>80</line>
+          <line>90</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -311,32 +312,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/Test.java</url>
-          <line>14</line>
+          <line>16</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/Test.java</url>
-          <line>15</line>
+          <line>17</line>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java</url>
-          <line>122</line>
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java</url>
-          <line>130</line>
+          <line>134</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java</url>
-          <line>129</line>
+          <line>133</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java</url>
-          <line>127</line>
+          <line>131</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
@@ -359,12 +355,6 @@
           <line>29</line>
           <properties field="storeImage" class="hristov.mihail.carracing.controllers.CarModalController" />
           <option name="timeStamp" value="79" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java</url>
-          <line>121</line>
-          <properties field="fileInputStream" class="hristov.mihail.carracing.controllers.EditCarController" />
-          <option name="timeStamp" value="87" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

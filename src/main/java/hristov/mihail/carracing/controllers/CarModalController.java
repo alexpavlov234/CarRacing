@@ -1,15 +1,5 @@
 package hristov.mihail.carracing.controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Objects;
-import java.util.ResourceBundle;
-
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.services.CarService;
@@ -25,6 +15,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class CarModalController {
 
@@ -74,13 +74,13 @@ public class CarModalController {
             CarService.addCar(car);
             car = CarService.getLastCar();
             try {
-
-                FileInputStream fileInputStream = new FileInputStream(file);
-                storeImage = CarService.setImageCar();
-                storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                storeImage.setInt(2, this.car.getIdCar());
-                storeImage.execute();
-
+                if (!Objects.isNull(file)) {
+                    FileInputStream fileInputStream = new FileInputStream(file);
+                    storeImage = CarService.setImageCar();
+                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                    storeImage.setInt(2, this.car.getIdCar());
+                    storeImage.execute();
+                }
                 modelCarField.setText(car.getModelCar());
                 brandCarField.setText(car.getBrandCar());
                 fuelCarField.setText(car.getFuelCar());
@@ -92,7 +92,7 @@ public class CarModalController {
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
 
 
-                Scene scene =  null;
+                Scene scene = null;
                 try {
                     scene = new Scene(fxmlLoader.load());
                 } catch (IOException ex) {
@@ -102,7 +102,7 @@ public class CarModalController {
 
                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                 stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
-               applyChangeButton.getScene().getWindow().setWidth(applyChangeButton.getScene().getWidth() + 0.001);
+                applyChangeButton.getScene().getWindow().setWidth(applyChangeButton.getScene().getWidth() + 0.001);
 
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -114,24 +114,43 @@ public class CarModalController {
             car.setBrandCar(brandCarField.getText());
             car.setFuelCar(fuelCarField.getText());
             car.setEngineCar(engineCarField.getText());
-            car.setHorsepowerCar(Integer.parseInt(horsepowerCarField.getText()));
-
-
             try {
-                if(!Objects.isNull(file)) {
-                    FileInputStream fileInputStream = new FileInputStream(file);
-                    storeImage = CarService.setImageCar();
-                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                    storeImage.setInt(2, this.car.getIdCar());
-                    storeImage.execute();
+                car.setHorsepowerCar(Integer.parseInt(horsepowerCarField.getText()));
+                try {
+                    if (!Objects.isNull(file)) {
+                        FileInputStream fileInputStream = new FileInputStream(file);
+                        storeImage = CarService.setImageCar();
+                        storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                        storeImage.setInt(2, this.car.getIdCar());
+                        storeImage.execute();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                CarService.updateCar(car);
+                Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
+
+
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                //dialogController.setLoggedUser(car.getIdCar());
+                CarModalController dialogController = fxmlLoader.getController();
+                dialogController.setCar(car);
+                stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
+                stage.setScene(scene);
+                stage.show();
+                //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
+                applyChangeButton.setText("Приложи");
             } catch (Exception e) {
-         e.printStackTrace();
+                WarningController.openMessageModal("Въведете валидни конски сили!", "Невалидни данни");
             }
-            CarService.updateCar(car);
-            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-            stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
-            applyChangeButton.setText("Приложи");
+
         }
     }
 
@@ -162,7 +181,7 @@ public class CarModalController {
             stage1.setScene(scene);
             stage1.show();
         } catch (IOException e) {
-           WarningController.openMessageModal(e.getMessage(), "Системна грешка");
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
         }
 
     }

@@ -92,6 +92,14 @@ public class CarsController {
                                             stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                             stage.setScene(scene);
                                             stage.show();
+                                            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+                                                @Override
+                                                public void handle(WindowEvent paramT) {
+                                                    carObservableList = FXCollections.observableList(CarService.getAllCar());
+                                                    table.setItems(carObservableList);
+                                                }
+                                            });
                                         } catch (Exception e) {
                                             Stage stage1 = new Stage();
                                             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));

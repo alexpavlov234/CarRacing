@@ -5,6 +5,7 @@ import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.PersonService;
 import hristov.mihail.carracing.services.UserService;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,11 +15,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -132,7 +136,7 @@ public class RegisterController {
                     if (passwordField.getText().equals(confirmPasswordField.getText())) {
                         PersonService.addPerson(firstNameField.getText().trim(), lastNameField.getText().trim());
                         User user = new User(emailField.getText().trim(), passwordField.getText(), "User", PersonService.getLastPerson().getIdPerson());
-                        if(UserService.getUser(user.getEmailUser()).equals(null)) {
+                        if(Objects.isNull(UserService.getUser(user.getEmailUser()))) {
                             UserService.addUser(user);
                             openLoginScreen(event);
                         } else {
@@ -147,6 +151,7 @@ public class RegisterController {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             WarningController.openMessageModal(e.getMessage(), "Системна грешка");
         }
 
@@ -218,6 +223,48 @@ public class RegisterController {
             wrongNameLabel.setText(null);
             wrongPasswordLabel.setText(null);
         });
+
+        emailField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    registerUser(new ActionEvent());
+                }
+            }
+        });
+
+        passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    registerUser(new ActionEvent());
+                }
+            }
+        });
+        confirmPasswordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    registerUser(new ActionEvent());
+                }
+            }
+        }); lastNameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    registerUser(new ActionEvent());
+                }
+            }
+        }); firstNameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER)) {
+                    registerUser(new ActionEvent());
+                }
+            }
+        });
+
+
         File file = new File("src/main/java/hristov/mihail/carracing/images/car-icon.png");
         Image image = new Image(file.toURI().toString());
         imageView.setImage(image);
