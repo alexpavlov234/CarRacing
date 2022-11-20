@@ -117,7 +117,7 @@ public class CarModalController {
                     }
                 }
             } else {
-                WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни");
+                WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
             }
         } else {
             if (!(modelCarField.getText().equals(null) || brandCarField.getText().equals(null) || engineCarField.getText().equals(null) || fuelCarField.getText().equals(null) || horsepowerCarField.getText().equals(null) || modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
@@ -161,12 +161,12 @@ public class CarModalController {
                             stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                             applyChangeButton.setText("Приложи");
                         } catch (Exception e) {
-                            WarningController.openMessageModal("Въведете валидни конски сили!", "Невалидни данни");
+                            WarningController.openMessageModal("Въведете валидни конски сили!", "Невалидни данни", MessageType.WARNING);
                         }
                     }
                 }
             } else {
-                WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни");
+                WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
             }
         }
     }
@@ -199,7 +199,7 @@ public class CarModalController {
                 stage1.setScene(scene);
                 stage1.show();
             } catch (IOException e) {
-                WarningController.openMessageModal(e.getMessage(), "Системна грешка");
+                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
             }
         }
     }
@@ -208,7 +208,7 @@ public class CarModalController {
         String regexPattern = "^[0-9].[0-9].*$";
 
         if (!name.matches(regexPattern)) {
-            WarningController.openMessageModal("Въведено е невалидно име за двигател!", "Невалиден двигател");
+            WarningController.openMessageModal("Въведено е невалидно име за двигател!", "Невалиден двигател", MessageType.WARNING);
         }
         return name.matches(regexPattern);
     }

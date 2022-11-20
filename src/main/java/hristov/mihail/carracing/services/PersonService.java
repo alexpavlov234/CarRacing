@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.services;
 
 import hristov.mihail.carracing.data.Database;
+import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Person;
 
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ public class PersonService {
 
         try {
             resultSet.next();
-            person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePerson"));
+            person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
         } catch (SQLException e) {
             e.printStackTrace();
             //TODO: Екран за грешка
@@ -39,7 +40,7 @@ public class PersonService {
         try {
             resultSet.next();
             //TODO: Проверка за null стойности
-            person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePerson"));
+            person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")),  resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             //TODO: Екран за грешка
@@ -57,6 +58,10 @@ public class PersonService {
         Database.execute("DELETE FROM person WHERE idPerson = " + idPerson + ";");
         // DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
     }
+    public static void setCarPerson(Car car, Person person){
+        Database.execute("UPDATE person SET  carPerson = " + car.getIdCar() + "  WHERE idPerson =" + person.getIdPerson() + ";");
+        //INSERT INTO Person (namePerson, lengthPerson, locationPerson) VALUES ('Monte Personlo',456,'Dupnica');
+    }
 
     public static ArrayList<Person> getAllPerson() {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM person;");
@@ -64,7 +69,7 @@ public class PersonService {
         ArrayList<Person> allPersons = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-                Person person = new Person(Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("imagePerson"));
+                Person person = new Person(Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), Integer.parseInt(resultSet.getString("pointsPerson")),  resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
                 allPersons.add(person);
             }
         } catch (SQLException e) {

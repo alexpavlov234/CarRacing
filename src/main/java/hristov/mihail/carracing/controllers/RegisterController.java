@@ -118,7 +118,7 @@ public class RegisterController {
             stage.show();
 
         } catch (IOException e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }
     }
 
@@ -140,7 +140,7 @@ public class RegisterController {
                             UserService.addUser(user);
                             openLoginScreen(event);
                         } else {
-                            WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител");
+                            WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител",MessageType.WARNING);
                         }
 
                     } else {
@@ -152,7 +152,7 @@ public class RegisterController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
 
     }

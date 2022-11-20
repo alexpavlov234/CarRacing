@@ -10,7 +10,9 @@ public class Person {
     private int pointsPerson;
     private String imagePathPerson;
 
-    public Person(int idPerson, String firstNamePerson, String middleNamePerson, String lastNamePerson, int agePerson, String nationalityPerson, int pointsPerson, String imagePathPerson) {
+    private int carPerson;
+
+    public Person(int idPerson, String firstNamePerson, String middleNamePerson, String lastNamePerson, int agePerson, String nationalityPerson, int pointsPerson, int carPerson, String imagePathPerson) {
         this.idPerson = idPerson;
         this.firstNamePerson = firstNamePerson;
         this.middleNamePerson = middleNamePerson;
@@ -18,7 +20,16 @@ public class Person {
         this.agePerson = agePerson;
         this.nationalityPerson = nationalityPerson;
         this.pointsPerson = pointsPerson;
+        this.carPerson = carPerson;
         this.imagePathPerson = imagePathPerson;
+    }
+
+    public int getCarPerson() {
+        return carPerson;
+    }
+
+    public void setCarPerson(int carPerson) {
+        this.carPerson = carPerson;
     }
 
     public int getIdPerson() {
@@ -84,4 +95,6 @@ public class Person {
     public void setImagePathPerson(String value) {
         this.imagePathPerson = value;
     }
+
+
 }

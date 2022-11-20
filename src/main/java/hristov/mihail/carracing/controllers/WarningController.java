@@ -41,24 +41,44 @@ public class WarningController {
         stage.close();
     }
 
-    public static void openMessageModal(String text, String windowTitle){
-        Stage stage1 = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
+    public static void openMessageModal(String text, String windowTitle, MessageType messageType){
+        if(messageType == MessageType.WARNING) {
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
 
 
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(text);
+            stage1.setTitle(windowTitle);
+            stage1.setScene(scene);
+            stage1.setResizable(false);
+            stage1.show();
+        } else if (messageType == MessageType.SUCCESS){
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("success-modal.fxml"));
+
+
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            //messageController.setLoggedUser(car.getIdCar());
+            WarningController messageController = fxmlLoader.getController();
+            messageController.setErrorMessage(text);
+            stage1.setTitle(windowTitle);
+            stage1.setScene(scene);
+            stage1.setResizable(false);
+            stage1.show();
         }
-        //messageController.setLoggedUser(car.getIdCar());
-        WarningController messageController = fxmlLoader.getController();
-        messageController.setErrorMessage(text);
-        stage1.setTitle(windowTitle);
-        stage1.setScene(scene);
-        stage1.setResizable(false);
-        stage1.show();
     }
     @FXML
     void initialize() {

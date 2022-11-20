@@ -22,8 +22,9 @@ create table person
     agePerson         int         null,
     nationalityPerson varchar(45) null,
     pointsPerson      int         null,
-    imagePerson       mediumblob  null,
     carPerson         int         null,
+    imagePerson       mediumblob  null,
+
     constraint carPerson
         foreign key (carPerson) references car (idCar)
 );
