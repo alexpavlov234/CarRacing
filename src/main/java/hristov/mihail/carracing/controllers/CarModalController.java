@@ -5,6 +5,7 @@ import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.services.CarService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -69,27 +72,118 @@ public class CarModalController {
 
     @FXML
     void applyChanges(ActionEvent event) {
-        if (car == null) {
-            car = new Car(modelCarField.getText(), brandCarField.getText(), engineCarField.getText(), fuelCarField.getText(), Integer.parseInt(horsepowerCarField.getText()));
-            CarService.addCar(car);
-            car = CarService.getLastCar();
-            try {
-                if (!Objects.isNull(file)) {
-                    FileInputStream fileInputStream = new FileInputStream(file);
-                    storeImage = CarService.setImageCar();
-                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                    storeImage.setInt(2, this.car.getIdCar());
-                    storeImage.execute();
-                }
-                modelCarField.setText(car.getModelCar());
-                brandCarField.setText(car.getBrandCar());
-                fuelCarField.setText(car.getFuelCar());
-                engineCarField.setText(car.getEngineCar());
-                horsepowerCarField.setText(Integer.toString(car.getHorsepowerCar()));
-                labelCarName.setText(car.getBrandCar() + " " + car.getModelCar());
 
-                carImageView.setImage(CarService.getImageCar(car));
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
+        if (Objects.isNull(car)) {
+            if (!(modelCarField.getText().equals(null) || brandCarField.getText().equals(null) || engineCarField.getText().equals(null) || fuelCarField.getText().equals(null) || horsepowerCarField.getText().equals(null) || modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
+                if (isValidEngine(engineCarField.getText())) {
+                    car = new Car(modelCarField.getText(), brandCarField.getText(), engineCarField.getText(), fuelCarField.getText(), Integer.parseInt(horsepowerCarField.getText()));
+                    CarService.addCar(car);
+                    car = CarService.getLastCar();
+                    try {
+                        if (!Objects.isNull(file)) {
+                            FileInputStream fileInputStream = new FileInputStream(file);
+                            storeImage = CarService.setImageCar();
+                            storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                            storeImage.setInt(2, this.car.getIdCar());
+                            storeImage.execute();
+                        }
+                        modelCarField.setText(car.getModelCar());
+                        brandCarField.setText(car.getBrandCar());
+                        fuelCarField.setText(car.getFuelCar());
+                        engineCarField.setText(car.getEngineCar());
+                        horsepowerCarField.setText(Integer.toString(car.getHorsepowerCar()));
+                        labelCarName.setText(car.getBrandCar() + " " + car.getModelCar());
+
+                        carImageView.setImage(CarService.getImageCar(car));
+                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
+
+
+                        Scene scene = null;
+                        try {
+                            scene = new Scene(fxmlLoader.load());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+
+                        Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                        stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
+                        // applyChangeButton.getScene().getWindow().setWidth(applyChangeButton.getScene().getWidth());
+
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            } else {
+                WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни");
+            }
+        } else {
+            if (!(modelCarField.getText().equals(null) || brandCarField.getText().equals(null) || engineCarField.getText().equals(null) || fuelCarField.getText().equals(null) || horsepowerCarField.getText().equals(null) || modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
+                {
+                    if (isValidEngine(engineCarField.getText())) {
+                        car.setModelCar(modelCarField.getText());
+                        car.setBrandCar(brandCarField.getText());
+                        car.setFuelCar(fuelCarField.getText());
+                        car.setEngineCar(engineCarField.getText());
+                        try {
+                            car.setHorsepowerCar(Integer.parseInt(horsepowerCarField.getText()));
+                            try {
+                                if (!Objects.isNull(file)) {
+                                    FileInputStream fileInputStream = new FileInputStream(file);
+                                    storeImage = CarService.setImageCar();
+                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                                    storeImage.setInt(2, this.car.getIdCar());
+                                    storeImage.execute();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            CarService.updateCar(car);
+                            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
+
+
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            //dialogController.setLoggedUser(car.getIdCar());
+                            CarModalController dialogController = fxmlLoader.getController();
+                            dialogController.setCar(car);
+                            stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
+                            stage.setScene(scene);
+                            stage.show();
+                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                            stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
+                            applyChangeButton.setText("Приложи");
+                        } catch (Exception e) {
+                            WarningController.openMessageModal("Въведете валидни конски сили!", "Невалидни данни");
+                        }
+                    }
+                }
+            } else {
+                WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни");
+            }
+        }
+    }
+
+    @FXML
+    void uploadImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
+        if (!Objects.isNull(file)) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(file);
+
+                //storeImage.execute();
+                carImageView.setImage(new Image(fileInputStream));
+            } catch (FileNotFoundException e) {
+                Stage stage1 = new Stage();
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
 
 
                 Scene scene = null;
@@ -98,92 +192,25 @@ public class CarModalController {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-
-
-                Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
-                applyChangeButton.getScene().getWindow().setWidth(applyChangeButton.getScene().getWidth() + 0.001);
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                //messageController.setLoggedUser(car.getIdCar());
+                WarningController messageController = fxmlLoader.getController();
+                messageController.setErrorMessage(e.getMessage());
+                stage1.setTitle("Системна грешка");
+                stage1.setScene(scene);
+                stage1.show();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                WarningController.openMessageModal(e.getMessage(), "Системна грешка");
             }
-        } else {
-            car.setModelCar(modelCarField.getText());
-            car.setBrandCar(brandCarField.getText());
-            car.setFuelCar(fuelCarField.getText());
-            car.setEngineCar(engineCarField.getText());
-            try {
-                car.setHorsepowerCar(Integer.parseInt(horsepowerCarField.getText()));
-                try {
-                    if (!Objects.isNull(file)) {
-                        FileInputStream fileInputStream = new FileInputStream(file);
-                        storeImage = CarService.setImageCar();
-                        storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                        storeImage.setInt(2, this.car.getIdCar());
-                        storeImage.execute();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                CarService.updateCar(car);
-                Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
-
-
-                Scene scene = null;
-                try {
-                    scene = new Scene(fxmlLoader.load());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                //dialogController.setLoggedUser(car.getIdCar());
-                CarModalController dialogController = fxmlLoader.getController();
-                dialogController.setCar(car);
-                stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
-                stage.setScene(scene);
-                stage.show();
-                //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
-                applyChangeButton.setText("Приложи");
-            } catch (Exception e) {
-                WarningController.openMessageModal("Въведете валидни конски сили!", "Невалидни данни");
-            }
-
         }
     }
 
-    @FXML
-    void uploadImage(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
+    public boolean isValidEngine(String name) {
+        String regexPattern = "^[0-9].[0-9].*$";
 
-            //storeImage.execute();
-            carImageView.setImage(new Image(fileInputStream));
-        } catch (FileNotFoundException e) {
-            Stage stage1 = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            //messageController.setLoggedUser(car.getIdCar());
-            WarningController messageController = fxmlLoader.getController();
-            messageController.setErrorMessage(e.getMessage());
-            stage1.setTitle("Системна грешка");
-            stage1.setScene(scene);
-            stage1.show();
-        } catch (IOException e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка");
+        if (!name.matches(regexPattern)) {
+            WarningController.openMessageModal("Въведено е невалидно име за двигател!", "Невалиден двигател");
         }
-
+        return name.matches(regexPattern);
     }
 
     @FXML
@@ -202,7 +229,46 @@ public class CarModalController {
             assert label3 != null : "fx:id=\"label3\" was not injected: check your FXML file 'car-modal.fxml'.";
             assert labelCarName != null : "fx:id=\"labelCarName\" was not injected: check your FXML file 'car-modal.fxml'.";
             assert modelCarField != null : "fx:id=\"modelCarField\" was not injected: check your FXML file 'car-modal.fxml'.";
-
+            modelCarField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    if (ke.getCode().equals(KeyCode.ENTER)) {
+                        applyChanges(new ActionEvent());
+                    }
+                }
+            });
+            brandCarField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    if (ke.getCode().equals(KeyCode.ENTER)) {
+                        applyChanges(new ActionEvent());
+                    }
+                }
+            });
+            engineCarField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    if (ke.getCode().equals(KeyCode.ENTER)) {
+                        applyChanges(new ActionEvent());
+                    }
+                }
+            });
+            fuelCarField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    if (ke.getCode().equals(KeyCode.ENTER)) {
+                        applyChanges(new ActionEvent());
+                    }
+                }
+            });
+            horsepowerCarField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    if (ke.getCode().equals(KeyCode.ENTER)) {
+                        applyChanges(new ActionEvent());
+                    }
+                }
+            });
             if (car != null) {
                 //do stuff
                 modelCarField.setText(car.getModelCar());

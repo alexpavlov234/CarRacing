@@ -52,6 +52,12 @@ public class CarsController {
         model.setCellValueFactory(new PropertyValueFactory<Car, String>("modelCar"));
         actions.setCellValueFactory(new PropertyValueFactory<Car, String>("fuelCar"));
 
+    brand.maxWidthProperty().bind(table.widthProperty().divide(3));
+    model.maxWidthProperty().bind(table.widthProperty().divide(3));
+    actions.maxWidthProperty().bind(table.widthProperty().divide(3));
+        brand.minWidthProperty().bind(table.widthProperty().divide(3));
+        model.minWidthProperty().bind(table.widthProperty().divide(3));
+        actions.minWidthProperty().bind(table.widthProperty().divide(3));
         Callback<TableColumn<Car, String>, TableCell<Car, String>> cellFactory = //
                 new Callback<TableColumn<Car, String>, TableCell<Car, String>>() {
                     @Override

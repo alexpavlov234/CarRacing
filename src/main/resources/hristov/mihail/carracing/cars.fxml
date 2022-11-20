@@ -16,9 +16,9 @@
       </Label>
       <TableView fx:id="table" layoutX="14.0" layoutY="55.0" prefHeight="335.0" prefWidth="572.0" AnchorPane.bottomAnchor="53.80000000000001" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0">
         <columns>
-          <TableColumn fx:id="brand" editable="false" prefWidth="192.7999725341797" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Марка" />
-          <TableColumn fx:id="model" editable="false" prefWidth="208.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Модел" />
-            <TableColumn fx:id="actions" editable="false" maxWidth="1.7976931348623157E308" prefWidth="232.800048828125" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Действия" />
+          <TableColumn fx:id="brand" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Марка" />
+          <TableColumn fx:id="model" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Модел" />
+            <TableColumn fx:id="actions" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Действия" />
         </columns>
       </TableView>
       <Button fx:id="addCar" layoutX="600.0" layoutY="418.0" mnemonicParsing="false" onAction="#addCar" text="Добави" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
