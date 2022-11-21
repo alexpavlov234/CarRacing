@@ -15,7 +15,7 @@
             <Font name="Segoe UI" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="errorMessage" layoutX="182.0" layoutY="70.0" prefHeight="70.0" prefWidth="236.0" styleClass="labelWhite" text="Не може да бъде промена стойността на колата!" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="errorMessage" layoutX="182.0" layoutY="70.0" prefHeight="70.0" prefWidth="236.0" styleClass="labelWhite" text="Не може да бъде промена стойността на колата!" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="70.6" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>

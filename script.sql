@@ -1,6 +1,6 @@
 create database if not exists carracers;
 use carracers;
-create table if not exists car
+create table if not exists track
 (
     idCar         int auto_increment
         primary key,
@@ -26,7 +26,7 @@ create table person
     imagePerson       mediumblob  null,
 
     constraint carPerson
-        foreign key (carPerson) references car (idCar)
+        foreign key (carPerson) references track (idCar)
 );
 
 
@@ -66,7 +66,7 @@ create table if not exists race_has_car_and_driver
     points   int not null,
     primary key (id, idRace, idCar, idDriver),
     constraint fk_Race_has_Car_and_Driver_Car1
-        foreign key (idCar) references car (idCar),
+        foreign key (idCar) references track (idCar),
     constraint fk_Race_has_Car_and_Driver_Driver1
         foreign key (idDriver) references person (idPerson),
     constraint fk_Race_has_Car_and_Driver_Race1

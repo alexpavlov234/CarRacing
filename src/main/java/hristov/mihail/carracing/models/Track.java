@@ -29,44 +29,43 @@ public class Track {
         this.locationTrack = locationTrack;
     }
 
-
     public int getIdTrack() {
-        return this.idTrack;
+        return idTrack;
     }
 
-    public void setIdTrack(int value) {
-        this.idTrack = value;
+    public void setIdTrack(int idTrack) {
+        this.idTrack = idTrack;
     }
 
-    public String getTrackName() {
-        return this.nameTrack;
+    public String getNameTrack() {
+        return nameTrack;
     }
 
-    public void setTrackName(String value) {
-        this.nameTrack = value;
+    public void setNameTrack(String nameTrack) {
+        this.nameTrack = nameTrack;
     }
 
-    public int getTrackLength() {
-        return this.lengthTrack;
+    public int getLengthTrack() {
+        return lengthTrack;
     }
 
-    public void setTrackLength(int value) {
-        this.lengthTrack = value;
+    public void setLengthTrack(int lengthTrack) {
+        this.lengthTrack = lengthTrack;
     }
 
-    public String getTrackLocation() {
-        return this.locationTrack;
+    public String getLocationTrack() {
+        return locationTrack;
     }
 
-    public void setTrackLocation(String value) {
-        this.locationTrack = value;
+    public void setLocationTrack(String locationTrack) {
+        this.locationTrack = locationTrack;
     }
 
-    public String getTrackImagePath() {
-        return this.imagePathTrack;
+    public String getImagePathTrack() {
+        return imagePathTrack;
     }
 
-    public void setTrackImagePath(String value) {
-        this.imagePathTrack = value;
+    public void setImagePathTrack(String imagePathTrack) {
+        this.imagePathTrack = imagePathTrack;
     }
 }
