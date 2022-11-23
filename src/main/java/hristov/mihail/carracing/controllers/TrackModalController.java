@@ -77,41 +77,50 @@ public class TrackModalController {
 
         if (Objects.isNull(track)) {
             if (!(nameTrackField.getText().equals(null) || nameTrackField.getText().equals(null) || lengthTrackField.getText().equals(null) || locationTrackField.getText().equals(null) || nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals("") )) {
-
                     if (isNumeric(lengthTrackField.getText())) {
                         track = new Track( nameTrackField.getText(), Integer.parseInt(lengthTrackField.getText()), locationTrackField.getText());
                         TrackService.addTrack(track);
+                        track = TrackService.getLastTrack();
+
                         try {
                             if (!Objects.isNull(file)) {
                                 FileInputStream fileInputStream = new FileInputStream(file);
+                                //Подготвяме командата за задаване на изображение
                                 storeImage = TrackService.setImageTrack();
+                                //Попълваме върпостиелните в нея
                                 storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
                                 storeImage.setInt(2, this.track.getIdTrack());
+                                //Изпълняваме командата
                                 storeImage.execute();
                             }
-
+                            //Задаваме полетата с данните на обекта
                             nameTrackField.setText(track.getNameTrack());
                             locationTrackField.setText(track.getLocationTrack());
                             lengthTrackField.setText(Integer.toString(track.getLengthTrack()));
-
                             labelTrackName.setText(track.getNameTrack());
-
                             trackImageView.setImage(TrackService.getImageTrack(track));
+                            //Обновяваме прозореца
+
+                            applyChangeButton.setText("Приложи");
+                            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
 
                             Scene scene = null;
                             try {
                                 scene = new Scene(fxmlLoader.load());
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
                             }
-
-
-                            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                            //dialogController.setLoggedUser(car.getIdCar());
+                            TrackModalController dialogController = fxmlLoader.getController();
+                            dialogController.setTrack(track);
                             stage.setTitle("Редакция на " + track.getNameTrack());
-                            // applyChangeButton.getScene().getWindow().setWidth(applyChangeButton.getScene().getWidth());
+                            stage.setScene(scene);
+                            stage.show();
+                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
+                            applyChangeButton.setText("Приложи");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IOException e) {
@@ -134,15 +143,19 @@ public class TrackModalController {
                                 try {
                                     if (!Objects.isNull(file)) {
                                         FileInputStream fileInputStream = new FileInputStream(file);
+                                        //Подготвяме командата за задаване на изображение
                                         storeImage = TrackService.setImageTrack();
+                                        //Попълваме върпостиелните в нея
                                         storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
                                         storeImage.setInt(2, this.track.getIdTrack());
+                                        //Изпълняваме командата
                                         storeImage.execute();
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 TrackService.updateTrack(track);
+
                                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
@@ -153,15 +166,13 @@ public class TrackModalController {
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
-                                //dialogController.setLoggedUser(track.getIdTrack());
+                                //dialogController.setLoggedUser(car.getIdCar());
                                 TrackModalController dialogController = fxmlLoader.getController();
                                 dialogController.setTrack(track);
-                                stage.setTitle("Редакция на " + track.getNameTrack());
                                 stage.setScene(scene);
                                 stage.show();
-                                applyChangeButton.setText("Приложи");
                             } catch (Exception e) {
-                                WarningController.openMessageModal("Въведете валидна дължина на писта!", "Невалидни данни", MessageType.WARNING);
+                               WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                             }
                         }
 

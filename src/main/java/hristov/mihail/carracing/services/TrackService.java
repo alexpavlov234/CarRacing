@@ -83,4 +83,18 @@ public class TrackService {
         }
         return allTracks;
     }
+
+    public static Track getLastTrack() {
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM track ORDER BY idTrack DESC LIMIT 1;");
+
+        Track track = null;
+        try {
+            resultSet.next();
+            track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
+        } catch (SQLException e) {
+            //TODO: Екран за грешка
+        }
+
+        return track;
+    }
 }

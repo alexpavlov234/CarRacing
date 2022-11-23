@@ -87,7 +87,7 @@ public class CarsController {
                                 final Button deleteButton = new Button("Изтрий");
 
                                 final Button editButton = new Button("Редактирай");
-
+                                // Override-ваме някакъв метод бе не го мисли
                                 @Override
                                 public void updateItem(String item, boolean empty) {
                                     super.updateItem(item, empty);
@@ -95,59 +95,55 @@ public class CarsController {
                                         setGraphic(null);
                                         setText(null);
                                     } else {
+                                        // На нашия бутон за изтриване задаваме стил и какво да става като се цъкне.
                                         deleteButton.setStyle("-fx-background-color: #8b0000; -fx-text-fill: white; ");
                                         deleteButton.setOnAction(event -> {
+                                            // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                             Car car = getTableView().getItems().get(getIndex());
+                                            // Изтриваме колата
+                                            //TODO: Колата принадлежи на някой
                                             CarService.deleteCar(car.getIdCar());
+                                            // Обновяваме таблицата
                                             carObservableList = FXCollections.observableList(CarService.getAllCar());
                                             table.setItems(carObservableList);
                                         });
-
+                                        // Задаваме какво да се прави при натискантето на бутона за редакиране .
                                         editButton.setOnAction(event -> {
+                                            // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                             Car car = getTableView().getItems().get(getIndex());
 
                                             try {
+                                                // Създаваме нов stage (нов прозорец)
                                                 Stage stage = new Stage();
+                                                // Зареждане на прозореца от fxml-a.
                                                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
-
-
+                                                // Зареждане на сцената.
                                                 Scene scene = new Scene(fxmlLoader.load());
-                                                //dialogController.setLoggedUser(car.getIdCar());
+                                                // Подаваме на контролера на модала нашата кола за да може да я отвори
                                                 CarModalController dialogController = fxmlLoader.getController();
                                                 dialogController.setCar(car);
+                                                // Промяна на прозореца да изглежда като такъв за редакция.
                                                 stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                                 stage.setScene(scene);
                                                 stage.show();
+                                                // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
                                                     @Override
                                                     public void handle(WindowEvent paramT) {
+                                                        // Обновяване на елементите в нашата таблица.
                                                         carObservableList = FXCollections.observableList(CarService.getAllCar());
                                                         table.setItems(carObservableList);
                                                     }
                                                 });
                                             } catch (Exception e) {
-                                                Stage stage1 = new Stage();
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-                                                Scene scene = null;
-                                                try {
-                                                    scene = new Scene(fxmlLoader.load());
-                                                } catch (IOException ex) {
-                                                    throw new RuntimeException(ex);
-                                                }
-                                                //messageController.setLoggedUser(car.getIdCar());
-                                                WarningController messageController = fxmlLoader.getController();
-                                                messageController.setErrorMessage(e.getMessage());
-                                                stage1.setTitle("Системна грешка");
-                                                stage1.setScene(scene);
-                                                stage1.show();
-                                                //TODO: Екран за грешка
+                                                // Ако нещо гръмне по трасето да се покаже грешка.
+                                                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                             }
 
 
                                         });
+                                        // Настройване на бутоните да бъдат в центъра на колоната и да са един до друг
                                         HBox pane = new HBox(deleteButton, editButton);
                                         pane.setSpacing(5);
                                         pane.setAlignment(Pos.CENTER);
@@ -156,10 +152,12 @@ public class CarsController {
                                     }
                                 }
                             };
+                            // Задаване на подравняване на колоната.
                             cell.setAlignment(Pos.CENTER);
-
+                            // Връшаме нашата клетка. Кодът по-горе указва как ще се генерира дадена клетка и какви методи ще имат бутоните ѝ.
                             return cell;
                         } else {
+                            // Ако потребителят не е администратор, бутонът ще бъде друг.
                             final TableCell<Car, String> cell = new TableCell<Car, String>() {
 
                                 final Button chooseButton = new Button("Избери за текуща кола");
@@ -172,21 +170,27 @@ public class CarsController {
                                         setGraphic(null);
                                         setText(null);
                                     } else {
+                                        // Задаваме стил на бутона.
                                         chooseButton.setStyle("-fx-background-color: #e5aa00; -fx-text-fill: white; ");
+                                        // Задаваме какво да се прави при натискане на бутона.
                                         chooseButton.setOnAction(event -> {
+                                            // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                             Car car = getTableView().getItems().get(getIndex());
+
                                             try {
+                                                // Задаваме избраната кола за дадения състезател.
                                                 PersonService.setCarPerson(car, PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()));
                                                 WarningController.openMessageModal("Вие успешно избрахте своята кола за състезания!", "Успшено избрана кола", MessageType.SUCCESS);
                                             } catch (Exception e) {
-                                                WarningController.openMessageModal("Вие успешно избрахте своята кола за състезания!", "Успшено избрана кола", MessageType.SUCCESS);
+                                                WarningController.openMessageModal("Неуспешно избрана кола за състезания!", "Неуспшено избрана кола", MessageType.WARNING);
 
                                             }
-
+                                            // Обновяваме нашата таблица.
                                             carObservableList = FXCollections.observableList(CarService.getAllCar());
                                             table.setItems(carObservableList);
                                         });
 
+                                        // Настройване на бутоните да бъдат в центъра на колоната и да са един до друг
 
                                         HBox pane = new HBox(chooseButton);
                                         pane.setSpacing(5);
@@ -196,16 +200,20 @@ public class CarsController {
                                     }
                                 }
                             };
+                            // Задаване на подравняване на колоната.
                             cell.setAlignment(Pos.CENTER);
+                            // Връшаме нашата клетка. Кодът по-горе указва как ще се генерира дадена клетка и какви методи ще имат бутоните ѝ.
                             return cell;
                         }
                     }
                 };
+        // Задаваме как нашата колона ще генерира своите клетки
         actions.setCellFactory(cellFactory);
+        // Задаваме елементите на таблицата
         table.setItems(carObservableList);
     }
 
-
+    // Метод, който ще се изпълнява при натискане на бутона добавяне на нов обект.
     @FXML
     void addCar(ActionEvent event) {
 
@@ -221,6 +229,7 @@ public class CarsController {
             stage.setTitle("Добавяне на кола");
             stage.setScene(scene);
             stage.show();
+            // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
                 @Override
@@ -230,8 +239,8 @@ public class CarsController {
                 }
             });
         } catch (Exception e) {
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
 
-            //TODO: Екран за грешка
         }
     }
 }
