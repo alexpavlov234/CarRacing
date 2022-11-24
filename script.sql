@@ -1,18 +1,18 @@
 create database if not exists carracers;
 use carracers;
-create table if not exists track
+create table if not exists car
 (
     idCar         int auto_increment
         primary key,
-    modelCar      varchar(45)  not null,
-    brandCar      varchar(45)  not null,
-    engineCar     varchar(45)  not null,
-    fuelCar       varchar(45)  not null,
-    horsepowerCar int          not null,
-    imageCar mediumblob null
+    modelCar      varchar(45) not null,
+    brandCar      varchar(45) not null,
+    engineCar     varchar(45) not null,
+    fuelCar       varchar(45) not null,
+    horsepowerCar int         not null,
+    imageCar      mediumblob  null
 );
 
-create table person
+create table if not exists person
 (
     idPerson          int auto_increment
         primary key,
@@ -24,20 +24,19 @@ create table person
     pointsPerson      int         null,
     carPerson         int         null,
     imagePerson       mediumblob  null,
-
     constraint carPerson
-        foreign key (carPerson) references track (idCar)
+        foreign key (carPerson) references car (idCar)
+            on delete set null
 );
-
 
 create table if not exists track
 (
-    idTrack        int auto_increment
+    idTrack       int auto_increment
         primary key,
-    nameTrack      varchar(45)  not null,
-    lengthTrack    int          not null,
-    locationTrack  varchar(45)  not null,
-    imageTrack mediumblob null
+    nameTrack     varchar(45) not null,
+    lengthTrack   int         not null,
+    locationTrack varchar(45) not null,
+    imageTrack    mediumblob  null
 );
 
 create table if not exists race
@@ -53,7 +52,6 @@ create table if not exists race
         foreign key (trackRace) references track (idTrack)
 );
 
-
 create index fk_race_track1_idx
     on race (trackRace);
 
@@ -66,13 +64,12 @@ create table if not exists race_has_car_and_driver
     points   int not null,
     primary key (id, idRace, idCar, idDriver),
     constraint fk_Race_has_Car_and_Driver_Car1
-        foreign key (idCar) references track (idCar),
+        foreign key (idCar) references car (idCar),
     constraint fk_Race_has_Car_and_Driver_Driver1
         foreign key (idDriver) references person (idPerson),
     constraint fk_Race_has_Car_and_Driver_Race1
         foreign key (idRace) references race (idRace)
 );
-
 
 create index fk_Race_has_Car_and_Driver_Car1_idx
     on race_has_car_and_driver (idCar);
@@ -83,11 +80,13 @@ create index fk_Race_has_Car_and_Driver_Driver1_idx
 create table if not exists user
 (
     idUser        int auto_increment,
-    emailUser     varchar(45) not null unique,
+    emailUser     varchar(45) not null,
     passUser      varchar(45) not null,
     typeUser      varchar(45) not null,
     userHasPerson int         not null,
     primary key (idUser, userHasPerson),
+    constraint emailUser
+        unique (emailUser),
     constraint fk_user_driver1
         foreign key (userHasPerson) references person (idPerson)
 );

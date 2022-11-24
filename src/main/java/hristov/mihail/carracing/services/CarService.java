@@ -2,6 +2,7 @@ package hristov.mihail.carracing.services;
 
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
+import hristov.mihail.carracing.models.Person;
 import javafx.scene.image.Image;
 
 import java.io.InputStream;
@@ -16,6 +17,7 @@ public class CarService {
         Database.execute("INSERT INTO car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "','" + car.getFuelCar() + "'," + car.getHorsepowerCar() + ");");
         //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
     }
+
 
     public static Car getCar(int idCar) {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (idCar = " + idCar + ");");

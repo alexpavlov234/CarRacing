@@ -30,7 +30,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CarsController {
-
+    // Нашата таблица с данни, която се визуализира.
+    // Получаваме данните за нея от service, който взима всички записи от базата данни като ArrayList.
+    // Този лист се преобразува в ObservableList - изгъзен лист, който само той е свъместим с TableView.
     ObservableList<Car> carObservableList = FXCollections.observableList(CarService.getAllCar());
     @FXML
     private ResourceBundle resources;
@@ -49,7 +51,7 @@ public class CarsController {
     private TableColumn<Car, String> model;
     @FXML
     private TableView<Car> table;
-
+    // Метод, който се изпълнява при зареждането на нашия прозорец.
     @FXML
     void initialize() {
         assert actions != null : "fx:id=\"actions\" was not injected: check your FXML file 'cars.fxml'.";
@@ -59,6 +61,7 @@ public class CarsController {
         brand.setCellValueFactory(new PropertyValueFactory<Car, String>("brandCar"));
         model.setCellValueFactory(new PropertyValueFactory<Car, String>("modelCar"));
         actions.setCellValueFactory(new PropertyValueFactory<Car, String>("fuelCar"));
+        // Проверяваме дали логнат потребител е администратор.
         if (LoginService.isLoggedUserAdmin()) {
             brand.maxWidthProperty().bind(table.widthProperty().divide(3));
             model.maxWidthProperty().bind(table.widthProperty().divide(3));
@@ -101,7 +104,8 @@ public class CarsController {
                                             // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                             Car car = getTableView().getItems().get(getIndex());
                                             // Изтриваме колата
-                                            //TODO: Колата принадлежи на някой
+                                            //TODO: Колата принадлежи на
+
                                             CarService.deleteCar(car.getIdCar());
                                             // Обновяваме таблицата
                                             carObservableList = FXCollections.observableList(CarService.getAllCar());
