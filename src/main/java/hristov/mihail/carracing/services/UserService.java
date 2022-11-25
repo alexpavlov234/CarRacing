@@ -1,9 +1,13 @@
 package hristov.mihail.carracing.services;
 
-import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
+import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.User;
+import javafx.scene.image.Image;
 
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,6 +31,20 @@ public class UserService {
         }
         return user;
     }
+    public static User getLastUser() {
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM user ORDER BY idUser DESC LIMIT 1;");
+
+        User user = null;
+        try {
+            resultSet.next();
+            user = new User(resultSet.getString("idUser") == null ? 0 : Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getString("userHasPerson") == null ? 0 : Integer.parseInt(resultSet.getString("userHasPerson")));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //TODO: Екран за грешка
+        }
+        return user;
+    }
+
 
     public static User getUser(String emailUser) {
 
@@ -48,7 +66,7 @@ public class UserService {
 
     public static void updateUser(User user) {
         //'
-        Database.execute("UPDATE user SET emailUser = '" + user.getEmailUser() + "', passUser = '" + user.getPassUser() + "', typeUser =' " + user.getTypeUser() + "', userHasPerson = " + user.getUserHasPerson() + "  WHERE idUser =" + user.getIdUser() + ";");
+        Database.execute("UPDATE user SET emailUser = '" + user.getEmailUser() + "', passUser = '" + user.getPassUser() + "', typeUser ='" + user.getTypeUser() + "', userHasPerson = " + user.getUserHasPerson() + "  WHERE idUser =" + user.getIdUser() + ";");
         //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
     }
 

@@ -4,6 +4,7 @@ import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Track;
 import hristov.mihail.carracing.services.CarService;
+import hristov.mihail.carracing.services.LoginService;
 import hristov.mihail.carracing.services.TrackService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -49,8 +50,7 @@ public class TrackModalController {
     private TextField lengthTrackField;
     @FXML
     private TextField locationTrackField;
-    @FXML
-    private TextField horsepowerCarField;
+
     @FXML
     private Label label;
     @FXML
@@ -62,11 +62,9 @@ public class TrackModalController {
     @FXML
     private Label labelTrackName;
     @FXML
-    private TextField modelCarField;
-    @FXML
     private Button uploadImageButton;
     private Track track;
-    private int trackId;
+
 
     public void setTrack(Track track) {
         this.track = track;
@@ -76,32 +74,86 @@ public class TrackModalController {
     void applyChanges(ActionEvent event) {
 
         if (Objects.isNull(track)) {
-            if (!(nameTrackField.getText().equals(null) || nameTrackField.getText().equals(null) || lengthTrackField.getText().equals(null) || locationTrackField.getText().equals(null) || nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals("") )) {
-                    if (isNumeric(lengthTrackField.getText())) {
-                        track = new Track( nameTrackField.getText(), Integer.parseInt(lengthTrackField.getText()), locationTrackField.getText());
-                        TrackService.addTrack(track);
-                        track = TrackService.getLastTrack();
+            if (!(nameTrackField.getText().equals(null) || nameTrackField.getText().equals(null) || lengthTrackField.getText().equals(null) || locationTrackField.getText().equals(null) || nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals(""))) {
+                if (isNumeric(lengthTrackField.getText())) {
+                    track = new Track(nameTrackField.getText(), Integer.parseInt(lengthTrackField.getText()), locationTrackField.getText());
+                    TrackService.addTrack(track);
+                    track = TrackService.getLastTrack();
 
+                    try {
+                        if (!Objects.isNull(file)) {
+                            FileInputStream fileInputStream = new FileInputStream(file);
+                            //Подготвяме командата за задаване на изображение
+                            storeImage = TrackService.setImageTrack();
+                            //Попълваме върпостиелните в нея
+                            storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                            storeImage.setInt(2, this.track.getIdTrack());
+                            //Изпълняваме командата
+                            storeImage.execute();
+                        }
+                        //Задаваме полетата с данните на обекта
+                        nameTrackField.setText(track.getNameTrack());
+                        locationTrackField.setText(track.getLocationTrack());
+                        lengthTrackField.setText(Integer.toString(track.getLengthTrack()));
+                        labelTrackName.setText(track.getNameTrack());
+                        trackImageView.setImage(TrackService.getImageTrack(track));
+                        //Обновяваме прозореца
+
+                        applyChangeButton.setText("Приложи");
+                        Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
+
+
+                        Scene scene = null;
                         try {
-                            if (!Objects.isNull(file)) {
-                                FileInputStream fileInputStream = new FileInputStream(file);
-                                //Подготвяме командата за задаване на изображение
-                                storeImage = TrackService.setImageTrack();
-                                //Попълваме върпостиелните в нея
-                                storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                storeImage.setInt(2, this.track.getIdTrack());
-                                //Изпълняваме командата
-                                storeImage.execute();
-                            }
-                            //Задаваме полетата с данните на обекта
-                            nameTrackField.setText(track.getNameTrack());
-                            locationTrackField.setText(track.getLocationTrack());
-                            lengthTrackField.setText(Integer.toString(track.getLengthTrack()));
-                            labelTrackName.setText(track.getNameTrack());
-                            trackImageView.setImage(TrackService.getImageTrack(track));
-                            //Обновяваме прозореца
+                            scene = new Scene(fxmlLoader.load());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //dialogController.setLoggedUser(car.getIdCar());
+                        TrackModalController dialogController = fxmlLoader.getController();
+                        dialogController.setTrack(track);
+                        stage.setTitle("Редакция на " + track.getNameTrack());
+                        stage.setScene(scene);
+                        stage.show();
+                        //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
-                            applyChangeButton.setText("Приложи");
+                        applyChangeButton.setText("Приложи");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+            } else {
+                WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
+            }
+        } else {
+            if (!(nameTrackField.getText().equals(null) || nameTrackField.getText().equals(null) || lengthTrackField.getText().equals(null) || locationTrackField.getText().equals(null) || nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals(""))) {
+                {
+                    if (isNumeric(lengthTrackField.getText())) {
+                        track.setNameTrack(nameTrackField.getText());
+                        track.setLocationTrack(locationTrackField.getText());
+                        track.setLengthTrack(Integer.parseInt(lengthTrackField.getText()));
+                        try {
+
+                            try {
+                                if (!Objects.isNull(file)) {
+                                    FileInputStream fileInputStream = new FileInputStream(file);
+                                    //Подготвяме командата за задаване на изображение
+                                    storeImage = TrackService.setImageTrack();
+                                    //Попълваме върпостиелните в нея
+                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                                    storeImage.setInt(2, this.track.getIdTrack());
+                                    //Изпълняваме командата
+                                    storeImage.execute();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            TrackService.updateTrack(track);
+
                             Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
@@ -115,72 +167,19 @@ public class TrackModalController {
                             //dialogController.setLoggedUser(car.getIdCar());
                             TrackModalController dialogController = fxmlLoader.getController();
                             dialogController.setTrack(track);
-                            stage.setTitle("Редакция на " + track.getNameTrack());
                             stage.setScene(scene);
                             stage.show();
-                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
-                            applyChangeButton.setText("Приложи");
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                        } catch (Exception e) {
+                            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                         }
-
-                }
-            } else {
-                WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
-            }
-        } else {
-            if (!(nameTrackField.getText().equals(null) || nameTrackField.getText().equals(null) || lengthTrackField.getText().equals(null) || locationTrackField.getText().equals(null) || nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals("") )) {
-                {
-                    if (isNumeric(lengthTrackField.getText())) {
-                            track.setNameTrack(nameTrackField.getText());
-                            track.setLocationTrack(locationTrackField.getText());
-                            track.setLengthTrack(Integer.parseInt(lengthTrackField.getText()));
-                            try {
-
-                                try {
-                                    if (!Objects.isNull(file)) {
-                                        FileInputStream fileInputStream = new FileInputStream(file);
-                                        //Подготвяме командата за задаване на изображение
-                                        storeImage = TrackService.setImageTrack();
-                                        //Попълваме върпостиелните в нея
-                                        storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                        storeImage.setInt(2, this.track.getIdTrack());
-                                        //Изпълняваме командата
-                                        storeImage.execute();
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                TrackService.updateTrack(track);
-
-                                Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
-
-
-                                Scene scene = null;
-                                try {
-                                    scene = new Scene(fxmlLoader.load());
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                //dialogController.setLoggedUser(car.getIdCar());
-                                TrackModalController dialogController = fxmlLoader.getController();
-                                dialogController.setTrack(track);
-                                stage.setScene(scene);
-                                stage.show();
-                            } catch (Exception e) {
-                               WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-                            }
-                        }
+                    }
 
                 }
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
             }
         }
+
     }
 
     @FXML
@@ -213,6 +212,8 @@ public class TrackModalController {
             } catch (IOException e) {
                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
             }
+        } else {
+            trackImageView.setImage(TrackService.getImageTrack(track));
         }
     }
 
@@ -241,7 +242,17 @@ public class TrackModalController {
             assert label2 != null : "fx:id=\"label2\" was not injected: check your FXML file 'track-modal.fxml'.";
             assert label3 != null : "fx:id=\"label3\" was not injected: check your FXML file 'track-modal.fxml'.";
             assert labelTrackName != null : "fx:id=\"labelTrackName\" was not injected: check your FXML file 'track-modal.fxml'.";
-
+            if (!LoginService.isLoggedUserAdmin()) {
+                applyChangeButton.setText("OK");
+                applyChangeButton.setOnAction(e -> {
+                    Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                    stage.close();
+                });
+                nameTrackField.setEditable(false);
+                lengthTrackField.setEditable(false);
+                locationTrackField.setEditable(false);
+                uploadImageButton.setVisible(false);
+            }
 
             nameTrackField.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
@@ -268,9 +279,7 @@ public class TrackModalController {
                 }
             });
 
-            if (track != null) {
-                //do stuff
-
+            if (!Objects.isNull(track)) {
                 nameTrackField.setText(track.getNameTrack());
                 locationTrackField.setText(track.getLocationTrack());
                 lengthTrackField.setText(Integer.toString(track.getLengthTrack()));
@@ -280,10 +289,9 @@ public class TrackModalController {
                 trackImageView.setImage(TrackService.getImageTrack(track));
             } else {
                 applyChangeButton.setText("Добави");
+                ((Stage) applyChangeButton.getScene().getWindow()).setTitle("Добавяне на писта");
                 labelTrackName.setText("Добавяне на писта");
             }
         });
-
     }
-
 }

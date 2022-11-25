@@ -3,7 +3,11 @@ package hristov.mihail.carracing.services;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Person;
+import javafx.scene.image.Image;
 
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,6 +37,36 @@ public class PersonService {
         return person;
     }
 
+    public static Image getImagePerson(Person person) {
+        try {
+            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imagePerson FROM person WHERE (idPerson = " + person.getIdPerson() + ");");
+            //retrieve.setInt(1, 1);
+            ResultSet resultSet = retrieve.executeQuery();
+            resultSet.next();
+            Blob blob = resultSet.getBlob(1);
+            if (blob != null) {
+                InputStream inputStream = blob.getBinaryStream();
+                Image image = new Image(inputStream);
+                return image;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static PreparedStatement setImagePerson() {
+        try {
+            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE person SET imagePerson = ?  WHERE idPerson = ?;");
+            return store;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     public static Person getLastPerson() {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM person ORDER BY idPerson DESC LIMIT 1;");
 

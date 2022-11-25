@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="270.0" prefWidth="683.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.UserModalController">
+   <children>
+      <Label fx:id="labelUserName" layoutX="14.0" layoutY="19.0" styleClass="labelWhite" text="Потребител" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
+         <font>
+            <Font name="Segoe UI" size="21.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="userImageView" fitHeight="198.0" fitWidth="294.0" layoutX="249.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="image" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <VBox layoutX="14.0" layoutY="88.0" prefHeight="94.0" prefWidth="359.0" spacing="5.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="435.0" spacing="10.0">
+               <children>
+                  <Label fx:id="label" prefHeight="0.0" prefWidth="140.0" styleClass="labelWhite" text="Имейл:">
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="emailUserField" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="435.0" spacing="10.0">
+               <children>
+                  <Label fx:id="label11" prefHeight="0.0" prefWidth="140.0" styleClass="labelWhite" text="Парола:">
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="passwordUserField" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="435.0" spacing="10.0">
+               <children>
+                  <Label fx:id="label1" prefHeight="0.0" prefWidth="140.0" styleClass="labelWhite" text="Роля:">
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="roleCombobox" prefWidth="150.0" styleClass="combobox" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="356.0" spacing="10.0">
+               <children>
+                  <Label fx:id="label4" prefHeight="0.0" prefWidth="140.0" styleClass="labelWhite" text="Свързан потребител:">
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="personUserField" editable="false" prefHeight="27.0" prefWidth="151.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="462.0" layoutY="231.0" spacing="5.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Button fx:id="uploadImageButton" mnemonicParsing="false" onAction="#uploadImage" text="Качи изображение" />
+            <Button fx:id="applyChangeButton" mnemonicParsing="false" onAction="#applyChanges" text="Приложи" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -210,6 +210,8 @@ public class CarModalController {
             } catch (Exception e) {
                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
             }
+        } else {
+            carImageView.setImage(CarService.getImageCar(car));
         }
     }
     // Проверка чрез regex дали двигателят е валиден.
@@ -288,7 +290,7 @@ public class CarModalController {
                 }
             });
             // Ако колата не е празна, прозорецът ще се зададе като такъв за редактиране на данни и ако е - за добавяне на кола.
-            if (car != null) {
+            if (!Objects.isNull(car)) {
                 //do stuff
                 modelCarField.setText(car.getModelCar());
                 brandCarField.setText(car.getBrandCar());
@@ -300,6 +302,8 @@ public class CarModalController {
                 carImageView.setImage(CarService.getImageCar(car));
             } else {
                 applyChangeButton.setText("Добави");
+                ((Stage) applyChangeButton.getScene().getWindow()).setTitle("Добавяне на кола");
+
                 labelCarName.setText("Добавяне на кола");
             }
         });

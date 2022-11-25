@@ -156,7 +156,7 @@ public class MainScreenAdminController {
 
     @FXML
     private void handleShowView4(ActionEvent event) {
-        try {loadFXML("tracks.fxml");} catch (Exception e) {
+        try {loadFXML("users.fxml");} catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }
     }
