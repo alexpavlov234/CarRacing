@@ -103,7 +103,7 @@ public class PersonService {
         ArrayList<Person> allPersons = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-                Person person = new Person(Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), Integer.parseInt(resultSet.getString("pointsPerson")),  resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
+                Person person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")),  resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
                 allPersons.add(person);
             }
         } catch (SQLException e) {

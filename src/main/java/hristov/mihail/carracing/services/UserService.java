@@ -63,6 +63,23 @@ public class UserService {
         }
         return user;
     }
+    public static User getUser(Person person) {
+
+        //TODO: Да проверим къде трябва да има кавички
+        //ТОDO: В SQL не е '==', а '='!
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM user WHERE (userHasPerson = " + person.getIdPerson() + ") LIMIT 1;");
+
+        //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
+        User user = null;
+        try {
+            //TODO: Задължително
+            resultSet.next();
+            user = new User(Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), Integer.parseInt(resultSet.getString("userHasPerson")));
+        } catch (Exception e) {
+            //TODO: Да обсъдим
+        }
+        return user;
+    }
 
     public static void updateUser(User user) {
         //'

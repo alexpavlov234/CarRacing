@@ -55,6 +55,10 @@ public class User {
         return this.typeUser;
     }
 
+    public boolean isAdmin(){
+        return this.typeUser.equals("Admin");
+    }
+
     public void setTypeUser(String value) {
         this.typeUser = value;
     }
