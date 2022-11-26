@@ -1,9 +1,7 @@
 package hristov.mihail.carracing.controllers;
 
 import hristov.mihail.carracing.HelloApplication;
-import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Track;
-import hristov.mihail.carracing.services.CarService;
 import hristov.mihail.carracing.services.LoginService;
 import hristov.mihail.carracing.services.TrackService;
 import javafx.application.Platform;
@@ -130,50 +128,54 @@ public class TrackModalController {
                 WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
             }
         } else {
-            if (!(nameTrackField.getText().equals(null) || nameTrackField.getText().equals(null) || lengthTrackField.getText().equals(null) || locationTrackField.getText().equals(null) || nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals(""))) {
-                {
-                    if (isNumeric(lengthTrackField.getText())) {
-                        track.setNameTrack(nameTrackField.getText());
-                        track.setLocationTrack(locationTrackField.getText());
-                        track.setLengthTrack(Integer.parseInt(lengthTrackField.getText()));
-                        try {
-
+            if (!(Objects.isNull(nameTrackField.getText()) || Objects.isNull(lengthTrackField.getText()) || Objects.isNull(locationTrackField.getText()))) {
+                if (!(nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals(""))) {
+                    {
+                        if (isNumeric(lengthTrackField.getText())) {
+                            track.setNameTrack(nameTrackField.getText());
+                            track.setLocationTrack(locationTrackField.getText());
+                            track.setLengthTrack(Integer.parseInt(lengthTrackField.getText()));
                             try {
-                                if (!Objects.isNull(file)) {
-                                    FileInputStream fileInputStream = new FileInputStream(file);
-                                    //Подготвяме командата за задаване на изображение
-                                    storeImage = TrackService.setImageTrack();
-                                    //Попълваме върпостиелните в нея
-                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                    storeImage.setInt(2, this.track.getIdTrack());
-                                    //Изпълняваме командата
-                                    storeImage.execute();
+
+                                try {
+                                    if (!Objects.isNull(file)) {
+                                        FileInputStream fileInputStream = new FileInputStream(file);
+                                        //Подготвяме командата за задаване на изображение
+                                        storeImage = TrackService.setImageTrack();
+                                        //Попълваме върпостиелните в нея
+                                        storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                                        storeImage.setInt(2, this.track.getIdTrack());
+                                        //Изпълняваме командата
+                                        storeImage.execute();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
+                                TrackService.updateTrack(track);
+
+                                Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
+
+
+                                Scene scene = null;
+                                try {
+                                    scene = new Scene(fxmlLoader.load());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                //dialogController.setLoggedUser(car.getIdCar());
+                                TrackModalController dialogController = fxmlLoader.getController();
+                                dialogController.setTrack(track);
+                                stage.setScene(scene);
+                                stage.show();
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                             }
-                            TrackService.updateTrack(track);
-
-                            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
-
-
-                            Scene scene = null;
-                            try {
-                                scene = new Scene(fxmlLoader.load());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            //dialogController.setLoggedUser(car.getIdCar());
-                            TrackModalController dialogController = fxmlLoader.getController();
-                            dialogController.setTrack(track);
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (Exception e) {
-                            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                         }
-                    }
 
+                    }
+                } else {
+                    WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
                 }
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);

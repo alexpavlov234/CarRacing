@@ -65,9 +65,13 @@
                   </VBox>
             <AnchorPane layoutY="517.0" prefHeight="77.0" prefWidth="206.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
-                  <Button fx:id="exitUserButton" layoutX="140.0" layoutY="40.0" mnemonicParsing="false" onAction="#exitUser" prefHeight="27.0" prefWidth="70.0" text="Изход" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="14.0" />
-                  <Label fx:id="profileNameLabel" layoutX="14.0" layoutY="21.0" prefHeight="38.0" prefWidth="102.0" text="Профил" textFill="WHITE" />
-                  <Button fx:id="profileUserButton" layoutX="142.0" layoutY="11.0" mnemonicParsing="false" onAction="#editProfile" prefHeight="27.0" prefWidth="70.0" text="Профил" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="11.0" />
+                  <VBox layoutX="121.0" layoutY="9.0" spacing="5.0" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="9.0">
+                     <children>
+                        <Button fx:id="profileUserButton" mnemonicParsing="false" onAction="#editProfile" prefHeight="27.0" prefWidth="70.0" text="Профил" />
+                        <Button fx:id="exitUserButton" mnemonicParsing="false" onAction="#exitUser" prefHeight="27.0" prefWidth="70.0" text="Изход" />
+                     </children>
+                  </VBox>
+                  <Label fx:id="profileNameLabel" layoutX="14.0" layoutY="19.0" prefHeight="38.0" prefWidth="102.0" text="Профил" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0" />
                </children>
             </AnchorPane>
          </children>

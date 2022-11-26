@@ -85,12 +85,12 @@ public class RegisterController {
     }
 
     public boolean isValidName(String name) {
-        String regexPattern = "[А-ЯЁ][-А-яЁё]+";
+        String regexPattern = "[А-ЯЁ][-А-яЁё]+|[A-Z][a-z]+";
 
         if (!name.matches(regexPattern)) {
             firstNameField.setStyle("-fx-border-color: red");
             lastNameField.setStyle("-fx-border-color: red");
-            wrongNameLabel.setText("Въведете коректни имена на кирилица!");
+            wrongNameLabel.setText("Въведете коректни имена!");
         }
         return name.matches(regexPattern);
     }
@@ -125,13 +125,7 @@ public class RegisterController {
     @FXML
     void registerUser(ActionEvent event) {
         try {
-            if (firstNameField.getText().trim().contains(" ") || lastNameField.getText().trim().contains(" ") || firstNameField.equals(null) || lastNameField.equals(null) || firstNameField.equals("") || lastNameField.equals("")) {
-
-                firstNameField.setStyle("-fx-border-color: red");
-                lastNameField.setStyle("-fx-border-color: red");
-                wrongNameLabel.setText("Въведете коректни имена!");
-
-            } else if (isValidEmail(emailField.getText().trim()) && isValidPassword(passwordField.getText())) {
+           if (isValidEmail(emailField.getText().trim()) && isValidPassword(passwordField.getText())) {
                 if (isValidName(firstNameField.getText().trim()) && isValidName(lastNameField.getText().trim())) {
                     if (passwordField.getText().equals(confirmPasswordField.getText())) {
                         PersonService.addPerson(firstNameField.getText().trim(), lastNameField.getText().trim());

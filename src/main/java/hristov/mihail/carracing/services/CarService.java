@@ -1,5 +1,7 @@
 package hristov.mihail.carracing.services;
 
+import hristov.mihail.carracing.controllers.MessageType;
+import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Person;
@@ -18,12 +20,16 @@ public class CarService {
         //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
     }
 
+    public static String getCarName(Car car) {
+        return car.getBrandCar() + " " + car.getModelCar();
+    }
 
     public static Car getCar(int idCar) {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (idCar = " + idCar + ");");
         //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
         Car car = null;
         try {
+            resultSet.next();
 //            byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
 //            Blob blobData = Database.createBlob();
 //            blobData.setBytes(1, byteData);
@@ -33,6 +39,30 @@ public class CarService {
             //TODO: Екран за грешка
         }
         return car;
+    }
+
+    public static Car getCar(String name) {
+        String[] names = name.split(" ");
+        if (names.length == 2) {
+            ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (modelCar = '" + names[1] + "' AND brandCar = '" + names[0] + "');");
+            //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
+            Car car = null;
+            try {
+                resultSet.next();
+//            byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
+//            Blob blobData = Database.createBlob();
+//            blobData.setBytes(1, byteData);
+                //  car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), blobData);
+                car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")));
+            } catch (SQLException e) {
+                //TODO: Екран за грешка
+            }
+            return car;
+        } else {
+            WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+            return null;
+        }
+
     }
 
     public static Car getLastCar() {
@@ -110,4 +140,23 @@ public class CarService {
         }
         return allCars;
     }
+
+    public static ArrayList<String> getAllCarNames() {
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM car;");
+
+        ArrayList<String> allCars = new ArrayList<>();
+        try {
+            while ((resultSet.next())) {
+//                byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
+//                Blob blobData = Database.createBlob();
+//                blobData.setBytes(1, byteData);
+                allCars.add(resultSet.getString("brandCar") + " " + resultSet.getString("modelCar"));
+
+            }
+        } catch (SQLException e) {
+            //TODO: Екран за грешка
+        }
+        return allCars;
+    }
+
 }

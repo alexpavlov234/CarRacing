@@ -2,7 +2,6 @@ package hristov.mihail.carracing.controllers;
 
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.User;
-import hristov.mihail.carracing.services.CarService;
 import hristov.mihail.carracing.services.PersonService;
 import hristov.mihail.carracing.services.UserService;
 import javafx.application.Platform;
@@ -27,7 +26,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -174,52 +172,56 @@ public class UserModalController {
         } else {
             // Ако обектът съдържащ колата, не е празен, това значи, че искаме да бъде актуализиран в базата данни.
             // Извършваме нужните проверки на въведените данни.
-            if (!(emailUserField.getText().equals(null) || passwordUserField.getText().equals(null) || personUserField.getText().equals(null) || emailUserField.getText().equals("") || passwordUserField.getText().equals("") || personUserField.getText().equals(""))) {
-                // Проверяваме дали имейлът е валиден
-                if (isValidEmail(emailUserField.getText())) {
-                    if (isValidPassword(passwordUserField.getText())) {
+            if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(personUserField.getText()))) {
+                if (!(emailUserField.getText().equals("") || passwordUserField.getText().equals("") || personUserField.getText().equals(""))) {
+                    // Проверяваме дали имейлът е валиден
+                    if (isValidEmail(emailUserField.getText())) {
+                        if (isValidPassword(passwordUserField.getText())) {
 
-                        // Актуализираме данните на нашата кола.
-                        user.setEmailUser(emailUserField.getText());
-                        user.setPassUser(passwordUserField.getText());
-                        user.setTypeUser(roleCombobox.getValue());
+                            // Актуализираме данните на нашата кола.
+                            user.setEmailUser(emailUserField.getText());
+                            user.setPassUser(passwordUserField.getText());
+                            user.setTypeUser(roleCombobox.getValue());
 
 
-                        // Зареждаме каченото изображение и го задаваме на нашия обект.
-                        try {
-                            if (!Objects.isNull(file)) {
-                                FileInputStream fileInputStream = new FileInputStream(file);
-                                storeImage = PersonService.setImagePerson();
-                                storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                storeImage.setInt(2, this.user.getUserHasPerson());
-                                storeImage.execute();
+                            // Зареждаме каченото изображение и го задаваме на нашия обект.
+                            try {
+                                if (!Objects.isNull(file)) {
+                                    FileInputStream fileInputStream = new FileInputStream(file);
+                                    storeImage = PersonService.setImagePerson();
+                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                                    storeImage.setInt(2, this.user.getUserHasPerson());
+                                    storeImage.execute();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        UserService.updateUser(user);
-                        Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("user-modal.fxml"));
+                            UserService.updateUser(user);
+                            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("user-modal.fxml"));
 
 
-                        Scene scene = null;
-                        try {
-                            scene = new Scene(fxmlLoader.load());
-                        } catch (IOException e) {
-                            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load());
+                            } catch (IOException e) {
+                                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                            }
+                            // Обновяваме нашето прозорче за всеки случай.
+                            //dialogController.setLoggedUser(user.getIdCar());
+                            UserModalController dialogController = fxmlLoader.getController();
+                            dialogController.setUser(user);
+                            stage.setScene(scene);
+                            stage.show();
+                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+
+
                         }
-                        // Обновяваме нашето прозорче за всеки случай.
-                        //dialogController.setLoggedUser(user.getIdCar());
-                        UserModalController dialogController = fxmlLoader.getController();
-                        dialogController.setUser(user);
-                        stage.setScene(scene);
-                        stage.show();
-                        //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
 
                     }
-
-
+                } else {
+                    WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
                 }
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);

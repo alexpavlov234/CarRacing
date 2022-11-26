@@ -89,14 +89,16 @@ public class MainScreenUserController {
 
             Stage stage = new Stage();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("edit-user.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
-
+            ProfileController dialogController = fxmlLoader.getController();
+            dialogController.setUser(LoginService.getLoggedUser());
             stage.setTitle("Редакция на профил");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
+            e.printStackTrace();
             WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }
     }

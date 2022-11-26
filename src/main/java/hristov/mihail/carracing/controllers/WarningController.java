@@ -37,7 +37,6 @@ public class WarningController {
     @FXML
     void setOkButton(ActionEvent event) {
         Stage stage = (Stage) okButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         stage.close();
     }
 
