@@ -26,6 +26,16 @@ public class User {
         this.emailUser = emailUser;
         this.passUser = passUser;
     }
+    public User(User user, int userHasPerson){
+        this.emailUser = user.emailUser;
+        this.passUser = user.passUser;
+        this.typeUser = user.typeUser;
+        this.userHasPerson = userHasPerson;
+    }
+
+    public User() {
+
+    }
 
     public int getIdUser() {
         return this.idUser;

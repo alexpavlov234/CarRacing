@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class PersonService {
     public static void addPerson(Person person) {
-        Database.execute("INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, imagePerson) VALUES ('" + person.getFirstNamePerson() + "','" + person.getMiddleNamePerson() + "','" + person.getLastNamePerson() + "'," + person.getAgePerson() + ",'" + person.getNationalityPerson() + "'," + person.getPointsPerson() + ",'" + person.getImagePathPerson() + "');");
-        //INSERT INTO Person (namePerson, lengthPerson, locationPerson) VALUES ('Monte Personlo',456,'Dupnica');
+        Database.execute("INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, carPerson, imagePerson) VALUES ('" + person.getFirstNamePerson() + "','" + person.getMiddleNamePerson() + "','" + person.getLastNamePerson() + "'," + person.getAgePerson() + ",'" + person.getNationalityPerson() + "'," + person.getPointsPerson() + "," + person.getCarPerson() + ",'" + person.getImagePathPerson() + "');");
+       //INSERT INTO Person (namePerson, lengthPerson, locationPerson) VALUES ('Monte Personlo',456,'Dupnica');
     }
 
     public static void addPerson(String firstNamePerson, String lastNamePerson) {

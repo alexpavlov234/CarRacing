@@ -50,8 +50,6 @@ public class ProfileController {
     @FXML
     private Button applyChangeButton;
 
-    @FXML
-    private Button cancelChangeButton;
 
     @FXML
     private ComboBox<String> carPersonCombobox;
@@ -121,11 +119,6 @@ public class ProfileController {
     private User user;
     private Person person;
 
-    @FXML
-    void cancelChanges(ActionEvent event) {
-        Stage stage = (Stage) cancelChangeButton.getScene().getWindow();
-        stage.close();
-    }
 
     // Нашият метод, който приема обект, който ще се зареди в нашия модал. Тоест като цъкнеш редактирай този метод получава от таблицата обекта, който ще редактираме и го задава за нашия модал.
     public void setUser(User user) {
@@ -167,40 +160,115 @@ public class ProfileController {
 
         // Ако обектът съдържащ колата, не е празен, това значи, че искаме да бъде актуализиран в базата данни.
         // Извършваме нужните проверки на въведените данни.
-
-        if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(firstNamePersonField.getText()) || Objects.isNull(middleNamePersonField.getText()) || Objects.isNull(lastNamePersonField.getText()) || Objects.isNull(agePersonField.getText()))) {
-            if (!(emailUserField.getText().equals("") || passwordUserField.getText().equals("") || firstNamePersonField.getText().equals("") || middleNamePersonField.getText().equals("") || lastNamePersonField.getText().equals("") || agePersonField.getText().equals(""))) {
-                // Проверяваме дали имейлът е валиден
-                if (isValidEmail(emailUserField.getText())) {
-                    if (isValidPassword(passwordUserField.getText())) {
-                        if (isValidName(firstNamePersonField.getText()) && isValidName(middleNamePersonField.getText()) && isValidName(lastNamePersonField.getText())) {
-                            if (isValidAge(agePersonField.getText())) {
-                                if (isNumeric(pointsPersonField.getText())) {
-                                    if (!(Objects.isNull(carPersonCombobox.getValue()) || Objects.isNull(nationalityPersonCombobox.getValue()))) {
-                                        // Актуализираме данните на нашата кола.
-                                        user.setEmailUser(emailUserField.getText());
-                                        user.setPassUser(passwordUserField.getText());
-                                        person.setAgePerson(Integer.parseInt(agePersonField.getText()));
-                                        person.setFirstNamePerson(firstNamePersonField.getText());
-                                        person.setMiddleNamePerson(middleNamePersonField.getText());
-                                        person.setLastNamePerson(lastNamePersonField.getText());
-                                        person.setNationalityPerson(nationalityPersonCombobox.getValue());
-                                        person.setPointsPerson(Integer.parseInt(pointsPersonField.getText()));
-                                        person.setCarPerson(CarService.getCar(carPersonCombobox.getValue()).getIdCar());
-                                        // Зареждаме каченото изображение и го задаваме на нашия обект.
-                                        try {
-                                            if (!Objects.isNull(file)) {
-                                                FileInputStream fileInputStream = new FileInputStream(file);
-                                                storeImage = PersonService.setImagePerson();
-                                                storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                                storeImage.setInt(2, this.user.getUserHasPerson());
-                                                storeImage.execute();
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
+if (!Objects.isNull(user)) {
+    if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(firstNamePersonField.getText()) || Objects.isNull(middleNamePersonField.getText()) || Objects.isNull(lastNamePersonField.getText()) || Objects.isNull(agePersonField.getText()))) {
+        if (!(emailUserField.getText().equals("") || passwordUserField.getText().equals("") || firstNamePersonField.getText().equals("") || middleNamePersonField.getText().equals("") || lastNamePersonField.getText().equals("") || agePersonField.getText().equals(""))) {
+            // Проверяваме дали имейлът е валиден
+            if (isValidEmail(emailUserField.getText())) {
+                if (isValidPassword(passwordUserField.getText())) {
+                    if (isValidName(firstNamePersonField.getText()) && isValidName(middleNamePersonField.getText()) && isValidName(lastNamePersonField.getText())) {
+                        if (isValidAge(agePersonField.getText())) {
+                            if (isNumeric(pointsPersonField.getText())) {
+                                if (!(Objects.isNull(carPersonCombobox.getValue()) || Objects.isNull(nationalityPersonCombobox.getValue()))) {
+                                    // Актуализираме данните на нашата кола.
+                                    user.setEmailUser(emailUserField.getText());
+                                    user.setPassUser(passwordUserField.getText());
+                                    person.setAgePerson(Integer.parseInt(agePersonField.getText()));
+                                    person.setFirstNamePerson(firstNamePersonField.getText());
+                                    person.setMiddleNamePerson(middleNamePersonField.getText());
+                                    person.setLastNamePerson(lastNamePersonField.getText());
+                                    person.setNationalityPerson(nationalityPersonCombobox.getValue());
+                                    person.setPointsPerson(Integer.parseInt(pointsPersonField.getText()));
+                                    person.setCarPerson(CarService.getCar(carPersonCombobox.getValue()).getIdCar());
+                                    // Зареждаме каченото изображение и го задаваме на нашия обект.
+                                    try {
+                                        if (!Objects.isNull(file)) {
+                                            FileInputStream fileInputStream = new FileInputStream(file);
+                                            storeImage = PersonService.setImagePerson();
+                                            storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                                            storeImage.setInt(2, this.user.getUserHasPerson());
+                                            storeImage.execute();
                                         }
-                                        PersonService.updatePerson(person);
-                                        UserService.updateUser(user);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    PersonService.updatePerson(person);
+                                    UserService.updateUser(user);
+                                    Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
+
+
+                                    Scene scene = null;
+                                    try {
+                                        scene = new Scene(fxmlLoader.load());
+                                    } catch (IOException e) {
+                                        WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                                    }
+                                    // Обновяваме нашето прозорче за всеки случай.
+                                    //dialogController.setLoggedUser(user.getIdCar());
+                                    ProfileController dialogController = fxmlLoader.getController();
+                                    dialogController.setUser(user);
+                                    stage.setScene(scene);
+                                    stage.show();
+                                    //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+
+                                } else {
+                                    WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+        } else {
+            WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
+        }
+    } else {
+        WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
+    }
+} else {
+    if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(firstNamePersonField.getText()) || Objects.isNull(middleNamePersonField.getText()) || Objects.isNull(lastNamePersonField.getText()) || Objects.isNull(agePersonField.getText()))) {
+        if (!(emailUserField.getText().equals("") || passwordUserField.getText().equals("") || firstNamePersonField.getText().equals("") || middleNamePersonField.getText().equals("") || lastNamePersonField.getText().equals("") || agePersonField.getText().equals(""))) {
+            // Проверяваме дали имейлът е валиден
+            if (isValidEmail(emailUserField.getText())) {
+                if (isValidPassword(passwordUserField.getText())) {
+                    if (isValidName(firstNamePersonField.getText()) && isValidName(middleNamePersonField.getText()) && isValidName(lastNamePersonField.getText())) {
+                        if (isValidAge(agePersonField.getText())) {
+                            if (isNumeric(pointsPersonField.getText())) {
+                                if (!(Objects.isNull(carPersonCombobox.getValue()) || Objects.isNull(nationalityPersonCombobox.getValue()))) {
+                                    // Актуализираме данните на нашата кола.
+                                    user = new User();
+                                    person = new Person();
+                                    user.setEmailUser(emailUserField.getText());
+                                    user.setPassUser(passwordUserField.getText());
+                                    person.setAgePerson(Integer.parseInt(agePersonField.getText()));
+                                    person.setFirstNamePerson(firstNamePersonField.getText());
+                                    person.setMiddleNamePerson(middleNamePersonField.getText());
+                                    person.setLastNamePerson(lastNamePersonField.getText());
+                                    person.setNationalityPerson(nationalityPersonCombobox.getValue());
+                                    person.setPointsPerson(Integer.parseInt(pointsPersonField.getText()));
+                                    person.setCarPerson(CarService.getCar(carPersonCombobox.getValue()).getIdCar());
+                                    // Зареждаме каченото изображение и го задаваме на нашия обект.
+                                    try {
+                                        if (!Objects.isNull(file)) {
+                                            FileInputStream fileInputStream = new FileInputStream(file);
+                                            storeImage = PersonService.setImagePerson();
+                                            storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                                            storeImage.setInt(2, this.user.getUserHasPerson());
+                                            storeImage.execute();
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    System.out.println(person.getCarPerson());
+                                    PersonService.addPerson(person);
+                                    User user = new User(this.user, PersonService.getLastPerson().getIdPerson());
+                                    if (Objects.isNull(UserService.getUser(user.getEmailUser()))) {
+                                        UserService.addUser(user);
+                                        this.user = UserService.getLastUser();
                                         Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                                         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
@@ -214,29 +282,33 @@ public class ProfileController {
                                         // Обновяваме нашето прозорче за всеки случай.
                                         //dialogController.setLoggedUser(user.getIdCar());
                                         ProfileController dialogController = fxmlLoader.getController();
-                                        dialogController.setUser(user);
+                                        dialogController.setUser(this.user);
                                         stage.setScene(scene);
                                         stage.show();
-                                        //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
                                     } else {
-                                        WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
+                                        WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител", MessageType.WARNING);
                                     }
+
+                                    //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+
+                                } else {
+                                    WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
                                 }
                             }
                         }
-
                     }
 
                 }
 
-            } else {
-                WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
             }
+
         } else {
             WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
         }
-
+    } else {
+        WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
+    }
+}
 
     }
 
@@ -279,11 +351,11 @@ public class ProfileController {
             return false;
         } else {
             int age = Integer.parseInt(strNum);
-            if (!(age > 0 && age <= 150)) {
+            if (!(age >= 18 && age <= 150)) {
 
                 WarningController.openMessageModal("Въведена е невалидна възраст!", "Невалидни данни", MessageType.WARNING);
             }
-            return age > 0 && age <= 150;
+            return age >= 18 && age <= 150;
         }
 
     }
@@ -295,7 +367,6 @@ public class ProfileController {
         Platform.runLater(() -> {
             assert agePersonField != null : "fx:id=\"agePersonField\" was not injected: check your FXML file 'profile.fxml'.";
             assert applyChangeButton != null : "fx:id=\"applyChangeButton\" was not injected: check your FXML file 'profile.fxml'.";
-            assert cancelChangeButton != null : "fx:id=\"cancelChangeButton\" was not injected: check your FXML file 'profile.fxml'.";
             assert carPersonCombobox != null : "fx:id=\"carPersonField\" was not injected: check your FXML file 'profile.fxml'.";
             assert emailUserField != null : "fx:id=\"emailUserField\" was not injected: check your FXML file 'profile.fxml'.";
             assert firstNamePersonField != null : "fx:id=\"firstNamePersonField\" was not injected: check your FXML file 'profile.fxml'.";
@@ -318,12 +389,14 @@ public class ProfileController {
             assert roleCombobox != null : "fx:id=\"roleCombobox\" was not injected: check your FXML file 'profile.fxml'.";
             assert uploadImageButton != null : "fx:id=\"uploadImageButton\" was not injected: check your FXML file 'profile.fxml'.";
             assert userImageView != null : "fx:id=\"userImageView\" was not injected: check your FXML file 'profile.fxml'.";
-            person = PersonService.getPerson(user.getUserHasPerson());
+            if (!Objects.isNull(user)) {
+                person = PersonService.getPerson(user.getUserHasPerson());
+            }
             // Добавяме елементите в нашия comboBox
             roleCombobox.getItems().addAll("Admin", "User");
             carPersonCombobox.getItems().addAll(CarService.getAllCarNames());
             nationalityPersonCombobox.getItems().addAll("Австралия", "Австрия", "Азербайджан", "Албания", "Алжир", "Ангола", "Андора", "Антигуа и Барбуда", "Аржентина", "Армения", "Афганистан", "Бангладеш", "Барбадос", "Бахамски острови", "Бахрейн", "Беларус", "Белгия", "Белиз", "Бенин", "Боливия", "Босна и Херцеговина", "Ботсвана", "Бразилия", "Бруней", "Буркина Фасо", "Бурунди", "Бутан", "България", "Вануату", "Великобритания", "Венецуела", "Виетнам", "Габон", "Гамбия", "Гана", "Гватемала", "Гвиана", "Гвинея", "Гвинея-Бисау", "Германия", "Гренада", "Грузия", "Гърция", "Дания", "Демократична република Конго", "Джибути", "Доминика", "Доминиканска република", "Египет", "Еквадор", "Екваториална Гвинея", "Еритрея", "Есватини", "Естония", "Етиопия", "Замбия", "Зимбабве", "Израел", "Източен Тимор", "Индия", "Индонезия", "Ирак", "Иран", "Ирландия", "Исландия", "Испания", "Италия", "Йемен", "Йордания", "Кабо Верде", "Казахстан", "Камбоджа", "Камерун", "Канада", "Катар", "Кения", "Кипър", "Киргизстан", "Кирибати", "Китай", "Колумбия", "Коморски острови", "Коста Рика", "Кот д'Ивоар", "Куба", "Кувейт", "Лаос", "Латвия", "Лесото", "Либерия", "Либия", "Ливан", "Литва", "Лихтенщайн", "Люксембург", "Мавритания", "Мавриций", "Мадагаскар", "Малави", "Малайзия", "Малдиви", "Мали", "Малта", "Мароко", "Маршалови острови", "Мексико", "Мианмар", "Микронезия", "Мозамбик", "Молдова", "Монако", "Монголия", "Намибия", "Науру", "Непал", "Нигер", "Нигерия", "Нидерландия", "Никарагуа", "Нова Зеландия", "Норвегия", "ОАЕ", "Оман", "Пакистан", "Палау", "Панама", "Папуа Нова Гвинея", "Парагвай", "Перу", "Полша", "Португалия", "Република Конго", "Руанда", "Румъния", "Русия", "Салвадор", "Самоа", "Сан Марино", "Сао Томе и Принсипи", "Саудитска Арабия", "САЩ", "Северна Корея", "Северна Македония", "Сейнт Винсент и Гренадини", "Сейнт Китс и Невис", "Сейнт Лусия", "Сейшелски острови", "Сенегал", "Сиера Леоне", "Сингапур", "Сирия", "Словакия", "Словения", "Соломонови острови", "Сомалия", "Судан", "Суринам", "Сърбия", "Таджикистан", "Тайланд", "Танзания", "Того", "Тонга", "Тринидад и Тобаго", "Тувалу", "Тунис", "Туркменистан", "Турция", "Уганда", "Узбекистан", "Украйна", "Унгария", "Уругвай", "Фиджи", "Филипини", "Финландия", "Франция", "Хаити", "Хондурас", "Хърватия", "Централноафриканска република", "Чад", "Черна гора", "Чехия", "Чили", "Швейцария", "Швеция", "Шри Ланка", "ЮАР", "Южен Судан", "Южна Корея", "Ямайка", "Япония");
-            if (!Objects.isNull(CarService.getCar(person.getCarPerson()))) {
+            if (!(Objects.isNull(person) || person.getCarPerson() == 0)) {
                 carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
             }
             emailUserField.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -382,42 +455,55 @@ public class ProfileController {
                     }
                 }
             });
+            if (!Objects.isNull(user)) {
+                // Ако колата не е празна, прозорецът ще се зададе като такъв за редактиране на данни и ако е - за добавяне на кола.
+                if (LoginService.isLoggedUserAdmin()) {
+                    person = PersonService.getPerson(user.getUserHasPerson());
+                    emailUserField.setText(user.getEmailUser());
+                    passwordUserField.setText(user.getPassUser());
+                    agePersonField.setText(Integer.toString(person.getAgePerson()));
+                    firstNamePersonField.setText(person.getFirstNamePerson());
+                    middleNamePersonField.setText(person.getMiddleNamePerson());
+                    lastNamePersonField.setText(person.getLastNamePerson());
+                    nationalityPersonCombobox.setValue(person.getNationalityPerson());
+                    pointsPersonField.setText(Integer.toString(person.getPointsPerson()));
 
-            // Ако колата не е празна, прозорецът ще се зададе като такъв за редактиране на данни и ако е - за добавяне на кола.
-            if (LoginService.isLoggedUserAdmin()) {
-                emailUserField.setText(user.getEmailUser());
-                passwordUserField.setText(user.getPassUser());
-                agePersonField.setText(Integer.toString(person.getAgePerson()));
-                firstNamePersonField.setText(person.getFirstNamePerson());
-                middleNamePersonField.setText(person.getMiddleNamePerson());
-                lastNamePersonField.setText(person.getLastNamePerson());
-                nationalityPersonCombobox.setValue(person.getNationalityPerson());
-                pointsPersonField.setText(Integer.toString(person.getPointsPerson()));
-                roleCombobox.setValue(user.getTypeUser());
-                if (person.getCarPerson() != 0) {
-                    carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
+                        roleCombobox.setValue(user.getTypeUser());
+                    if (!(Objects.isNull(person) || person.getCarPerson() == 0)) {
+                        carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
+                    }
+
+                    userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
+
+                } else {
+                    emailUserField.setText(user.getEmailUser());
+                    passwordUserField.setText(user.getPassUser());
+                    agePersonField.setText(Integer.toString(person.getAgePerson()));
+                    firstNamePersonField.setText(person.getFirstNamePerson());
+                    middleNamePersonField.setText(person.getMiddleNamePerson());
+                    lastNamePersonField.setText(person.getLastNamePerson());
+                    nationalityPersonCombobox.setValue(person.getNationalityPerson());
+                    pointsPersonField.setText(Integer.toString(person.getPointsPerson()));
+                    roleCombobox.setValue(user.getTypeUser());
+
+
+                    if (!(Objects.isNull(person) || person.getCarPerson() == 0)) {
+                        carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
+                    }
+
+                        userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
+
+                    pointsPersonField.setEditable(false);
+                    roleCombobox.setDisable(true);
+
                 }
-                userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
-
-
             } else {
-                emailUserField.setText(user.getEmailUser());
-                passwordUserField.setText(user.getPassUser());
-                agePersonField.setText(Integer.toString(person.getAgePerson()));
-                firstNamePersonField.setText(person.getFirstNamePerson());
-                middleNamePersonField.setText(person.getMiddleNamePerson());
-                lastNamePersonField.setText(person.getLastNamePerson());
-                nationalityPersonCombobox.setValue(person.getNationalityPerson());
-                pointsPersonField.setText(Integer.toString(person.getPointsPerson()));
-                roleCombobox.setValue(user.getTypeUser());
-                if (person.getCarPerson() != 0) {
-                    carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
-                }
-                userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
-                pointsPersonField.setEditable(false);
-                roleCombobox.setDisable(true);
-
-            }
+                roleCombobox.setValue("User");
+                pointsPersonField.setText("0");
+                agePersonField.setText("18");
+                applyChangeButton.setText("Добави");
+                labelUserName.setText("Добавяне на състезател");
+                            }
         });
 
     }

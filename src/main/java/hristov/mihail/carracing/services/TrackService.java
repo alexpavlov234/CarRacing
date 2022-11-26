@@ -60,7 +60,7 @@ public class TrackService {
 
     public static void updateTrack(Track track) {
         //'
-        Database.execute("UPDATE track SET nameTrack = '" + track.getNameTrack() + "', lengthTrack = " + track.getLengthTrack() + ", locationTrack =' " + track.getLocationTrack() + "'  WHERE idTrack =" + track.getIdTrack() + ";");
+        Database.execute("UPDATE track SET nameTrack = '" + track.getNameTrack() + "', lengthTrack = " + track.getLengthTrack() + ", locationTrack ='" + track.getLocationTrack() + "'  WHERE idTrack =" + track.getIdTrack() + ";");
         //INSERT INTO Track (nameTrack, lengthTrack, locationTrack) VALUES ('Monte Carlo',456,'Dupnica');
     }
 

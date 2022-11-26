@@ -24,6 +24,10 @@ public class Person {
         this.imagePathPerson = imagePathPerson;
     }
 
+    public Person() {
+
+    }
+
     public int getCarPerson() {
         return carPerson;
     }
