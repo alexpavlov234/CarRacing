@@ -103,4 +103,9 @@ public class Car {
     public void setImageCar(Blob value) {
         this.imageCar = value;
     }
+
+    public String getNameCar() {
+        return this.brandCar + " " + this.modelCar;
+
+    }
 }

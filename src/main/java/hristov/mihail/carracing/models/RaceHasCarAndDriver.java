@@ -2,85 +2,69 @@ package hristov.mihail.carracing.models;
 
 public class RaceHasCarAndDriver
 {
-    private int _id;
-    public int getid()
-    {
-        return this._id;
-    }
-    public void setid(int value)
-    {
-        this._id = value;
+    private int id;
+    private int idRace;
+    private int idCar;
+    private int idDriver;
+
+    public RaceHasCarAndDriver() {
+
     }
 
-    private int _idRace;
-    public int getidRace()
-    {
-        return this._idRace;
-    }
-    public void setidRace(int value)
-    {
-        this._idRace = value;
+    public int getId() {
+        return id;
     }
 
-    private int _idCar;
-    public int getidCar()
-    {
-        return this._idCar;
-    }
-    public void setidCar(int value)
-    {
-        this._idCar = value;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    private int _idDriver;
-    public int getidDriver()
-    {
-        return this._idDriver;
-    }
-    public void setidDriver(int value)
-    {
-        this._idDriver = value;
+    public int getIdRace() {
+        return idRace;
     }
 
-    private int _mileage;
-    public int getmileage()
-    {
-        return this._mileage;
-    }
-    public void setmileage(int value)
-    {
-        this._mileage = value;
+    public void setIdRace(int idRace) {
+        this.idRace = idRace;
     }
 
-    private int _length;
-    public int getlength()
-    {
-        return this._length;
-    }
-    public void setlength(int value)
-    {
-        this._length = value;
+    public int getIdCar() {
+        return idCar;
     }
 
-    private int _points;
-    public int getpoints()
-    {
-        return this._points;
-    }
-    public void setpoints(int value)
-    {
-        this._points = value;
+    public void setIdCar(int idCar) {
+        this.idCar = idCar;
     }
 
-
-    public RaceHasCarAndDriver(int id_, int idRace_, int idCar_, int idDriver_, int mileage_, int length_, int points_)
-    {
-        this._id = id_;
-        this._idRace = idRace_;
-        this._idCar = idCar_;
-        this._idDriver = idDriver_;
-        this._mileage = mileage_;
-        this._length = length_;
-        this._points = points_;
+    public int getIdDriver() {
+        return idDriver;
     }
+
+    public void setIdDriver(int idDriver) {
+        this.idDriver = idDriver;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public RaceHasCarAndDriver(int idRace, int idCar, int idDriver, int points) {
+        this.idRace = idRace;
+        this.idCar = idCar;
+        this.idDriver = idDriver;
+        this.points = points;
+    }
+
+    public RaceHasCarAndDriver(int id, int idRace, int idCar, int idDriver, int points) {
+        this.id = id;
+        this.idRace = idRace;
+        this.idCar = idCar;
+        this.idDriver = idDriver;
+        this.points = points;
+    }
+
+    private int points;
 }

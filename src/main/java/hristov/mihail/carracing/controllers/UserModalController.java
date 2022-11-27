@@ -263,7 +263,7 @@ public class UserModalController {
 
     // Проверка чрез regex дали даден низ е само от числа.
     public boolean isNumeric(String strNum) {
-        String regexPattern = "-?\\d+(\\.\\d+)?";
+        String regexPattern = "^[1-9]\\d*$";
         if (!strNum.matches(regexPattern)) {
             WarningController.openMessageModal("Въведено е невалидно число за конски сили!", "Невалидни конски сили", MessageType.WARNING);
         }

@@ -13,8 +13,8 @@ public class Test {
 
 //        RaceService.addRace(new Race(1, 1, "2022-11-14", 10, 142, 8));
 
-//        RaceService.deleteRace(2);
+//        RaceService.deleteRaceHasCarAndDriver(2);
 
-        RaceService.updateRace(new Race(3, 1, "2022-11-14", 12, 142, 8));
+      //  RaceService.updateRace(new Race(3, 1, "2022-11-14", 12, 142, 8));
     }
 }

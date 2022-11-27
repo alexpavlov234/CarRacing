@@ -263,7 +263,6 @@ if (!Objects.isNull(user)) {
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
-                                    System.out.println(person.getCarPerson());
                                     PersonService.addPerson(person);
                                     User user = new User(this.user, PersonService.getLastPerson().getIdPerson());
                                     if (Objects.isNull(UserService.getUser(user.getEmailUser()))) {
@@ -313,7 +312,7 @@ if (!Objects.isNull(user)) {
     }
 
     public boolean isNumeric(String strNum) {
-        String regexPattern = "-?\\d+(\\.\\d+)?";
+        String regexPattern = "^[1-9]\\d*$";
         if (!strNum.matches(regexPattern)) {
             WarningController.openMessageModal("Въведено е невалидно число за възраст!", "Невалидни конски сили", MessageType.WARNING);
         }

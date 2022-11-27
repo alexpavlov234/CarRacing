@@ -1,5 +1,7 @@
 package hristov.mihail.carracing.services;
 
+import hristov.mihail.carracing.controllers.MessageType;
+import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Person;
@@ -110,5 +112,50 @@ public class PersonService {
             //TODO: Екран за грешка
         }
         return allPersons;
+    }
+
+    public static ArrayList<String> getAllPersonNames() {
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM person;");
+
+        ArrayList<String> allPeople = new ArrayList<>();
+        try {
+            while ((resultSet.next())) {
+//                byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
+//                Blob blobData = Database.createBlob();
+//                blobData.setBytes(1, byteData);
+                Person person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")),  resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
+
+                if(!UserService.getUser(person).getTypeUser().equals("Admin")) {
+                    allPeople.add(resultSet.getString("firstNamePerson") + " " + resultSet.getString("lastNamePerson"));
+                }
+            }
+        } catch (SQLException e) {
+            //TODO: Екран за грешка
+        }
+        return allPeople;
+    }
+
+    public static Person getPerson(String name) {
+        String[] names = name.split(" ");
+        if (names.length == 2) {
+            ResultSet resultSet = Database.executeQuery("SELECT * FROM person WHERE (firstNamePerson = '" + names[0] + "' AND lastNamePerson = '" + names[1] + "');");
+           //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
+            Person person = null;
+            try {
+                resultSet.next();
+//            byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
+//            Blob blobData = Database.createBlob();
+//            blobData.setBytes(1, byteData);
+                //  car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), blobData);
+                person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
+            } catch (SQLException e) {
+                //TODO: Екран за грешка
+            }
+            return person;
+        } else {
+            WarningController.openMessageModal("Не е намерен такъв състезател!", "Лиспващ състезател", MessageType.WARNING);
+            return null;
+        }
+
     }
 }

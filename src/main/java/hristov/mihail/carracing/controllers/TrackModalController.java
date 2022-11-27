@@ -223,7 +223,7 @@ public class TrackModalController {
 
 
     public boolean isNumeric(String strNum) {
-        String regexPattern = "-?\\d+(\\.\\d+)?";
+        String regexPattern = "^[1-9]\\d*$";
         if (!strNum.matches(regexPattern)) {
             WarningController.openMessageModal("Въведено е невалидно число за дължина на пистата!", "Невалидна дължина на пистата", MessageType.WARNING);
         }

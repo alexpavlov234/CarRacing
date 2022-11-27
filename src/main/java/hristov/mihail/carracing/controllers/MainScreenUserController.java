@@ -112,7 +112,7 @@ public class MainScreenUserController {
 
     @FXML
     private void handleShowView1(ActionEvent event) {
-        try {loadFXML("tracks.fxml");} catch (Exception e) {
+        try {loadFXML("races.fxml");} catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }
     }

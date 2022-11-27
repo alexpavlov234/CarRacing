@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="205.0" prefWidth="758.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RaceHasCarAndDriverModalController">
+   <children>
+      <Label fx:id="labelUserName" layoutX="14.0" layoutY="19.0" styleClass="labelWhite" text="Участие в състезание" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
+         <font>
+            <Font name="Segoe UI" size="21.0" />
+         </font>
+      </Label>
+      <VBox layoutX="14.0" layoutY="88.0" prefHeight="70.0" prefWidth="422.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <HBox prefHeight="27.0" prefWidth="726.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="360.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="label" prefHeight="18.0" prefWidth="110.0" styleClass="labelWhite" text="Състезател:">
+                           <font>
+                              <Font name="Segoe UI" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="driverCombobox" prefHeight="27.0" prefWidth="238.0" styleClass="combobox" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="361.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="label11" prefHeight="0.0" prefWidth="110.0" styleClass="labelWhite" text="Състезание:">
+                           <font>
+                              <Font name="Segoe UI" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="raceCombobox" prefHeight="27.0" prefWidth="240.0" styleClass="combobox" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox spacing="15.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="355.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="label1" prefHeight="18.0" prefWidth="110.0" styleClass="labelWhite" text="Кола:">
+                           <font>
+                              <Font name="Segoe UI" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="carCombobox" prefHeight="27.0" prefWidth="240.0" styleClass="combobox" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="356.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="label4" prefHeight="0.0" prefWidth="110.0" styleClass="labelWhite" text="Точки:">
+                           <font>
+                              <Font name="Segoe UI" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="points" prefHeight="27.0" prefWidth="54.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="462.0" layoutY="231.0" spacing="5.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Button fx:id="applyChangeButton" mnemonicParsing="false" onAction="#applyChanges" text="Приложи" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

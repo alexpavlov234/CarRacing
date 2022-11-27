@@ -26,7 +26,7 @@ public class CarService {
 
     public static Car getCar(int idCar) {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (idCar = " + idCar + ");");
-        //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
+       //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
         Car car = null;
         try {
             resultSet.next();
@@ -34,6 +34,7 @@ public class CarService {
 //            Blob blobData = Database.createBlob();
 //            blobData.setBytes(1, byteData);
             //  car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), blobData);
+
             car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")));
         } catch (SQLException e) {
             //TODO: Екран за грешка
@@ -46,6 +47,7 @@ public class CarService {
         if (names.length == 2) {
             ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (modelCar = '" + names[1] + "' AND brandCar = '" + names[0] + "');");
             //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
+
             Car car = null;
             try {
                 resultSet.next();

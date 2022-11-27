@@ -4,17 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Създаден е прозорец &quot;Профил&quot;.&#10;1. Поправени са  всички модали.&#10;2. Подобрени са някои service-и.&#10;3. Създаени са нови екрани.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/PeopleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/people.fxml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Създаден е екран за състезатели.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceHasCarAndDriverModalController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-modal.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TrackModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TrackModalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/UserModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/UserModalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Car.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Race.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/Race.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/RaceHasCarAndDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/RaceHasCarAndDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/profile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,29 +60,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/apavlov/IdeaProjects/CarRacing/src/main/resources/hristov/mihail/carracing",
-    "list.type.of.created.stylesheet": "CSS",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.5046083",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/apavlov/IdeaProjects/CarRacing/src/main/resources/hristov/mihail/carracing&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5046083&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
-      "MySQL"
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/&quot;: [
+      &quot;MySQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\apavlov\IdeaProjects\CarRacing\src\main\resources\hristov\mihail\carracing" />
@@ -84,6 +98,7 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="hristov.mihail.carracing.controllers" />
+      <recent name="hristov.mihail.carracing.services" />
     </key>
   </component>
   <component name="RunManager" selected="Application.hristov.mihail.carracing.HelloApplication">
@@ -166,7 +181,9 @@
       <workItem from="1669281829327" duration="2296000" />
       <workItem from="1669362301712" duration="6332000" />
       <workItem from="1669398736043" duration="10507000" />
-      <workItem from="1669487965756" duration="16341000" />
+      <workItem from="1669487965756" duration="17024000" />
+      <workItem from="1669545838588" duration="8040000" />
+      <workItem from="1669572408834" duration="15581000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -294,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669500000965</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Създаден е екран за състезатели.">
+      <created>1669505474114</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1669505474114</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,7 +359,8 @@
     <MESSAGE value="Създаден е екран за класация." />
     <MESSAGE value="Създаден е прозорец &quot;Профил&quot;.&#10;1. Поправени са  всички модали.&#10;2. Подобрени са някой service-и.&#10;3. Създаени са нови екрани." />
     <MESSAGE value="Създаден е прозорец &quot;Профил&quot;.&#10;1. Поправени са  всички модали.&#10;2. Подобрени са някои service-и.&#10;3. Създаени са нови екрани." />
-    <option name="LAST_COMMIT_MESSAGE" value="Създаден е прозорец &quot;Профил&quot;.&#10;1. Поправени са  всички модали.&#10;2. Подобрени са някои service-и.&#10;3. Създаени са нови екрани." />
+    <MESSAGE value="Създаден е екран за състезатели." />
+    <option name="LAST_COMMIT_MESSAGE" value="Създаден е екран за състезатели." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -352,7 +377,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java</url>
-          <line>77</line>
+          <line>79</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -377,7 +402,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java</url>
-          <line>26</line>
+          <line>28</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -392,7 +417,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java</url>
-          <line>114</line>
+          <line>116</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -417,7 +442,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java</url>
-          <line>34</line>
+          <line>35</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -434,6 +459,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java</url>
           <line>253</line>
           <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java</url>
+          <line>362</line>
+          <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java</url>
@@ -476,6 +511,12 @@
           <line>42</line>
           <properties field="addPerson" class="hristov.mihail.carracing.controllers.PeopleController" />
           <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/RaceHasCarAndDriver.java</url>
+          <line>5</line>
+          <properties field="idRace" class="hristov.mihail.carracing.models.RaceHasCarAndDriver" />
+          <option name="timeStamp" value="123" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

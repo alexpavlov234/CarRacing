@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public static User getUser(int idUser) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM user WHERE (idUser == " + idUser + ");");
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM user WHERE (idUser = " + idUser + ");");
         //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
         User user = null;
         try {
@@ -39,7 +39,7 @@ public class UserService {
             resultSet.next();
             user = new User(resultSet.getString("idUser") == null ? 0 : Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getString("userHasPerson") == null ? 0 : Integer.parseInt(resultSet.getString("userHasPerson")));
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+
             //TODO: Екран за грешка
         }
         return user;

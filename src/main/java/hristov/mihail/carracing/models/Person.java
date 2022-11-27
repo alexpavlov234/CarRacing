@@ -101,4 +101,7 @@ public class Person {
     }
 
 
+    public String getNamePerson() {
+        return this.firstNamePerson + " " + this.lastNamePerson;
+    }
 }

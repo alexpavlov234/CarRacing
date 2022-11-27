@@ -144,53 +144,54 @@ public class CarModalController {
         } else {
             // Ако обектът съдържащ колата, не е празен, това значи, че искаме да бъде актуализиран в базата данни.
             // Извършваме нужните проверки на въведените данни.
-            if (!(modelCarField.getText().equals(null) || brandCarField.getText().equals(null) || engineCarField.getText().equals(null) || fuelCarField.getText().equals(null) || horsepowerCarField.getText().equals(null) || modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
-                {
-                    if (!(modelCarField.getText().equals(null) || brandCarField.getText().equals(null) || engineCarField.getText().equals(null) || fuelCarField.getText().equals(null) || horsepowerCarField.getText().equals(null) || modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
-                        // Проверяваме дали нашият двигател е с валидно число.
-                        if (isValidEngine(engineCarField.getText())) {
-                            // Проверяваме дали е въведено число за конски сили.
-                            if (isNumeric(horsepowerCarField.getText())) {
-                                // Актуализираме данните на нашата кола.
-                                car.setModelCar(modelCarField.getText());
-                                car.setBrandCar(brandCarField.getText());
-                                car.setFuelCar(fuelCarField.getText());
-                                car.setEngineCar(engineCarField.getText());
-                                // Зареждаме каченото изображение и го задаваме на нашия обект.
-                                try {
-                                    if (!Objects.isNull(file)) {
-                                        FileInputStream fileInputStream = new FileInputStream(file);
-                                        storeImage = CarService.setImageCar();
-                                        storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                        storeImage.setInt(2, this.car.getIdCar());
-                                        storeImage.execute();
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+            if (!(Objects.isNull(modelCarField.getText()) || Objects.isNull(brandCarField.getText()) || Objects.isNull(engineCarField.getText()) || Objects.isNull(fuelCarField.getText()) || Objects.isNull(horsepowerCarField.getText()))) {
+                if (!(modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
+                    // Проверяваме дали нашият двигател е с валидно число.
+                    if (isValidEngine(engineCarField.getText())) {
+                        // Проверяваме дали е въведено число за конски сили.
+                        if (isNumeric(horsepowerCarField.getText())) {
+                            // Актуализираме данните на нашата кола.
+                            car.setModelCar(modelCarField.getText());
+                            car.setBrandCar(brandCarField.getText());
+                            car.setFuelCar(fuelCarField.getText());
+                            car.setEngineCar(engineCarField.getText());
+                            // Зареждаме каченото изображение и го задаваме на нашия обект.
+                            try {
+                                if (!Objects.isNull(file)) {
+                                    FileInputStream fileInputStream = new FileInputStream(file);
+                                    storeImage = CarService.setImageCar();
+                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                                    storeImage.setInt(2, this.car.getIdCar());
+                                    storeImage.execute();
                                 }
-                                CarService.updateCar(car);
-                                Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
-
-
-                                Scene scene = null;
-                                try {
-                                    scene = new Scene(fxmlLoader.load());
-                                } catch (IOException e) {
-                                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-                                }
-                                // Обновяваме нашето прозорче за всеки случай.
-                                //dialogController.setLoggedUser(car.getIdCar());
-                                CarModalController dialogController = fxmlLoader.getController();
-                                dialogController.setCar(car);
-                                stage.setScene(scene);
-                                stage.show();
-                                //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
-
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
+                            CarService.updateCar(car);
+                            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
+
+
+                            Scene scene = null;
+                            try {
+                                scene = new Scene(fxmlLoader.load());
+                            } catch (IOException e) {
+                                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                            }
+                            // Обновяваме нашето прозорче за всеки случай.
+                            //dialogController.setLoggedUser(car.getIdCar());
+                            CarModalController dialogController = fxmlLoader.getController();
+                            dialogController.setCar(car);
+                            stage.setScene(scene);
+                            stage.show();
+                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+
+
                         }
                     }
+
+                } else {
+                    WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
                 }
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
@@ -229,7 +230,7 @@ public class CarModalController {
 
     // Проверка чрез regex дали даден низ е само от числа.
     public boolean isNumeric(String strNum) {
-        String regexPattern = "-?\\d+(\\.\\d+)?";
+        String regexPattern = "^[1-9]\\d*$";
         if (!strNum.matches(regexPattern)) {
             WarningController.openMessageModal("Въведено е невалидно число за конски сили!", "Невалидни конски сили", MessageType.WARNING);
         }

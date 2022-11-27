@@ -1,5 +1,7 @@
 package hristov.mihail.carracing.models;
 
+import hristov.mihail.carracing.services.TrackService;
+
 public class Race {
     private int idRace;
     private int trackRace;
@@ -7,6 +9,14 @@ public class Race {
     private int lapsRace;
     private int pointsRace;
     private int participantsRace;
+
+    public Race(int trackRace, String dateRace, int lapsRace, int pointsRace, int participantsRace) {
+        this.trackRace = trackRace;
+        this.dateRace = dateRace;
+        this.lapsRace = lapsRace;
+        this.pointsRace = pointsRace;
+        this.participantsRace = participantsRace;
+    }
 
     public Race(int IdRace, int TrackRace, String DateRace, int LapsRace, int PointsRace, int ParticipantsRace) {
         this.idRace = IdRace;
@@ -63,5 +73,10 @@ public class Race {
 
     public void setParticipantsRace(int value) {
         this.participantsRace = value;
+    }
+
+    public String getNameRace() {
+        return TrackService.getTrack(this.trackRace).getNameTrack() + " / " + this.dateRace;
+
     }
 }
