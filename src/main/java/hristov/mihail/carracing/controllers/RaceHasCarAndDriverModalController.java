@@ -1,7 +1,6 @@
 package hristov.mihail.carracing.controllers;
 
 import hristov.mihail.carracing.HelloApplication;
-import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
 import hristov.mihail.carracing.services.*;
 import javafx.application.Platform;
@@ -57,9 +56,7 @@ public class RaceHasCarAndDriverModalController {
 
     public boolean isNumeric(String strNum) {
         String regexPattern = "^[1-9]\\d*$";
-        if (!strNum.matches(regexPattern)) {
-            WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
-        }
+
         return strNum.matches(regexPattern);
     }
 
@@ -67,7 +64,7 @@ public class RaceHasCarAndDriverModalController {
     @FXML
     void applyChanges(ActionEvent event) {
         if (!Objects.isNull(raceHasCarAndDriver)) {
-            if (isNumeric(points.getText())) {
+            if (isNumeric(points.getText()) || Integer.parseInt(points.getText()) == 0) {
                 if (RaceHasCarAndDriverService.areTherePlacesAvailable(RaceService.getRace(raceHasCarAndDriver.getIdRace()))) {
                     raceHasCarAndDriver.setIdCar(CarService.getCar(carCombobox.getValue()).getIdCar());
                     raceHasCarAndDriver.setIdDriver(PersonService.getPerson(driverCombobox.getValue()).getIdPerson());
@@ -93,36 +90,46 @@ public class RaceHasCarAndDriverModalController {
                 } else {
                     WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
                 }
+            } else {
+                WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
+
             }
 
         } else {
-            if (isNumeric(points.getText())) {
-                   raceHasCarAndDriver = new RaceHasCarAndDriver();
+            if (isNumeric(points.getText()) || Integer.parseInt(points.getText()) == 0) {
+                if (RaceHasCarAndDriverService.areTherePlacesAvailable(RaceService.getRace(raceHasCarAndDriver.getIdRace()))) {
+
+                    raceHasCarAndDriver = new RaceHasCarAndDriver();
                     raceHasCarAndDriver.setIdCar(CarService.getCar(carCombobox.getValue()).getIdCar());
                     raceHasCarAndDriver.setIdDriver(PersonService.getPerson(driverCombobox.getValue()).getIdPerson());
                     raceHasCarAndDriver.setIdRace(RaceService.getRace(raceCombobox.getValue()).getIdRace());
                     raceHasCarAndDriver.setPoints(Integer.parseInt(points.getText()));
                     if (RaceHasCarAndDriverService.areTherePlacesAvailable(RaceService.getRace(raceHasCarAndDriver.getIdRace()))) {
-                    RaceHasCarAndDriverService.addRaceHasCarAndDriver(raceHasCarAndDriver);
-                    Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
+                        RaceHasCarAndDriverService.addRaceHasCarAndDriver(raceHasCarAndDriver);
+                        Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
 
 
-                    Scene scene = null;
+                        Scene scene = null;
                     try {
                         scene = new Scene(fxmlLoader.load());
                     } catch (IOException e) {
                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     }
-                    // Обновяваме нашето прозорче за всеки случай.
-                    //dialogController.setLoggedUser(car.getIdCar());
-                    RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
-                    dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
-                    stage.setScene(scene);
-                    stage.show();
+                        // Обновяваме нашето прозорче за всеки случай.
+                        //dialogController.setLoggedUser(car.getIdCar());
+                        RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
+                        dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
+                        stage.setScene(scene);
+                        stage.show();
+                    }
+
+                } else {
+                    WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
                 }
             } else {
-                WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
+                WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
+
             }
         }
 

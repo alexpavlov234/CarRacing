@@ -28,6 +28,26 @@ public class RaceHasCarAndDriverService {
         return raceHasCarAndDriver;
     }
 
+    public static boolean isDriverParticipatingInRace(int idRace, int idDriver) {
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver WHERE (idRace = " + idRace + " AND idDriver ="+ idDriver +");");
+
+        //INSERT INTO RaceHasCarAndDriver (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
+        RaceHasCarAndDriver raceHasCarAndDriver = null;
+        try {
+            resultSet.next();
+            raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")),Integer.parseInt(resultSet.getString("idRace")),Integer.parseInt(resultSet.getString("idCar")),Integer.parseInt(resultSet.getString("idDriver")),Integer.parseInt(resultSet.getString("points")));
+
+      if(raceHasCarAndDriver.getIdRace() > 0){
+          return true;
+      } else {
+          return false;
+      }
+        } catch (SQLException e) {
+        //TODO: Екран за грешка
+    }
+        return false;
+    }
+
     public static void updateRaceHasCarAndDriver(RaceHasCarAndDriver raceHasCarAndDriver) {
         //'
         Database.execute("UPDATE race_has_car_and_driver SET idRace = " + raceHasCarAndDriver.getIdRace() + ", idCar = " + raceHasCarAndDriver.getIdCar() + ", idDriver = " + raceHasCarAndDriver.getIdDriver() + ", points = " + raceHasCarAndDriver.getPoints() + " WHERE id =  " + raceHasCarAndDriver.getId() + ";");
@@ -84,16 +104,12 @@ public class RaceHasCarAndDriverService {
     }
     public static boolean areTherePlacesAvailable(Race race) {
         ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = "+race.getIdRace()+", 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
-        int number = 0;
+        int number;
         try {
             resultSet.next();
             number =Integer.parseInt(resultSet.getString("Number"));
 
-            if(number < race.getParticipantsRace()){
-                return true;
-            } else {
-                return false;
-            }
+            return number < race.getParticipantsRace();
         } catch (SQLException e) {
             //TODO: Екран за грешка
             return false;

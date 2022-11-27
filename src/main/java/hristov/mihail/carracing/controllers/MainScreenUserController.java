@@ -36,9 +36,6 @@ public class MainScreenUserController {
     private Button profileUserButton;
 
     @FXML
-    private Button personScreenButton;
-
-    @FXML
     private Label profileNameLabel;
 
     @FXML
@@ -112,7 +109,7 @@ public class MainScreenUserController {
 
     @FXML
     private void handleShowView1(ActionEvent event) {
-        try {loadFXML("races.fxml");} catch (Exception e) {
+        try {loadFXML("races-user.fxml");} catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }
     }
@@ -149,7 +146,6 @@ public class MainScreenUserController {
         assert carScreenButton != null : "fx:id=\"carScreenButton\" was not injected: check your FXML file 'main-screen-admin.fxml'.";
         assert exitUserButton != null : "fx:id=\"exitUserButton\" was not injected: check your FXML file 'main-screen-admin.fxml'.";
         assert profileUserButton != null : "fx:id=\"profileUserButton\" was not injected: check your FXML file 'main-screen-admin.fxml'.";
-        assert personScreenButton != null : "fx:id=\"personScreenButton\" was not injected: check your FXML file 'main-screen-admin.fxml'.";
         assert profileNameLabel != null : "fx:id=\"profileNameLabel\" was not injected: check your FXML file 'main-screen-admin.fxml'.";
         assert mainBorderPane != null : "fx:id=\"mainBorderPane\" was not injected: check your FXML file 'main-screen-admin.fxml'.";
         assert raceScreenButton != null : "fx:id=\"raceScreenButton\" was not injected: check your FXML file 'main-screen-admin.fxml'.";
