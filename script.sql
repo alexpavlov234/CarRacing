@@ -1,6 +1,6 @@
 create database if not exists carracers;
 use carracers;
-create table if not exists user
+create table if not exists car
 (
     idCar         int auto_increment
         primary key,
@@ -25,7 +25,7 @@ create table if not exists person
     carPerson         int         null,
     imagePerson       mediumblob  null,
     constraint carPerson
-        foreign key (carPerson) references user (idCar)
+        foreign key (carPerson) references car (idCar)
             on delete set null
 );
 
@@ -36,7 +36,9 @@ create table if not exists track
     nameTrack     varchar(45) not null,
     lengthTrack   int         not null,
     locationTrack varchar(45) not null,
-    imageTrack    mediumblob  null
+    imageTrack    mediumblob  null,
+    constraint nameTrack
+        unique (nameTrack)
 );
 
 create table if not exists race
@@ -64,7 +66,7 @@ create table if not exists race_has_car_and_driver
     points   int not null,
     primary key (id, idRace, idCar, idDriver),
     constraint fk_Race_has_Car_and_Driver_Car1
-        foreign key (idCar) references user (idCar),
+        foreign key (idCar) references car (idCar),
     constraint fk_Race_has_Car_and_Driver_Driver1
         foreign key (idDriver) references person (idPerson),
     constraint fk_Race_has_Car_and_Driver_Race1
@@ -93,5 +95,4 @@ create table if not exists user
 
 create index fk_user_driver1_idx
     on user (userHasPerson);
-
 
