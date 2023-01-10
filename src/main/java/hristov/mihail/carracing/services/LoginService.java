@@ -14,28 +14,22 @@ public class LoginService {
         try {
             if (loggedUser.getPassUser().equals(password)) {
                 user = loggedUser;
-                if(isLoggedUserAdmin()) {
-
-
+                if (isLoggedUserAdmin()) {
 
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-screen-admin.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load());
 
-
                     stage.setTitle("Управление на автомобилни състезания");
                     stage.setScene(scene);
                     stage.show();
                     return true;
+
                 } else {
-
-
-
 
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-screen-user.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load());
-
 
                     stage.setTitle("Управление на автомобилни състезания");
                     stage.setScene(scene);
@@ -43,19 +37,17 @@ public class LoginService {
                     return true;
                 }
             } else {
-
                 return false;
             }
         } catch (Exception e) {
-
             return false;
         }
-
     }
 
-    public static boolean isLoggedUserAdmin(){
+    public static boolean isLoggedUserAdmin() {
         return user.getTypeUser().equals("Admin");
     }
+
     public static User getLoggedUser() {
         return user;
     }

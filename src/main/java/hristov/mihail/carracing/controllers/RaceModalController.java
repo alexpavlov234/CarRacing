@@ -81,7 +81,7 @@ public class RaceModalController {
     // Какво да се случва като цъкнеш бутона приложи.
     @FXML
     void applyChanges(ActionEvent event) {
-        // Програма да не би нашия обект да е празен. Ако е празен, значи е избран прозорец за добавяне на кола.
+        // Програма проверява да не би нашия обект да е празен. Ако е празен, значи е избран прозорец за добавяне на кола.
         // Ако не е празен, значи ще променяме кола
         if (Objects.isNull(race)) {
             // Проверяваме дали въведените полета са с коректни данни.
@@ -138,7 +138,7 @@ public class RaceModalController {
                                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                     }
                                 } else {
-                                    WarningController.openMessageModal("Въведено е невалидна дата!", "Невалидна дата", MessageType.WARNING);
+                                    WarningController.openMessageModal("Въведена е невалидна дата!", "Невалидна дата", MessageType.WARNING);
 
                                 }
                             } else {
