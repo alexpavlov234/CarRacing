@@ -60,7 +60,6 @@ public class CarsController {
         assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'cars.fxml'.";
         brand.setCellValueFactory(new PropertyValueFactory<Car, String>("brandCar"));
         model.setCellValueFactory(new PropertyValueFactory<Car, String>("modelCar"));
-        actions.setCellValueFactory(new PropertyValueFactory<Car, String>("fuelCar"));
         // Проверяваме дали логнат потребител е администратор.
         if (LoginService.isLoggedUserAdmin()) {
             brand.maxWidthProperty().bind(table.widthProperty().divide(3));

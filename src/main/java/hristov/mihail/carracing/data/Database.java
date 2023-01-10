@@ -32,14 +32,6 @@ public class Database {
         }
     }
 
-    public static Connection getConnection() {
-        try {
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static ResultSet executeQuery(String sql) {
         try {
             Connection myConnection = DriverManager.getConnection(url, user, password);
@@ -1005,16 +997,15 @@ public class Database {
             };
         }
     }
-
-    public static Blob createBlob() {
-
+    public static Connection getConnection() {
         try {
-            Connection myConnection = DriverManager.getConnection(url, user, password);
-            Blob blobData = myConnection.createBlob();
-            return blobData;
+            return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+
+
+
 }

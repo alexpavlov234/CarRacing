@@ -16,21 +16,15 @@ public class LoginService {
                 user = loggedUser;
                 if(isLoggedUserAdmin()) {
 
-
-
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-screen-admin.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load());
-
 
                     stage.setTitle("Управление на автомобилни състезания");
                     stage.setScene(scene);
                     stage.show();
                     return true;
                 } else {
-
-
-
 
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-screen-user.fxml"));
 
@@ -58,10 +52,6 @@ public class LoginService {
     }
     public static User getLoggedUser() {
         return user;
-    }
-
-    public static void setLoggedUser(User user) {
-        LoginService.user = user;
     }
 
     public static void logoutUser() {
