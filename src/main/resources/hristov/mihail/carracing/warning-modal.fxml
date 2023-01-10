@@ -27,7 +27,7 @@
       </HBox>
       <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="79.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@download.png" />
+            <Image url="@warning.png" />
          </image>
       </ImageView>
    </children>
