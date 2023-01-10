@@ -77,6 +77,5 @@ public class Race {
 
     public String getNameRace() {
         return TrackService.getTrack(this.trackRace).getNameTrack() + " / " + this.dateRace;
-
     }
 }

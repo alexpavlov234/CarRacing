@@ -74,7 +74,8 @@ public class RegisterController {
 
 
     public boolean isValidPassword(String password) {
-        String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        //String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        String regexPattern = "^(?=.*[0-9])(?=\\S+$).{8,}$";
 
         if (!password.matches(regexPattern)) {
             passwordField.setStyle("-fx-border-color: red");
@@ -86,6 +87,7 @@ public class RegisterController {
 
     public boolean isValidName(String name) {
         String regexPattern = "[А-ЯЁ][-А-яЁё]+|[A-Z][a-z]+";
+
 
         if (!name.matches(regexPattern)) {
             firstNameField.setStyle("-fx-border-color: red");

@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 public class CarsController {
     // Нашата таблица с данни, която се визуализира.
     // Получаваме данните за нея от service, който взима всички записи от базата данни като ArrayList.
-    // Този лист се преобразува в ObservableList - изгъзен лист, който само той е свъместим с TableView.
+    // Този лист се преобразува в ObservableList - лист, който само той е съвместим с TableView.
     ObservableList<Car> carObservableList = FXCollections.observableList(CarService.getAllCar());
     @FXML
     private ResourceBundle resources;
@@ -89,7 +89,7 @@ public class CarsController {
                                 final Button deleteButton = new Button("Изтрий");
 
                                 final Button editButton = new Button("Редактирай");
-                                // Override-ваме някакъв метод бе не го мисли
+
                                 @Override
                                 public void updateItem(String item, boolean empty) {
                                     super.updateItem(item, empty);
@@ -110,7 +110,7 @@ public class CarsController {
                                             carObservableList = FXCollections.observableList(CarService.getAllCar());
                                             table.setItems(carObservableList);
                                         });
-                                        // Задаваме какво да се прави при натискантето на бутона за редакиране .
+                                        // Задаваме какво да се прави при натискантето на бутона за редакиране.
                                         editButton.setOnAction(event -> {
                                             // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                             Car car = getTableView().getItems().get(getIndex());
@@ -122,9 +122,10 @@ public class CarsController {
                                                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
                                                 // Зареждане на сцената.
                                                 Scene scene = new Scene(fxmlLoader.load());
-                                                // Подаваме на контролера на модала нашата кола за да може да я отвори
+                                                // Подаваме на контролера на модала нашата кола, за да може да я отвори
                                                 CarModalController dialogController = fxmlLoader.getController();
                                                 dialogController.setCar(car);
+
                                                 // Промяна на прозореца да изглежда като такъв за редакция.
                                                 stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                                 stage.setScene(scene);
