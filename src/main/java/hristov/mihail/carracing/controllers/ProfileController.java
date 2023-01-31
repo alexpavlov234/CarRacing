@@ -134,7 +134,8 @@ public class ProfileController {
     }
 
     public boolean isValidPassword(String password) {
-        String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+//        String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        String regexPattern = "^(?=.*[0-9])(?=\\S+$).{8,}$";
 
         if (!password.matches(regexPattern)) {
             WarningController.openMessageModal("Въведете валидна парола!", "Невалидни данни", MessageType.WARNING);
@@ -312,9 +313,9 @@ if (!Objects.isNull(user)) {
     }
 
     public boolean isNumeric(String strNum) {
-        String regexPattern = "^[1-9]\\d*$";
+        String regexPattern = "^[0-9]\\d*$";
         if (!strNum.matches(regexPattern)) {
-            WarningController.openMessageModal("Въведено е невалидно число за възраст!", "Невалидни конски сили", MessageType.WARNING);
+            WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
         }
         return strNum.matches(regexPattern);
     }

@@ -83,8 +83,8 @@ public class UserModalController {
     }
 
     public boolean isValidPassword(String password) {
-        String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-
+//        String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        String regexPattern = "^(?=.*[0-9])(?=\\S+$).{8,}$";
         if (!password.matches(regexPattern)) {
             WarningController.openMessageModal("Въведете валидна парола!", "Невалидни данни", MessageType.WARNING);
         }

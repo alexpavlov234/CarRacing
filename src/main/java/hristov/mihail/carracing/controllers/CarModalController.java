@@ -84,7 +84,7 @@ public class CarModalController {
                         if (isNumeric(horsepowerCarField.getText())) {
                             // Ако всичко е наред с данните, значи може да запишем нашия нов обект в базата данни.
                             // Запазваме информацията от нашите полета в нов обект и този обект го добавяме в базата данни.
-                            car = new Car(modelCarField.getText(), brandCarField.getText(), engineCarField.getText(), fuelCarField.getText(), Integer.parseInt(horsepowerCarField.getText()));
+                            car = new Car(modelCarField.getText().trim().replace(" ","-"), brandCarField.getText().trim(), engineCarField.getText().trim(), fuelCarField.getText().trim(), Integer.parseInt(horsepowerCarField.getText().trim()));
                             CarService.addCar(car);
                             // Извличаме от базата данни новосъздадения обект, защото така е редно, ако има някакво форматиране на данните от нашата база данни.
                             car = CarService.getLastCar();
@@ -153,6 +153,7 @@ public class CarModalController {
                             // Актуализираме данните на нашата кола.
                             car.setModelCar(modelCarField.getText());
                             car.setBrandCar(brandCarField.getText());
+                            car.setHorsepowerCar(Integer.parseInt(horsepowerCarField.getText()));
                             car.setFuelCar(fuelCarField.getText());
                             car.setEngineCar(engineCarField.getText());
                             // Зареждаме каченото изображение и го задаваме на нашия обект.

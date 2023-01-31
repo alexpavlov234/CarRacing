@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.services;
 
 import hristov.mihail.carracing.data.Database;
+import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public class RaceHasCarAndDriverService {
     public static void addRaceHasCarAndDriver(RaceHasCarAndDriver raceHasCarAndDriver) {
-        Database.execute("INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES (" + raceHasCarAndDriver.getIdRace() + "," + raceHasCarAndDriver.getIdCar() + "," + raceHasCarAndDriver.getIdDriver() + "," +raceHasCarAndDriver.getPoints()+");");
+        Database.execute("INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES (" + raceHasCarAndDriver.getIdRace() + "," + raceHasCarAndDriver.getIdCar() + "," + raceHasCarAndDriver.getIdDriver() + "," + raceHasCarAndDriver.getPoints() + ");");
         //INSERT INTO RaceHasCarAndDriver (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
     }
 
@@ -21,7 +22,7 @@ public class RaceHasCarAndDriverService {
         RaceHasCarAndDriver raceHasCarAndDriver = null;
         try {
             resultSet.next();
-            raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")),Integer.parseInt(resultSet.getString("idRace")),Integer.parseInt(resultSet.getString("idCar")),Integer.parseInt(resultSet.getString("idDriver")),Integer.parseInt(resultSet.getString("points")));
+            raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
         } catch (SQLException e) {
             //TODO: Екран за грешка
         }
@@ -29,22 +30,22 @@ public class RaceHasCarAndDriverService {
     }
 
     public static boolean isDriverParticipatingInRace(int idRace, int idDriver) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver WHERE (idRace = " + idRace + " AND idDriver ="+ idDriver +");");
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver WHERE (idRace = " + idRace + " AND idDriver =" + idDriver + ");");
 
         //INSERT INTO RaceHasCarAndDriver (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
         RaceHasCarAndDriver raceHasCarAndDriver = null;
         try {
             resultSet.next();
-            raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")),Integer.parseInt(resultSet.getString("idRace")),Integer.parseInt(resultSet.getString("idCar")),Integer.parseInt(resultSet.getString("idDriver")),Integer.parseInt(resultSet.getString("points")));
+            raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
 
-      if(raceHasCarAndDriver.getIdRace() > 0){
-          return true;
-      } else {
-          return false;
-      }
+            if (raceHasCarAndDriver.getIdRace() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
-        //TODO: Екран за грешка
-    }
+            //TODO: Екран за грешка
+        }
         return false;
     }
 
@@ -65,7 +66,7 @@ public class RaceHasCarAndDriverService {
         ArrayList<RaceHasCarAndDriver> allRaceHasCarAndDriver = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")),Integer.parseInt(resultSet.getString("idRace")),Integer.parseInt(resultSet.getString("idCar")),Integer.parseInt(resultSet.getString("idDriver")),Integer.parseInt(resultSet.getString("points")));
+                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
                 allRaceHasCarAndDriver.add(raceHasCarAndDriver);
             }
         } catch (SQLException e) {
@@ -73,6 +74,7 @@ public class RaceHasCarAndDriverService {
         }
         return allRaceHasCarAndDriver;
     }
+
     public static ArrayList<RaceHasCarAndDriver> getAllRaceHasCarAndDriver(int idRace) {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver;");
 
@@ -80,8 +82,8 @@ public class RaceHasCarAndDriverService {
         try {
             while ((resultSet.next())) {
 
-                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")),Integer.parseInt(resultSet.getString("idRace")),Integer.parseInt(resultSet.getString("idCar")),Integer.parseInt(resultSet.getString("idDriver")),Integer.parseInt(resultSet.getString("points")));
-                if(raceHasCarAndDriver.getIdRace() == idRace) {
+                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
+                if (raceHasCarAndDriver.getIdRace() == idRace) {
                     allRaceHasCarAndDriver.add(raceHasCarAndDriver);
                 }
             }
@@ -92,24 +94,38 @@ public class RaceHasCarAndDriverService {
     }
 
     public static int getNumberParticipants(Race race) {
-        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = "+race.getIdRace()+", 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
+        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = " + race.getIdRace() + ", 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
         int number = 0;
         try {
             resultSet.next();
-            number =Integer.parseInt(resultSet.getString("Number"));
+            number = Integer.parseInt(resultSet.getString("Number"));
         } catch (SQLException e) {
             //TODO: Екран за грешка
         }
         return number;
     }
-    public static boolean areTherePlacesAvailable(Race race) {
-        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = "+race.getIdRace()+", 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
+
+    public static boolean isParticipatingInRace(int idRace, int idPerson) {
+        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = " + idRace + " AND idDriver = " + idPerson + " , 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
         int number;
         try {
             resultSet.next();
-            number =Integer.parseInt(resultSet.getString("Number"));
+            number = Integer.parseInt(resultSet.getString("Number"));
+            return number == 1;
+        } catch (SQLException e) {
+            //TODO: Екран за грешка
+            return false;
+        }
+    }
 
-            return number < race.getParticipantsRace();
+    public static boolean areTherePlacesAvailable(Race race) {
+        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = " + race.getIdRace() + ", 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
+        int number;
+        try {
+            resultSet.next();
+            number = Integer.parseInt(resultSet.getString("Number"));
+
+            return number <= race.getParticipantsRace();
         } catch (SQLException e) {
             //TODO: Екран за грешка
             return false;

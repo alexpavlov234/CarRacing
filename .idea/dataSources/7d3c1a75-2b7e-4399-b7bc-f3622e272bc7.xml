@@ -938,22 +938,22 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="273" parent="1" name="utf8mb4_zh_0900_as_cs">
       <Charset>utf8mb4</Charset>
     </collation>
-    <schema id="274" parent="1" name="carracers">
-      <Current>1</Current>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="275" parent="1" name="information_schema">
+    <schema id="274" parent="1" name="information_schema">
       <CollationName>utf8_general_ci</CollationName>
     </schema>
-    <schema id="276" parent="1" name="mysql">
+    <schema id="275" parent="1" name="mysql">
       <Grants>user|||mysql.session|localhost|SELECT|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="277" parent="1" name="performance_schema">
+    <schema id="276" parent="1" name="performance_schema">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="278" parent="1" name="sys">
+    <schema id="277" parent="1" name="sys">
       <Grants>sys_config|||mysql.sys|localhost|SELECT|G</Grants>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="278" parent="1" name="carracers">
+      <Current>1</Current>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="279" parent="1" name="mysql.infoschema">
@@ -975,27 +975,27 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="283" parent="274" name="car">
+    <table id="283" parent="278" name="car">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="284" parent="274" name="person">
+    <table id="284" parent="278" name="person">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="285" parent="274" name="race">
+    <table id="285" parent="278" name="race">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="286" parent="274" name="race_has_car_and_driver">
+    <table id="286" parent="278" name="race_has_car_and_driver">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="287" parent="274" name="track">
+    <table id="287" parent="278" name="track">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="288" parent="274" name="user">
+    <table id="288" parent="278" name="user">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>

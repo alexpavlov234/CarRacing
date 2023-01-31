@@ -167,6 +167,7 @@ public class CarsController {
                                 final Button chooseButton = new Button("Избери за текуща кола");
 
 
+
                                 @Override
                                 public void updateItem(String item, boolean empty) {
                                     super.updateItem(item, empty);
@@ -176,6 +177,11 @@ public class CarsController {
                                     } else {
                                         // Задаваме стил на бутона.
                                         chooseButton.setStyle("-fx-background-color: #e5aa00; -fx-text-fill: white; ");
+                                        if(PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()).getCarPerson() == getTableView().getItems().get(getIndex()).getIdCar()){
+                                            chooseButton.setDisable(true);
+                                        }else{
+                                            chooseButton.setDisable(false);
+                                        }
                                         // Задаваме какво да се прави при натискане на бутона.
                                         chooseButton.setOnAction(event -> {
                                             // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.

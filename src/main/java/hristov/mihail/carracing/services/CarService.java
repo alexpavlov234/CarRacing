@@ -43,7 +43,8 @@ public class CarService {
     }
 
     public static Car getCar(String name) {
-        String[] names = name.split(" ");
+        int firstSpaceIndex = name.indexOf(" ");
+        String[] names = {name.substring(0, firstSpaceIndex), name.substring(firstSpaceIndex + 1)};
         if (names.length == 2) {
             ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (modelCar = '" + names[1] + "' AND brandCar = '" + names[0] + "');");
             //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');

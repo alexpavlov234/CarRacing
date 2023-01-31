@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.services;
 
 import hristov.mihail.carracing.controllers.MessageType;
+import hristov.mihail.carracing.controllers.RaceHasCarAndDriverModalController;
 import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
@@ -16,6 +17,7 @@ public class RaceService {
         Database.execute("INSERT INTO race (trackRace, dateRace, lapsRace, pointsRace, participantsRace) VALUES (" + race.getTrackRace() + ",'" + race.getDateRace() + "'," + race.getLapsRace() + "," + race.getPointsRace() + "," + race.getParticipantsRace() + ");");
         //INSERT INTO Race (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
     }
+
     public static Race getLastRace() {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM race ORDER BY idRace DESC LIMIT 1;");
 
@@ -30,6 +32,7 @@ public class RaceService {
         }
         return race;
     }
+
     public static Race getRace(int idRace) {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM race WHERE (idRace = " + idRace + ");");
         //INSERT INTO Race (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
@@ -77,11 +80,23 @@ public class RaceService {
         ArrayList<String> allRaces = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-//                byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//                Blob blobData = Database.createBlob();
-//                blobData.setBytes(1, byteData);
                 allRaces.add(TrackService.getTrack(Integer.parseInt(resultSet.getString("trackRace"))).getNameTrack() + " / " + resultSet.getString("dateRace"));
+            }
+        } catch (SQLException e) {
+            //TODO: Екран за грешка
+        }
+        return allRaces;
+    }
 
+    public static ArrayList<String> getAllFreeRacesNames() {
+        ResultSet resultSet = Database.executeQuery("SELECT * FROM race;");
+
+        ArrayList<String> allRaces = new ArrayList<>();
+        try {
+            while ((resultSet.next())) {
+                if (RaceHasCarAndDriverService.areTherePlacesAvailable(getRace(Integer.parseInt(resultSet.getString("idRace"))))) {
+                    allRaces.add(TrackService.getTrack(Integer.parseInt(resultSet.getString("trackRace"))).getNameTrack() + " / " + resultSet.getString("dateRace"));
+                }
             }
         } catch (SQLException e) {
             //TODO: Екран за грешка

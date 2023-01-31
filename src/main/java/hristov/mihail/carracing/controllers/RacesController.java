@@ -91,8 +91,8 @@ public class RacesController {
         race.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idRace"));
         car.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idCar"));
         driver.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idDriver"));
-        
-        
+
+
         // Проверяваме дали логнат потребител е администратор.
 
         track.maxWidthProperty().bind(table.widthProperty().divide(4));
@@ -102,7 +102,7 @@ public class RacesController {
         race.maxWidthProperty().bind(table1.widthProperty().divide(4));
         car.maxWidthProperty().bind(table1.widthProperty().divide(4));
         driver.maxWidthProperty().bind(table1.widthProperty().divide(4));
-        actions1.maxWidthProperty().bind(table1.widthProperty().divide(4));       
+        actions1.maxWidthProperty().bind(table1.widthProperty().divide(4));
         track.minWidthProperty().bind(table.widthProperty().divide(4));
         date.minWidthProperty().bind(table.widthProperty().divide(4));
         actions.minWidthProperty().bind(table.widthProperty().divide(4));
@@ -298,7 +298,6 @@ public class RacesController {
                                         // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                         RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
                                         try {
-                                            if (RaceHasCarAndDriverService.areTherePlacesAvailable(RaceService.getRace(raceHasCarAndDriver.getIdRace()))) {
                                                 // Създаваме нов stage (нов прозорец)
                                                 Stage stage = new Stage();
                                                 // Зареждане на прозореца от fxml-a.
@@ -324,9 +323,6 @@ public class RacesController {
                                                         table1.setItems(raceHasCarAndDriverObservableList);
                                                     }
                                                 });
-                                            } else {
-                                                WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
-                                            }
 
                                         } catch (Exception e) {
                                             e.printStackTrace();
