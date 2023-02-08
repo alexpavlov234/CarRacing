@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="444.0" prefWidth="666.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RankingController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="labelWhite" text="Точки от състезания" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Segoe UI" size="21.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="14.0" layoutY="55.0" prefHeight="373.0" prefWidth="638.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0">
+         <columns>
+            <TableColumn fx:id="firstName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Име" />
+            <TableColumn fx:id="lastName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Фамилия" />
+            <TableColumn fx:id="nationality" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Националност" />
+            <TableColumn fx:id="points" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Точки" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

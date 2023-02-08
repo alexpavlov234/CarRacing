@@ -71,6 +71,9 @@ public class RacesController {
     private Button addParticipation;
 
     @FXML
+    private Button addPoints;
+
+    @FXML
     private Button addRace;
 
     @FXML
@@ -119,9 +122,6 @@ public class RacesController {
 
                         final TableCell<Race, Integer> cell = new TableCell<Race, Integer>() {
 
-
-
-                            // Override-ваме някакъв метод бе не го мисли
                             @Override
                             public void updateItem(Integer item, boolean empty) {
                                 super.updateItem(item, empty);
@@ -149,9 +149,6 @@ public class RacesController {
 
                         final TableCell<Race, Integer> cell = new TableCell<Race, Integer>() {
 
-
-
-                            // Override-ваме някакъв метод бе не го мисли
                             @Override
                             public void updateItem(Integer item, boolean empty) {
                                 super.updateItem(item, empty);
@@ -208,9 +205,6 @@ public class RacesController {
 
                         final TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
 
-
-
-                            // Override-ваме някакъв метод бе не го мисли
                             @Override
                             public void updateItem(Integer item, boolean empty) {
                                 super.updateItem(item, empty);
@@ -237,9 +231,6 @@ public class RacesController {
 
                         final TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
 
-
-
-                            // Override-ваме някакъв метод бе не го мисли
                             @Override
                             public void updateItem(Integer item, boolean empty) {
                                 super.updateItem(item, empty);
@@ -490,12 +481,42 @@ public class RacesController {
     }
 
     @FXML
+    void addRacePoints(ActionEvent event) {
+        try {
+
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-points-modal.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load());
+            //dialogController.setLoggedUser(car.getIdCar());
+
+            stage.setTitle("Добавяне на точки от състезания");
+            stage.setScene(scene);
+            stage.show();
+            // Когато се затвори нашия отворен прозорец да се обнови таблица.
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+                @Override
+                public void handle(WindowEvent paramT) {
+                    // Обновяване на елементите в нашата таблица.
+                    raceObservableList = FXCollections.observableList(RaceService.getAllRace());
+                    table.setItems(raceObservableList);
+                    raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
+                    table1.setItems(raceHasCarAndDriverObservableList);
+                }
+            });
+        } catch (Exception e) {
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+
+        }
+    }
+
+    @FXML
     void addRace(ActionEvent event) {
         try {
 
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-modal.fxml"));
-
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
