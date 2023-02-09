@@ -114,6 +114,7 @@ public class RacesController {
         car.minWidthProperty().bind(table1.widthProperty().divide(4));
         driver.minWidthProperty().bind(table1.widthProperty().divide(4));
         actions1.minWidthProperty().bind(table1.widthProperty().divide(4));
+
         Callback<TableColumn<Race, String>, TableCell<Race, String>> cellFactoryParticipants = //
                 new Callback<TableColumn<Race, String>, TableCell<Race, String>>() {
 
@@ -261,7 +262,6 @@ public class RacesController {
 
                             final Button editButton = new Button("Редактирай");
 
-                            // Override-ваме някакъв метод бе не го мисли
                             @Override
                             public void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
