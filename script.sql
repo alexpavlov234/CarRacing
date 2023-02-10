@@ -43,15 +43,14 @@ create table if not exists track
 
 create table if not exists race
 (
-    idRace           int auto_increment,
-    trackRace        int  not null,
+    idRace           int auto_increment primary key,
+    trackRace        int  null,
     dateRace         date not null,
     lapsRace         int  not null,
     pointsRace       int  not null,
     participantsRace int  not null,
-    primary key (idRace, trackRace),
     constraint fk_race_track1
-        foreign key (trackRace) references track (idTrack)
+        foreign key (trackRace) references track (idTrack) on delete set null
 );
 
 create index fk_race_track1_idx
@@ -60,17 +59,17 @@ create index fk_race_track1_idx
 create table if not exists race_has_car_and_driver
 (
     id       int auto_increment,
-    idRace   int not null,
-    idCar    int not null,
-    idDriver int not null,
-    points   int not null,
-    primary key (id, idRace, idCar, idDriver),
+    idRace   int null,
+    idCar    int null,
+    idDriver int null,
+    points   int null,
+    primary key (id),
     constraint fk_Race_has_Car_and_Driver_Car1
-        foreign key (idCar) references car (idCar),
+        foreign key (idCar) references car (idCar) on delete set null,
     constraint fk_Race_has_Car_and_Driver_Driver1
-        foreign key (idDriver) references person (idPerson),
+        foreign key (idDriver) references person (idPerson) on delete set null,
     constraint fk_Race_has_Car_and_Driver_Race1
-        foreign key (idRace) references race (idRace)
+        foreign key (idRace) references race (idRace) on delete set null
 );
 
 create index fk_Race_has_Car_and_Driver_Car1_idx
@@ -85,12 +84,12 @@ create table if not exists user
     emailUser     varchar(45) not null,
     passUser      varchar(45) not null,
     typeUser      varchar(45) not null,
-    userHasPerson int         not null,
-    primary key (idUser, userHasPerson),
+    userHasPerson int         null,
+    primary key (idUser),
     constraint emailUser
         unique (emailUser),
     constraint fk_user_driver1
-        foreign key (userHasPerson) references person (idPerson)
+        foreign key (userHasPerson) references person (idPerson) on delete set null
 );
 
 create index fk_user_driver1_idx
