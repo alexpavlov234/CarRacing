@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,11 +17,13 @@
       </Label>
       <TableView fx:id="table" layoutX="14.0" layoutY="55.0" prefHeight="349.0" prefWidth="638.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0">
          <columns>
-            <TableColumn fx:id="track" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Писта" />
-            <TableColumn fx:id="date" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Дата" />
-            <TableColumn fx:id="participants" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Брой участници" />
-            <TableColumn fx:id="actions" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Действия" />
+            <TableColumn fx:id="firstName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Име" />
+            <TableColumn fx:id="lastName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Фамилия" />
+            <TableColumn fx:id="car" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Кола" />
+            <TableColumn fx:id="points" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Точки" />
          </columns>
       </TableView>
+      <ComboBox fx:id="racesCombobox" layoutX="460.0" layoutY="20.0" prefHeight="27.0" prefWidth="186.0" styleClass="combobox" />
+      <Button fx:id="addPoints" layoutX="577.0" layoutY="410.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" text="Приложи" />
    </children>
 </AnchorPane>

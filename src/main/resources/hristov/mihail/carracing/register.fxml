@@ -85,11 +85,6 @@
                     <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openLoginScreen" prefHeight="34.0" prefWidth="306.0" text="Вход" />
                 </children>
             </VBox>
-            <Label alignment="CENTER" layoutX="747.0" layoutY="466.0" prefHeight="23.0" prefWidth="93.0" text="Версия 1.0.0" textFill="#a6b1cc" AnchorPane.bottomAnchor="14.0">
-                <font>
-                    <Font name="Segoe UI" size="12.0" />
-                </font>
-            </Label>
         </children>
 
 </AnchorPane>
