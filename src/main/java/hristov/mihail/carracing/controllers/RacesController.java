@@ -142,6 +142,7 @@ public class RacesController {
                         return cell;
                     }
                 };
+
         Callback<TableColumn<Race, String>, TableCell<Race, String>> cellFactoryTrack = //
                 new Callback<TableColumn<Race, String>, TableCell<Race, String>>() {
 
@@ -198,6 +199,7 @@ public class RacesController {
                         return cell;
                     }
                 };
+
         Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>> cellFactoryCar = //
                 new Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>>() {
 
@@ -224,6 +226,7 @@ public class RacesController {
                         return cell;
                     }
                 };
+
         Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>> cellFactoryDriver = //
                 new Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>>() {
 
@@ -250,6 +253,7 @@ public class RacesController {
                         return cell;
                     }
                 };
+
         Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>> cellFactory = //
                 new Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>>() {
 

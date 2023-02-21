@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class RankingController {
     // Нашата таблица с данни, която се визуализира.
     // Получаваме данните за нея от service, който взима всички записи от базата данни като ArrayList.
-    // Този лист се преобразува в ObservableList - изгъзен лист, който само той е свъместим с TableView.
+    // Този лист се преобразува в ObservableList - лист, който е свъместим с TableView.
     ObservableList<Person> userObservableList = new ObservableListBase<Person>() {
         @Override
         public Person get(int index) {
@@ -53,35 +53,36 @@ public class RankingController {
     private TableColumn<Person, String> points;
     @FXML
     private TableView<Person> table;
+
     // Метод, който се изпълнява при зареждането на нашия прозорец.
     @FXML
     void initialize() {
         firstName.setCellValueFactory(new PropertyValueFactory<Person, String>("firstNamePerson"));
         lastName.setCellValueFactory(new PropertyValueFactory<Person, String>("lastNamePerson"));
-       nationality.setCellValueFactory(new PropertyValueFactory<Person, String>("nationalityPerson"));
+        nationality.setCellValueFactory(new PropertyValueFactory<Person, String>("nationalityPerson"));
         points.setCellValueFactory(new PropertyValueFactory<Person, String>("pointsPerson"));
 
         ArrayList<Person> people = PersonService.getAllPerson();
         ArrayList<Person> racers = new ArrayList<>();
-        for (Person person :
-                people) {
-          //  if(!Objects.isNull(UserService.getUser(person))) {
-           //     if (!UserService.getUser(person).isAdmin()) {
-                    racers.add(person);
-           //     }
-           // }
+        for (Person person : people) {
+            //  if(!Objects.isNull(UserService.getUser(person))) {
+            //     if (!UserService.getUser(person).isAdmin()) {
+            racers.add(person);
+            //     }
+            // }
         }
+
         userObservableList = FXCollections.observableList(racers);
         // Проверяваме дали логнат потребител е администратор.
 
-            firstName.maxWidthProperty().bind(table.widthProperty().divide(4));
-            lastName.maxWidthProperty().bind(table.widthProperty().divide(4));
-            nationality.maxWidthProperty().bind(table.widthProperty().divide(4));
-            points.maxWidthProperty().bind(table.widthProperty().divide(4));
-            points.minWidthProperty().bind(table.widthProperty().divide(4));
-            firstName.minWidthProperty().bind(table.widthProperty().divide(4));
-            lastName.minWidthProperty().bind(table.widthProperty().divide(4));
-            nationality.minWidthProperty().bind(table.widthProperty().divide(4));
+        firstName.maxWidthProperty().bind(table.widthProperty().divide(4));
+        lastName.maxWidthProperty().bind(table.widthProperty().divide(4));
+        nationality.maxWidthProperty().bind(table.widthProperty().divide(4));
+        points.maxWidthProperty().bind(table.widthProperty().divide(4));
+        points.minWidthProperty().bind(table.widthProperty().divide(4));
+        firstName.minWidthProperty().bind(table.widthProperty().divide(4));
+        lastName.minWidthProperty().bind(table.widthProperty().divide(4));
+        nationality.minWidthProperty().bind(table.widthProperty().divide(4));
 
         // Задаваме елементите на таблицата
         table.setItems(userObservableList);
