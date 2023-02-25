@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Вече се зареждат почти като хората точките в прозореца за добавяне на точки.">
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки.">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7d3c1a75-2b7e-4399-b7bc-f3622e272bc7.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,6 +191,7 @@
       <workItem from="1676476337117" duration="10840000" />
       <workItem from="1676920112292" duration="3469000" />
       <workItem from="1676997842207" duration="15919000" />
+      <workItem from="1677349741584" duration="370000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -381,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677341170244</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки.">
+      <created>1677341754151</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1677341754151</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,7 +431,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Тоя път е бая... Променен скрипт на базата данни. Създаден екран за управление на таблицата за колите. Създаден е и диалогов прозорец за добавяне на кола. :)" />
     <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :)." />
     <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :). Добавен е css файл с дизайн на системата." />
     <MESSAGE value="Ще се насера :)" />
@@ -448,7 +455,8 @@
     <MESSAGE value="Промени в RaceModalPointsController.&#10;Все още е прототип." />
     <MESSAGE value="Оправен е бъга при зареждане. На комбобокса при редакция на участие. Почти е поправено ги зареждането на таблицата с точки." />
     <MESSAGE value="Вече се зареждат почти като хората точките в прозореца за добавяне на точки." />
-    <option name="LAST_COMMIT_MESSAGE" value="Вече се зареждат почти като хората точките в прозореца за добавяне на точки." />
+    <MESSAGE value="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки." />
+    <option name="LAST_COMMIT_MESSAGE" value="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -66,7 +66,18 @@ public class RaceModalPointsController {
     private TableView<RaceHasCarAndDriver> table;
     @FXML
     void applyPoints(ActionEvent event) {
-        RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
+        int totalPoints = 0;
+        for (RaceHasCarAndDriver raceHasCarAndDriver:
+             raceHasCarAndDriversObservableList) {
+           totalPoints += raceHasCarAndDriver.getPoints();
+        }
+        if(totalPoints <= RaceService.getRace(racesCombobox.getValue()).getPointsRace()) {
+            RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
+        } else {
+            WarningController.openMessageModal("Общият брой точки е невалиден","Невалиден брой точки", MessageType.WARNING);
+        }
+        this.initialize();
+
     }
     @FXML
     void initialize() {
