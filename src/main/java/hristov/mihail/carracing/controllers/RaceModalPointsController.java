@@ -64,7 +64,10 @@ public class RaceModalPointsController {
 
     @FXML
     private TableView<RaceHasCarAndDriver> table;
-
+    @FXML
+    void applyPoints(ActionEvent event) {
+        RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
+    }
     @FXML
     void initialize() {
         assert addPoints != null : "fx:id=\"addPoints\" was not injected: check your FXML file 'race-points-modal.fxml'.";

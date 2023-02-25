@@ -4,9 +4,9 @@ import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
+import javafx.collections.ObservableList;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class RaceHasCarAndDriverService {
@@ -130,5 +130,30 @@ public class RaceHasCarAndDriverService {
             //TODO: Екран за грешка
             return false;
         }
+
+
     }
+
+    public static void updateRaceHasCarAndDriverList(ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList) {
+        // Clear the existing data in the race_has_car_and_driver table
+        String clearSql = "DELETE FROM race_has_car_and_driver";
+        Database.execute(clearSql);
+
+        // Insert the updated data into the race_has_car_and_driver table
+        String insertSql = "INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) " +
+                "VALUES (?, ?, ?, ?)";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(insertSql)) {
+            for (RaceHasCarAndDriver r : raceHasCarAndDriversObservableList) {
+                stmt.setInt(1, r.getIdRace());
+                stmt.setInt(2, r.getIdCar());
+                stmt.setInt(3, r.getIdDriver());
+                stmt.setInt(4, r.getPoints());
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
