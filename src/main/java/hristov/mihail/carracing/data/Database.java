@@ -11,13 +11,13 @@ import java.util.Map;
 public class Database {
     // Полетата са private, защото да не може да се променят от обект.
     // Домашен сървър
-//    private static final String url = "jdbc:mysql://94.26.10.22:1234/carracers";
-//    private static final String user = "Alex";
-//    private static final String password = "Alex123@&";
-    // Локална база данни на Миши Скиши
-     private static final String url = "jdbc:mysql://localhost:3306/carracers";
-     private static final String user = "root";
-     private static final String password = "Mihail100404H";
+    private static final String url = "jdbc:mysql://94.26.10.22:1234/carracers";
+    private static final String user = "Alex";
+    private static final String password = "Alex123@&";
+    // Локална база данни на Миш Скиш Киш
+//    private static final String url = "jdbc:mysql://localhost:3306/carracers";
+//    private static final String user = "root";
+//    private static final String password = "Mihail100404H";
 
     public static void execute(String sql) {
         try {

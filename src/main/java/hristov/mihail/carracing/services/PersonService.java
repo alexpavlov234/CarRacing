@@ -5,6 +5,7 @@ import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Person;
+import hristov.mihail.carracing.models.User;
 import javafx.scene.image.Image;
 
 import java.io.InputStream;
@@ -120,20 +121,29 @@ public class PersonService {
         ArrayList<String> allPeople = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-//                byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//                Blob blobData = Database.createBlob();
-//                blobData.setBytes(1, byteData);
-                Person person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")),  resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),resultSet.getString("imagePerson"));
+                Person person = new Person(
+                        resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")),
+                        resultSet.getString("firstNamePerson"),
+                        resultSet.getString("middleNamePerson"),
+                        resultSet.getString("lastNamePerson"),
+                        resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")),
+                        resultSet.getString("nationalityPerson"),
+                        resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")),
+                        resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),
+                        resultSet.getString("imagePerson")
+                );
 
-                if(!UserService.getUser(person).getTypeUser().equals("Admin")) {
+                User user = UserService.getUser(person);
+                if (user != null && !user.getTypeUser().equals("Admin")) {
                     allPeople.add(resultSet.getString("firstNamePerson") + " " + resultSet.getString("lastNamePerson"));
                 }
             }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            //TODO: Handle the error
         }
         return allPeople;
     }
+
 
     public static Person getPerson(String name) {
         String[] names = name.split(" ");

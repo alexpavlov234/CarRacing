@@ -182,152 +182,55 @@ public class RaceModalPointsController {
                     }
                 };
 
-        Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>> cellFactoryPoints = //
-                new Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>>() {
+        Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>> cellFactoryPoints = new Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>>() {
+
+            @Override
+            public TableCell<RaceHasCarAndDriver, Integer> call(TableColumn<RaceHasCarAndDriver, Integer> param) {
+                TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
+                    private TextField textField = new TextField();
 
                     @Override
-                    public TableCell call(final TableColumn<RaceHasCarAndDriver, Integer> param) {
-
-                        final TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
-                            TextField textField = new TextField();
-                            @Override
-                            public void updateItem(Integer item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                    setText(null);
-                                } else {
-                                    RaceHasCarAndDriver raceHasCarAndDriver1 = getTableView().getItems().get(getIndex());
-                                    textField.setText(Integer.toString(raceHasCarAndDriver1.getPoints()));
-                                    textField.textProperty().addListener((obs, oldText, newText) -> {
-                                        raceHasCarAndDriver1.setPoints(Integer.parseInt(newText));
-                                    });
-                                }
-                                HBox pane = new HBox(textField);
-                                pane.setSpacing(5);
-                                pane.setAlignment(Pos.CENTER);
-                                setGraphic(pane);
-                                setText(null);
+                    public void updateItem(Integer item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
+                            // Get the value for this cell from the RaceHasCarAndDriver object
+                            Integer points = raceHasCarAndDriver.getPoints();
+                            if (points != null) {
+                                textField.setText(points.toString());
+                            } else {
+                                textField.setText("");
                             }
-                        };
-                        // Задаване на подравняване на колоната.
-                        cell.setAlignment(Pos.CENTER);
-                        // Връшаме нашата клетка. Кодът по-горе указва как ще се генерира дадена клетка и какви методи ще имат бутоните ѝ.
-                        return cell;
+                            textField.textProperty().addListener((obs, oldText, newText) -> {
+                                if (newText.isEmpty()) {
+                                    raceHasCarAndDriver.setPoints(0);
+                                } else {
+                                    raceHasCarAndDriver.setPoints(Integer.parseInt(newText));
+                                }
+                            });
+                            setGraphic(textField);
+                        }
+                        setText(null);
                     }
                 };
+                cell.setAlignment(Pos.CENTER);
+                return cell;
+            }
+        };
 
 
 
-//        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactoryDriver = //
-//                new Callback<TableColumn<Person, String>, TableCell<Person, String>>() {
-//
-//                    @Override
-//                    public TableCell call(final TableColumn<Person, String> param) {
-//
-//                        final TableCell<Person, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
-//
-//                            @Override
-//                            public void updateItem(Integer item, boolean empty) {
-//                                super.updateItem(item, empty);
-//                                if (empty) {
-//                                    setGraphic(null);
-//                                    setText(null);
-//                                } else {
-////                                    RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
-////                                    setText(PersonService.getPerson(raceHasCarAndDriver.getIdDriver()).getNamePerson());
-//                                    Person person = getTableView().getItems().get(getIndex());
-//                                    setText(PersonService.getPerson(person.getIdPerson()).getFirstNamePerson());
-//                                }
-//                            }
-//                        };
-//                        // Задаване на подравняване на колоната.
-//                        cell.setAlignment(Pos.CENTER);
-//                        // Връшаме нашата клетка. Кодът по-горе указва как ще се генерира дадена клетка и какви методи ще имат бутоните ѝ.
-//                        return cell;
-//                    }
-//                };
 
-
-//        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactoryFirstName = //
-//                new Callback<TableColumn<Person, String>, TableCell<Person, String>>() {
-//
-//                    @Override
-//                    public TableCell call(final TableColumn<Person, String> param) {
-//
-//                        final TableCell<Person, Integer> cell = new TableCell<Person, Integer>() {
-//
-//                            @Override
-//                            public void updateItem(Integer item, boolean empty) {
-//                                super.updateItem(item, empty);
-//                                if (empty) {
-//                                    setGraphic(null);
-//                                    setText(null);
-//                                } else {
-//                                    Person person = getTableView().getItems().get(getIndex());
-//                                    setText(PersonService.getPerson(person.getIdPerson()).getFirstNamePerson());
-//                                }
-//                            }
-//                        };
-//                        // Задаване на подравняване на колоната.
-//                        cell.setAlignment(Pos.CENTER);
-//                        // Връшаме нашата клетка. Кодът по-горе указва как ще се генерира дадена клетка и какви методи ще имат бутоните ѝ.
-//                        return cell;
-//                    }
-//                };
 
         car.setCellFactory(cellFactoryCar);
         firstName.setCellFactory(cellFactoryFirstName);
         lastName.setCellFactory(cellFactoryLastName);
         points.setCellFactory(cellFactoryPoints);
 
-//        ArrayList<Person> people = PersonService.getAllPerson();
-//        ArrayList<Person> racers = new ArrayList<>();
-//        for (Person person : people) {
-//            racers.add(person);
-//        }
-//        userObservableList = FXCollections.observableList(racers);
-
-
-//        // Add races to combo box
-//        racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
-//
-//        // Add listener to update table when a race is selected
-//        racesCombobox.setOnAction(event -> {
-//            String selectedRaceName = racesCombobox.getValue();
-//            if (selectedRaceName != null) {
-//                Race selectedRace = RaceService.getRace(selectedRaceName);
-//                List<RaceHasCarAndDriver> raceResults = selectedRace.getRaceResults();
-//
-//                // Clear table and add new data
-//                table.getItems().setAll(raceResults);
-//            } else {
-//                // If no race is selected, clear the table
-//                table.getItems().clear();
-//            }
-//        });
-
-
 
         racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
-//
-//        racesCombobox.setOnAction(e -> {
-//            String selectedOption = racesCombobox.getValue();
-//
-//            // Perform any logic needed to retrieve the data to display in the TableView based on the selected option
-////            List<String> dataForTable = getDataForSelectedOption(selectedOption);
-//
-//            car.setCellFactory(cellFactoryCar);
-//
-//            // Clear the existing data from the TableView
-//            table.getItems().clear();
-//
-////            // Add the new data to the TableView
-////            table.getItems().addAll(cellFactoryCar);
-//        });
-
-//        raceHasCarAndDriver.setIdRace(RaceService.getRace(raceCombobox.getValue()).getIdRace());
-
 
     }
     @FXML
