@@ -16,6 +16,7 @@ import hristov.mihail.carracing.services.RaceService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
@@ -40,18 +41,6 @@ public class RaceModalPointsController {
     private URL location;
 
     ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList;
-
-//    ObservableList<Person> userObservableList = new ObservableListBase<Person>() {
-//        @Override
-//        public Person get(int index) {
-//            return null;
-//        }
-//
-//        @Override
-//        public int size() {
-//            return 0;
-//        }
-//    };
 
     @FXML
     private Button addPoints;
@@ -236,22 +225,21 @@ public class RaceModalPointsController {
     @FXML
     private void onSelectComboBox(ActionEvent event) {
         int idRace = RaceService.getRace(racesCombobox.getValue()).getIdRace();
-        raceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
+        //Големи сме ****** не бяхме добавили idRace където трябва.
+        raceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace));
         for (int i = 0; i<table.getItems().size(); i++) {
             table.getItems().clear();
         }
         table.setItems(raceHasCarAndDriversObservableList);
+        raceHasCarAndDriversObservableList.addListener((ListChangeListener<RaceHasCarAndDriver>) change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
+                    table.refresh();
+                }
+            }
+        });
     }
 
-    // A helper method to retrieve the data to display in the TableView based on the selected option
-//    private List<String> getDataForSelectedOption(String selectedOption) {
-//        // Perform any necessary logic to retrieve the data to display in the TableView
-//        // For this example, we'll just return a hardcoded list of data
-//        if (selectedOption.equals(raceHasCarAndDriver.getIdRace(RaceService.getRace(racesCombobox.getValue()).getIdRace()))) {
-//            return Arrays.asList("asdasdasdasdasdasda");
-//        } else {
-//            return Collections.emptyList();
-//        }
-//    }
+
 
 }

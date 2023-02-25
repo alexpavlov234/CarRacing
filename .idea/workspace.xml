@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Промени в RaceModalPointsController.&#10;Все още е прототип.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Оправен е бъга при зареждане. На комбобокса при редакция на участие. Почти е поправено ги зареждането на таблицата с точки.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -369,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676491010778</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Оправен е бъга при зареждане. На комбобокса при редакция на участие. Почти е поправено ги зареждането на таблицата с точки.">
+      <created>1677339763049</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1677339763049</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,7 +415,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Работещ TrackService." />
     <MESSAGE value="Подобрен TrackService и създаден клас за тестване." />
     <MESSAGE value="Тоя път е бая... Променен скрипт на базата данни. Създаден екран за управление на таблицата за колите. Създаден е и диалогов прозорец за добавяне на кола. :)" />
     <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :)." />
@@ -436,7 +439,8 @@
     <MESSAGE value="Оправен бутон за добавяне на участие." />
     <MESSAGE value="Промени в RaceModalPointsController." />
     <MESSAGE value="Промени в RaceModalPointsController.&#10;Все още е прототип." />
-    <option name="LAST_COMMIT_MESSAGE" value="Промени в RaceModalPointsController.&#10;Все още е прототип." />
+    <MESSAGE value="Оправен е бъга при зареждане. На комбобокса при редакция на участие. Почти е поправено ги зареждането на таблицата с точки." />
+    <option name="LAST_COMMIT_MESSAGE" value="Оправен е бъга при зареждане. На комбобокса при редакция на участие. Почти е поправено ги зареждането на таблицата с точки." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -567,6 +571,15 @@
           <properties field="track" class="hristov.mihail.carracing.controllers.TrackModalController" />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java</url>
+          <line>487</line>
+          <properties class="hristov.mihail.carracing.controllers.RacesController" method="addRacePoints">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="133" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -574,5 +587,10 @@
         <PinnedItemInfo parentTag="com.mysql.cj.protocol.a.result.ByteArrayRow" memberName="internalRowData" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CarRacing$hristov_mihail_carracing_HelloApplication.ic" NAME="hristov.mihail.carracing.HelloApplication Coverage Results" MODIFIED="1677340347545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>hristov.mihail.carracing.*</FILTER>
+    </SUITE>
   </component>
 </project>
