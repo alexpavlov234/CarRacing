@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7d3c1a75-2b7e-4399-b7bc-f3622e272bc7.xml" beforeDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/script.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceHasCarAndDriverModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceHasCarAndDriverModalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +194,8 @@
       <workItem from="1676476337117" duration="10840000" />
       <workItem from="1676920112292" duration="3469000" />
       <workItem from="1676997842207" duration="15919000" />
-      <workItem from="1677349741584" duration="370000" />
+      <workItem from="1677349741584" duration="421000" />
+      <workItem from="1677405041050" duration="4661000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -389,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677341754151</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници.">
+      <created>1677350145025</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1677350145025</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +442,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :)." />
     <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :). Добавен е css файл с дизайн на системата." />
     <MESSAGE value="Ще се насера :)" />
     <MESSAGE value="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни." />
@@ -456,7 +466,8 @@
     <MESSAGE value="Оправен е бъга при зареждане. На комбобокса при редакция на участие. Почти е поправено ги зареждането на таблицата с точки." />
     <MESSAGE value="Вече се зареждат почти като хората точките в прозореца за добавяне на точки." />
     <MESSAGE value="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки." />
-    <option name="LAST_COMMIT_MESSAGE" value="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки." />
+    <MESSAGE value="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници." />
+    <option name="LAST_COMMIT_MESSAGE" value="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

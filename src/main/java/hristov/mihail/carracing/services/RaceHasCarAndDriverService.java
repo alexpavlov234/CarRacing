@@ -136,7 +136,7 @@ public class RaceHasCarAndDriverService {
 
     public static void updateRaceHasCarAndDriverList(ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList) {
         // Clear the existing data in the race_has_car_and_driver table
-        String clearSql = "DELETE FROM race_has_car_and_driver";
+        String clearSql = "DELETE FROM race_has_car_and_driver WHERE idRace =" + raceHasCarAndDriversObservableList.get(0).getIdRace();
         Database.execute(clearSql);
 
         // Insert the updated data into the race_has_car_and_driver table

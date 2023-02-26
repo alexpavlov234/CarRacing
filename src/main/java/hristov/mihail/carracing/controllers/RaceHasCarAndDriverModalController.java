@@ -45,8 +45,6 @@ public class RaceHasCarAndDriverModalController {
     @FXML
     private Label labelUserName;
 
-    @FXML
-    private TextField points;
     private RaceHasCarAndDriver raceHasCarAndDriver;
     @FXML
     private ComboBox<String> raceCombobox;
@@ -64,11 +62,10 @@ public class RaceHasCarAndDriverModalController {
     @FXML
     void applyChanges(ActionEvent event) {
         if (!Objects.isNull(raceHasCarAndDriver)) {
-            if (isNumeric(points.getText()) || Integer.parseInt(points.getText()) == 0) {
                 raceHasCarAndDriver.setIdCar(CarService.getCar(carCombobox.getValue()).getIdCar());
                 raceHasCarAndDriver.setIdDriver(PersonService.getPerson(driverCombobox.getValue()).getIdPerson());
                 raceHasCarAndDriver.setIdRace(RaceService.getRace(raceCombobox.getValue()).getIdRace());
-                raceHasCarAndDriver.setPoints(Integer.parseInt(points.getText()));
+                raceHasCarAndDriver.setPoints(0);
                 if (RaceHasCarAndDriverService.areTherePlacesAvailable(RaceService.getRace(raceHasCarAndDriver.getIdRace()))) {
                     if ((raceHasCarAndDriver.getIdCar() == CarService.getCar(carCombobox.getValue()).getIdCar() && raceHasCarAndDriver.getIdDriver() == PersonService.getPerson(driverCombobox.getValue()).getIdPerson())) {
 
@@ -114,17 +111,15 @@ public class RaceHasCarAndDriverModalController {
                 } else {
                     WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
                 }
-            } else {
-                WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
-            }
+
 
         } else {
-            if (isNumeric(points.getText()) || Integer.parseInt(points.getText()) == 0) {
+
                 raceHasCarAndDriver = new RaceHasCarAndDriver();
                 raceHasCarAndDriver.setIdCar(CarService.getCar(carCombobox.getValue()).getIdCar());
                 raceHasCarAndDriver.setIdDriver(PersonService.getPerson(driverCombobox.getValue()).getIdPerson());
                 raceHasCarAndDriver.setIdRace(RaceService.getRace(raceCombobox.getValue()).getIdRace());
-                raceHasCarAndDriver.setPoints(Integer.parseInt(points.getText()));
+                raceHasCarAndDriver.setPoints(0);
                 if (RaceHasCarAndDriverService.areTherePlacesAvailable(RaceService.getRace(raceHasCarAndDriver.getIdRace()))) {
                     if (!RaceHasCarAndDriverService.isParticipatingInRace(raceHasCarAndDriver.getIdRace(), raceHasCarAndDriver.getIdDriver())) {
 
@@ -152,10 +147,6 @@ public class RaceHasCarAndDriverModalController {
                 } else {
                     WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
                 }
-            } else {
-                WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
-
-            }
         }
 
     }
@@ -171,7 +162,6 @@ public class RaceHasCarAndDriverModalController {
             assert label11 != null : "fx:id=\"label11\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
             assert label4 != null : "fx:id=\"label4\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
             assert labelUserName != null : "fx:id=\"labelUserName\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
-            assert points != null : "fx:id=\"points\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
             assert raceCombobox != null : "fx:id=\"raceCombobox\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
 
             carCombobox.getItems().addAll(CarService.getAllCarNames());
@@ -183,15 +173,12 @@ public class RaceHasCarAndDriverModalController {
                     carCombobox.setValue(CarService.getCar(raceHasCarAndDriver.getIdCar()).getNameCar());
                     raceCombobox.setValue(RaceService.getRace(raceHasCarAndDriver.getIdRace()).getNameRace());
                     driverCombobox.setValue(PersonService.getPerson(raceHasCarAndDriver.getIdDriver()).getNamePerson());
-                    points.setText(Integer.toString(raceHasCarAndDriver.getPoints()));
                 } else {
                     carCombobox.setValue(CarService.getCar(raceHasCarAndDriver.getIdCar()).getNameCar());
                     raceCombobox.setValue(RaceService.getRace(raceHasCarAndDriver.getIdRace()).getNameRace());
                     driverCombobox.setValue(PersonService.getPerson(raceHasCarAndDriver.getIdDriver()).getNamePerson());
-                    points.setText(Integer.toString(raceHasCarAndDriver.getPoints()));
                     driverCombobox.setDisable(true);
                     raceCombobox.setDisable(true);
-                    points.setEditable(false);
                 }
             } else {
                 if (LoginService.isLoggedUserAdmin() && Objects.isNull(raceHasCarAndDriver)) {

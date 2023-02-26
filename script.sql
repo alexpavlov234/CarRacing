@@ -95,3 +95,56 @@ create table if not exists user
 create index fk_user_driver1_idx
     on user (userHasPerson);
 
+use carracers;
+
+-- Insert data into car table
+INSERT INTO car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar)
+VALUES ('GT-R', 'Nissan', 'V6', 'Gasoline', 565),
+       ('911', 'Porsche', 'Flat 6', 'Gasoline', 450),
+       ('Corvette', 'Chevrolet', 'V8', 'Gasoline', 495),
+       ('Aventador', 'Lamborghini', 'V12', 'Gasoline', 740),
+       ('Model S', 'Tesla', 'Electric', 'Electric', 670);
+
+-- Insert data into person table
+INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson) VALUES
+                                                                                                                       ('Николай', 'Петров', 'Димитров', 25, 'Bulgarian', 20),
+                                                                                                                       ('Мария', 'Стоянова', 'Иванова', 30, 'Bulgarian', 15),
+                                                                                                                       ('Георги', 'Ангелов', 'Тодоров', 27, 'Bulgarian', 18),
+                                                                                                                       ('Анна', 'Василева', 'Димитрова', 22, 'Bulgarian', 25),
+                                                                                                                       ('Димитър', 'Петров', 'Ангелов', 28, 'Bulgarian', 10);
+-- Insert data into user table
+INSERT INTO user (emailUser, passUser, typeUser, userHasPerson) VALUES
+                                                                    ('nikolai.dimitrov@example.com', 'password1', 'Admin', 1),
+                                                                    ('maria.ivanova@example.com', 'password2', 'User', 2),
+                                                                    ('georgi.todorov@example.com', 'password3', 'User', 3),
+                                                                    ('anna.dimitrova@example.com', 'password4', 'User', 4),
+                                                                    ('dimitar.angelov@example.com', 'password5', 'Admin', 5);
+
+-- Insert data into track table
+INSERT INTO track (nameTrack, lengthTrack, locationTrack)
+VALUES ('Circuit de Spa-Francorchamps', 7004, 'Belgium'),
+       ('Circuit of the Americas', 5513, 'USA'),
+       ('Nürburgring Nordschleife', 20832, 'Germany'),
+       ('Mount Panorama Circuit', 6211, 'Australia'),
+       ('Suzuka Circuit', 5807, 'Japan');
+
+-- Insert data into race table
+INSERT INTO race (trackRace, dateRace, lapsRace, pointsRace, participantsRace)
+VALUES (3, '2022-05-01', 3, 20, 5),
+       (1, '2022-07-15', 5, 30, 4),
+       (5, '2022-08-22', 4, 25, 3),
+       (2, '2022-09-10', 6, 35, 4),
+       (4, '2022-11-05', 4, 25, 5);
+
+-- Insert data into race_has_car_and_driver table
+INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES
+                                                                          (1, 1, 1, 10),
+                                                                          (1, 2, 2, 8),
+                                                                          (1, 3, 3, 6),
+                                                                          (2, 2, 1, 10),
+                                                                          (2, 1, 2, 8),
+                                                                          (2, 3, 3, 6),
+                                                                          (3, 3, 1, 10),
+                                                                          (3, 1, 2, 8),
+                                                                          (3, 2, 3, 6);
+

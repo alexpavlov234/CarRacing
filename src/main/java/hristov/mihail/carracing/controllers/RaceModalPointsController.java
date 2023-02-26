@@ -66,15 +66,20 @@ public class RaceModalPointsController {
     private TableView<RaceHasCarAndDriver> table;
     @FXML
     void applyPoints(ActionEvent event) {
+        Race race = RaceService.getRace(racesCombobox.getValue());
         int totalPoints = 0;
         for (RaceHasCarAndDriver raceHasCarAndDriver:
              raceHasCarAndDriversObservableList) {
            totalPoints += raceHasCarAndDriver.getPoints();
         }
-        if(totalPoints <= RaceService.getRace(racesCombobox.getValue()).getPointsRace()) {
-            RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
-        } else {
-            WarningController.openMessageModal("Общият брой точки е невалиден","Невалиден брой точки", MessageType.WARNING);
+        if(raceHasCarAndDriversObservableList.size() > 0) {
+            if (totalPoints <= race.getPointsRace()) {
+                RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
+                WarningController.openMessageModal("Вие успешно въведохте точките на всички състезатели!", "Успешно въведени точки", MessageType.SUCCESS);
+
+            } else {
+                WarningController.openMessageModal("Сумата от точките на всички състезатели трябва да бъде не по-голяма от " + race.getPointsRace() + " !", "Невалиден брой точки", MessageType.WARNING);
+            }
         }
         this.initialize();
 
@@ -210,7 +215,11 @@ public class RaceModalPointsController {
                                 if (newText.isEmpty()) {
                                     raceHasCarAndDriver.setPoints(0);
                                 } else {
-                                    raceHasCarAndDriver.setPoints(Integer.parseInt(newText));
+                                    try {
+                                        raceHasCarAndDriver.setPoints(Integer.parseInt(newText));
+                                    } catch (Exception e) {
+                                        raceHasCarAndDriver.setPoints(0);
+                                    }
                                 }
                             });
                             setGraphic(textField);
@@ -232,7 +241,7 @@ public class RaceModalPointsController {
         lastName.setCellFactory(cellFactoryLastName);
         points.setCellFactory(cellFactoryPoints);
 
-
+        racesCombobox.getItems().removeAll();
         racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
 
     }
