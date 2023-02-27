@@ -107,11 +107,11 @@ VALUES ('GT-R', 'Nissan', 'V6', 'Gasoline', 565),
 
 -- Insert data into person table
 INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson) VALUES
-                                                                                                                       ('Николай', 'Петров', 'Димитров', 25, 'Bulgarian', 20),
-                                                                                                                       ('Мария', 'Стоянова', 'Иванова', 30, 'Bulgarian', 15),
-                                                                                                                       ('Георги', 'Ангелов', 'Тодоров', 27, 'Bulgarian', 18),
-                                                                                                                       ('Анна', 'Василева', 'Димитрова', 22, 'Bulgarian', 25),
-                                                                                                                       ('Димитър', 'Петров', 'Ангелов', 28, 'Bulgarian', 10);
+                                                                                                                       ('Николай', 'Петров', 'Димитров', 25, 'Българин', 20),
+                                                                                                                       ('Мария', 'Стоянова', 'Иванова', 30, 'Българин', 15),
+                                                                                                                       ('Георги', 'Ангелов', 'Тодоров', 27, 'Българин', 18),
+                                                                                                                       ('Анна', 'Василева', 'Димитрова', 22, 'Българин', 25),
+                                                                                                                       ('Димитър', 'Петров', 'Ангелов', 28, 'Българин', 10);
 -- Insert data into user table
 INSERT INTO user (emailUser, passUser, typeUser, userHasPerson) VALUES
                                                                     ('nikolai.dimitrov@example.com', 'password1', 'Admin', 1),

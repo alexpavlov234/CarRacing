@@ -64,15 +64,18 @@ public class RaceModalPointsController {
 
     @FXML
     private TableView<RaceHasCarAndDriver> table;
+
     @FXML
     void applyPoints(ActionEvent event) {
         Race race = RaceService.getRace(racesCombobox.getValue());
         int totalPoints = 0;
-        for (RaceHasCarAndDriver raceHasCarAndDriver:
-             raceHasCarAndDriversObservableList) {
-           totalPoints += raceHasCarAndDriver.getPoints();
+
+        for (RaceHasCarAndDriver raceHasCarAndDriver :
+                raceHasCarAndDriversObservableList) {
+            totalPoints += raceHasCarAndDriver.getPoints();
         }
-        if(raceHasCarAndDriversObservableList.size() > 0) {
+
+        if (raceHasCarAndDriversObservableList.size() > 0) {
             if (totalPoints <= race.getPointsRace()) {
                 RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
                 WarningController.openMessageModal("Вие успешно въведохте точките на всички състезатели!", "Успешно въведени точки", MessageType.SUCCESS);
@@ -84,6 +87,7 @@ public class RaceModalPointsController {
         this.initialize();
 
     }
+
     @FXML
     void initialize() {
         assert addPoints != null : "fx:id=\"addPoints\" was not injected: check your FXML file 'race-points-modal.fxml'.";
@@ -190,7 +194,8 @@ public class RaceModalPointsController {
                     }
                 };
 
-        Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>> cellFactoryPoints = new Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>>() {
+        Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>> cellFactoryPoints = //
+                new Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>>() {
 
             @Override
             public TableCell<RaceHasCarAndDriver, Integer> call(TableColumn<RaceHasCarAndDriver, Integer> param) {
@@ -233,24 +238,21 @@ public class RaceModalPointsController {
         };
 
 
-
-
-
         car.setCellFactory(cellFactoryCar);
         firstName.setCellFactory(cellFactoryFirstName);
         lastName.setCellFactory(cellFactoryLastName);
         points.setCellFactory(cellFactoryPoints);
-
         racesCombobox.getItems().removeAll();
         racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
 
     }
+
     @FXML
     private void onSelectComboBox(ActionEvent event) {
         int idRace = RaceService.getRace(racesCombobox.getValue()).getIdRace();
         //Големи сме ****** не бяхме добавили idRace където трябва.
         raceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace));
-        for (int i = 0; i<table.getItems().size(); i++) {
+        for (int i = 0; i < table.getItems().size(); i++) {
             table.getItems().clear();
         }
         table.setItems(raceHasCarAndDriversObservableList);
@@ -262,7 +264,5 @@ public class RaceModalPointsController {
             }
         });
     }
-
-
 
 }
