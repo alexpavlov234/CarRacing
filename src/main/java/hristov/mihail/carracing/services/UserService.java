@@ -1,5 +1,7 @@
 package hristov.mihail.carracing.services;
 
+import hristov.mihail.carracing.controllers.MessageType;
+import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.User;
@@ -14,96 +16,122 @@ import java.util.ArrayList;
 
 public class UserService {
     public static void addUser(User user) {
-        Database.execute("INSERT INTO user (emailUser, passUser, typeUser, userHasPerson) VALUES ('" + user.getEmailUser() + "','" + user.getPassUser() + "','" + user.getTypeUser() + "', " + user.getUserHasPerson() + ");");
+        try {
+            PreparedStatement statement = Database.getConnection().prepareStatement("INSERT INTO user (emailUser, passUser, typeUser, userHasPerson) VALUES (?, ?, ?, ?)");
+            statement.setString(1, user.getEmailUser());
+            statement.setString(2, user.getPassUser());
+            statement.setString(3, user.getTypeUser());
+            statement.setInt(4, user.getUserHasPerson());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при добавяне на потребител!", "Грешка", MessageType.WARNING);
+        }
     }
 
     public static User getUser(int idUser) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM user WHERE (idUser = " + idUser + ");");
-        //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
         User user = null;
         try {
-            //TODO: Задължително
-            resultSet.next();
-            user = new User(resultSet.getString("idUser") == null ? 0 : Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getString("userHasPerson") == null ? 0 : Integer.parseInt(resultSet.getString("userHasPerson")));
+            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE idUser = ?");
+            statement.setInt(1, idUser);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getInt("idUser"), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getInt("userHasPerson"));
+            }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
-            e.printStackTrace();
+            WarningController.openMessageModal("Не е намерен такъв потребител!", "Липсващ потребител", MessageType.WARNING);
         }
         return user;
     }
+
     public static User getLastUser() {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM user ORDER BY idUser DESC LIMIT 1;");
-
         User user = null;
         try {
-            resultSet.next();
-            user = new User(resultSet.getString("idUser") == null ? 0 : Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getString("userHasPerson") == null ? 0 : Integer.parseInt(resultSet.getString("userHasPerson")));
+            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user ORDER BY idUser DESC LIMIT 1");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getInt("idUser"), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getInt("userHasPerson"));
+            }
         } catch (SQLException e) {
-
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Не е намерен такъв потребител!", "Липсващ потребител", MessageType.WARNING);
         }
         return user;
     }
-
 
     public static User getUser(String emailUser) {
-
-        //TODO: Да проверим къде трябва да има кавички
-        //ТОDO: В SQL не е '==', а '='!
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM user WHERE (emailUser = '" + emailUser + "');");
-
-        //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
         User user = null;
         try {
-            //TODO: Задължително
-            resultSet.next();
-            user = new User(Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), Integer.parseInt(resultSet.getString("userHasPerson")));
-        } catch (Exception e) {
-           //TODO: Да обсъдим
+            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE emailUser = ?");
+            statement.setString(1, emailUser);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getInt("idUser"), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getInt("userHasPerson"));
+            }
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Не е намерен такъв потребител!", "Липсващ потребител", MessageType.WARNING);
         }
         return user;
     }
+
     public static User getUser(Person person) {
-
-        //TODO: Да проверим къде трябва да има кавички
-        //ТОDO: В SQL не е '==', а '='!
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM user WHERE (userHasPerson = " + person.getIdPerson() + ") LIMIT 1;");
-
-        //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
         User user = null;
         try {
-            //TODO: Задължително
-            resultSet.next();
-            user = new User(Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), Integer.parseInt(resultSet.getString("userHasPerson")));
-        } catch (Exception e) {
-            //TODO: Да обсъдим
+            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE userHasPerson = ? LIMIT 1");
+            statement.setInt(1, person.getIdPerson());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getInt("idUser"), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getInt("userHasPerson"));
+            }
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Не е намерен такъв потребител!", "Липсващ потребител", MessageType.WARNING);
         }
         return user;
     }
 
     public static void updateUser(User user) {
-        //'
-        Database.execute("UPDATE user SET emailUser = '" + user.getEmailUser() + "', passUser = '" + user.getPassUser() + "', typeUser ='" + user.getTypeUser() + "', userHasPerson = " + user.getUserHasPerson() + "  WHERE idUser =" + user.getIdUser() + ";");
-        //INSERT INTO User (nameUser, lengthUser, locationUser) VALUES ('Monte Carlo',456,'Dupnica');
+        try {
+            PreparedStatement statement = Database.getConnection().prepareStatement("UPDATE user SET emailUser = ?, passUser = ?, typeUser = ?, userHasPerson = ? WHERE idUser = ?");
+            statement.setString(1, user.getEmailUser());
+            statement.setString(2, user.getPassUser());
+            statement.setString(3, user.getTypeUser());
+            statement.setInt(4, user.getUserHasPerson());
+            statement.setInt(5, user.getIdUser());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при обновяване на потребител!", "Грешка", MessageType.WARNING);
+        }
     }
 
     public static void deleteUser(int idUser) {
-        Database.execute("DELETE FROM user WHERE idUser = " + idUser + ";");
-        // DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
-    }
-
-    public static ArrayList<User> getAllUser() {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM user;");
-
-        ArrayList<User> allUsers = new ArrayList<>();
         try {
-            while ((resultSet.next())) {
-                User user = new User(Integer.parseInt(resultSet.getString("idUser")), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), Integer.parseInt(resultSet.getString("userHasPerson")));
+            PreparedStatement statement = Database.getConnection().prepareStatement("DELETE FROM user WHERE idUser = ?");
+            statement.setInt(1, idUser);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при изтриване на потребител!", "Грешка", MessageType.WARNING);
+        }
+    }
+    public static ArrayList<User> getAllUser() {
+        ArrayList<User> allUsers = new ArrayList<>();
+
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user");
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("idUser");
+                String email = resultSet.getString("emailUser");
+                String password = resultSet.getString("passUser");
+                String type = resultSet.getString("typeUser");
+                int personId = resultSet.getInt("userHasPerson");
+
+                User user = new User(id, email, password, type, personId);
                 allUsers.add(user);
             }
+
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Възникна грешка при извличането на всички потребители", "Грешка", MessageType.WARNING);
         }
+
         return allUsers;
     }
+
 }

@@ -8,96 +8,117 @@ import hristov.mihail.carracing.models.Person;
 import javafx.scene.image.Image;
 
 import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CarService {
     public static void addCar(Car car) {
-        Database.execute("INSERT INTO car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES ('" + car.getModelCar() + "','" + car.getBrandCar() + "','" + car.getEngineCar() + "','" + car.getFuelCar() + "'," + car.getHorsepowerCar() + ");");
-        //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
+        String sql = "INSERT INTO car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, car.getModelCar());
+            pstmt.setString(2, car.getBrandCar());
+            pstmt.setString(3, car.getEngineCar());
+            pstmt.setString(4, car.getFuelCar());
+            pstmt.setInt(5, car.getHorsepowerCar());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при добавянето на кола в базата данни!", "Неуспешна операция", MessageType.WARNING);
+        }
     }
+
 
     public static String getCarName(Car car) {
         return car.getBrandCar() + " " + car.getModelCar();
     }
 
     public static Car getCar(int idCar) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (idCar = " + idCar + ");");
-       //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
-        Car car = null;
-        try {
-            resultSet.next();
-//            byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//            Blob blobData = Database.createBlob();
-//            blobData.setBytes(1, byteData);
-            //  car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), blobData);
-
-            car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")));
+        String sql = "SELECT * FROM car WHERE idCar=?";
+        try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idCar);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
+            } else {
+                WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+                return null; // or throw an exception if you prefer
+            }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+            return null;
         }
-        return car;
     }
+
 
     public static Car getCar(String name) {
         int firstSpaceIndex = name.indexOf(" ");
         String[] names = {name.substring(0, firstSpaceIndex), name.substring(firstSpaceIndex + 1)};
         if (names.length == 2) {
-            ResultSet resultSet = Database.executeQuery("SELECT * FROM car WHERE (modelCar = '" + names[1] + "' AND brandCar = '" + names[0] + "');");
-            //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
-
-            Car car = null;
-            try {
-                resultSet.next();
-//            byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//            Blob blobData = Database.createBlob();
-//            blobData.setBytes(1, byteData);
-                //  car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), blobData);
-                car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")));
+            String sql = "SELECT * FROM car WHERE modelCar=? AND brandCar=?";
+            try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, names[1]);
+                pstmt.setString(2, names[0]);
+                ResultSet resultSet = pstmt.executeQuery();
+                if (resultSet.next()) {
+                    return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
+                } else {
+                    WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+                    return null;
+                }
             } catch (SQLException e) {
-                //TODO: Екран за грешка
+                WarningController.openMessageModal("Грешка при търсенето на колата!", "Грешка", MessageType.WARNING);
+                return null;
             }
-            return car;
         } else {
             WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
             return null;
         }
-
     }
+
 
     public static Car getLastCar() {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM car ORDER BY idCar DESC LIMIT 1;");
-
-        Car car = null;
-        try {
-            resultSet.next();
-            //TODO: Проверка за null стойности
-            car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")));
+        String sql = "SELECT * FROM car ORDER BY idCar DESC LIMIT 1";
+        try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet resultSet = pstmt.executeQuery()) {
+            if (resultSet.next()) {
+                return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
+            } else {
+                WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+                return null;
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Грешка при взимане на последната кола от базата данни!", "Неуспешна операция", MessageType.WARNING);
+            return null;
         }
-        return car;
     }
 
+
     public static void updateCar(Car car) {
-        //'
-        Database.execute("UPDATE car SET modelCar = '" + car.getModelCar() + "', brandCar = '" + car.getBrandCar() + "', engineCar = '" + car.getEngineCar() + "', fuelCar = '" + car.getFuelCar() + "', horsepowerCar = " + car.getHorsepowerCar() + "  WHERE idCar =" + car.getIdCar() + ";");
-        //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
+        String sql = "UPDATE car SET modelCar=?, brandCar=?, engineCar=?, fuelCar=?, horsepowerCar=? WHERE idCar=?";
+        try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, car.getModelCar());
+            pstmt.setString(2, car.getBrandCar());
+            pstmt.setString(3, car.getEngineCar());
+            pstmt.setString(4, car.getFuelCar());
+            pstmt.setInt(5, car.getHorsepowerCar());
+            pstmt.setInt(6, car.getIdCar());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при обновяването на колата в базата данни!", "Неуспешна операция", MessageType.WARNING);
+        }
     }
 
     public static void deleteCar(int idCar) {
-        Database.execute("DELETE FROM car WHERE idCar = " + idCar + ";");
-        // DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+        String sql = "DELETE FROM car WHERE idCar=?";
+        try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idCar);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при изтриването на колата от базата данни!", "Неуспешна операция", MessageType.WARNING);
+        }
     }
 
     public static Image getImageCar(Car car) {
         try {
             PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageCar FROM car WHERE (idCar = " + car.getIdCar() + ");");
-            //retrieve.setInt(1, 1);
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
             Blob blob = resultSet.getBlob(1);
@@ -108,11 +129,10 @@ public class CarService {
             } else {
                 return null;
             }
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            WarningController.openMessageModal("Грешка при зареждане на снимката на колата!", "Грешка", MessageType.WARNING);
+            return null;
         }
-
     }
 
     public static PreparedStatement setImageCar() {
@@ -120,7 +140,8 @@ public class CarService {
             PreparedStatement store = Database.getConnection().prepareStatement("UPDATE car SET imageCar = ?  WHERE idCar = ?;");
             return store;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            WarningController.openMessageModal("Грешка при задаване на снимката на колата!", "Грешка", MessageType.WARNING);
+            return null;
         }
 
     }
@@ -130,34 +151,34 @@ public class CarService {
 
         ArrayList<Car> allCars = new ArrayList<>();
         try {
-            while ((resultSet.next())) {
-//                byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//                Blob blobData = Database.createBlob();
-//                blobData.setBytes(1, byteData);
-                //  Car car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), blobData);
-                Car car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")));
+            while (resultSet.next()) {
+                int id = resultSet.getInt("idCar");
+                String model = resultSet.getString("modelCar");
+                String brand = resultSet.getString("brandCar");
+                String engine = resultSet.getString("engineCar");
+                String fuel = resultSet.getString("fuelCar");
+                int horsepower = resultSet.getInt("horsepowerCar");
+                Car car = new Car(id, model, brand, engine, fuel, horsepower);
                 allCars.add(car);
             }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Възникна грешка при извличането на всички коли", "Грешка", MessageType.WARNING);
         }
         return allCars;
     }
 
+
     public static ArrayList<String> getAllCarNames() {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM car;");
-
+        String sql = "SELECT CONCAT(brandCar, ' ', modelCar) AS carName FROM car;";
         ArrayList<String> allCars = new ArrayList<>();
-        try {
-            while ((resultSet.next())) {
-//                byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//                Blob blobData = Database.createBlob();
-//                blobData.setBytes(1, byteData);
-                allCars.add(resultSet.getString("brandCar") + " " + resultSet.getString("modelCar"));
-
+        try (Connection conn = Database.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet resultSet = pstmt.executeQuery()) {
+            while (resultSet.next()) {
+                allCars.add(resultSet.getString("carName"));
             }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Грешка при извличане на имената на колите!", "Грешка", MessageType.WARNING);
         }
         return allCars;
     }

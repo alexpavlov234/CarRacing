@@ -30,7 +30,6 @@ public class LoginService {
 
                     Scene scene = new Scene(fxmlLoader.load());
 
-
                     stage.setTitle("Управление на автомобилни състезания");
                     stage.setScene(scene);
                     stage.show();

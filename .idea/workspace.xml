@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници.">
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/script.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceHasCarAndDriverModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceHasCarAndDriverModalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +195,8 @@
       <workItem from="1676920112292" duration="3469000" />
       <workItem from="1676997842207" duration="15919000" />
       <workItem from="1677349741584" duration="421000" />
-      <workItem from="1677405041050" duration="4661000" />
+      <workItem from="1677405041050" duration="5266000" />
+      <workItem from="1677523579088" duration="3553000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -400,7 +401,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677350145025</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ.">
+      <created>1677412368926</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1677412368926</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,7 +450,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Създаден е прозорец при появата на грешка в системата. Базата данни е сменена с тази на домашния сървър :). Добавен е css файл с дизайн на системата." />
     <MESSAGE value="Ще се насера :)" />
     <MESSAGE value="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни." />
     <MESSAGE value="Още свършена работа :)." />
@@ -467,7 +474,8 @@
     <MESSAGE value="Вече се зареждат почти като хората точките в прозореца за добавяне на точки." />
     <MESSAGE value="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки." />
     <MESSAGE value="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници." />
-    <option name="LAST_COMMIT_MESSAGE" value="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници." />
+    <MESSAGE value="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ." />
+    <option name="LAST_COMMIT_MESSAGE" value="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -483,16 +491,6 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java</url>
           <line>151</line>
           <option name="timeStamp" value="50" />
@@ -503,13 +501,8 @@
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java</url>
-          <line>117</line>
+          <line>137</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -534,7 +527,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java</url>
-          <line>35</line>
+          <line>34</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -551,16 +544,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java</url>
           <line>254</line>
           <option name="timeStamp" value="122" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java</url>
-          <line>80</line>
-          <option name="timeStamp" value="130" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java</url>

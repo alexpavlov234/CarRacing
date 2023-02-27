@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class TrackService {
     public static void addTrack(Track track) {
         Database.execute("INSERT INTO track (nameTrack, lengthTrack, locationTrack) VALUES ('" + track.getNameTrack() + "'," + track.getLengthTrack() + ",'" + track.getLocationTrack() + "');");
-        //INSERT INTO Track (nameTrack, lengthTrack, locationTrack) VALUES ('Monte Carlo',456,'Dupnica');
+
     }
     public static PreparedStatement setImageTrack() {
         try {
@@ -30,7 +30,6 @@ public class TrackService {
     public static Image getImageTrack(Track track) {
         try {
             PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageTrack FROM track WHERE (idTrack = " + track.getIdTrack() + ");");
-            //retrieve.setInt(1, 1);
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
             Blob blob = resultSet.getBlob(1);
@@ -49,13 +48,12 @@ public class TrackService {
     }
     public static Track getTrack(int idTrack) {
         ResultSet resultSet = Database.executeQuery("SELECT * FROM track WHERE (idTrack = " + idTrack + ");");
-        //INSERT INTO Track (nameTrack, lengthTrack, locationTrack) VALUES ('Monte Carlo',456,'Dupnica');
-        Track track = null;
+         Track track = null;
         try {
             resultSet.next();
             track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+
         }
 
         return track;
@@ -64,34 +62,24 @@ public class TrackService {
     public static Track getTrack(String name) {
 
         ResultSet resultSet = Database.executeQuery("SELECT * FROM track WHERE (nameTrack = '" + name + "');");
-        //INSERT INTO Car (nameCar, lengthCar, locationCar) VALUES ('Monte Carlo',456,'Dupnica');
+
         Track track = null;
         try {
             resultSet.next();
-//            byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//            Blob blobData = Database.createBlob();
-//            blobData.setBytes(1, byteData);
-            //  car = new Car(Integer.parseInt(resultSet.getString("idCar")), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), Integer.parseInt(resultSet.getString("horsepowerCar")), blobData);
-            track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
+        track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
         } catch (SQLException e) {
             //TODO: Екран за грешка
              WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
         }
         return track;
 
-
-
-
     }
     public static void updateTrack(Track track) {
-        //'
         Database.execute("UPDATE track SET nameTrack = '" + track.getNameTrack() + "', lengthTrack = " + track.getLengthTrack() + ", locationTrack ='" + track.getLocationTrack() + "'  WHERE idTrack =" + track.getIdTrack() + ";");
-        //INSERT INTO Track (nameTrack, lengthTrack, locationTrack) VALUES ('Monte Carlo',456,'Dupnica');
     }
 
     public static void deleteTrack(int idTrack) {
         Database.execute("DELETE FROM track WHERE idTrack = " + idTrack + ";");
-        // DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
     }
 
     public static ArrayList<Track> getAllTrack() {
@@ -104,7 +92,7 @@ public class TrackService {
                 allTracks.add(track);
             }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+
         }
         return allTracks;
     }
@@ -117,7 +105,7 @@ public class TrackService {
             resultSet.next();
             track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+
         }
 
         return track;
@@ -130,9 +118,7 @@ public class TrackService {
         ArrayList<String> allTracks = new ArrayList<>();
         try {
             while ((resultSet.next())) {
-//                byte[] byteData = resultSet.getString("imageCar").getBytes(StandardCharsets.UTF_8);//Better to specify encoding
-//                Blob blobData = Database.createBlob();
-//                blobData.setBytes(1, byteData);
+
                 allTracks.add(resultSet.getString("nameTrack"));
 
             }
