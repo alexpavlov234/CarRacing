@@ -242,9 +242,9 @@ public class RaceModalPointsController {
         firstName.setCellFactory(cellFactoryFirstName);
         lastName.setCellFactory(cellFactoryLastName);
         points.setCellFactory(cellFactoryPoints);
-        racesCombobox.getItems().removeAll();
-        racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
-
+        if(racesCombobox.getItems().size() == 0) {
+            racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
+        }
     }
 
     @FXML
