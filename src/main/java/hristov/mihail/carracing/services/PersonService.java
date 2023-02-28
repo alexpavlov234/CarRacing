@@ -166,7 +166,7 @@ public class PersonService {
                 allPersons.add(person);
             }
         } catch (SQLException e) {
-            WarningController.openMessageModal("Възникна грешка при извличането на всички хора", "Грешка", MessageType.WARNING);
+            WarningController.openMessageModal("Възникна грешка при извличането на всички хора!", "Грешка", MessageType.WARNING);
         }
         return allPersons;
     }
@@ -196,7 +196,7 @@ public class PersonService {
                 }
             }
         } catch (SQLException e) {
-            WarningController.openMessageModal("Възникна грешка при извличането на всички хора", "Грешка", MessageType.WARNING);
+            WarningController.openMessageModal("Възникна грешка при извличането на всички хора!", "Грешка", MessageType.WARNING);
         }
         return allPeople;
     }

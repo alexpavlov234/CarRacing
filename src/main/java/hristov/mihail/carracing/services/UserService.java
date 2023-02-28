@@ -128,7 +128,7 @@ public class UserService {
             }
 
         } catch (SQLException e) {
-            WarningController.openMessageModal("Възникна грешка при извличането на всички потребители", "Грешка", MessageType.WARNING);
+            WarningController.openMessageModal("Възникна грешка при извличането на всички потребители!", "Грешка", MessageType.WARNING);
         }
 
         return allUsers;

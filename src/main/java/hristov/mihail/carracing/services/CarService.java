@@ -162,7 +162,7 @@ public class CarService {
                 allCars.add(car);
             }
         } catch (SQLException e) {
-            WarningController.openMessageModal("Възникна грешка при извличането на всички коли", "Грешка", MessageType.WARNING);
+            WarningController.openMessageModal("Възникна грешка при извличането на всички коли!", "Грешка", MessageType.WARNING);
         }
         return allCars;
     }

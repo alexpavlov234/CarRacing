@@ -1,5 +1,7 @@
 package hristov.mihail.carracing.services;
 
+import hristov.mihail.carracing.controllers.MessageType;
+import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.Race;
@@ -11,149 +13,191 @@ import java.util.ArrayList;
 
 public class RaceHasCarAndDriverService {
     public static void addRaceHasCarAndDriver(RaceHasCarAndDriver raceHasCarAndDriver) {
-        Database.execute("INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES (" + raceHasCarAndDriver.getIdRace() + "," + raceHasCarAndDriver.getIdCar() + "," + raceHasCarAndDriver.getIdDriver() + "," + raceHasCarAndDriver.getPoints() + ");");
-        //INSERT INTO RaceHasCarAndDriver (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
-    }
-
-    public static RaceHasCarAndDriver getRaceHasCarAndDriver(int idRaceHasCarAndDriver) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver WHERE (id = " + idRaceHasCarAndDriver + ");");
-
-        //INSERT INTO RaceHasCarAndDriver (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
-        RaceHasCarAndDriver raceHasCarAndDriver = null;
-        try {
-            resultSet.next();
-            raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
+        String sql = "INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, raceHasCarAndDriver.getIdRace());
+            statement.setInt(2, raceHasCarAndDriver.getIdCar());
+            statement.setInt(3, raceHasCarAndDriver.getIdDriver());
+            statement.setInt(4, raceHasCarAndDriver.getPoints());
+            statement.executeUpdate();
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Грешка при добавянето на участие в базата данни!", "Неуспешна операция", MessageType.WARNING);
+        }
+    }
+    public static RaceHasCarAndDriver getRaceHasCarAndDriver(int idRaceHasCarAndDriver) {
+        String sql = "SELECT * FROM race_has_car_and_driver WHERE id = ?";
+        RaceHasCarAndDriver raceHasCarAndDriver = null;
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, idRaceHasCarAndDriver);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                raceHasCarAndDriver = new RaceHasCarAndDriver(
+                        Integer.parseInt(resultSet.getString("id")),
+                        Integer.parseInt(resultSet.getString("idRace")),
+                        Integer.parseInt(resultSet.getString("idCar")),
+                        Integer.parseInt(resultSet.getString("idDriver")),
+                        Integer.parseInt(resultSet.getString("points"))
+                );
+            }
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Не е намерено такова участие!", "Несъществуващо участие", MessageType.WARNING);
         }
         return raceHasCarAndDriver;
     }
-
     public static boolean isDriverParticipatingInRace(int idRace, int idDriver) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver WHERE (idRace = " + idRace + " AND idDriver =" + idDriver + ");");
+        String sql = "SELECT * FROM race_has_car_and_driver WHERE idRace = ? AND idDriver = ?";
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, idRace);
+            statement.setInt(2, idDriver);
+            ResultSet resultSet = statement.executeQuery();
 
-        //INSERT INTO RaceHasCarAndDriver (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
-        RaceHasCarAndDriver raceHasCarAndDriver = null;
-        try {
-            resultSet.next();
-            raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
+            RaceHasCarAndDriver raceHasCarAndDriver = null;
+            if (resultSet.next()) {
+                raceHasCarAndDriver = new RaceHasCarAndDriver(
+                        Integer.parseInt(resultSet.getString("id")),
+                        Integer.parseInt(resultSet.getString("idRace")),
+                        Integer.parseInt(resultSet.getString("idCar")),
+                        Integer.parseInt(resultSet.getString("idDriver")),
+                        Integer.parseInt(resultSet.getString("points")));
+            }
 
-            if (raceHasCarAndDriver.getIdRace() > 0) {
+            if (raceHasCarAndDriver != null && raceHasCarAndDriver.getIdRace() > 0) {
                 return true;
             } else {
                 return false;
             }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Грешка при търсенето на участник в участие!", "Грешка", MessageType.WARNING);
+            return false;
         }
-        return false;
     }
-
     public static void updateRaceHasCarAndDriver(RaceHasCarAndDriver raceHasCarAndDriver) {
-        //'
-        Database.execute("UPDATE race_has_car_and_driver SET idRace = " + raceHasCarAndDriver.getIdRace() + ", idCar = " + raceHasCarAndDriver.getIdCar() + ", idDriver = " + raceHasCarAndDriver.getIdDriver() + ", points = " + raceHasCarAndDriver.getPoints() + " WHERE id =  " + raceHasCarAndDriver.getId() + ";");
-        //INSERT INTO RaceHasCarAndDriver (nameRace, lengthRace, locationRace) VALUES ('Monte Racelo',456,'Dupnica');
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("UPDATE race_has_car_and_driver SET idRace = ?, idCar = ?, idDriver = ?, points = ? WHERE id = ?")) {
+            statement.setInt(1, raceHasCarAndDriver.getIdRace());
+            statement.setInt(2, raceHasCarAndDriver.getIdCar());
+            statement.setInt(3, raceHasCarAndDriver.getIdDriver());
+            statement.setInt(4, raceHasCarAndDriver.getPoints());
+            statement.setInt(5, raceHasCarAndDriver.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при обновяването на участие в базата данни!", "Неуспешна операция", MessageType.WARNING);
+        }
     }
 
     public static void deleteRaceHasCarAndDriver(int idRaceHasCarAndDriver) {
-        Database.execute("DELETE FROM race_has_car_and_driver WHERE id = " + idRaceHasCarAndDriver + ";");
-        // DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("DELETE FROM race_has_car_and_driver WHERE id = ?")) {
+            statement.setInt(1, idRaceHasCarAndDriver);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при изтриването на участие от базата данни!", "Неуспешна операция", MessageType.WARNING);
+        }
     }
 
     public static ArrayList<RaceHasCarAndDriver> getAllRaceHasCarAndDriver() {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver;");
-
         ArrayList<RaceHasCarAndDriver> allRaceHasCarAndDriver = new ArrayList<>();
-        try {
-            while ((resultSet.next())) {
-                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM race_has_car_and_driver")) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(
+                        Integer.parseInt(resultSet.getString("id")),
+                        Integer.parseInt(resultSet.getString("idRace")),
+                        Integer.parseInt(resultSet.getString("idCar")),
+                        Integer.parseInt(resultSet.getString("idDriver")),
+                        Integer.parseInt(resultSet.getString("points"))
+                );
                 allRaceHasCarAndDriver.add(raceHasCarAndDriver);
             }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Възникна грешка при извличането на всички участия!", "Грешка", MessageType.WARNING);
         }
         return allRaceHasCarAndDriver;
     }
-
     public static ArrayList<RaceHasCarAndDriver> getAllRaceHasCarAndDriver(int idRace) {
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM race_has_car_and_driver;");
-
         ArrayList<RaceHasCarAndDriver> allRaceHasCarAndDriver = new ArrayList<>();
-        try {
-            while ((resultSet.next())) {
-
-                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(Integer.parseInt(resultSet.getString("id")), Integer.parseInt(resultSet.getString("idRace")), Integer.parseInt(resultSet.getString("idCar")), Integer.parseInt(resultSet.getString("idDriver")), Integer.parseInt(resultSet.getString("points")));
-                if (raceHasCarAndDriver.getIdRace() == idRace) {
-                    allRaceHasCarAndDriver.add(raceHasCarAndDriver);
-                }
+        String sql = "SELECT * FROM race_has_car_and_driver WHERE idRace = ?";
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, idRace);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(
+                        Integer.parseInt(resultSet.getString("id")),
+                        Integer.parseInt(resultSet.getString("idRace")),
+                        Integer.parseInt(resultSet.getString("idCar")),
+                        Integer.parseInt(resultSet.getString("idDriver")),
+                        Integer.parseInt(resultSet.getString("points"))
+                );
+                allRaceHasCarAndDriver.add(raceHasCarAndDriver);
             }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Възникна грешка при извличането на всички участия!", "Грешка", MessageType.WARNING);
         }
         return allRaceHasCarAndDriver;
     }
-
     public static int getNumberParticipants(Race race) {
-        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = " + race.getIdRace() + ", 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
         int number = 0;
-        try {
-            resultSet.next();
-            number = Integer.parseInt(resultSet.getString("Number"));
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(
+                "SELECT COUNT(IF(idRace = ?, 1, NULL)) AS 'Number' FROM race_has_car_and_driver")) {
+            statement.setInt(1, race.getIdRace());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                number = resultSet.getInt("Number");
+            }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
+            WarningController.openMessageModal("Възникна грешка при извличането на броя на участниците!", "Грешка", MessageType.WARNING);
         }
         return number;
     }
 
     public static boolean isParticipatingInRace(int idRace, int idPerson) {
-        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = " + idRace + " AND idDriver = " + idPerson + " , 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
-        int number;
-        try {
-            resultSet.next();
-            number = Integer.parseInt(resultSet.getString("Number"));
-            return number == 1;
+        boolean isParticipating = false;
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(
+                "SELECT COUNT(IF(idRace = ? AND idDriver = ?, 1, NULL)) AS 'Number' FROM race_has_car_and_driver")) {
+            statement.setInt(1, idRace);
+            statement.setInt(2, idPerson);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int number = resultSet.getInt("Number");
+                isParticipating = number == 1;
+            }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
-            return false;
+            WarningController.openMessageModal("Грешка при търсенето на участник в състезание!", "Грешка", MessageType.WARNING);
         }
+        return isParticipating;
     }
 
     public static boolean areTherePlacesAvailable(Race race) {
-        ResultSet resultSet = Database.executeQuery("SELECT COUNT(IF(idRace = " + race.getIdRace() + ", 1, NULL)) AS 'Number' FROM race_has_car_and_driver;");
-        int number;
-        try {
-            resultSet.next();
-            number = Integer.parseInt(resultSet.getString("Number"));
-
-            return number <= race.getParticipantsRace();
+        boolean arePlacesAvailable = false;
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(
+                "SELECT COUNT(IF(idRace = ?, 1, NULL)) AS 'Number' FROM race_has_car_and_driver")) {
+            statement.setInt(1, race.getIdRace());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int number = resultSet.getInt("Number");
+                arePlacesAvailable = number < race.getParticipantsRace();
+            }
         } catch (SQLException e) {
-            //TODO: Екран за грешка
-            return false;
+            WarningController.openMessageModal("Грешка при търсенето на свободни места в състезанието!", "Грешка", MessageType.WARNING);
         }
-
-
+        return arePlacesAvailable;
     }
-
     public static void updateRaceHasCarAndDriverList(ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList) {
-        // Clear the existing data in the race_has_car_and_driver table
-        String clearSql = "DELETE FROM race_has_car_and_driver WHERE idRace =" + raceHasCarAndDriversObservableList.get(0).getIdRace();
-        Database.execute(clearSql);
-
-        // Insert the updated data into the race_has_car_and_driver table
-        String insertSql = "INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) " +
-                "VALUES (?, ?, ?, ?)";
+        String insertSql = "INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(insertSql)) {
+            conn.setAutoCommit(false); // Disable auto-commit to improve performance
             for (RaceHasCarAndDriver r : raceHasCarAndDriversObservableList) {
                 stmt.setInt(1, r.getIdRace());
                 stmt.setInt(2, r.getIdCar());
                 stmt.setInt(3, r.getIdDriver());
                 stmt.setInt(4, r.getPoints());
-                stmt.executeUpdate();
+                stmt.addBatch(); // Add the prepared statement to a batch
             }
+            stmt.executeBatch(); // Execute the batch of prepared statements
+            conn.commit(); // Commit the changes to the database
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            WarningController.openMessageModal("Грешка при актуализирането на точките!", "Грешка", MessageType.WARNING);
         }
     }
 
 }
+

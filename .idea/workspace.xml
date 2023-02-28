@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ.">
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService.">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" afterDir="false" />
     </list>
@@ -196,7 +198,8 @@
       <workItem from="1676997842207" duration="15919000" />
       <workItem from="1677349741584" duration="421000" />
       <workItem from="1677405041050" duration="5266000" />
-      <workItem from="1677523579088" duration="3553000" />
+      <workItem from="1677523579088" duration="4099000" />
+      <workItem from="1677610852169" duration="1881000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -408,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677412368926</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService.">
+      <created>1677527462728</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1677527462728</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +460,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Ще се насера :)" />
     <MESSAGE value="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни." />
     <MESSAGE value="Още свършена работа :)." />
     <MESSAGE value="Промени в CarsController.&#10;1. Проверка дали не са въведени празни данни. &#10;2. Поправен е бъг със качването на празна снимка. &#10;3. Направена е функционалност при натискане на бутон Enter да се добавя/променя кола.&#10;4. Направена проверка за коректен двигател. &#10;5. Дизайнът на таблицата е променен." />
@@ -475,7 +484,8 @@
     <MESSAGE value="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки." />
     <MESSAGE value="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници." />
     <MESSAGE value="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ." />
-    <option name="LAST_COMMIT_MESSAGE" value="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ." />
+    <MESSAGE value="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService." />
+    <option name="LAST_COMMIT_MESSAGE" value="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -527,7 +537,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java</url>
-          <line>34</line>
+          <line>41</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
