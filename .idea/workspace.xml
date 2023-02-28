@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Коригирани са всички service-и.">
+      <change afterPath="$PROJECT_DIR$/src/test/java/CarServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +21,8 @@
       <list>
         <option value="FxmlFile" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -52,35 +49,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;SQL Inserts&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;SQL Inserts&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/apavlov/IdeaProjects/CarRacing/src/main/resources/hristov/mihail/carracing&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5046083&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "SQL Inserts",
+    "database.data.extractors.current.id": "SQL Inserts",
+    "last_opened_file_path": "C:/Users/apavlov/IdeaProjects/CarRacing/src/main/resources/hristov/mihail/carracing",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.5046083",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ],
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/&quot;: [
-      &quot;MySQL&quot;
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
+      "MySQL"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\apavlov\IdeaProjects\CarRacing\src\main\resources\hristov\mihail\carracing" />
@@ -94,12 +91,15 @@
       <recent name="C:\Users\Александър\IdeaProjects\CarRacing\src\main\resources" />
       <recent name="C:\Users\alexp\Documents\Projects\CarRacing\src\main\java\hristov\mihail\carracing\images" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="hristov.mihail.carracing.controllers" />
       <recent name="hristov.mihail.carracing.services" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.hristov.mihail.carracing.HelloApplication">
+  <component name="RunManager" selected="JUnit.CarServiceTest">
     <configuration name="Test" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hristov.mihail.carracing.Test" />
       <module name="CarRacing" />
@@ -131,8 +131,29 @@
       <script-mode>FILE</script-mode>
       <method v="2" />
     </configuration>
+    <configuration name="CarServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CarRacing" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CarServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarServiceTest.testAddCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CarRacing" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CarServiceTest" />
+      <option name="METHOD_NAME" value="testAddCar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CarServiceTest" />
+        <item itemvalue="JUnit.CarServiceTest.testAddCar" />
         <item itemvalue="Application.hristov.mihail.carracing.HelloApplication" />
         <item itemvalue="Database Script.script.sql" />
       </list>
@@ -199,7 +220,7 @@
       <workItem from="1677349741584" duration="421000" />
       <workItem from="1677405041050" duration="5266000" />
       <workItem from="1677523579088" duration="4099000" />
-      <workItem from="1677610852169" duration="1881000" />
+      <workItem from="1677610852169" duration="5100000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -418,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677527462728</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Коригирани са всички service-и.">
+      <created>1677612926223</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1677612926223</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +488,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Напълно готова система за вход!&#10;1. Имената трябва да са на кирилица, паролите трябва да съвпадат и да са валидни, както и имейлите.&#10;2. Направени са съобщения за невалидно валидиране.&#10;3. При натискане на бутона Enter се осъществява регистрация/вход.&#10;4. Всяка грешка се управлява като хората.&#10;5. Екранът за грешки е променен.&#10;6. Актуализиран е скриптът на базата данни.&#10;7. Добавена е връзка към домашния сървър на базата данни." />
     <MESSAGE value="Още свършена работа :)." />
     <MESSAGE value="Промени в CarsController.&#10;1. Проверка дали не са въведени празни данни. &#10;2. Поправен е бъг със качването на празна снимка. &#10;3. Направена е функционалност при натискане на бутон Enter да се добавя/променя кола.&#10;4. Направена проверка за коректен двигател. &#10;5. Дизайнът на таблицата е променен." />
     <MESSAGE value="Ох котьо..... (Надвишавам часа си за лягане не се чуди)&#10;1. Вече има два начални екрана, в зависимост от това дали си админ или не (можем да го направим един).&#10;2. Добавена е проверка какво си.&#10;3. Добавен е enum за това какъв тип прозорец за съобщение си отворил.&#10;4. Коригиран PersonService (всеки потребител трябва да има кола).&#10;5. Началният екран е преработен. :)" />
@@ -485,7 +512,8 @@
     <MESSAGE value="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници." />
     <MESSAGE value="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ." />
     <MESSAGE value="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService." />
-    <option name="LAST_COMMIT_MESSAGE" value="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService." />
+    <MESSAGE value="Коригирани са всички service-и." />
+    <option name="LAST_COMMIT_MESSAGE" value="Коригирани са всички service-и." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -512,7 +540,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java</url>
-          <line>137</line>
+          <line>138</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -554,6 +582,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java</url>
           <line>254</line>
           <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/CarServiceTest.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java</url>
