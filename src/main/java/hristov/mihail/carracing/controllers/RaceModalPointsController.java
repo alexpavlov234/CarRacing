@@ -81,7 +81,7 @@ public class RaceModalPointsController {
                 WarningController.openMessageModal("Вие успешно въведохте точките на всички състезатели!", "Успешно въведени точки", MessageType.SUCCESS);
 
             } else {
-                WarningController.openMessageModal("Сумата от точките на всички състезатели трябва да бъде не по-голяма от " + race.getPointsRace() + " !", "Невалиден брой точки", MessageType.WARNING);
+                WarningController.openMessageModal("Сумата от точките на всички състезатели трябва да бъде не по-голяма от " + race.getPointsRace() + "!", "Невалиден брой точки", MessageType.WARNING);
             }
         }
         this.initialize();

@@ -15,9 +15,9 @@
       </Label>
       <TableView fx:id="table" layoutX="14.0" layoutY="55.0" prefHeight="373.0" prefWidth="638.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0">
         <columns>
-          <TableColumn fx:id="firstName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Име" />
-          <TableColumn fx:id="lastName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Фамилия" />
-            <TableColumn fx:id="nationality" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER-LEFT;" styleClass="table-colum" text="Националност" />
+          <TableColumn fx:id="firstName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Име" />
+          <TableColumn fx:id="lastName" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Фамилия" />
+            <TableColumn fx:id="nationality" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Националност" />
             <TableColumn fx:id="points" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Точки" />
         </columns>
       </TableView>
