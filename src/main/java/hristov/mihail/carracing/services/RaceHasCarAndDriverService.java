@@ -181,19 +181,43 @@ public class RaceHasCarAndDriverService {
         return arePlacesAvailable;
     }
     public static void updateRaceHasCarAndDriverList(ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList) {
+
+        String updateSql = "UPDATE race_has_car_and_driver SET points = ? WHERE idRace = ? AND idCar = ? AND idDriver = ?";
         String insertSql = "INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES (?, ?, ?, ?)";
-        try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(insertSql)) {
+
+        try (Connection conn = Database.getConnection()) {
             conn.setAutoCommit(false); // Disable auto-commit to improve performance
-            for (RaceHasCarAndDriver r : raceHasCarAndDriversObservableList) {
-                stmt.setInt(1, r.getIdRace());
-                stmt.setInt(2, r.getIdCar());
-                stmt.setInt(3, r.getIdDriver());
-                stmt.setInt(4, r.getPoints());
-                stmt.addBatch(); // Add the prepared statement to a batch
+
+            // Insert or update the race results
+            try (PreparedStatement updateStmt = conn.prepareStatement(updateSql);
+                 PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+
+                for (RaceHasCarAndDriver r : raceHasCarAndDriversObservableList) {
+                    updateStmt.setInt(1, r.getPoints());
+                    updateStmt.setInt(2, r.getIdRace());
+                    updateStmt.setInt(3, r.getIdCar());
+                    updateStmt.setInt(4, r.getIdDriver());
+
+                    int updatedRows = updateStmt.executeUpdate();
+
+                    if (updatedRows == 0) {
+                        // No rows were updated, so we need to insert a new record
+                        insertStmt.setInt(1, r.getIdRace());
+                        insertStmt.setInt(2, r.getIdCar());
+                        insertStmt.setInt(3, r.getIdDriver());
+                        insertStmt.setInt(4, r.getPoints());
+                        insertStmt.addBatch(); // Add the prepared statement to a batch
+                    }
+                }
+
+                // Execute the batch of prepared statements for inserting new records
+                insertStmt.executeBatch();
+
+                conn.commit(); // Commit the changes to the database
+            } catch (SQLException e) {
+                conn.rollback(); // Rollback the changes if an exception occurs
+                WarningController.openMessageModal("Грешка при актуализирането на точките!", "Грешка", MessageType.WARNING);
             }
-            stmt.executeBatch(); // Execute the batch of prepared statements
-            conn.commit(); // Commit the changes to the database
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при актуализирането на точките!", "Грешка", MessageType.WARNING);
         }
