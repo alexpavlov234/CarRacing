@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="245.0" prefWidth="389.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RaceHasCarAndDriverModalController">
+<AnchorPane prefHeight="245.0" prefWidth="389.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RaceHasCarAndDriverModalController">
    <children>
       <Label fx:id="labelUserName" layoutX="14.0" layoutY="19.0" styleClass="labelWhite" text="Участие в състезание" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
          <font>
@@ -34,7 +34,7 @@
                         <Font name="Segoe UI" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="driverCombobox" prefHeight="27.0" prefWidth="238.0" styleClass="combobox" />
+                  <ComboBox fx:id="driverCombobox" prefHeight="27.0" prefWidth="240.0" styleClass="combobox" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="355.0" spacing="10.0">

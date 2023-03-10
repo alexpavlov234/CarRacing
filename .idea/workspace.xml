@@ -4,29 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Добавена е икона на приложението.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceHasCarAndDriverModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceHasCarAndDriverModalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RankingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RankingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TracksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TracksController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/WarningController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/WarningController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/RaceHasCarAndDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/RaceHasCarAndDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/TrackService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/UserService.java" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код.">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/cars.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/cars.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/people.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/people.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-points-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-points-modal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races-user.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races-user.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/tracks.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/tracks.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/users.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -494,7 +480,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678487156524</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код.">
+      <created>1678488009302</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1678488009302</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +529,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Отстранение бъгове и писани коментари." />
     <MESSAGE value="Оправен е бъг при изтриването на кола." />
     <MESSAGE value="Създаден е екран за потребители." />
     <MESSAGE value="Създаден е екран за класация." />
@@ -561,7 +553,8 @@
     <MESSAGE value="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител." />
     <MESSAGE value="Поправени са грешки и потребителите могат да виждат само своите състезания." />
     <MESSAGE value="Добавена е икона на приложението." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавена е икона на приложението." />
+    <MESSAGE value="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код." />
+    <option name="LAST_COMMIT_MESSAGE" value="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

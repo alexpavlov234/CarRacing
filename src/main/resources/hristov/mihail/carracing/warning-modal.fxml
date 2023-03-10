@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="211.0" prefWidth="497.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.WarningController">
+<AnchorPane prefHeight="211.0" prefWidth="497.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.WarningController">
    <children>
       <Label fx:id="labelCarName" layoutX="14.0" layoutY="19.0" styleClass="labelWhite" text="Грешка" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Segoe UI" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="errorMessage" layoutX="182.0" layoutY="70.0" prefHeight="70.0" prefWidth="236.0" styleClass="labelWhite" text="Не може да бъде промена стойността на колата!" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="70.6" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="70.0">
+      <Label fx:id="errorMessage" layoutX="182.0" layoutY="70.0" prefHeight="70.0" prefWidth="236.0" styleClass="labelWhite" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="70.6" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>

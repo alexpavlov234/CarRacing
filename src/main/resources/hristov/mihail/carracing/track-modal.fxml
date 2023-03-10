@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="264.0" prefWidth="683.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.TrackModalController">
+<AnchorPane prefHeight="264.0" prefWidth="683.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.TrackModalController">
    <children>
       <Label fx:id="labelTrackName" layoutX="14.0" layoutY="19.0" styleClass="labelWhite" text="Писта" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
          <font>
@@ -17,7 +17,7 @@
          </font>
       </Label>
       <ImageView fx:id="trackImageView" fitHeight="198.0" fitWidth="292.0" layoutX="249.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="image" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-      <VBox layoutX="14.0" layoutY="87.0" prefHeight="95.0" prefWidth="310.0" spacing="5.0" AnchorPane.topAnchor="87.0">
+      <VBox layoutX="14.0" layoutY="75.0" prefHeight="95.0" prefWidth="310.0" spacing="5.0" AnchorPane.topAnchor="75.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="435.0" spacing="10.0">
                <children>
