@@ -13,10 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -59,7 +56,7 @@ public class UsersController {
         assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'cars.fxml'.";
         email.setCellValueFactory(new PropertyValueFactory<User, String>("emailUser"));
         typeOfUser.setCellValueFactory(new PropertyValueFactory<User, String>("typeUser"));
-
+        table.setPlaceholder(new Label("Няма записи в таблицата"));
         // Проверяваме дали логнат потребител е администратор.
         if (LoginService.isLoggedUserAdmin()) {
             email.maxWidthProperty().bind(table.widthProperty().divide(3));

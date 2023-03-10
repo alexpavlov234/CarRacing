@@ -16,10 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -94,7 +91,8 @@ public class RacesController {
         race.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idRace"));
         car.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idCar"));
         driver.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idDriver"));
-
+        table.setPlaceholder(new Label("Няма записи в таблицата"));
+        table1.setPlaceholder(new Label("Няма записи в таблицата"));
 
         // Проверяваме дали логнат потребител е администратор.
 

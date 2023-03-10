@@ -98,7 +98,7 @@ public class RaceModalPointsController {
         assert racesCombobox != null : "fx:id=\"racesCombobox\" was not injected: check your FXML file 'race-points-modal.fxml'.";
         assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'race-points-modal.fxml'.";
         car.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idCar"));
-
+        table.setPlaceholder(new Label("Няма записи в таблицата"));
 
         firstName.maxWidthProperty().bind(table.widthProperty().divide(4));
         firstName.minWidthProperty().bind(table.widthProperty().divide(4));

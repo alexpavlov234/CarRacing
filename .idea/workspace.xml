@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Добавена е поддръжка за тестване на service-и, но не е коректен методът за тестване.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/PeopleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/PeopleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/user-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/user-modal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -455,7 +458,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677617113715</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител.">
+      <created>1678482865263</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1678482865263</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +507,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Промени в CarsController.&#10;1. Проверка дали не са въведени празни данни. &#10;2. Поправен е бъг със качването на празна снимка. &#10;3. Направена е функционалност при натискане на бутон Enter да се добавя/променя кола.&#10;4. Направена проверка за коректен двигател. &#10;5. Дизайнът на таблицата е променен." />
     <MESSAGE value="Ох котьо..... (Надвишавам часа си за лягане не се чуди)&#10;1. Вече има два начални екрана, в зависимост от това дали си админ или не (можем да го направим един).&#10;2. Добавена е проверка какво си.&#10;3. Добавен е enum за това какъв тип прозорец за съобщение си отворил.&#10;4. Коригиран PersonService (всеки потребител трябва да има кола).&#10;5. Началният екран е преработен. :)" />
     <MESSAGE value="Създаден е екран за пистите :), ама не е готов." />
     <MESSAGE value="Отстранение бъгове и писани коментари." />
@@ -522,7 +531,8 @@
     <MESSAGE value="Пренаписани са следните service-и: CarService, LoginService, PersonService, UserService." />
     <MESSAGE value="Коригирани са всички service-и." />
     <MESSAGE value="Добавена е поддръжка за тестване на service-и, но не е коректен методът за тестване." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавена е поддръжка за тестване на service-и, но не е коректен методът за тестване." />
+    <MESSAGE value="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител." />
+    <option name="LAST_COMMIT_MESSAGE" value="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -603,14 +613,14 @@
           <option name="timeStamp" value="136" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/UserModalController.java</url>
-          <line>327</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java</url>
           <line>233</line>
           <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java</url>
+          <line>375</line>
+          <option name="timeStamp" value="140" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java</url>
@@ -650,7 +660,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java</url>
-          <line>487</line>
+          <line>485</line>
           <properties class="hristov.mihail.carracing.controllers.RacesController" method="addRacePoints">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

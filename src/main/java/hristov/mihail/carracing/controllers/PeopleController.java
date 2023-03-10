@@ -13,10 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -65,6 +62,7 @@ public class PeopleController {
         lastName.setCellValueFactory(new PropertyValueFactory<Person, String>("lastNamePerson"));
         nationality.setCellValueFactory(new PropertyValueFactory<Person, String>("nationalityPerson"));
         points.setCellValueFactory(new PropertyValueFactory<Person, String>("pointsPerson"));
+        table.setPlaceholder(new Label("Няма записи в таблицата"));
         // Проверяваме дали логнат потребител е администратор.
 
         firstName.maxWidthProperty().bind(table.widthProperty().divide(5));

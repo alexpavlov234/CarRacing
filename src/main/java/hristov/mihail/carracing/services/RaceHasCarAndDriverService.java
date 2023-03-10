@@ -133,6 +133,28 @@ public class RaceHasCarAndDriverService {
         }
         return allRaceHasCarAndDriver;
     }
+
+    public static ArrayList<RaceHasCarAndDriver> getAllRaceHasCarAndDriverFromPerson(int idPerson) {
+        ArrayList<RaceHasCarAndDriver> allRaceHasCarAndDriver = new ArrayList<>();
+        String sql = "SELECT * FROM race_has_car_and_driver WHERE idDriver = ?";
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, idPerson);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(
+                        Integer.parseInt(resultSet.getString("id")),
+                        Integer.parseInt(resultSet.getString("idRace")),
+                        Integer.parseInt(resultSet.getString("idCar")),
+                        Integer.parseInt(resultSet.getString("idDriver")),
+                        Integer.parseInt(resultSet.getString("points"))
+                );
+                allRaceHasCarAndDriver.add(raceHasCarAndDriver);
+            }
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Възникна грешка при извличането на всички участия!", "Грешка", MessageType.WARNING);
+        }
+        return allRaceHasCarAndDriver;
+    }
     public static int getNumberParticipants(Race race) {
         int number = 0;
         try (PreparedStatement statement = Database.getConnection().prepareStatement(

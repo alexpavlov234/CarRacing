@@ -14,10 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -60,7 +57,10 @@ public class CarsController {
         assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'cars.fxml'.";
         brand.setCellValueFactory(new PropertyValueFactory<Car, String>("brandCar"));
         model.setCellValueFactory(new PropertyValueFactory<Car, String>("modelCar"));
+
+        table.setPlaceholder(new Label("Няма записи в таблицата"));
         // Проверяваме дали логнат потребител е администратор.
+
         if (LoginService.isLoggedUserAdmin()) {
             brand.maxWidthProperty().bind(table.widthProperty().divide(3));
             model.maxWidthProperty().bind(table.widthProperty().divide(3));

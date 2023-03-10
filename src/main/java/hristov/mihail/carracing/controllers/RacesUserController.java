@@ -3,6 +3,7 @@ package hristov.mihail.carracing.controllers;
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
+import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -27,7 +25,7 @@ import java.util.ResourceBundle;
 public class RacesUserController {
 
     ObservableList<Race> raceObservableList = FXCollections.observableList(RaceService.getAllRace());
-    ObservableList<RaceHasCarAndDriver> raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
+    ObservableList<RaceHasCarAndDriver> raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriverFromPerson(LoginService.getLoggedUser().getIdUser()));
 
     @FXML
     private ResourceBundle resources;
@@ -85,7 +83,8 @@ public class RacesUserController {
         car.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idCar"));
         driver.setCellValueFactory(new PropertyValueFactory<RaceHasCarAndDriver, String>("idDriver"));
 
-
+        table.setPlaceholder(new Label("Няма записи в таблицата"));
+        table1.setPlaceholder(new Label("Няма записи в таблицата"));
         // Проверяваме дали логнат потребител е администратор.
 
         track.maxWidthProperty().bind(table.widthProperty().divide(4));
@@ -278,7 +277,7 @@ public class RacesUserController {
                                         // Обновяваме таблицата
                                         raceObservableList = FXCollections.observableList(RaceService.getAllRace());
                                         table.setItems(raceObservableList);
-                                        raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
+                                        raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriverFromPerson(LoginService.getLoggedUser().getIdUser()));
                                         table1.setItems(raceHasCarAndDriverObservableList);
                                     });
                                     // Задаваме какво да се прави при натискантето на бутона за редакиране .
@@ -308,7 +307,7 @@ public class RacesUserController {
                                                         // Обновяване на елементите в нашата таблица.
                                                         raceObservableList = FXCollections.observableList(RaceService.getAllRace());
                                                         table.setItems(raceObservableList);
-                                                        raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
+                                                        raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriverFromPerson(LoginService.getLoggedUser().getIdUser()));
                                                         table1.setItems(raceHasCarAndDriverObservableList);
                                                     }
                                                 });
@@ -375,23 +374,26 @@ public class RacesUserController {
 
                                         try {
                                             if (RaceHasCarAndDriverService.areTherePlacesAvailable(race)) {
-                                                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(race.getIdRace(), PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()).getCarPerson(), PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()).getIdPerson(), 0);
-                                                RaceHasCarAndDriverService.addRaceHasCarAndDriver(raceHasCarAndDriver);
-                                                raceObservableList = FXCollections.observableList(RaceService.getAllRace());
-                                                table.setItems(raceObservableList);
-                                                raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
-                                                table1.setItems(raceHasCarAndDriverObservableList);
-                                                WarningController.openMessageModal("Вие успешно участвате в състезанието!", "Успешно участие", MessageType.SUCCESS);
+                                                if(PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()).getCarPerson() != 0) {
+                                                    RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(race.getIdRace(), PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()).getCarPerson(), PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()).getIdPerson(), 0);
+                                                    RaceHasCarAndDriverService.addRaceHasCarAndDriver(raceHasCarAndDriver);
+                                                    raceObservableList = FXCollections.observableList(RaceService.getAllRace());
+                                                    table.setItems(raceObservableList);
+                                                    raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriverFromPerson(LoginService.getLoggedUser().getIdUser()));
+                                                    table1.setItems(raceHasCarAndDriverObservableList);
+                                                    WarningController.openMessageModal("Вие успешно участвате в състезанието!", "Успешно участие", MessageType.SUCCESS);
+                                                } else {
+                                                    WarningController.openMessageModal("Моля първо си изберете кола!", "Няма избрана кола", MessageType.WARNING);
+                                                }
                                             } else {
                                                 WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
-
                                             }
                                             // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
 
                                             // Обновяване на елементите в нашата таблица.
                                             raceObservableList = FXCollections.observableList(RaceService.getAllRace());
                                             table.setItems(raceObservableList);
-                                            raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
+                                            raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriverFromPerson(LoginService.getLoggedUser().getIdUser()));
                                             table1.setItems(raceHasCarAndDriverObservableList);
 
                                         } catch (Exception e) {
