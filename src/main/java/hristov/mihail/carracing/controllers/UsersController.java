@@ -110,11 +110,11 @@ public class UsersController {
                                                 // Създаваме нов stage (нов прозорец)
                                                 Stage stage = new Stage();
                                                 // Зареждане на прозореца от fxml-a.
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("user-modal.fxml"));
+                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
                                                 // Зареждане на сцената.
                                                 Scene scene = new Scene(fxmlLoader.load());
                                                 // Подаваме на контролера на модала нашата кола за да може да я отвори
-                                                UserModalController dialogController = fxmlLoader.getController();
+                                                ProfileController dialogController = fxmlLoader.getController();
                                                 dialogController.setUser(user);
                                                 // Промяна на прозореца да изглежда като такъв за редакция.
                                                 stage.setTitle("Редакция на потребител");
@@ -166,7 +166,7 @@ public class UsersController {
 
         try {
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("user-modal.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
 
             Scene scene = new Scene(fxmlLoader.load());

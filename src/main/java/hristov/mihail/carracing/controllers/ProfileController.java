@@ -245,6 +245,7 @@ if (!Objects.isNull(user)) {
                                     person = new Person();
                                     user.setEmailUser(emailUserField.getText());
                                     user.setPassUser(passwordUserField.getText());
+                                    user.setTypeUser(roleCombobox.getValue());
                                     person.setAgePerson(Integer.parseInt(agePersonField.getText()));
                                     person.setFirstNamePerson(firstNamePersonField.getText());
                                     person.setMiddleNamePerson(middleNamePersonField.getText());
