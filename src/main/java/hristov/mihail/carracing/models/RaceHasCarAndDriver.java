@@ -1,14 +1,29 @@
 package hristov.mihail.carracing.models;
 
-public class RaceHasCarAndDriver
-{
+public class RaceHasCarAndDriver {
     private int id;
     private int idRace;
     private int idCar;
     private int idDriver;
+    private int points;
 
     public RaceHasCarAndDriver() {
 
+    }
+
+    public RaceHasCarAndDriver(int idRace, int idCar, int idDriver, int points) {
+        this.idRace = idRace;
+        this.idCar = idCar;
+        this.idDriver = idDriver;
+        this.points = points;
+    }
+
+    public RaceHasCarAndDriver(int id, int idRace, int idCar, int idDriver, int points) {
+        this.id = id;
+        this.idRace = idRace;
+        this.idCar = idCar;
+        this.idDriver = idDriver;
+        this.points = points;
     }
 
     public int getId() {
@@ -50,21 +65,4 @@ public class RaceHasCarAndDriver
     public void setPoints(int points) {
         this.points = points;
     }
-
-    public RaceHasCarAndDriver(int idRace, int idCar, int idDriver, int points) {
-        this.idRace = idRace;
-        this.idCar = idCar;
-        this.idDriver = idDriver;
-        this.points = points;
-    }
-
-    public RaceHasCarAndDriver(int id, int idRace, int idCar, int idDriver, int points) {
-        this.id = id;
-        this.idRace = idRace;
-        this.idCar = idCar;
-        this.idDriver = idDriver;
-        this.points = points;
-    }
-
-    private int points;
 }

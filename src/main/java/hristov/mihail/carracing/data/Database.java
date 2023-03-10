@@ -997,6 +997,7 @@ public class Database {
             };
         }
     }
+
     public static Connection getConnection() {
         try {
             return DriverManager.getConnection(url, user, password);
@@ -1004,8 +1005,6 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
-
-
 
 
 }

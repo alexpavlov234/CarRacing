@@ -2,7 +2,6 @@ package hristov.mihail.carracing.controllers;
 
 import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.services.PersonService;
-import hristov.mihail.carracing.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
@@ -15,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class RankingController {

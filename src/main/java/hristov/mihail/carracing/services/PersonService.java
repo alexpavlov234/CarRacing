@@ -9,7 +9,10 @@ import hristov.mihail.carracing.models.User;
 import javafx.scene.image.Image;
 
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PersonService {
@@ -101,6 +104,7 @@ public class PersonService {
         }
 
     }
+
     public static Person getLastPerson() {
         String sql = "SELECT * FROM person ORDER BY idPerson DESC LIMIT 1;";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
@@ -200,7 +204,6 @@ public class PersonService {
         }
         return allPeople;
     }
-
 
 
     public static Person getPerson(String name) {

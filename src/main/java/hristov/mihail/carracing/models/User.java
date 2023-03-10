@@ -26,7 +26,8 @@ public class User {
         this.emailUser = emailUser;
         this.passUser = passUser;
     }
-    public User(User user, int userHasPerson){
+
+    public User(User user, int userHasPerson) {
         this.emailUser = user.emailUser;
         this.passUser = user.passUser;
         this.typeUser = user.typeUser;
@@ -65,12 +66,12 @@ public class User {
         return this.typeUser;
     }
 
-    public boolean isAdmin(){
-        return this.typeUser.equals("Admin");
-    }
-
     public void setTypeUser(String value) {
         this.typeUser = value;
+    }
+
+    public boolean isAdmin() {
+        return this.typeUser.equals("Admin");
     }
 
     public int getUserHasPerson() {

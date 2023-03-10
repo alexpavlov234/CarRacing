@@ -3,12 +3,14 @@ package hristov.mihail.carracing.services;
 import hristov.mihail.carracing.controllers.MessageType;
 import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
-import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
 import javafx.collections.ObservableList;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RaceHasCarAndDriverService {
@@ -24,6 +26,7 @@ public class RaceHasCarAndDriverService {
             WarningController.openMessageModal("Грешка при добавянето на участие в базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
+
     public static RaceHasCarAndDriver getRaceHasCarAndDriver(int idRaceHasCarAndDriver) {
         String sql = "SELECT * FROM race_has_car_and_driver WHERE id = ?";
         RaceHasCarAndDriver raceHasCarAndDriver = null;
@@ -44,6 +47,7 @@ public class RaceHasCarAndDriverService {
         }
         return raceHasCarAndDriver;
     }
+
     public static boolean isDriverParticipatingInRace(int idRace, int idDriver) {
         String sql = "SELECT * FROM race_has_car_and_driver WHERE idRace = ? AND idDriver = ?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
@@ -61,16 +65,13 @@ public class RaceHasCarAndDriverService {
                         Integer.parseInt(resultSet.getString("points")));
             }
 
-            if (raceHasCarAndDriver != null && raceHasCarAndDriver.getIdRace() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return raceHasCarAndDriver != null && raceHasCarAndDriver.getIdRace() > 0;
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при търсенето на участник в участие!", "Грешка", MessageType.WARNING);
             return false;
         }
     }
+
     public static void updateRaceHasCarAndDriver(RaceHasCarAndDriver raceHasCarAndDriver) {
         try (PreparedStatement statement = Database.getConnection().prepareStatement("UPDATE race_has_car_and_driver SET idRace = ?, idCar = ?, idDriver = ?, points = ? WHERE id = ?")) {
             statement.setInt(1, raceHasCarAndDriver.getIdRace());
@@ -112,6 +113,7 @@ public class RaceHasCarAndDriverService {
         }
         return allRaceHasCarAndDriver;
     }
+
     public static ArrayList<RaceHasCarAndDriver> getAllRaceHasCarAndDriver(int idRace) {
         ArrayList<RaceHasCarAndDriver> allRaceHasCarAndDriver = new ArrayList<>();
         String sql = "SELECT * FROM race_has_car_and_driver WHERE idRace = ?";
@@ -155,6 +157,7 @@ public class RaceHasCarAndDriverService {
         }
         return allRaceHasCarAndDriver;
     }
+
     public static int getNumberParticipants(Race race) {
         int number = 0;
         try (PreparedStatement statement = Database.getConnection().prepareStatement(
@@ -202,6 +205,7 @@ public class RaceHasCarAndDriverService {
         }
         return arePlacesAvailable;
     }
+
     public static void updateRaceHasCarAndDriverList(ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList) {
 
         String updateSql = "UPDATE race_has_car_and_driver SET points = ? WHERE idRace = ? AND idCar = ? AND idDriver = ?";

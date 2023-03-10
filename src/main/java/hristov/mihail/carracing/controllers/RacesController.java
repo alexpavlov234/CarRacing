@@ -1,14 +1,12 @@
 package hristov.mihail.carracing.controllers;
 
-import java.io.FileInputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
-import hristov.mihail.carracing.services.*;
+import hristov.mihail.carracing.services.CarService;
+import hristov.mihail.carracing.services.PersonService;
+import hristov.mihail.carracing.services.RaceHasCarAndDriverService;
+import hristov.mihail.carracing.services.RaceService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +22,11 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+
+import java.io.FileInputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class RacesController {
 

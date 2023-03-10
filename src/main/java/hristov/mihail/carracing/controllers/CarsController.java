@@ -2,7 +2,6 @@ package hristov.mihail.carracing.controllers;
 
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Car;
-import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.services.CarService;
 import hristov.mihail.carracing.services.LoginService;
 import hristov.mihail.carracing.services.PersonService;
@@ -24,7 +23,6 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

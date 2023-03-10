@@ -4,7 +4,6 @@ import hristov.mihail.carracing.controllers.MessageType;
 import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
-import hristov.mihail.carracing.models.Person;
 import javafx.scene.image.Image;
 
 import java.io.InputStream;

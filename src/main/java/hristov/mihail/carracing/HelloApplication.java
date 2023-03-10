@@ -1,7 +1,5 @@
 package hristov.mihail.carracing;
 
-import hristov.mihail.carracing.models.Track;
-import hristov.mihail.carracing.services.TrackService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +10,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -22,9 +24,5 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

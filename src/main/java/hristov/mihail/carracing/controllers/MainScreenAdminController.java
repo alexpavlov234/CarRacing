@@ -1,10 +1,5 @@
 package hristov.mihail.carracing.controllers;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.services.LoginService;
@@ -18,6 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class MainScreenAdminController {
 

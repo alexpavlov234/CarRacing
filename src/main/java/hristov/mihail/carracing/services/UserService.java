@@ -5,10 +5,7 @@ import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.User;
-import javafx.scene.image.Image;
 
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -110,6 +107,7 @@ public class UserService {
             WarningController.openMessageModal("Грешка при изтриване на потребител!", "Грешка", MessageType.WARNING);
         }
     }
+
     public static ArrayList<User> getAllUser() {
         ArrayList<User> allUsers = new ArrayList<>();
 

@@ -1,36 +1,23 @@
 package hristov.mihail.carracing.controllers;
 
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.*;
-
-import hristov.mihail.carracing.HelloApplication;
-import hristov.mihail.carracing.models.Car;
-import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
 import hristov.mihail.carracing.services.CarService;
 import hristov.mihail.carracing.services.PersonService;
 import hristov.mihail.carracing.services.RaceHasCarAndDriverService;
 import hristov.mihail.carracing.services.RaceService;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class RaceModalPointsController {
 
@@ -197,52 +184,57 @@ public class RaceModalPointsController {
         Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>> cellFactoryPoints = //
                 new Callback<TableColumn<RaceHasCarAndDriver, Integer>, TableCell<RaceHasCarAndDriver, Integer>>() {
 
-            @Override
-            public TableCell<RaceHasCarAndDriver, Integer> call(TableColumn<RaceHasCarAndDriver, Integer> param) {
-                TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
-                    private TextField textField = new TextField();
-
                     @Override
-                    public void updateItem(Integer item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
-                            // Get the value for this cell from the RaceHasCarAndDriver object
-                            Integer points = raceHasCarAndDriver.getPoints();
-                            if (points != null) {
-                                textField.setText(points.toString());
-                            } else {
-                                textField.setText("");
-                            }
-                            textField.textProperty().addListener((obs, oldText, newText) -> {
-                                if (newText.isEmpty()) {
-                                    raceHasCarAndDriver.setPoints(0);
-                                } else {
-                                    try {
-                                        raceHasCarAndDriver.setPoints(Integer.parseInt(newText));
-                                    } catch (Exception e) {
-                                        raceHasCarAndDriver.setPoints(0);
+                    public TableCell<RaceHasCarAndDriver, Integer> call(TableColumn<RaceHasCarAndDriver, Integer> param) {
+                        TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
+                            private final TextField textField = new TextField();
+
+                            // Add listener in constructor
+                            {
+                                textField.textProperty().addListener((obs, oldText, newText) -> {
+                                    if (newText.isEmpty()) {
+                                        getTableView().getItems().get(getIndex()).setPoints(0);
+                                    } else {
+                                        try {
+                                            getTableView().getItems().get(getIndex()).setPoints(Integer.parseInt(newText));
+                                        } catch (Exception e) {
+                                            getTableView().getItems().get(getIndex()).setPoints(0);
+                                        }
                                     }
+                                });
+                            }
+
+                            @Override
+                            public void updateItem(Integer item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (empty) {
+                                    setGraphic(null);
+                                } else {
+                                    RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
+                                    // Get the value for this cell from the RaceHasCarAndDriver object
+                                    Integer points = raceHasCarAndDriver.getPoints();
+                                    if (points != null) {
+                                        textField.setText(points.toString());
+                                    } else {
+                                        textField.setText("");
+                                    }
+
+                                    setGraphic(textField);
                                 }
-                            });
-                            setGraphic(textField);
-                        }
-                        setText(null);
+                                setText(null);
+                            }
+                        };
+                        cell.setAlignment(Pos.CENTER);
+                        return cell;
                     }
                 };
-                cell.setAlignment(Pos.CENTER);
-                return cell;
-            }
-        };
 
 
         car.setCellFactory(cellFactoryCar);
         firstName.setCellFactory(cellFactoryFirstName);
         lastName.setCellFactory(cellFactoryLastName);
         points.setCellFactory(cellFactoryPoints);
-        if(racesCombobox.getItems().size() == 0) {
+        if (racesCombobox.getItems().size() == 0) {
             racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
         }
     }

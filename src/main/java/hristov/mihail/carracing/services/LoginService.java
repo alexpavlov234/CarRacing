@@ -1,7 +1,6 @@
 package hristov.mihail.carracing.services;
 
 import hristov.mihail.carracing.HelloApplication;
-import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.models.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +16,7 @@ public class LoginService {
         try {
             if (loggedUser.getPassUser().equals(password)) {
                 user = loggedUser;
-                if(isLoggedUserAdmin()) {
+                if (isLoggedUserAdmin()) {
 
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-screen-admin.fxml"));
 
@@ -49,9 +48,10 @@ public class LoginService {
 
     }
 
-    public static boolean isLoggedUserAdmin(){
+    public static boolean isLoggedUserAdmin() {
         return user.getTypeUser().equals("Admin");
     }
+
     public static User getLoggedUser() {
         return user;
     }

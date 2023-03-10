@@ -26,6 +26,7 @@ public class TrackService {
             WarningController.openMessageModal("Грешка при добавянето на писта в базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
+
     public static PreparedStatement setImageTrack() {
         try {
             PreparedStatement store = Database.getConnection().prepareStatement("UPDATE track SET imageTrack = ?  WHERE idTrack = ?;");
@@ -35,6 +36,7 @@ public class TrackService {
             return null;
         }
     }
+
     public static Image getImageTrack(Track track) {
         try {
             PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageTrack FROM track WHERE (idTrack = " + track.getIdTrack() + ");");
@@ -53,6 +55,7 @@ public class TrackService {
             return null;
         }
     }
+
     public static Track getTrack(int idTrack) {
         Track track = null;
         try {
@@ -62,13 +65,14 @@ public class TrackService {
             if (resultSet.next()) {
                 track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
             } else {
-            WarningController.openMessageModal("Не е намерена такава писта!", "Лиспваща писта", MessageType.WARNING);
+                WarningController.openMessageModal("Не е намерена такава писта!", "Лиспваща писта", MessageType.WARNING);
             }
         } catch (SQLException e) {
             WarningController.openMessageModal("Не е намерена такава писта!", "Лиспваща писта", MessageType.WARNING);
         }
         return track;
     }
+
     public static Track getTrack(String name) {
         String sql = "SELECT * FROM track WHERE nameTrack = ?";
         Track track = null;
@@ -85,6 +89,7 @@ public class TrackService {
 
         return track;
     }
+
     public static void updateTrack(Track track) {
         String sql = "UPDATE track SET nameTrack = ?, lengthTrack = ?, locationTrack = ? WHERE idTrack = ?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
@@ -107,6 +112,7 @@ public class TrackService {
             WarningController.openMessageModal("Грешка при изтриването на колата от базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
+
     public static ArrayList<Track> getAllTrack() {
         String sql = "SELECT * FROM track;";
         ArrayList<Track> allTracks = new ArrayList<>();
@@ -121,6 +127,7 @@ public class TrackService {
         }
         return allTracks;
     }
+
     public static Track getLastTrack() {
         String sql = "SELECT * FROM track ORDER BY idTrack DESC LIMIT 1;";
         Track track = null;
@@ -135,6 +142,7 @@ public class TrackService {
 
         return track;
     }
+
     public static ArrayList<String> getAllTrackNames() {
         ArrayList<String> allTracks = new ArrayList<>();
         try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM track")) {

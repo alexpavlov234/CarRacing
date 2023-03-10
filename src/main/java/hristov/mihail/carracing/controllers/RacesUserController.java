@@ -3,7 +3,6 @@ package hristov.mihail.carracing.controllers;
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
-import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,12 +1,5 @@
 package hristov.mihail.carracing.controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
-
 import hristov.mihail.carracing.HelloApplication;
 import hristov.mihail.carracing.models.User;
 import hristov.mihail.carracing.services.LoginService;
@@ -26,6 +19,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class LoginController {
 

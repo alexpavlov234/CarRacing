@@ -1,10 +1,8 @@
 package hristov.mihail.carracing.services;
 
 import hristov.mihail.carracing.controllers.MessageType;
-import hristov.mihail.carracing.controllers.RaceHasCarAndDriverModalController;
 import hristov.mihail.carracing.controllers.WarningController;
 import hristov.mihail.carracing.data.Database;
-import hristov.mihail.carracing.models.Car;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.Track;
 
@@ -12,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RaceService {
     public static void addRace(Race race) {
@@ -28,6 +25,7 @@ public class RaceService {
             WarningController.openMessageModal("Грешка при добавянето на състезание в базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
+
     public static Race getLastRace() {
         String sql = "SELECT * FROM race ORDER BY idRace DESC LIMIT 1;";
         Race race = null;
@@ -47,6 +45,7 @@ public class RaceService {
         }
         return race;
     }
+
     public static Race getRace(int idRace) {
         String sql = "SELECT * FROM race WHERE idRace=?";
         Race race = null;
@@ -70,6 +69,7 @@ public class RaceService {
 
         return race;
     }
+
     public static void updateRace(Race race) {
         String sql = "UPDATE race SET trackRace = ?, dateRace = ?, lapsRace = ?, pointsRace = ?, participantsRace = ? WHERE idRace = ?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
@@ -94,6 +94,7 @@ public class RaceService {
             WarningController.openMessageModal("Грешка при изтриването на състезанието от базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
+
     public static ArrayList<Race> getAllRace() {
         ArrayList<Race> allRaces = new ArrayList<>();
 
@@ -109,6 +110,7 @@ public class RaceService {
 
         return allRaces;
     }
+
     public static ArrayList<String> getAllRaceNames() {
         ArrayList<String> allRaces = new ArrayList<>();
         try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM race");
@@ -136,6 +138,7 @@ public class RaceService {
         }
         return allRaces;
     }
+
     public static Race getRace(String name) {
 
         String[] names = name.split(" / ");
