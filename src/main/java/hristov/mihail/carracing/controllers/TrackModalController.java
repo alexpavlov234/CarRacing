@@ -111,6 +111,7 @@ public class TrackModalController {
                         //dialogController.setLoggedUser(car.getIdCar());
                         TrackModalController dialogController = fxmlLoader.getController();
                         dialogController.setTrack(track);
+                        stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                         stage.setTitle("Редакция на " + track.getNameTrack());
                         stage.setScene(scene);
                         stage.show();
@@ -292,6 +293,11 @@ public class TrackModalController {
             } else {
                 applyChangeButton.setText("Добави");
                 ((Stage) applyChangeButton.getScene().getWindow()).setTitle("Добавяне на писта");
+                try {
+                    ((Stage) applyChangeButton.getScene().getWindow()).getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
+                } catch (FileNotFoundException e) {
+                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                }
                 labelTrackName.setText("Добавяне на писта");
             }
         });

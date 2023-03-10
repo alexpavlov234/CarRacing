@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -123,6 +124,7 @@ public class CarModalController {
 
                                 CarModalController dialogController = fxmlLoader.getController();
                                 dialogController.setCar(car);
+                                stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                 stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                 stage.setScene(scene);
                                 stage.show();
@@ -308,7 +310,11 @@ public class CarModalController {
             } else {
                 applyChangeButton.setText("Добави");
                 ((Stage) applyChangeButton.getScene().getWindow()).setTitle("Добавяне на кола");
-
+                try {
+                    ((Stage) applyChangeButton.getScene().getWindow()).getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
+                } catch (FileNotFoundException e) {
+                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                }
                 labelCarName.setText("Добавяне на кола");
             }
         });

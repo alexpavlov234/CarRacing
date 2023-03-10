@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -96,7 +97,7 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Регистрация");
             stage.setScene(scene);
             stage.show();

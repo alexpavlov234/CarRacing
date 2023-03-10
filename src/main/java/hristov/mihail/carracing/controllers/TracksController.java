@@ -18,12 +18,14 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -130,6 +132,7 @@ public class TracksController {
                                                 //dialogController.setLoggedUser(track.getIdCar());
                                                 TrackModalController dialogController = fxmlLoader.getController();
                                               dialogController.setTrack(track);
+                                                stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                               stage.setTitle("Редакция на " + track.getNameTrack());
                                                 stage.setScene(scene);
                                                 stage.show();
@@ -201,6 +204,7 @@ public class TracksController {
                                                 //dialogController.setLoggedUser(track.getIdCar());
                                                 TrackModalController dialogController = fxmlLoader.getController();
                                                 dialogController.setTrack(track);
+                                                stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                                 stage.setTitle("Преглед на " + track.getNameTrack());
                                                 stage.setScene(scene);
                                                 stage.show();
@@ -264,7 +268,7 @@ public class TracksController {
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на кола");
             stage.setScene(scene);
             stage.show();

@@ -14,11 +14,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -127,6 +130,7 @@ public class RaceModalController {
 
                                         RaceModalController dialogController = fxmlLoader.getController();
                                         dialogController.setRace(race);
+                                        stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                         stage.setTitle("Редакция на " + race.getNameRace());
                                         stage.setScene(scene);
                                         stage.show();
@@ -302,7 +306,11 @@ public class RaceModalController {
             } else {
                 applyChangeButton.setText("Добави");
                 ((Stage) applyChangeButton.getScene().getWindow()).setTitle("Добавяне на състезание");
-
+                try {
+                    ((Stage) applyChangeButton.getScene().getWindow()).getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
+                } catch (FileNotFoundException e) {
+                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                }
                 labelRaceName.setText("Добавяне на състезание");
             }
         });

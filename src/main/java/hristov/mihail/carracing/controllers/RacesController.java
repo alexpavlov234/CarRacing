@@ -1,5 +1,6 @@
 package hristov.mihail.carracing.controllers;
 
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -130,7 +132,7 @@ public class RacesController {
                                 } else {
                                     Race race = getTableView().getItems().get(getIndex());
                                     RaceHasCarAndDriverService.getNumberParticipants(race);
-                                    setText(RaceHasCarAndDriverService.getNumberParticipants(race)+" / "+ race.getParticipantsRace());
+                                    setText(RaceHasCarAndDriverService.getNumberParticipants(race) + " / " + race.getParticipantsRace());
                                 }
                             }
                         };
@@ -175,7 +177,6 @@ public class RacesController {
                     public TableCell call(final TableColumn<RaceHasCarAndDriver, String> param) {
 
                         final TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
-
 
 
                             // Override-ваме някакъв метод бе не го мисли
@@ -291,31 +292,32 @@ public class RacesController {
                                         // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                         RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
                                         try {
-                                                // Създаваме нов stage (нов прозорец)
-                                                Stage stage = new Stage();
-                                                // Зареждане на прозореца от fxml-a.
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
-                                                // Зареждане на сцената.
-                                                Scene scene = new Scene(fxmlLoader.load());
-                                                // Подаваме на контролера на модала нашата кола за да може да я отвори
-                                                RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
-                                                dialogController.setRaceHasCarAndDriver(RaceHasCarAndDriverService.getRaceHasCarAndDriver(raceHasCarAndDriver.getId()));
-                                                // Промяна на прозореца да изглежда като такъв за редакция.
-                                                stage.setTitle("Редакция на участие в състезание");
-                                                stage.setScene(scene);
-                                                stage.show();
-                                                // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
-                                                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                                            // Създаваме нов stage (нов прозорец)
+                                            Stage stage = new Stage();
+                                            // Зареждане на прозореца от fxml-a.
+                                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
+                                            // Зареждане на сцената.
+                                            Scene scene = new Scene(fxmlLoader.load());
+                                            // Подаваме на контролера на модала нашата кола за да може да я отвори
+                                            RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
+                                            dialogController.setRaceHasCarAndDriver(RaceHasCarAndDriverService.getRaceHasCarAndDriver(raceHasCarAndDriver.getId()));
+                                            // Промяна на прозореца да изглежда като такъв за редакция.
+                                            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
+                                            stage.setTitle("Редакция на участие в състезание");
+                                            stage.setScene(scene);
+                                            stage.show();
+                                            // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
+                                            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
-                                                    @Override
-                                                    public void handle(WindowEvent paramT) {
-                                                        // Обновяване на елементите в нашата таблица.
-                                                        raceObservableList = FXCollections.observableList(RaceService.getAllRace());
-                                                        table.setItems(raceObservableList);
-                                                        raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
-                                                        table1.setItems(raceHasCarAndDriverObservableList);
-                                                    }
-                                                });
+                                                @Override
+                                                public void handle(WindowEvent paramT) {
+                                                    // Обновяване на елементите в нашата таблица.
+                                                    raceObservableList = FXCollections.observableList(RaceService.getAllRace());
+                                                    table.setItems(raceObservableList);
+                                                    raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
+                                                    table1.setItems(raceHasCarAndDriverObservableList);
+                                                }
+                                            });
 
                                         } catch (Exception e) {
                                             e.printStackTrace();
@@ -375,8 +377,8 @@ public class RacesController {
                                         Race race = getTableView().getItems().get(getIndex());
 
                                         ArrayList<RaceHasCarAndDriver> raceHasCarAndDriverArrayList = RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(race.getIdRace());
-                                        for (RaceHasCarAndDriver raceHasCarAndDriver:raceHasCarAndDriverArrayList
-                                             ) {
+                                        for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriverArrayList
+                                        ) {
                                             RaceHasCarAndDriverService.deleteRaceHasCarAndDriver(raceHasCarAndDriver.getId());
                                         }
                                         // Изтриваме колата
@@ -402,8 +404,9 @@ public class RacesController {
                                             // Зареждане на сцената.
                                             Scene scene = new Scene(fxmlLoader.load());
                                             // Подаваме на контролера на модала нашата кола за да може да я отвори
-                                      RaceModalController dialogController = fxmlLoader.getController();
+                                            RaceModalController dialogController = fxmlLoader.getController();
                                             dialogController.setRace(race);
+                                            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                             // Промяна на прозореца да изглежда като такъв за редакция.
                                             stage.setTitle("Редакция на състезание");
                                             stage.setScene(scene);
@@ -450,6 +453,7 @@ public class RacesController {
         // Задаваме елементите на таблицата
         table.setItems(raceObservableList);
     }
+
     @FXML
     void addParticipation(ActionEvent event) {
         try {
@@ -460,7 +464,7 @@ public class RacesController {
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на участие");
             stage.setScene(scene);
             stage.show();
@@ -491,7 +495,7 @@ public class RacesController {
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на точки от състезания");
             stage.setScene(scene);
             stage.show();
@@ -522,7 +526,7 @@ public class RacesController {
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на състезание");
             stage.setScene(scene);
             stage.show();

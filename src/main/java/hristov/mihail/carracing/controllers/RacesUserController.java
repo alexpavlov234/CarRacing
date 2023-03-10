@@ -14,11 +14,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -296,6 +298,7 @@ public class RacesUserController {
                                                 RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                                                 dialogController.setRaceHasCarAndDriver(RaceHasCarAndDriverService.getRaceHasCarAndDriver(raceHasCarAndDriver.getId()));
                                                 // Промяна на прозореца да изглежда като такъв за редакция.
+                                                stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                                 stage.setTitle("Редакция на участие в състезание");
                                                 stage.setScene(scene);
                                                 stage.show();

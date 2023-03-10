@@ -16,12 +16,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -125,7 +127,7 @@ public class CarsController {
                                                 // Подаваме на контролера на модала нашата кола, за да може да я отвори
                                                 CarModalController dialogController = fxmlLoader.getController();
                                                 dialogController.setCar(car);
-
+                                                stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                                 // Промяна на прозореца да изглежда като такъв за редакция.
                                                 stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                                 stage.setScene(scene);
@@ -235,7 +237,7 @@ public class CarsController {
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на кола");
             stage.setScene(scene);
             stage.show();

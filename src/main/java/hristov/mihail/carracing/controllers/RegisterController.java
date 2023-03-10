@@ -20,6 +20,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -114,7 +115,7 @@ public class RegisterController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Вход");
             stage.setScene(scene);
             stage.show();

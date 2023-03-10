@@ -4,15 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител.">
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Поправени са грешки и потребителите могат да виждат само своите състезания.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/PeopleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/PeopleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TrackModalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TrackModalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TracksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TracksController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/LoginService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,10 +98,11 @@
       <recent name="C:\Users\alexp\Documents\Projects\CarRacing\src\main\java\hristov\mihail\carracing\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alexp\IdeaProjects\CarRacing\src\main\resources\hristov\mihail\carracing" />
+      <recent name="C:\Users\alexp\IdeaProjects\CarRacing\src\main\resources" />
+      <recent name="C:\Users\alexp\IdeaProjects\CarRacing\src\main\java\hristov\mihail\carracing\images" />
       <recent name="C:\Users\apavlov\IdeaProjects\CarRacing\src\main\resources\hristov\mihail\carracing\Windows" />
       <recent name="C:\Users\apavlov\IdeaProjects\CarRacing\src\main\resources\hristov\mihail\carracing" />
-      <recent name="C:\Users\Александър\IdeaProjects\CarRacing\src\main\resources" />
-      <recent name="C:\Users\alexp\Documents\Projects\CarRacing\src\main\java\hristov\mihail\carracing\images" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -465,7 +475,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678482865263</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Поправени са грешки и потребителите могат да виждат само своите състезания.">
+      <created>1678484076518</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1678484076518</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +524,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Ох котьо..... (Надвишавам часа си за лягане не се чуди)&#10;1. Вече има два начални екрана, в зависимост от това дали си админ или не (можем да го направим един).&#10;2. Добавена е проверка какво си.&#10;3. Добавен е enum за това какъв тип прозорец за съобщение си отворил.&#10;4. Коригиран PersonService (всеки потребител трябва да има кола).&#10;5. Началният екран е преработен. :)" />
     <MESSAGE value="Създаден е екран за пистите :), ама не е готов." />
     <MESSAGE value="Отстранение бъгове и писани коментари." />
     <MESSAGE value="Оправен е бъг при изтриването на кола." />
@@ -532,14 +548,15 @@
     <MESSAGE value="Коригирани са всички service-и." />
     <MESSAGE value="Добавена е поддръжка за тестване на service-и, но не е коректен методът за тестване." />
     <MESSAGE value="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител." />
-    <option name="LAST_COMMIT_MESSAGE" value="Променен е модалът за добавяне и редактиране на потребители. Махнат е гадният свързан потребител." />
+    <MESSAGE value="Поправени са грешки и потребителите могат да виждат само своите състезания." />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправени са грешки и потребителите могат да виждат само своите състезания." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/LoginController.java</url>
-          <line>90</line>
+          <line>91</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -549,12 +566,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java</url>
-          <line>151</line>
+          <line>154</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java</url>
-          <line>159</line>
+          <line>162</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -574,12 +591,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java</url>
-          <line>128</line>
+          <line>129</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RegisterController.java</url>
-          <line>127</line>
+          <line>128</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -619,7 +636,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesUserController.java</url>
-          <line>375</line>
+          <line>378</line>
           <option name="timeStamp" value="140" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
@@ -636,7 +653,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/TracksController.java</url>
-          <line>42</line>
+          <line>44</line>
           <properties field="addTrack" class="hristov.mihail.carracing.controllers.TracksController" />
           <option name="timeStamp" value="104" />
         </line-breakpoint>
@@ -660,7 +677,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java</url>
-          <line>485</line>
+          <line>489</line>
           <properties class="hristov.mihail.carracing.controllers.RacesController" method="addRacePoints">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

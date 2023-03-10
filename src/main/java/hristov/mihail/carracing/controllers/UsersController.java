@@ -15,12 +15,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -113,6 +115,7 @@ public class UsersController {
                                                 // Подаваме на контролера на модала нашата кола за да може да я отвори
                                                 ProfileController dialogController = fxmlLoader.getController();
                                                 dialogController.setUser(user);
+                                                stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                                 // Промяна на прозореца да изглежда като такъв за редакция.
                                                 stage.setTitle("Редакция на потребител");
                                                 stage.setScene(scene);
@@ -168,7 +171,7 @@ public class UsersController {
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(user.getIdUser());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на потребител");
             stage.setScene(scene);
             stage.show();

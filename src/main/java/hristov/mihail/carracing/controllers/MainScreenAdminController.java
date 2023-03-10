@@ -1,5 +1,6 @@
 package hristov.mihail.carracing.controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -59,7 +61,7 @@ public class MainScreenAdminController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
-
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Вход");
             stage.setScene(scene);
             stage.show();
@@ -94,6 +96,7 @@ public class MainScreenAdminController {
             Scene scene = new Scene(fxmlLoader.load());
             ProfileController dialogController = fxmlLoader.getController();
             dialogController.setUser(LoginService.getLoggedUser());
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Редакция на профил");
             stage.setScene(scene);
             stage.show();
