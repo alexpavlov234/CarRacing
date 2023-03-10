@@ -106,7 +106,7 @@ public class TrackModalController {
                         try {
                             scene = new Scene(fxmlLoader.load());
                         } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                         }
                         //dialogController.setLoggedUser(car.getIdCar());
                         TrackModalController dialogController = fxmlLoader.getController();
@@ -119,9 +119,9 @@ public class TrackModalController {
 
                         applyChangeButton.setText("Приложи");
                     } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     }
 
                 }
@@ -150,7 +150,7 @@ public class TrackModalController {
                                         storeImage.execute();
                                     }
                                 } catch (Exception e) {
-                                    e.printStackTrace();
+                                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                 }
                                 TrackService.updateTrack(track);
 
@@ -162,7 +162,7 @@ public class TrackModalController {
                                 try {
                                     scene = new Scene(fxmlLoader.load());
                                 } catch (IOException e) {
-                                    throw new RuntimeException(e);
+                                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                 }
                                 //dialogController.setLoggedUser(car.getIdCar());
                                 TrackModalController dialogController = fxmlLoader.getController();

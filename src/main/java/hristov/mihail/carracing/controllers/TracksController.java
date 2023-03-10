@@ -160,7 +160,7 @@ public class TracksController {
                                                 stage1.setTitle("Системна грешка");
                                                 stage1.setScene(scene);
                                                 stage1.show();
-                                                e.printStackTrace();
+                                                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                                 //TODO: Екран за грешка
                                             }
 
@@ -232,7 +232,7 @@ public class TracksController {
                                                 stage1.setTitle("Системна грешка");
                                                 stage1.setScene(scene);
                                                 stage1.show();
-                                                e.printStackTrace();
+                                                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                                 //TODO: Екран за грешка
                                             }
                                         });

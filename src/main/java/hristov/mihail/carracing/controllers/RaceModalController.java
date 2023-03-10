@@ -125,7 +125,7 @@ public class RaceModalController {
                                         try {
                                             scene = new Scene(fxmlLoader.load());
                                         } catch (IOException e) {
-                                            throw new RuntimeException(e);
+                                            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                         }
 
                                         RaceModalController dialogController = fxmlLoader.getController();
@@ -138,7 +138,7 @@ public class RaceModalController {
 
                                         applyChangeButton.setText("Приложи");
                                     } catch (Exception e) {
-                                        e.printStackTrace();
+
                                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                     }
                                 } else {

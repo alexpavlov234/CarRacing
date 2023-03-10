@@ -119,7 +119,7 @@ public class CarModalController {
                                 try {
                                     scene = new Scene(fxmlLoader.load());
                                 } catch (IOException e) {
-                                    throw new RuntimeException(e);
+                                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                 }
 
                                 CarModalController dialogController = fxmlLoader.getController();
@@ -168,7 +168,7 @@ public class CarModalController {
                                     storeImage.execute();
                                 }
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                             }
                             CarService.updateCar(car);
                             Stage stage = (Stage) applyChangeButton.getScene().getWindow();

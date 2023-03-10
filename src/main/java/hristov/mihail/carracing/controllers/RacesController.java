@@ -323,7 +323,7 @@ public class RacesController {
                                             });
 
                                         } catch (Exception e) {
-                                            e.printStackTrace();
+
                                             // Ако нещо гръмне по трасето да се покаже грешка.
                                             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                         }
@@ -427,7 +427,7 @@ public class RacesController {
                                                 }
                                             });
                                         } catch (Exception e) {
-                                            e.printStackTrace();
+
                                             // Ако нещо гръмне по трасето да се покаже грешка.
                                             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                         }

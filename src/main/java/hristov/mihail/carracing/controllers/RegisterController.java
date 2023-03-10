@@ -148,7 +148,7 @@ public class RegisterController {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
 

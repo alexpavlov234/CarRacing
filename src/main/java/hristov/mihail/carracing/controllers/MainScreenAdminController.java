@@ -5,6 +5,7 @@ import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.services.LoginService;
 import hristov.mihail.carracing.services.PersonService;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -100,8 +102,19 @@ public class MainScreenAdminController {
             stage.setTitle("Редакция на профил");
             stage.setScene(scene);
             stage.show();
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+                @Override
+                public void handle(WindowEvent paramT) {
+                    Person loggedPerson = PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson());
+                    profileNameLabel.setText("Здравей, \n" + loggedPerson.getFirstNamePerson() + " " + loggedPerson.getLastNamePerson());
+                    if (!LoginService.isLoggedUserAdmin()) {
+                        exitUser(new ActionEvent());
+                    }
+                }
+            });
         } catch (Exception e) {
-            e.printStackTrace();
+
             WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }
     }
@@ -114,9 +127,11 @@ public class MainScreenAdminController {
     }
 
     @FXML
-    private void handleShowView1(ActionEvent event) {
-        try {loadFXML("races.fxml");} catch (Exception e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+    void handleShowView1(ActionEvent event) {
+        try {
+            loadFXML("races.fxml");
+        } catch (Exception e) {
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
@@ -145,24 +160,30 @@ public class MainScreenAdminController {
     }
 
     @FXML
-    private void handleShowView2(ActionEvent event) {
-        try {loadFXML("people.fxml");} catch (Exception e) {
+    void handleShowView2(ActionEvent event) {
+        try {
+            loadFXML("people.fxml");
+        } catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
     @FXML
-    private void handleShowView3(ActionEvent event) {
-        try {loadFXML("tracks.fxml");} catch (Exception e) {
+    void handleShowView3(ActionEvent event) {
+        try {
+            loadFXML("tracks.fxml");
+        } catch (Exception e) {
 
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
     @FXML
-    private void handleShowView4(ActionEvent event) {
-        try {loadFXML("users.fxml");} catch (Exception e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+    void handleShowView4(ActionEvent event) {
+        try {
+            loadFXML("users.fxml");
+        } catch (Exception e) {
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
