@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="284.0" prefWidth="279.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RaceModalController">
+<AnchorPane prefHeight="284.0" prefWidth="279.0" styleClass="pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hristov.mihail.carracing.controllers.RaceModalController">
    <children>
-      <Label fx:id="labelRaceName" layoutX="14.0" layoutY="19.0" styleClass="labelWhite" text="Състезание" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
+      <Label fx:id="labelRaceName" layoutX="14.0" layoutY="19.0" prefHeight="27.0" prefWidth="256.0" styleClass="labelWhite" text="Състезание" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0">
          <font>
             <Font name="Segoe UI" size="21.0" />
          </font>

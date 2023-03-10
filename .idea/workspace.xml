@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код.">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/cars.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/cars.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/people.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/people.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-has-car-and-driver-modal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-points-modal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/race-points-modal.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races-user.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races-user.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/races.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/tracks.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/tracks.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/users.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hristov/mihail/carracing/users.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Поправен е дизайнът навсякъде." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -487,7 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678488009302</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Поправен е дизайнът навсякъде.">
+      <created>1678488664409</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1678488664409</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,8 +527,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Оправен е бъг при изтриването на кола." />
-    <MESSAGE value="Създаден е екран за потребители." />
     <MESSAGE value="Създаден е екран за класация." />
     <MESSAGE value="Създаден е прозорец &quot;Профил&quot;.&#10;1. Поправени са  всички модали.&#10;2. Подобрени са някой service-и.&#10;3. Създаени са нови екрани." />
     <MESSAGE value="Създаден е прозорец &quot;Профил&quot;.&#10;1. Поправени са  всички модали.&#10;2. Подобрени са някои service-и.&#10;3. Създаени са нови екрани." />
@@ -554,7 +550,9 @@
     <MESSAGE value="Поправени са грешки и потребителите могат да виждат само своите състезания." />
     <MESSAGE value="Добавена е икона на приложението." />
     <MESSAGE value="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код." />
-    <option name="LAST_COMMIT_MESSAGE" value="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код." />
+    <MESSAGE value="Отстранен е бъгът в модалния прозорец за добавяне на точки и е форматиран целият код. Поправен е дизайнът навсякъде." />
+    <MESSAGE value="Поправен е дизайнът навсякъде." />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправен е дизайнът навсякъде." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
