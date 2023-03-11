@@ -99,13 +99,14 @@ public class RaceHasCarAndDriverService {
         try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM race_has_car_and_driver")) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(
-                        Integer.parseInt(resultSet.getString("id")),
-                        Integer.parseInt(resultSet.getString("idRace")),
-                        Integer.parseInt(resultSet.getString("idCar")),
-                        Integer.parseInt(resultSet.getString("idDriver")),
-                        Integer.parseInt(resultSet.getString("points"))
-                );
+                int id = resultSet.getString("id") != null ? Integer.parseInt(resultSet.getString("id")) : 0;
+                int idRace = resultSet.getString("idRace") != null ? Integer.parseInt(resultSet.getString("idRace")) : 0;
+                int idCar = resultSet.getString("idCar") != null ? Integer.parseInt(resultSet.getString("idCar")) : 0;
+                int idDriver = resultSet.getString("idDriver") != null ? Integer.parseInt(resultSet.getString("idDriver")) : 0;
+                int points = resultSet.getString("points") != null ? Integer.parseInt(resultSet.getString("points")) : 0;
+
+                RaceHasCarAndDriver raceHasCarAndDriver = new RaceHasCarAndDriver(id, idRace, idCar, idDriver, points);
+
                 allRaceHasCarAndDriver.add(raceHasCarAndDriver);
             }
         } catch (SQLException e) {

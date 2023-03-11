@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Коригирани са грешките и ако администраторът промени ролята си, той ще бъде изхвърлен от системата.">
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Коригирани са данните в скрипта (добавен е admin потребител - той може да редактира само някои неща по профила си).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/script.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RankingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RankingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,35 +51,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "database.data.extractors.current.export.id": "SQL Inserts",
-    "database.data.extractors.current.id": "SQL Inserts",
-    "last_opened_file_path": "C:/Users/alexp/AppData/Local/SceneBuilder/SceneBuilder.exe",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.5046083",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;SQL Inserts&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;SQL Inserts&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexp/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5046083&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
-      "MySQL"
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/&quot;: [
+      &quot;MySQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\apavlov\IdeaProjects\CarRacing\src\main\resources\hristov\mihail\carracing" />
@@ -225,6 +226,7 @@
       <workItem from="1677610852169" duration="6565000" />
       <workItem from="1678045048673" duration="35000" />
       <workItem from="1678045091027" duration="1327000" />
+      <workItem from="1678557284435" duration="2148000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -664,11 +666,6 @@
           <option name="timeStamp" value="140" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java</url>
           <line>505</line>
           <option name="timeStamp" value="143" />
@@ -682,6 +679,41 @@
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/ProfileController.java</url>
           <line>186</line>
           <option name="timeStamp" value="145" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="163" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="165" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="169" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="179" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="180" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>177</line>
+          <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>194</line>
+          <option name="timeStamp" value="183" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/CarModalController.java</url>
@@ -729,13 +761,76 @@
           <option name="timeStamp" value="133" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RacesController.java</url>
-          <line>81</line>
-          <properties class="hristov.mihail.carracing.controllers.RacesController" method="initialize">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java</url>
+          <line>129</line>
+          <properties class="hristov.mihail.carracing.controllers.MainScreenAdminController" method="handleShowView1">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="141" />
+          <option name="timeStamp" value="159" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>29</line>
+          <properties class="hristov.mihail.carracing.services.RaceHasCarAndDriverService" method="getRaceHasCarAndDriver">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>16</line>
+          <properties class="hristov.mihail.carracing.services.RaceHasCarAndDriverService" method="addRaceHasCarAndDriver">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>50</line>
+          <properties class="hristov.mihail.carracing.services.RaceHasCarAndDriverService" method="isDriverParticipatingInRace">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>74</line>
+          <properties class="hristov.mihail.carracing.services.RaceHasCarAndDriverService" method="updateRaceHasCarAndDriver">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>87</line>
+          <properties class="hristov.mihail.carracing.services.RaceHasCarAndDriverService" method="deleteRaceHasCarAndDriver">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>139</line>
+          <properties class="hristov.mihail.carracing.services.RaceHasCarAndDriverService" method="getAllRaceHasCarAndDriverFromPerson">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/RaceHasCarAndDriverService.java</url>
+          <line>209</line>
+          <properties class="hristov.mihail.carracing.services.RaceHasCarAndDriverService" method="updateRaceHasCarAndDriverList">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="184" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

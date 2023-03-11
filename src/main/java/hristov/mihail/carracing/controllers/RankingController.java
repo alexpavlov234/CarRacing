@@ -60,15 +60,8 @@ public class RankingController {
         nationality.setCellValueFactory(new PropertyValueFactory<Person, String>("nationalityPerson"));
         points.setCellValueFactory(new PropertyValueFactory<Person, String>("pointsPerson"));
 
-        ArrayList<Person> people = PersonService.getAllPerson();
-        ArrayList<Person> racers = new ArrayList<>();
-        for (Person person : people) {
-            //  if(!Objects.isNull(UserService.getUser(person))) {
-            //     if (!UserService.getUser(person).isAdmin()) {
-            racers.add(person);
-            //     }
-            // }
-        }
+        ArrayList<Person> racers = PersonService.getAllPerson();
+
 
         userObservableList = FXCollections.observableList(racers);
         // Проверяваме дали логнат потребител е администратор.

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class PersonService {
     public static void addPerson(Person person) {
-        String query = "INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, carPerson, imagePerson) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO carracers.person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, carPerson, imagePerson) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(query)) {
             statement.setString(1, person.getFirstNamePerson());
             statement.setString(2, person.getMiddleNamePerson());
@@ -34,7 +34,7 @@ public class PersonService {
     }
 
     public static void addPerson(String firstNamePerson, String lastNamePerson) {
-        String query = "INSERT INTO person (firstNamePerson, lastNamePerson) VALUES (?, ?)";
+        String query = "INSERT INTO carracers.person (firstNamePerson, lastNamePerson) VALUES (?, ?)";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(query)) {
             statement.setString(1, firstNamePerson);
             statement.setString(2, lastNamePerson);
@@ -45,7 +45,7 @@ public class PersonService {
     }
 
     public static Person getPerson(int idPerson) {
-        String sql = "SELECT * FROM person WHERE idPerson=?";
+        String sql = "SELECT * FROM carracers.person WHERE idPerson=?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
             statement.setInt(1, idPerson);
             ResultSet resultSet = statement.executeQuery();
@@ -74,7 +74,7 @@ public class PersonService {
 
     public static Image getImagePerson(Person person) {
         try {
-            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imagePerson FROM person WHERE (idPerson = " + person.getIdPerson() + ");");
+            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imagePerson FROM carracers.person WHERE (idPerson = " + person.getIdPerson() + ");");
             //retrieve.setInt(1, 1);
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
@@ -96,7 +96,7 @@ public class PersonService {
 
     public static PreparedStatement setImagePerson() {
         try {
-            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE person SET imagePerson = ?  WHERE idPerson = ?;");
+            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.person SET imagePerson = ?  WHERE idPerson = ?;");
             return store;
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при задаване на снимката на човека!", "Грешка", MessageType.WARNING);
@@ -106,7 +106,7 @@ public class PersonService {
     }
 
     public static Person getLastPerson() {
-        String sql = "SELECT * FROM person ORDER BY idPerson DESC LIMIT 1;";
+        String sql = "SELECT * FROM carracers.person ORDER BY idPerson DESC LIMIT 1;";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -122,7 +122,7 @@ public class PersonService {
     }
 
     public static void updatePerson(Person person) {
-        String sql = "UPDATE person SET firstNamePerson=?, middleNamePerson=?, lastNamePerson=?, agePerson=?, nationalityPerson=?, pointsPerson=?, carPerson=? WHERE idPerson=?";
+        String sql = "UPDATE carracers.person SET firstNamePerson=?, middleNamePerson=?, lastNamePerson=?, agePerson=?, nationalityPerson=?, pointsPerson=?, carPerson=? WHERE idPerson=?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
             statement.setString(1, person.getFirstNamePerson());
             statement.setString(2, person.getMiddleNamePerson());
@@ -139,17 +139,26 @@ public class PersonService {
     }
 
     public static void deletePerson(int idPerson) {
-        String sql = "DELETE FROM person WHERE idPerson=?";
-        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
+        String sql1 = "DELETE FROM carracers.person WHERE idPerson=?";
+        String sql2 = "DELETE FROM carracers.race_has_car_and_driver WHERE carracers.race_has_car_and_driver.idDriver=?";
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql1)) {
             statement.setInt(1, idPerson);
             statement.executeUpdate();
+
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при изтриване на човек!", "Грешка", MessageType.WARNING);
+        }
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql2)) {
+            statement.setInt(1, idPerson);
+            statement.executeUpdate();
+
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при изтриване на човек!", "Грешка", MessageType.WARNING);
         }
     }
 
     public static void setCarPerson(Car car, Person person) {
-        String sql = "UPDATE person SET carPerson=? WHERE idPerson=?";
+        String sql = "UPDATE carracers.person SET carPerson=? WHERE idPerson=?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
             statement.setInt(1, car.getIdCar());
             statement.setInt(2, person.getIdPerson());
@@ -161,24 +170,28 @@ public class PersonService {
 
 
     public static ArrayList<Person> getAllPerson() {
-        ArrayList<Person> allPersons = new ArrayList<>();
-        String sql = "SELECT * FROM person";
+        ArrayList<Person> allPeople = new ArrayList<>();
+        String sql = "SELECT * FROM carracers.person";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 Person person = new Person(resultSet.getInt("idPerson"), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getInt("agePerson"), resultSet.getString("nationalityPerson"), resultSet.getInt("pointsPerson"), resultSet.getInt("carPerson"), resultSet.getString("imagePerson"));
-                allPersons.add(person);
+                User user = UserService.getUser(person);
+                if (user != null && !user.getTypeUser().equals("Admin")) {
+                    allPeople.add(person);
+                }
+
             }
         } catch (SQLException e) {
             WarningController.openMessageModal("Възникна грешка при извличането на всички хора!", "Грешка", MessageType.WARNING);
         }
-        return allPersons;
+        return allPeople;
     }
 
 
     public static ArrayList<String> getAllPersonNames() {
         ArrayList<String> allPeople = new ArrayList<>();
-        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM person;")) {
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM carracers.person;")) {
             ResultSet resultSet = statement.executeQuery();
 
             while ((resultSet.next())) {
@@ -209,7 +222,7 @@ public class PersonService {
     public static Person getPerson(String name) {
         String[] names = name.split(" ");
         if (names.length == 2) {
-            String sql = "SELECT * FROM person WHERE (firstNamePerson = ? AND lastNamePerson = ?)";
+            String sql = "SELECT * FROM carracers.person WHERE (firstNamePerson = ? AND lastNamePerson = ?)";
             try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
                 statement.setString(1, names[0]);
                 statement.setString(2, names[1]);
