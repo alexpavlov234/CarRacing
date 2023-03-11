@@ -134,6 +134,7 @@ public class TracksController {
                                                 stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                               stage.setTitle("Редакция на " + track.getNameTrack());
                                                 stage.setScene(scene);
+                                                stage.setResizable(false);
                                                 stage.show();
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -206,6 +207,7 @@ public class TracksController {
                                                 stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                                 stage.setTitle("Преглед на " + track.getNameTrack());
                                                 stage.setScene(scene);
+                                                stage.setResizable(false);
                                                 stage.show();
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -270,6 +272,7 @@ public class TracksController {
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на кола");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 

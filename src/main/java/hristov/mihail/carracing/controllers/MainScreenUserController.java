@@ -62,6 +62,7 @@ public class MainScreenUserController {
             Scene scene = new Scene(fxmlLoader.load());
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Вход");
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -98,6 +99,7 @@ public class MainScreenUserController {
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Редакция на профил");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 

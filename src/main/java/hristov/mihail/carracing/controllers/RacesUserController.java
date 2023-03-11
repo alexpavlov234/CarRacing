@@ -300,6 +300,7 @@ public class RacesUserController {
                                                 stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                                 stage.setTitle("Редакция на участие в състезание");
                                                 stage.setScene(scene);
+                                                stage.setResizable(false);
                                                 stage.show();
                                                 // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {

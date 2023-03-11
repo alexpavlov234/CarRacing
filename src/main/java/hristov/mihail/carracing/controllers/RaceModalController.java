@@ -133,6 +133,7 @@ public class RaceModalController {
                                         stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                         stage.setTitle("Редакция на " + race.getNameRace());
                                         stage.setScene(scene);
+                                        stage.setResizable(false);
                                         stage.show();
                                         //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
@@ -199,6 +200,7 @@ public class RaceModalController {
                                     RaceModalController dialogController = fxmlLoader.getController();
                                     dialogController.setRace(race);
                                     stage.setScene(scene);
+                                    stage.setResizable(false);
                                     stage.show();
                                     //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 

@@ -83,6 +83,7 @@ public class RaceHasCarAndDriverModalController {
                         RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                         dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
                     } else {
                         if (!(RaceHasCarAndDriverService.isParticipatingInRace(raceHasCarAndDriver.getIdRace(), raceHasCarAndDriver.getIdDriver()))) {
@@ -101,6 +102,7 @@ public class RaceHasCarAndDriverModalController {
                             RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                             dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
                             stage.setScene(scene);
+                            stage.setResizable(false);
                             stage.show();
                         } else {
                             WarningController.openMessageModal("Този състезател вече участва в това състезание!", "Повторно участие в състезание", MessageType.WARNING);
@@ -138,6 +140,7 @@ public class RaceHasCarAndDriverModalController {
                         RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                         dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
                     } else {
                         WarningController.openMessageModal("Този състезател вече участва в това състезание!", "Повторно участие в състезание", MessageType.WARNING);

@@ -200,6 +200,7 @@ public class ProfileController {
             //dialogController.setLoggedUser(user.getIdCar());
             ProfileController dialogController = fxmlLoader.getController();
             dialogController.setUser(user);
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } else if (!Objects.isNull(user)) {
@@ -251,6 +252,7 @@ public class ProfileController {
                                             //dialogController.setLoggedUser(user.getIdCar());
                                             ProfileController dialogController = fxmlLoader.getController();
                                             dialogController.setUser(user);
+                                            stage.setResizable(false);
                                             stage.setScene(scene);
                                             stage.show();
 
@@ -328,6 +330,7 @@ public class ProfileController {
                                                 ProfileController dialogController = fxmlLoader.getController();
                                                 dialogController.setUser(this.user);
                                                 stage.setScene(scene);
+                                                stage.setResizable(false);
                                                 stage.show();
                                             } else {
                                                 WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител", MessageType.WARNING);

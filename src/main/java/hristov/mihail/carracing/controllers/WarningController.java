@@ -37,6 +37,7 @@ public class WarningController {
     @FXML
     void setOkButton(ActionEvent event) {
         Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.setResizable(false);
         stage.close();
     }
 

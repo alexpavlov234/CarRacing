@@ -66,6 +66,7 @@ public class MainScreenAdminController {
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Вход");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             Stage stage1 = new Stage();
@@ -101,6 +102,7 @@ public class MainScreenAdminController {
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Редакция на профил");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 

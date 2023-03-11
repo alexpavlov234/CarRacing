@@ -99,6 +99,7 @@ public class LoginController {
             Scene scene = new Scene(fxmlLoader.load());
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Регистрация");
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

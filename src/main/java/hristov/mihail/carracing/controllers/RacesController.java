@@ -308,6 +308,7 @@ public class RacesController {
                                             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                             stage.setTitle("Редакция на участие в състезание");
                                             stage.setScene(scene);
+                                            stage.setResizable(false);
                                             stage.show();
                                             // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -413,6 +414,7 @@ public class RacesController {
                                             // Промяна на прозореца да изглежда като такъв за редакция.
                                             stage.setTitle("Редакция на състезание");
                                             stage.setScene(scene);
+                                            stage.setResizable(false);
                                             stage.show();
                                             // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -470,6 +472,7 @@ public class RacesController {
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на участие");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -501,6 +504,7 @@ public class RacesController {
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на точки от състезания");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -532,6 +536,7 @@ public class RacesController {
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на състезание");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {

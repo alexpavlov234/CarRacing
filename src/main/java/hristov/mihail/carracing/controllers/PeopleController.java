@@ -132,6 +132,7 @@ public class PeopleController {
                                             // Промяна на прозореца да изглежда като такъв за редакция.
                                             stage.setTitle("Редакция на " + person.getFirstNamePerson() + " " + person.getLastNamePerson());
                                             stage.setScene(scene);
+                                            stage.setResizable(false);
                                             stage.show();
                                             // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -185,6 +186,7 @@ public class PeopleController {
             //dialogController.setLoggedUser(car.getIdPerson());
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на състезател");
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
             // Когато се затвори нашия отворен прозорец да се обнови таблица.

@@ -114,6 +114,7 @@ public class TrackModalController {
                         stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                         stage.setTitle("Редакция на " + track.getNameTrack());
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
                         //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
@@ -168,6 +169,7 @@ public class TrackModalController {
                                 TrackModalController dialogController = fxmlLoader.getController();
                                 dialogController.setTrack(track);
                                 stage.setScene(scene);
+                                stage.setResizable(false);
                                 stage.show();
                             } catch (Exception e) {
                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -249,6 +251,7 @@ public class TrackModalController {
                 applyChangeButton.setText("OK");
                 applyChangeButton.setOnAction(e -> {
                     Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                    stage.setResizable(false);
                     stage.close();
                 });
                 nameTrackField.setEditable(false);

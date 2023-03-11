@@ -113,7 +113,7 @@ public class CarModalController {
                                 // Обновяваме нашия модел и го отваряме като модал за редакция на вече създадената кола.
                                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
-
+                                stage.setResizable(false);
 
                                 Scene scene = null;
                                 try {
@@ -127,6 +127,7 @@ public class CarModalController {
                                 stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
                                 stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                 stage.setScene(scene);
+                                stage.setResizable(false);
                                 stage.show();
                                 //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
@@ -173,7 +174,7 @@ public class CarModalController {
                             CarService.updateCar(car);
                             Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
-
+                            stage.setResizable(false);
 
                             Scene scene = null;
                             try {
