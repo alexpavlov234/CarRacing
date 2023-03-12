@@ -115,11 +115,11 @@ VALUES ('Николай', 'Петров', 'Димитров', 25, 'Българ�
        ('Администратор','','',0,'',0,1);
 -- Insert data into user table
 INSERT INTO user (emailUser, passUser, typeUser, userHasPerson)
-VALUES ('nikolai.dimitrov@example.com', 'password1', 'Admin', 1),
+VALUES ('nikolai.dimitrov@example.com', 'password1', 'User', 1),
        ('maria.ivanova@example.com', 'password2', 'User', 2),
        ('georgi.todorov@example.com', 'password3', 'User', 3),
        ('anna.dimitrova@example.com', 'password4', 'User', 4),
-       ('dimitar.angelov@example.com', 'password5', 'Admin', 5),
+       ('dimitar.angelov@example.com', 'password5', 'User', 5),
        ('admin', 'admin', 'Admin', 6);
 
 -- Insert data into track table
