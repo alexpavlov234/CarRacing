@@ -130,9 +130,9 @@ public class TracksController {
                                                 Scene scene = new Scene(fxmlLoader.load());
                                                 //dialogController.setLoggedUser(track.getIdCar());
                                                 TrackModalController dialogController = fxmlLoader.getController();
-                                              dialogController.setTrack(track);
+                                                dialogController.setTrack(track);
                                                 stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
-                                              stage.setTitle("Редакция на " + track.getNameTrack());
+                                                stage.setTitle("Редакция на " + track.getNameTrack());
                                                 stage.setScene(scene);
                                                 stage.setResizable(false);
                                                 stage.show();

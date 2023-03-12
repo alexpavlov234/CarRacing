@@ -356,7 +356,6 @@ public class ProfileController {
                 WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
             }
         }
-
     }
 
     public boolean isNumeric(String strNum) {
