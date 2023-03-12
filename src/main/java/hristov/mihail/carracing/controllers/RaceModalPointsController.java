@@ -242,7 +242,7 @@ public class RaceModalPointsController {
     @FXML
     private void onSelectComboBox(ActionEvent event) {
         int idRace = RaceService.getRace(racesCombobox.getValue()).getIdRace();
-        //Големи сме ****** не бяхме добавили idRace където трябва.
+        //Не бях добавил idRace където трябва.
         raceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace));
         for (int i = 0; i < table.getItems().size(); i++) {
             table.getItems().clear();

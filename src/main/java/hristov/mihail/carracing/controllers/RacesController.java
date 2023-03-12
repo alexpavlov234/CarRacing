@@ -99,7 +99,7 @@ public class RacesController {
         table.setPlaceholder(new Label("Няма записи в таблицата"));
         table1.setPlaceholder(new Label("Няма записи в таблицата"));
 
-        // Проверяваме дали логнат потребител е администратор.
+        // Проверяваме дали логнатият потребител е администратор.
 
         track.maxWidthProperty().bind(table.widthProperty().divide(4));
         date.maxWidthProperty().bind(table.widthProperty().divide(4));
@@ -381,8 +381,7 @@ public class RacesController {
                                         Race race = getTableView().getItems().get(getIndex());
 
                                         ArrayList<RaceHasCarAndDriver> raceHasCarAndDriverArrayList = RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(race.getIdRace());
-                                        for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriverArrayList
-                                        ) {
+                                        for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriverArrayList) {
                                             RaceHasCarAndDriverService.deleteRaceHasCarAndDriver(raceHasCarAndDriver.getId());
                                         }
                                         // Изтриваме колата
