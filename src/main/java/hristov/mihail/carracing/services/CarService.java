@@ -11,16 +11,21 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CarService {
+    // Метод за добавяне на кола в базата данни
     public static void addCar(Car car) {
-        String sql = "INSERT INTO car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES (?, ?, ?, ?, ?)";
+        // SQL заявка за добавяне на запис в таблицата car
+        String sql = "INSERT INTO carracers.car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Задаване на стойности на параметрите в SQL заявката
             pstmt.setString(1, car.getModelCar());
             pstmt.setString(2, car.getBrandCar());
             pstmt.setString(3, car.getEngineCar());
             pstmt.setString(4, car.getFuelCar());
             pstmt.setInt(5, car.getHorsepowerCar());
+            // Изпълнение на SQL заявката
             pstmt.executeUpdate();
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка при добавянето на кола в базата данни
             WarningController.openMessageModal("Грешка при добавянето на кола в базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
@@ -30,98 +35,137 @@ public class CarService {
         return car.getBrandCar() + " " + car.getModelCar();
     }
 
+    // Метод за извличане на кола от базата данни
     public static Car getCar(int idCar) {
-        String sql = "SELECT * FROM car WHERE idCar=?";
+        // SQL заявка за извличане на запис от таблицата car
+        String sql = "SELECT * FROM carracers.car WHERE idCar=?";
         try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Задаване на стойността на параметъра в SQL заявката
             pstmt.setInt(1, idCar);
+            // Изпълнение на SQL заявката и получаване на резултатите
             ResultSet resultSet = pstmt.executeQuery();
+            // Проверка дали има резултати
             if (resultSet.next()) {
+                // Създаване и връщане на обект от тип Car с информацията от резултатите
                 return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
             } else {
+                // Показване на предупреждение при липсваща кола с посочения ID
                 WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
-                return null; // or throw an exception if you prefer
+                return null;
             }
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка при извличането на колата от базата данни
             WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
             return null;
         }
     }
 
 
+    // Метод за извличане на кола от базата данни по име
     public static Car getCar(String name) {
+        // Разделяне на името на две части - марка и модел
         int firstSpaceIndex = name.indexOf(" ");
         String[] names = {name.substring(0, firstSpaceIndex), name.substring(firstSpaceIndex + 1)};
         if (names.length == 2) {
-            String sql = "SELECT * FROM car WHERE modelCar=? AND brandCar=?";
+            // SQL заявка за извличане на запис от таблицата car
+            String sql = "SELECT * FROM carracers.car WHERE modelCar=? AND brandCar=?";
             try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                // Задаване на стойностите на параметрите в SQL заявката
                 pstmt.setString(1, names[1]);
                 pstmt.setString(2, names[0]);
+                // Изпълнение на SQL заявката и получаване на резултатите
                 ResultSet resultSet = pstmt.executeQuery();
+                // Проверка дали има резултати
                 if (resultSet.next()) {
+                    // Създаване и връщане на обект от тип Car с информацията от резултатите
                     return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
                 } else {
+                    // Показване на предупреждение при липсваща кола с посоченото име
                     WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
                     return null;
                 }
             } catch (SQLException e) {
+                // Показване на предупреждение при грешка при търсенето на колата
                 WarningController.openMessageModal("Грешка при търсенето на колата!", "Грешка", MessageType.WARNING);
                 return null;
             }
         } else {
+            // Показване на предупреждениe при ненамиране на кола
             WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
             return null;
         }
     }
 
 
+    // Метод за извличане на последната добавена кола в базата данни
     public static Car getLastCar() {
-        String sql = "SELECT * FROM car ORDER BY idCar DESC LIMIT 1";
+        // SQL заявка за извличане на последния запис от таблицата car
+        String sql = "SELECT * FROM carracers.car ORDER BY idCar DESC LIMIT 1";
         try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet resultSet = pstmt.executeQuery()) {
+            // Проверка дали има резултати
             if (resultSet.next()) {
+                // Създаване и връщане на обект от тип Car с информацията от резултатите
                 return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
             } else {
+                // Показване на предупреждение при липсваща кола
                 WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
                 return null;
             }
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка при извличането на последната кола
             WarningController.openMessageModal("Грешка при взимане на последната кола от базата данни!", "Неуспешна операция", MessageType.WARNING);
             return null;
         }
     }
 
 
+    // Метод за актуализиране на кола в базата данни
     public static void updateCar(Car car) {
-        String sql = "UPDATE car SET modelCar=?, brandCar=?, engineCar=?, fuelCar=?, horsepowerCar=? WHERE idCar=?";
+        // SQL заявка за актуализиране на запис в таблицата car
+        String sql = "UPDATE carracers.car SET modelCar=?, brandCar=?, engineCar=?, fuelCar=?, horsepowerCar=? WHERE idCar=?";
         try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Задаване на стойности на параметрите в SQL заявката
             pstmt.setString(1, car.getModelCar());
             pstmt.setString(2, car.getBrandCar());
             pstmt.setString(3, car.getEngineCar());
             pstmt.setString(4, car.getFuelCar());
             pstmt.setInt(5, car.getHorsepowerCar());
             pstmt.setInt(6, car.getIdCar());
+            // Изпълнение на SQL заявката
             pstmt.executeUpdate();
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка при актуализирането на колата в базата данни
             WarningController.openMessageModal("Грешка при обновяването на колата в базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
 
+    // Метод за изтриване на кола от базата данни
     public static void deleteCar(int idCar) {
-        String sql = "DELETE FROM car WHERE idCar=?";
+        // SQL заявка за изтриване на запис от таблицата car
+        String sql = "DELETE FROM carracers.car WHERE idCar=?";
         try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Задаване на стойността на параметъра в SQL заявката
             pstmt.setInt(1, idCar);
+            // Изпълнение на SQL заявката
             pstmt.executeUpdate();
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка при изтриването на колата от базата данни
             WarningController.openMessageModal("Грешка при изтриването на колата от базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
 
+    // Метод за извличане на снимка на кола от базата данни
     public static Image getImageCar(Car car) {
         try {
-            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageCar FROM car WHERE (idCar = " + car.getIdCar() + ");");
+            // SQL заявка за извличане на запис от таблицата car
+            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageCar FROM carracers.car WHERE (idCar = " + car.getIdCar() + ");");
+            // Изпълнение на SQL заявката и получаване на резултатите
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
+            // Извличане на снимката от резултатите
             Blob blob = resultSet.getBlob(1);
             if (blob != null) {
+                // Превръщане на снимката в обект от тип Image и връщането му
                 InputStream inputStream = blob.getBinaryStream();
                 Image image = new Image(inputStream);
                 return image;
@@ -129,56 +173,75 @@ public class CarService {
                 return null;
             }
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка при зареждането на снимката на колата
             WarningController.openMessageModal("Грешка при зареждане на снимката на колата!", "Грешка", MessageType.WARNING);
             return null;
         }
     }
 
+    // Метод за задаване на снимка на кола в базата данни
     public static PreparedStatement setImageCar() {
         try {
-            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE car SET imageCar = ?  WHERE idCar = ?;");
+            // Създаване и връщане на обект от тип PreparedStatement за актуализиране на запис в таблицата car
+            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.car SET imageCar = ?  WHERE idCar = ?;");
             return store;
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка при задаването на снимката на колата
             WarningController.openMessageModal("Грешка при задаване на снимката на колата!", "Грешка", MessageType.WARNING);
             return null;
         }
-
     }
 
+    // Метод за извличане на всички коли от базата данни
     public static ArrayList<Car> getAllCar() {
+        // Изпълнение на заявка към базата данни
         ResultSet resultSet = Database.executeQuery("SELECT * FROM car;");
 
+        // Създаване на списък за съхранение на всички коли
         ArrayList<Car> allCars = new ArrayList<>();
         try {
+            // Обхождане на резултатите от заявката
             while (resultSet.next()) {
+                // Извличане на данните за всяка кола
                 int id = resultSet.getInt("idCar");
                 String model = resultSet.getString("modelCar");
                 String brand = resultSet.getString("brandCar");
                 String engine = resultSet.getString("engineCar");
                 String fuel = resultSet.getString("fuelCar");
                 int horsepower = resultSet.getInt("horsepowerCar");
+                // Създаване на обект от тип Car с извлечените данни
                 Car car = new Car(id, model, brand, engine, fuel, horsepower);
+                // Добавяне на обекта към списъка с всички коли
                 allCars.add(car);
             }
         } catch (SQLException e) {
+            // Показване на съобщение за грешка при възникване на проблем при извличането на данните
             WarningController.openMessageModal("Възникна грешка при извличането на всички коли!", "Грешка", MessageType.WARNING);
         }
+        // Връщане на списъка с всички коли
         return allCars;
     }
 
 
+    // Метод за извличане на имената (марка и модел) на всички коли от базата данни
     public static ArrayList<String> getAllCarNames() {
-        String sql = "SELECT CONCAT(brandCar, ' ', modelCar) AS carName FROM car;";
+        // Заявка към базата данни за извличане на марката и модела на всички коли
+        String sql = "SELECT CONCAT(brandCar, ' ', modelCar) AS carName FROM carracers.car;";
+        // Списък за съхранение на имената (марка и модел) на всички коли
         ArrayList<String> allCars = new ArrayList<>();
+        // Изпълнение на заявка към базата данни
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet resultSet = pstmt.executeQuery()) {
             while (resultSet.next()) {
+                // Добавяне на името към списъка с всички имена на коли
                 allCars.add(resultSet.getString("carName"));
             }
         } catch (SQLException e) {
+            // Показване на съобщение за грешка при възникване на проблем при извличането на данните
             WarningController.openMessageModal("Грешка при извличане на имената на колите!", "Грешка", MessageType.WARNING);
         }
+        // Връщане на списъка с имената (марка и модел) на всички коли
         return allCars;
     }
 

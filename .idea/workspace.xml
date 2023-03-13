@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Променен скрипт, съвпадащ с документацията.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Вече общите точки на един състезател се актуализират при промяна на точките за дадено състезание.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/RaceModalPointsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/data/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +226,7 @@
       <workItem from="1678045048673" duration="35000" />
       <workItem from="1678045091027" duration="1327000" />
       <workItem from="1678557284435" duration="2774000" />
-      <workItem from="1678730644645" duration="1808000" />
+      <workItem from="1678730644645" duration="4205000" />
     </task>
     <task id="LOCAL-00001" summary="Иницииране на проекта.">
       <created>1664475033076</created>
@@ -516,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678559632103</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Вече общите точки на един състезател се актуализират при промяна на точките за дадено състезание.">
+      <created>1678732522578</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1678732522578</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -558,7 +564,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Създаден е екран за състезатели." />
     <MESSAGE value="Създаден е екран за състезания за админ.&#10;Променени са над 20 файла и са изчистени множество бъгове." />
     <MESSAGE value="Проекта е готов на ниво изисквания! Лека нощ :)!" />
     <MESSAGE value="Проектът е готов на ниво изисквания! Лека нощ :)!" />
@@ -583,7 +588,8 @@
     <MESSAGE value="Поправен е дизайнът." />
     <MESSAGE value="Коригирани са грешките и ако администраторът промени ролята си, той ще бъде изхвърлен от системата." />
     <MESSAGE value="Коригиран е гадния бъг (дето ти викам а то се махна на компа) и в класациите да няма администратори." />
-    <option name="LAST_COMMIT_MESSAGE" value="Коригиран е гадния бъг (дето ти викам а то се махна на компа) и в класациите да няма администратори." />
+    <MESSAGE value="Вече общите точки на един състезател се актуализират при промяна на точките за дадено състезание." />
+    <option name="LAST_COMMIT_MESSAGE" value="Вече общите точки на един състезател се актуализират при промяна на точките за дадено състезание." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -607,11 +613,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/controllers/MainScreenAdminController.java</url>
           <line>183</line>
           <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/services/CarService.java</url>
-          <line>136</line>
-          <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hristov/mihail/carracing/Test.java</url>
