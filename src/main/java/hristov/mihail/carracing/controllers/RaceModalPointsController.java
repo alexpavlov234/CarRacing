@@ -1,5 +1,6 @@
 package hristov.mihail.carracing.controllers;
 
+import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
 import hristov.mihail.carracing.services.CarService;
@@ -21,14 +22,11 @@ import java.util.ResourceBundle;
 
 public class RaceModalPointsController {
 
+    ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList;
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
-    ObservableList<RaceHasCarAndDriver> raceHasCarAndDriversObservableList;
-
     @FXML
     private Button addPoints;
 
@@ -51,24 +49,42 @@ public class RaceModalPointsController {
 
     @FXML
     private TableView<RaceHasCarAndDriver> table;
+    private ObservableList<RaceHasCarAndDriver> originalRaceHasCarAndDriversObservableList;
+    private int idRace;
 
     @FXML
     void applyPoints(ActionEvent event) {
         Race race = RaceService.getRace(racesCombobox.getValue());
         int totalPoints = 0;
 
-        for (RaceHasCarAndDriver raceHasCarAndDriver :
-                raceHasCarAndDriversObservableList) {
+        for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriversObservableList) {
             totalPoints += raceHasCarAndDriver.getPoints();
         }
 
+        // Проверка дали размерът на списъка с коли и състезатели за състезанието е по-голям от 0
         if (raceHasCarAndDriversObservableList.size() > 0) {
+            // Проверка дали общият брой точки е по-малък или равен на точките за състезанието
             if (totalPoints <= race.getPointsRace()) {
+                // Актуализиране на списъка с коли и състезатели за състезанието
                 RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
+                // Обхождане на всеки елемент от списъка с коли и състезатели за състезанието
+                for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriversObservableList) {
+                    // Вземане на човека, асоцииран с ID-то на състезателя
+                    Person person = PersonService.getPerson(raceHasCarAndDriver.getIdDriver());
+                    // Вземане на оригиналните точки от оригиналния списък
+                    int originalPoints = originalRaceHasCarAndDriversObservableList.get(raceHasCarAndDriversObservableList.indexOf(raceHasCarAndDriver)).getPoints();
+                    // Актуализация на точките на човека като добавяме новите му точки и изваждаме точките му преди редакция
+                    person.setPointsPerson(person.getPointsPerson() + raceHasCarAndDriver.getPoints() - originalPoints);
+                    // Актуализация на човека в базата данни
+                    PersonService.updatePerson(person);
+                }
+                // Показване на успешно съобщение при въвеждането на всички точки за всички участници в състезанието
                 WarningController.openMessageModal("Вие успешно въведохте точките на всички състезатели!", "Успешно въведени точки", MessageType.SUCCESS);
-
+                // Актуализация на оригиналния списък с всички записи за коли и състезатели за това конкретно ID на състезание
+                originalRaceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace));
             } else {
-                WarningController.openMessageModal("Сумата от точките на всички състезатели трябва да бъде не по-голяма от " + race.getPointsRace() + "!", "Невалиден брой точки", MessageType.WARNING);
+                // Показване на предупреждение, че общата стойност от точките не трябва да надвишава определена стойност, определена от максималния брой позволени точки за това конкретно състезание.
+                WarningController.openMessageModal("Сумата от точките набот;всички участници трябва да бот;де не по-голяма от " + race.getPointsRace() + "!", "Невалиден брой точки", MessageType.WARNING);
             }
         }
         this.initialize();
@@ -241,8 +257,9 @@ public class RaceModalPointsController {
 
     @FXML
     private void onSelectComboBox(ActionEvent event) {
-        int idRace = RaceService.getRace(racesCombobox.getValue()).getIdRace();
+        idRace = RaceService.getRace(racesCombobox.getValue()).getIdRace();
         //Не бях добавил idRace където трябва.
+        originalRaceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace));
         raceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace));
         for (int i = 0; i < table.getItems().size(); i++) {
             table.getItems().clear();
