@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -46,6 +47,7 @@ public class RaceHasCarAndDriverModalController {
     private RaceHasCarAndDriver raceHasCarAndDriver;
     @FXML
     private ComboBox<String> raceCombobox;
+    private boolean isNotEditModal;
 
     public void setRaceHasCarAndDriver(RaceHasCarAndDriver raceHasCarAndDriver) {
         this.raceHasCarAndDriver = raceHasCarAndDriver;
@@ -60,6 +62,7 @@ public class RaceHasCarAndDriverModalController {
     @FXML
     void applyChanges(ActionEvent event) {
         if (!Objects.isNull(raceHasCarAndDriver)) {
+            if (carCombobox.getValue() != null && raceCombobox.getValue() != null && driverCombobox.getValue() != null) {
                 raceHasCarAndDriver.setIdCar(CarService.getCar(carCombobox.getValue()).getIdCar());
                 raceHasCarAndDriver.setIdDriver(PersonService.getPerson(driverCombobox.getValue()).getIdPerson());
                 raceHasCarAndDriver.setIdRace(RaceService.getRace(raceCombobox.getValue()).getIdRace());
@@ -112,9 +115,12 @@ public class RaceHasCarAndDriverModalController {
                     WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
                 }
 
+            } else {
+                WarningController.openMessageModal("Попълнете всички данни за участието!", "Празни данни", MessageType.WARNING);
 
+            }
         } else {
-
+            if (carCombobox.getValue() != null && raceCombobox.getValue() != null && driverCombobox.getValue() != null) {
                 raceHasCarAndDriver = new RaceHasCarAndDriver();
                 raceHasCarAndDriver.setIdCar(CarService.getCar(carCombobox.getValue()).getIdCar());
                 raceHasCarAndDriver.setIdDriver(PersonService.getPerson(driverCombobox.getValue()).getIdPerson());
@@ -148,7 +154,33 @@ public class RaceHasCarAndDriverModalController {
                 } else {
                     WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
                 }
+            } else {
+                WarningController.openMessageModal("Попълнете всички данни за участието!", "Празни данни", MessageType.WARNING);
+
+            }
         }
+
+    }
+
+    @FXML
+    private void onSelectComboBox(ActionEvent event) {
+        int idRace = RaceService.getRace(raceCombobox.getValue()).getIdRace();
+        ArrayList<String> personNames = PersonService.getAllPersonNames();
+        ArrayList<RaceHasCarAndDriver> raceHasCarAndDriverArrayList = RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace);
+        for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriverArrayList) {
+            for (int i = 0; i < personNames.size(); i++) {
+                if (PersonService.getPerson(personNames.get(i)).getIdPerson() == raceHasCarAndDriver.getIdDriver()) {
+                    personNames.remove(i);
+                }
+            }
+
+        }
+        driverCombobox.getItems().clear();
+        driverCombobox.getItems().addAll(personNames);
+        if (isNotEditModal) {
+            driverCombobox.setDisable(false);
+        }
+        carCombobox.setDisable(false);
 
     }
 
@@ -165,11 +197,14 @@ public class RaceHasCarAndDriverModalController {
             assert labelUserName != null : "fx:id=\"labelUserName\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
             assert raceCombobox != null : "fx:id=\"raceCombobox\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
 
-            carCombobox.getItems().addAll(CarService.getAllCarNames());
-            raceCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
-            driverCombobox.getItems().addAll(PersonService.getAllPersonNames());
 
+            isNotEditModal = Objects.isNull(raceHasCarAndDriver);
             if (!Objects.isNull(raceHasCarAndDriver)) {
+                carCombobox.getItems().addAll(CarService.getAllCarNames());
+                raceCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
+                raceCombobox.setDisable(true);
+                driverCombobox.getItems().addAll(PersonService.getAllPersonNames());
+                driverCombobox.setDisable(true);
                 if (LoginService.isLoggedUserAdmin()) {
                     carCombobox.setValue(CarService.getCar(raceHasCarAndDriver.getIdCar()).getNameCar());
                     raceCombobox.setValue(RaceService.getRace(raceHasCarAndDriver.getIdRace()).getNameRace());
@@ -182,6 +217,11 @@ public class RaceHasCarAndDriverModalController {
                     raceCombobox.setDisable(true);
                 }
             } else {
+                carCombobox.setDisable(true);
+                driverCombobox.setDisable(true);
+                carCombobox.getItems().addAll(CarService.getAllCarNames());
+                raceCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
+                driverCombobox.getItems().addAll(PersonService.getAllPersonNames());
                 if (LoginService.isLoggedUserAdmin() && Objects.isNull(raceHasCarAndDriver)) {
                     applyChangeButton.setText("Добави");
                 }

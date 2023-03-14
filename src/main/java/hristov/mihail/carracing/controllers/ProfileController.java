@@ -161,50 +161,50 @@ public class ProfileController {
 
         // Ако обектът съдържащ колата, не е празен, това значи, че искаме да бъде актуализиран в базата данни.
         // Извършваме нужните проверки на въведените данни.
-        if (user.getEmailUser().equals("admin") && user.getPassUser().equals("admin") && person.getFirstNamePerson().equals("Администратор")) {
-            user.setEmailUser(emailUserField.getText());
-            user.setPassUser(passwordUserField.getText());
-            user.setTypeUser(roleCombobox.getValue());
+         if (!Objects.isNull(user)) {
+             if (user.getEmailUser().equals("admin") && user.getPassUser().equals("admin") && person.getFirstNamePerson().equals("Администратор")) {
+                 user.setEmailUser(emailUserField.getText());
+                 user.setPassUser(passwordUserField.getText());
+                 user.setTypeUser(roleCombobox.getValue());
 
-            person.setAgePerson(Integer.parseInt(agePersonField.getText()));
-            person.setFirstNamePerson(firstNamePersonField.getText());
-            person.setMiddleNamePerson(middleNamePersonField.getText());
-            person.setLastNamePerson(lastNamePersonField.getText());
-            person.setNationalityPerson(nationalityPersonCombobox.getValue());
-            person.setPointsPerson(Integer.parseInt(pointsPersonField.getText()));
-            // Зареждаме каченото изображение и го задаваме на нашия обект.
-            try {
-                if (!Objects.isNull(file)) {
-                    FileInputStream fileInputStream = new FileInputStream(file);
-                    storeImage = PersonService.setImagePerson();
-                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                    storeImage.setInt(2, this.user.getUserHasPerson());
-                    storeImage.execute();
-                }
-            } catch (Exception e) {
-                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-            }
-            PersonService.updatePerson(person);
-            UserService.updateUser(user);
-            Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
+                 person.setAgePerson(Integer.parseInt(agePersonField.getText()));
+                 person.setFirstNamePerson(firstNamePersonField.getText());
+                 person.setMiddleNamePerson(middleNamePersonField.getText());
+                 person.setLastNamePerson(lastNamePersonField.getText());
+                 person.setNationalityPerson(nationalityPersonCombobox.getValue());
+                 person.setPointsPerson(Integer.parseInt(pointsPersonField.getText()));
+                 // Зареждаме каченото изображение и го задаваме на нашия обект.
+                 try {
+                     if (!Objects.isNull(file)) {
+                         FileInputStream fileInputStream = new FileInputStream(file);
+                         storeImage = PersonService.setImagePerson();
+                         storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
+                         storeImage.setInt(2, this.user.getUserHasPerson());
+                         storeImage.execute();
+                     }
+                 } catch (Exception e) {
+                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                 }
+                 PersonService.updatePerson(person);
+                 UserService.updateUser(user);
+                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
 
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException e) {
-                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-            }
-            // Обновяваме нашето прозорче за всеки случай.
-            //dialogController.setLoggedUser(user.getIdCar());
-            ProfileController dialogController = fxmlLoader.getController();
-            dialogController.setUser(user);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
-        } else if (!Objects.isNull(user)) {
-            if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(firstNamePersonField.getText()) || Objects.isNull(middleNamePersonField.getText()) || Objects.isNull(lastNamePersonField.getText()) || Objects.isNull(agePersonField.getText()))) {
+                 Scene scene = null;
+                 try {
+                     scene = new Scene(fxmlLoader.load());
+                 } catch (IOException e) {
+                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                 }
+                 // Обновяваме нашето прозорче за всеки случай.
+                 //dialogController.setLoggedUser(user.getIdCar());
+                 ProfileController dialogController = fxmlLoader.getController();
+                 dialogController.setUser(user);
+                 stage.setResizable(false);
+                 stage.setScene(scene);
+                 stage.show();
+             } else if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(firstNamePersonField.getText()) || Objects.isNull(middleNamePersonField.getText()) || Objects.isNull(lastNamePersonField.getText()) || Objects.isNull(agePersonField.getText()))) {
                 if (!(emailUserField.getText().equals("") || passwordUserField.getText().equals("") || firstNamePersonField.getText().equals("") || middleNamePersonField.getText().equals("") || lastNamePersonField.getText().equals("") || agePersonField.getText().equals(""))) {
                     // Проверяваме дали имейлът е валиден
                     if (isValidEmail(emailUserField.getText())) {

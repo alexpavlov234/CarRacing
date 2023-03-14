@@ -84,7 +84,7 @@ public class RaceModalPointsController {
                 originalRaceHasCarAndDriversObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(idRace));
             } else {
                 // Показване на предупреждение, че общата стойност от точките не трябва да надвишава определена стойност, определена от максималния брой позволени точки за това конкретно състезание.
-                WarningController.openMessageModal("Сумата от точките набот;всички участници трябва да бот;де не по-голяма от " + race.getPointsRace() + "!", "Невалиден брой точки", MessageType.WARNING);
+                WarningController.openMessageModal("Сумата от точките на всички участници не трябва да е по-голяма от " + race.getPointsRace() + "!", "Невалиден брой точки", MessageType.WARNING);
             }
         }
         this.initialize();

@@ -7,8 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,6 +41,7 @@ public class WarningController {
     void setOkButton(ActionEvent event) {
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.setResizable(false);
+
         stage.close();
     }
 
@@ -56,6 +60,12 @@ public class WarningController {
             //messageController.setLoggedUser(car.getIdCar());
             WarningController messageController = fxmlLoader.getController();
             messageController.setErrorMessage(text);
+            try {
+                stage1.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
+            } catch (FileNotFoundException e) {
+                // Nothing
+            }
+
             stage1.setTitle(windowTitle);
             stage1.setScene(scene);
             stage1.setResizable(false);
@@ -75,6 +85,11 @@ public class WarningController {
             WarningController messageController = fxmlLoader.getController();
             messageController.setErrorMessage(text);
             stage1.setTitle(windowTitle);
+            try {
+                stage1.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
+            } catch (FileNotFoundException e) {
+                // Nothing
+            }
             stage1.setScene(scene);
             stage1.setResizable(false);
             stage1.show();

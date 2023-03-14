@@ -24,7 +24,7 @@
                         <Font name="Segoe UI" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="raceCombobox" prefHeight="27.0" prefWidth="240.0" styleClass="combobox" />
+                  <ComboBox fx:id="raceCombobox" onAction="#onSelectComboBox" prefHeight="27.0" prefWidth="240.0" styleClass="combobox" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="360.0" spacing="10.0">
