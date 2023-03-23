@@ -165,7 +165,6 @@ public class RaceHasCarAndDriverModalController {
                     }
                 }
             }
-
         }
         driverCombobox.getItems().clear();
         driverCombobox.getItems().addAll(personNames);
