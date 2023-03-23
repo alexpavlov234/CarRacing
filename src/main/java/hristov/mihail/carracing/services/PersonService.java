@@ -73,8 +73,7 @@ public class PersonService {
 
 
     public static Image getImagePerson(Person person) {
-        try {
-            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imagePerson FROM carracers.person WHERE (idPerson = " + person.getIdPerson() + ");");
+        try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imagePerson FROM carracers.person WHERE (idPerson = " + person.getIdPerson() + ");")) {
             //retrieve.setInt(1, 1);
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
@@ -95,8 +94,7 @@ public class PersonService {
     }
 
     public static PreparedStatement setImagePerson() {
-        try {
-            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.person SET imagePerson = ?  WHERE idPerson = ?;");
+        try (PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.person SET imagePerson = ?  WHERE idPerson = ?;")) {
             return store;
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при задаване на снимката на човека!", "Грешка", MessageType.WARNING);
@@ -241,6 +239,7 @@ public class PersonService {
             WarningController.openMessageModal("Не е намерен такъв състезател!", "Лиспващ състезател", MessageType.WARNING);
             return null;
         }
+
     }
 
 }

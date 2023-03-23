@@ -286,8 +286,7 @@ public class RacesUserController {
                                         // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                         RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
                                         try {
-                                            if (RaceHasCarAndDriverService.areTherePlacesAvailable(RaceService.getRace(raceHasCarAndDriver.getIdRace()))) {
-                                                // Създаваме нов stage (нов прозорец)
+                                             // Създаваме нов stage (нов прозорец)
                                                 Stage stage = new Stage();
                                                 // Зареждане на прозореца от fxml-a.
                                                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
@@ -314,9 +313,6 @@ public class RacesUserController {
                                                         table1.setItems(raceHasCarAndDriverObservableList);
                                                     }
                                                 });
-                                            } else {
-                                                WarningController.openMessageModal("Няма повече свободни места в избраното състезание!", "Няма свободни места", MessageType.WARNING);
-                                            }
 
                                         } catch (Exception e) {
 

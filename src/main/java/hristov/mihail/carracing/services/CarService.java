@@ -23,6 +23,7 @@ public class CarService {
             pstmt.setString(4, car.getFuelCar());
             pstmt.setInt(5, car.getHorsepowerCar());
             // Изпълнение на SQL заявката
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             // Показване на предупреждение при грешка при добавянето на кола в базата данни
@@ -156,9 +157,7 @@ public class CarService {
 
     // Метод за извличане на снимка на кола от базата данни
     public static Image getImageCar(Car car) {
-        try {
-            // SQL заявка за извличане на запис от таблицата car
-            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageCar FROM carracers.car WHERE (idCar = " + car.getIdCar() + ");");
+        try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageCar FROM carracers.car WHERE (idCar = " + car.getIdCar() + ");")){
             // Изпълнение на SQL заявката и получаване на резултатите
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
@@ -181,9 +180,7 @@ public class CarService {
 
     // Метод за задаване на снимка на кола в базата данни
     public static PreparedStatement setImageCar() {
-        try {
-            // Създаване и връщане на обект от тип PreparedStatement за актуализиране на запис в таблицата car
-            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.car SET imageCar = ?  WHERE idCar = ?;");
+        try (PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.car SET imageCar = ?  WHERE idCar = ?;")) {
             return store;
         } catch (SQLException e) {
             // Показване на предупреждение при грешка при задаването на снимката на колата
@@ -192,35 +189,35 @@ public class CarService {
         }
     }
 
-    // Метод за извличане на всички коли от базата данни
     public static ArrayList<Car> getAllCar() {
-        // Изпълнение на заявка към базата данни
-        ResultSet resultSet = Database.executeQuery("SELECT * FROM car;");
-
-        // Създаване на списък за съхранение на всички коли
+        // SQL query to retrieve all cars from the database
+        String sql = "SELECT * FROM carracers.car";
+        // Create a list to store all cars
         ArrayList<Car> allCars = new ArrayList<>();
-        try {
-            // Обхождане на резултатите от заявката
+        try (PreparedStatement pstmt = Database.getConnection().prepareStatement(sql);
+             ResultSet resultSet = pstmt.executeQuery()) {
+            // Iterate over the results of the query
             while (resultSet.next()) {
-                // Извличане на данните за всяка кола
+                // Extract data for each car
                 int id = resultSet.getInt("idCar");
                 String model = resultSet.getString("modelCar");
                 String brand = resultSet.getString("brandCar");
                 String engine = resultSet.getString("engineCar");
                 String fuel = resultSet.getString("fuelCar");
                 int horsepower = resultSet.getInt("horsepowerCar");
-                // Създаване на обект от тип Car с извлечените данни
+                // Create a Car object with the extracted data
                 Car car = new Car(id, model, brand, engine, fuel, horsepower);
-                // Добавяне на обекта към списъка с всички коли
+                // Add the Car object to the list of all cars
                 allCars.add(car);
             }
         } catch (SQLException e) {
-            // Показване на съобщение за грешка при възникване на проблем при извличането на данните
+            // Show an error message if there is a problem retrieving data from the database
             WarningController.openMessageModal("Възникна грешка при извличането на всички коли!", "Грешка", MessageType.WARNING);
         }
-        // Връщане на списъка с всички коли
+        // Return the list of all cars
         return allCars;
     }
+
 
 
     // Метод за извличане на имената (марка и модел) на всички коли от базата данни

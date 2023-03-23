@@ -13,8 +13,7 @@ import java.util.ArrayList;
 
 public class UserService {
     public static void addUser(User user) {
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("INSERT INTO user (emailUser, passUser, typeUser, userHasPerson) VALUES (?, ?, ?, ?)");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("INSERT INTO carracers.user (emailUser, passUser, typeUser, userHasPerson) VALUES (?, ?, ?, ?)")) {
             statement.setString(1, user.getEmailUser());
             statement.setString(2, user.getPassUser());
             statement.setString(3, user.getTypeUser());
@@ -27,8 +26,7 @@ public class UserService {
 
     public static User getUser(int idUser) {
         User user = null;
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE idUser = ?");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE idUser = ?")) {
             statement.setInt(1, idUser);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -42,8 +40,7 @@ public class UserService {
 
     public static User getLastUser() {
         User user = null;
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user ORDER BY idUser DESC LIMIT 1");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user ORDER BY idUser DESC LIMIT 1")) {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 user = new User(resultSet.getInt("idUser"), resultSet.getString("emailUser"), resultSet.getString("passUser"), resultSet.getString("typeUser"), resultSet.getInt("userHasPerson"));
@@ -56,8 +53,7 @@ public class UserService {
 
     public static User getUser(String emailUser) {
         User user = null;
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE emailUser = ?");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE emailUser = ?")) {
             statement.setString(1, emailUser);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -71,8 +67,7 @@ public class UserService {
 
     public static User getUser(Person person) {
         User user = null;
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE userHasPerson = ? LIMIT 1");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM user WHERE userHasPerson = ? LIMIT 1")) {
             statement.setInt(1, person.getIdPerson());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -85,8 +80,7 @@ public class UserService {
     }
 
     public static void updateUser(User user) {
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("UPDATE user SET emailUser = ?, passUser = ?, typeUser = ?, userHasPerson = ? WHERE idUser = ?");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("UPDATE user SET emailUser = ?, passUser = ?, typeUser = ?, userHasPerson = ? WHERE idUser = ?")) {
             statement.setString(1, user.getEmailUser());
             statement.setString(2, user.getPassUser());
             statement.setString(3, user.getTypeUser());
@@ -99,8 +93,7 @@ public class UserService {
     }
 
     public static void deleteUser(int idUser) {
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("DELETE FROM user WHERE idUser = ?");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("DELETE FROM user WHERE idUser = ?")) {
             statement.setInt(1, idUser);
             statement.executeUpdate();
         } catch (SQLException e) {
