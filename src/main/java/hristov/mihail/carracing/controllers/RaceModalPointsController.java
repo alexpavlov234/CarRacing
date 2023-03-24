@@ -67,17 +67,17 @@ public class RaceModalPointsController {
             if (totalPoints <= race.getPointsRace()) {
                 // Актуализиране на списъка с коли и състезатели за състезанието
                 RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
-                // Обхождане на всеки елемент от списъка с коли и състезатели за състезанието
-                for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriversObservableList) {
-                    // Вземане на човека, асоцииран с ID-то на състезателя
-                    Person person = PersonService.getPerson(raceHasCarAndDriver.getIdDriver());
-                    // Вземане на оригиналните точки от оригиналния списък
-                    int originalPoints = originalRaceHasCarAndDriversObservableList.get(raceHasCarAndDriversObservableList.indexOf(raceHasCarAndDriver)).getPoints();
-                    // Актуализация на точките на човека като добавяме новите му точки и изваждаме точките му преди редакция
-                    person.setPointsPerson(person.getPointsPerson() + raceHasCarAndDriver.getPoints() - originalPoints);
-                    // Актуализация на човека в базата данни
-                    PersonService.updatePerson(person);
-                }
+//                // Обхождане на всеки елемент от списъка с коли и състезатели за състезанието
+//                for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriversObservableList) {
+//                    // Вземане на човека, асоцииран с ID-то на състезателя
+//                    Person person = PersonService.getPerson(raceHasCarAndDriver.getIdDriver());
+//                    // Вземане на оригиналните точки от оригиналния списък
+//                    int originalPoints = originalRaceHasCarAndDriversObservableList.get(raceHasCarAndDriversObservableList.indexOf(raceHasCarAndDriver)).getPoints();
+//                    // Актуализация на точките на човека като добавяме новите му точки и изваждаме точките му преди редакция
+//                    person.setPointsPerson(person.getPointsPerson() + raceHasCarAndDriver.getPoints() - originalPoints);
+//                    // Актуализация на човека в базата данни
+//                    PersonService.updatePerson(person);
+//                }
                 // Показване на успешно съобщение при въвеждането на всички точки за всички участници в състезанието
                 WarningController.openMessageModal("Вие успешно въведохте точките на всички състезатели!", "Успешно въведени точки", MessageType.SUCCESS);
                 // Актуализация на оригиналния списък с всички записи за коли и състезатели за това конкретно ID на състезание

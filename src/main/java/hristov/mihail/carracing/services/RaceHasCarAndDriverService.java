@@ -86,13 +86,41 @@ public class RaceHasCarAndDriverService {
     }
 
     public static void deleteRaceHasCarAndDriver(int idRaceHasCarAndDriver) {
-        try (PreparedStatement statement = Database.getConnection().prepareStatement("DELETE FROM race_has_car_and_driver WHERE id = ?")) {
-            statement.setInt(1, idRaceHasCarAndDriver);
-            statement.executeUpdate();
+        try (Connection conn = Database.getConnection();
+             PreparedStatement deleteStmt = conn.prepareStatement("DELETE FROM race_has_car_and_driver WHERE id = ?");
+             PreparedStatement updateStmt = conn.prepareStatement("UPDATE person SET pointsPerson = ? WHERE idPerson = ?")) {
+
+            conn.setAutoCommit(false); // Disable auto-commit to improve performance
+
+            // Get the driver's ID and current total points before deleting the race result
+            int driverId = 0;
+            int pointsPerson = 0;
+            String selectSql = "SELECT idDriver, SUM(points) AS pointsPerson FROM race_has_car_and_driver WHERE id = ?";
+            try (PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
+                selectStmt.setInt(1, idRaceHasCarAndDriver);
+                ResultSet rs = selectStmt.executeQuery();
+                if (rs.next()) {
+                    driverId = rs.getInt("idDriver");
+                    pointsPerson = rs.getInt("pointsPerson");
+                }
+            }
+
+            // Delete the race result
+            deleteStmt.setInt(1, idRaceHasCarAndDriver);
+            deleteStmt.executeUpdate();
+
+            // Update the driver's total points
+            pointsPerson = getTotalPointsForDriver(conn, driverId); // Recalculate total points
+            updateStmt.setInt(1, pointsPerson);
+            updateStmt.setInt(2, driverId);
+            updateStmt.executeUpdate();
+
+            conn.commit(); // Commit the changes to the database
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при изтриването на участие от базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
+
 
     public static ArrayList<RaceHasCarAndDriver> getAllRaceHasCarAndDriver() {
         ArrayList<RaceHasCarAndDriver> allRaceHasCarAndDriver = new ArrayList<>();
@@ -211,13 +239,15 @@ public class RaceHasCarAndDriverService {
 
         String updateSql = "UPDATE race_has_car_and_driver SET points = ? WHERE idRace = ? AND idCar = ? AND idDriver = ?";
         String insertSql = "INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points) VALUES (?, ?, ?, ?)";
+        String updatePersonSql = "UPDATE person SET pointsPerson = ? WHERE idPerson = ?";
 
         try (Connection conn = Database.getConnection()) {
             conn.setAutoCommit(false); // Disable auto-commit to improve performance
 
             // Insert or update the race results
             try (PreparedStatement updateStmt = conn.prepareStatement(updateSql);
-                 PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+                 PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+                 PreparedStatement updatePersonStmt = conn.prepareStatement(updatePersonSql)) {
 
                 for (RaceHasCarAndDriver r : raceHasCarAndDriversObservableList) {
                     updateStmt.setInt(1, r.getPoints());
@@ -235,6 +265,11 @@ public class RaceHasCarAndDriverService {
                         insertStmt.setInt(4, r.getPoints());
                         insertStmt.addBatch(); // Add the prepared statement to a batch
                     }
+
+                    // Update the driver's total points in the person table
+                    updatePersonStmt.setInt(1, getTotalPointsForDriver(conn, r.getIdDriver()));
+                    updatePersonStmt.setInt(2, r.getIdDriver());
+                    updatePersonStmt.executeUpdate();
                 }
 
                 // Execute the batch of prepared statements for inserting new records
@@ -249,6 +284,20 @@ public class RaceHasCarAndDriverService {
             WarningController.openMessageModal("Грешка при актуализирането на точките!", "Грешка", MessageType.WARNING);
         }
     }
+
+    private static int getTotalPointsForDriver(Connection conn, int driverId) throws SQLException {
+        String sql = "SELECT SUM(points) FROM race_has_car_and_driver WHERE idDriver = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, driverId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                return 0;
+            }
+        }
+    }
+
 
 }
 
