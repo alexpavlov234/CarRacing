@@ -28,9 +28,6 @@ public class Database {
         try {
             Connection myConnection = DriverManager.getConnection(url, user, password);
             Statement myStatement = myConnection.createStatement();
-            //ВАЖНОООООООООООООООООООООООООО
-            //executeQuery -> execute
-
             myStatement.execute(sql);
         } catch (SQLException e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);

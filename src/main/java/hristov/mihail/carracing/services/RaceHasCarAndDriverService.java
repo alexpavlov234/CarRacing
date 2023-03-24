@@ -227,7 +227,7 @@ public class RaceHasCarAndDriverService {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int number = resultSet.getInt("Number");
-                arePlacesAvailable = number <= race.getParticipantsRace();
+                arePlacesAvailable = number + 1 <= race.getParticipantsRace() ;
             }
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при търсенето на свободни места в състезанието!", "Грешка", MessageType.WARNING);

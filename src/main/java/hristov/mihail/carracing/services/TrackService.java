@@ -15,8 +15,7 @@ import java.util.ArrayList;
 
 public class TrackService {
     public static void addTrack(Track track) {
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("INSERT INTO track (nameTrack, lengthTrack, locationTrack) VALUES (?, ?, ?)");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("INSERT INTO track (nameTrack, lengthTrack, locationTrack) VALUES (?, ?, ?)")) {
             statement.setString(1, track.getNameTrack());
             statement.setInt(2, track.getLengthTrack());
             statement.setString(3, track.getLocationTrack());
@@ -28,8 +27,7 @@ public class TrackService {
     }
 
     public static PreparedStatement setImageTrack() {
-        try {
-            PreparedStatement store = Database.getConnection().prepareStatement("UPDATE track SET imageTrack = ?  WHERE idTrack = ?;");
+        try (PreparedStatement store = Database.getConnection().prepareStatement("UPDATE track SET imageTrack = ?  WHERE idTrack = ?;")){
             return store;
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при задаване на снимката на пистата!", "Грешка", MessageType.WARNING);
@@ -38,8 +36,7 @@ public class TrackService {
     }
 
     public static Image getImageTrack(Track track) {
-        try {
-            PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageTrack FROM track WHERE (idTrack = " + track.getIdTrack() + ");");
+        try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageTrack FROM track WHERE (idTrack = " + track.getIdTrack() + ");")){
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
             Blob blob = resultSet.getBlob(1);
@@ -58,8 +55,7 @@ public class TrackService {
 
     public static Track getTrack(int idTrack) {
         Track track = null;
-        try {
-            PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM track WHERE idTrack = ?");
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM track WHERE idTrack = ?")){
             statement.setInt(1, idTrack);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
