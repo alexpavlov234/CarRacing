@@ -142,13 +142,43 @@ public class CarService {
 
     // Метод за изтриване на кола от базата данни
     public static void deleteCar(int idCar) {
+        boolean isCarUsed = false;
         // SQL заявка за изтриване на запис от таблицата car
         String sql = "DELETE FROM carracers.car WHERE idCar=?";
         try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            // Задаване на стойността на параметъра в SQL заявката
-            pstmt.setInt(1, idCar);
-            // Изпълнение на SQL заявката
-            pstmt.executeUpdate();
+            // SQL заявки за проверка дали колата е използвана някъде
+            String raceSql = "SELECT * FROM carracers.race_has_car_and_driver WHERE idCar=?";
+            String driverSql = "SELECT * FROM carracers.person WHERE carPerson=?";
+            try (PreparedStatement racePstmt = conn.prepareStatement(raceSql); PreparedStatement driverPstmt = conn.prepareStatement(driverSql)) {
+
+                // Проверка дали колата се използва в състезания
+                racePstmt.setInt(1, idCar);
+                ResultSet raceResultSet = racePstmt.executeQuery();
+                if (raceResultSet.next()) {
+                    isCarUsed = true;
+                    WarningController.openMessageModal("Колата се използва в състезание и не може да бъде изтрита!", "Неуспешно изтриване", MessageType.WARNING);
+                } else {
+
+                    // Проверка дали колата се използва от други състезатели
+                    driverPstmt.setInt(1, idCar);
+                    ResultSet driverResultSet = driverPstmt.executeQuery();
+                    if (driverResultSet.next()) {
+                        isCarUsed = true;
+                        // Показване на предупреждение при грешка при изтриването на колата от базата данни
+                        WarningController.openMessageModal("Колата се използва от състезател и не може да бъде изтрита!", "Неуспешно изтриване", MessageType.WARNING);
+                    }
+                }
+            } catch (SQLException e) {
+                // Показване на предупреждение при грешка при изтриването на колата от базата данни
+                WarningController.openMessageModal("Грешка при изтриването на колата от базата данни!", "Неуспешна операция", MessageType.WARNING);
+            }
+            // Ако колата не се използва се изтрива
+            if (!isCarUsed) {
+                // Задаване на стойността на параметъра в SQL заявката
+                pstmt.setInt(1, idCar);
+                // Изпълнение на SQL заявката
+                pstmt.executeUpdate();
+            }
         } catch (SQLException e) {
             // Показване на предупреждение при грешка при изтриването на колата от базата данни
             WarningController.openMessageModal("Грешка при изтриването на колата от базата данни!", "Неуспешна операция", MessageType.WARNING);
@@ -157,7 +187,7 @@ public class CarService {
 
     // Метод за извличане на снимка на кола от базата данни
     public static Image getImageCar(Car car) {
-        try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageCar FROM carracers.car WHERE (idCar = " + car.getIdCar() + ");")){
+        try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageCar FROM carracers.car WHERE (idCar = " + car.getIdCar() + ");")) {
             // Изпълнение на SQL заявката и получаване на резултатите
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
@@ -203,8 +233,7 @@ public class CarService {
         String sql = "SELECT * FROM carracers.car";
         // Create a list to store all cars
         ArrayList<Car> allCars = new ArrayList<>();
-        try (PreparedStatement pstmt = Database.getConnection().prepareStatement(sql);
-             ResultSet resultSet = pstmt.executeQuery()) {
+        try (PreparedStatement pstmt = Database.getConnection().prepareStatement(sql); ResultSet resultSet = pstmt.executeQuery()) {
             // Iterate over the results of the query
             while (resultSet.next()) {
                 // Extract data for each car
@@ -228,7 +257,6 @@ public class CarService {
     }
 
 
-
     // Метод за извличане на имената (марка и модел) на всички коли от базата данни
     public static ArrayList<String> getAllCarNames() {
         // Заявка към базата данни за извличане на марката и модела на всички коли
@@ -236,9 +264,7 @@ public class CarService {
         // Списък за съхранение на имената (марка и модел) на всички коли
         ArrayList<String> allCars = new ArrayList<>();
         // Изпълнение на заявка към базата данни
-        try (Connection conn = Database.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet resultSet = pstmt.executeQuery()) {
+        try (Connection conn = Database.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet resultSet = pstmt.executeQuery()) {
             while (resultSet.next()) {
                 // Добавяне на името към списъка с всички имена на коли
                 allCars.add(resultSet.getString("carName"));

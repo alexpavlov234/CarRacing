@@ -104,7 +104,6 @@ public class CarsController {
                                             Car car = getTableView().getItems().get(getIndex());
                                             // Изтриваме колата
                                             //TODO: Колата принадлежи на
-
                                             CarService.deleteCar(car.getIdCar());
                                             // Обновяваме таблицата
                                             carObservableList = FXCollections.observableList(CarService.getAllCar());
