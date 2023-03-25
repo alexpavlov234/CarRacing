@@ -45,7 +45,7 @@ public class TrackService {
     }
 
     public static Image getImageTrack(Track track) {
-        try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageTrack FROM track WHERE (idTrack = " + track.getIdTrack() + ");")){
+        try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imageTrack FROM track WHERE (idTrack = " + track.getIdTrack() + ");")) {
             ResultSet resultSet = retrieve.executeQuery();
             resultSet.next();
             Blob blob = resultSet.getBlob(1);
@@ -64,7 +64,7 @@ public class TrackService {
 
     public static Track getTrack(int idTrack) {
         Track track = null;
-        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM track WHERE idTrack = ?")){
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM track WHERE idTrack = ?")) {
             statement.setInt(1, idTrack);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -109,10 +109,22 @@ public class TrackService {
     }
 
     public static void deleteTrack(int idTrack) {
+        boolean isTrackUsed = false;
         String sql = "DELETE FROM track WHERE idTrack = ?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
-            statement.setInt(1, idTrack);
-            statement.executeUpdate();
+            String trackSql = "SELECT * FROM race WHERE trackRace = ?";
+            try (PreparedStatement driverPstmt = Database.getConnection().prepareStatement(trackSql)) {
+                driverPstmt.setInt(1, idTrack);
+                ResultSet driverResultSet = driverPstmt.executeQuery();
+                if (driverResultSet.next()) {
+                    isTrackUsed = true;
+                    WarningController.openMessageModal("Пистата се използва от състезание и не може да бъде изтрита!", "Неуспешно изтриване", MessageType.WARNING);
+                }
+            }
+            if (!isTrackUsed) {
+                statement.setInt(1, idTrack);
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при изтриването на пистата от базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
