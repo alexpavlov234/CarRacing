@@ -30,7 +30,6 @@ import java.util.ResourceBundle;
 
 public class CarModalController {
 
-    static PreparedStatement storeImage;
     static File file;
     @FXML
     private ResourceBundle resources;
@@ -85,21 +84,15 @@ public class CarModalController {
                         if (isNumeric(horsepowerCarField.getText())) {
                             // Ако всичко е наред с данните, значи може да запишем нашия нов обект в базата данни.
                             // Запазваме информацията от нашите полета в нов обект и този обект го добавяме в базата данни.
-                            car = new Car(modelCarField.getText().trim().replace(" ","-"), brandCarField.getText().trim(), engineCarField.getText().trim(), fuelCarField.getText().trim(), Integer.parseInt(horsepowerCarField.getText().trim()));
+                            car = new Car(modelCarField.getText().trim().replace(" ", "-"), brandCarField.getText().trim(), engineCarField.getText().trim(), fuelCarField.getText().trim(), Integer.parseInt(horsepowerCarField.getText().trim()));
                             CarService.addCar(car);
                             // Извличаме от базата данни новосъздадения обект, защото така е редно, ако има някакво форматиране на данните от нашата база данни.
                             car = CarService.getLastCar();
                             try {
                                 // Проверяваме дали има качено изображение.
                                 if (!Objects.isNull(file)) {
-                                    FileInputStream fileInputStream = new FileInputStream(file);
-                                    // Подготвяме нашата команда за добавяне на изображение на нашата кола.
-                                    storeImage = CarService.setImageCar();
-                                    // Задаваме със стойности, двете въпросителни в нашата заявка.
-                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                    storeImage.setInt(2, this.car.getIdCar());
-                                    // Изпълняваме нашата заявка.
-                                    storeImage.execute();
+                                    CarService.setImageCar(file, this.car);
+
                                 }
                                 // Задаваме нашите полета да бъдат равни на полетата от нашия обект. Нали след като записахме колата, изтеглихме отново от базата данни за всеки случай.
                                 modelCarField.setText(car.getModelCar());
@@ -162,11 +155,7 @@ public class CarModalController {
                             // Зареждаме каченото изображение и го задаваме на нашия обект.
                             try {
                                 if (!Objects.isNull(file)) {
-                                    FileInputStream fileInputStream = new FileInputStream(file);
-                                    storeImage = CarService.setImageCar();
-                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                    storeImage.setInt(2, this.car.getIdCar());
-                                    storeImage.execute();
+                                    CarService.setImageCar(file, this.car);
                                 }
                             } catch (Exception e) {
                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -202,6 +191,7 @@ public class CarModalController {
             }
         }
     }
+
     // Метод, който се извиква при натискане на бутона за качване на изображение.
     @FXML
     void uploadImage(ActionEvent event) {
@@ -222,6 +212,7 @@ public class CarModalController {
             carImageView.setImage(CarService.getImageCar(car));
         }
     }
+
     // Проверка чрез regex дали двигателят е валиден.
     public boolean isValidEngine(String name) {
         String regexPattern = "^[0-9].[0-9].*$";
@@ -240,6 +231,7 @@ public class CarModalController {
         }
         return strNum.matches(regexPattern);
     }
+
     // Кметът, който се изпълнява при отварянето на нашия модел.
     @FXML
     void initialize() {

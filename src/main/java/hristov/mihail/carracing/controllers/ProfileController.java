@@ -35,7 +35,6 @@ import java.util.regex.Pattern;
 
 public class ProfileController {
 
-    static PreparedStatement storeImage;
     static File file;
 
     @FXML
@@ -176,11 +175,7 @@ public class ProfileController {
                  // Зареждаме каченото изображение и го задаваме на нашия обект.
                  try {
                      if (!Objects.isNull(file)) {
-                         FileInputStream fileInputStream = new FileInputStream(file);
-                         storeImage = PersonService.setImagePerson();
-                         storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                         storeImage.setInt(2, this.user.getUserHasPerson());
-                         storeImage.execute();
+                         PersonService.setImagePerson(file, this.person);
                      }
                  } catch (Exception e) {
                      WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -227,11 +222,7 @@ public class ProfileController {
                                             // Зареждаме каченото изображение и го задаваме на нашия обект.
                                             try {
                                                 if (!Objects.isNull(file)) {
-                                                    FileInputStream fileInputStream = new FileInputStream(file);
-                                                    storeImage = PersonService.setImagePerson();
-                                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                                    storeImage.setInt(2, this.user.getUserHasPerson());
-                                                    storeImage.execute();
+                                                    PersonService.setImagePerson(file, this.person);
                                                 }
                                             } catch (Exception e) {
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -301,11 +292,7 @@ public class ProfileController {
                                             // Зареждаме каченото изображение и го задаваме на нашия обект.
                                             try {
                                                 if (!Objects.isNull(file)) {
-                                                    FileInputStream fileInputStream = new FileInputStream(file);
-                                                    storeImage = PersonService.setImagePerson();
-                                                    storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                                    storeImage.setInt(2, this.user.getUserHasPerson());
-                                                    storeImage.execute();
+                                                    PersonService.setImagePerson(file, this.person);
                                                 }
                                             } catch (Exception e) {
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);

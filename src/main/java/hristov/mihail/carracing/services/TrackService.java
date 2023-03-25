@@ -6,6 +6,9 @@ import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Track;
 import javafx.scene.image.Image;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
@@ -26,12 +29,18 @@ public class TrackService {
         }
     }
 
-    public static PreparedStatement setImageTrack() {
-        try (PreparedStatement store = Database.getConnection().prepareStatement("UPDATE track SET imageTrack = ?  WHERE idTrack = ?;")){
-            return store;
+    public static void setImageTrack(File file, Track track) {
+        try (PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.track SET imageTrack = ?  WHERE idTrack = ?;")) {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            store.setBinaryStream(1, fileInputStream, fileInputStream.available());
+            store.setInt(2, track.getIdTrack());
+            store.execute();
         } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при задаване на снимката на пистата! Грешка в базата данни!", "Грешка", MessageType.WARNING);
+        } catch (FileNotFoundException e) {
+            WarningController.openMessageModal("Грешка при задаване на снимката на пистата! Файлът не е намерен!", "Грешка", MessageType.WARNING);
+        } catch (Exception e) {
             WarningController.openMessageModal("Грешка при задаване на снимката на пистата!", "Грешка", MessageType.WARNING);
-            return null;
         }
     }
 
@@ -105,7 +114,7 @@ public class TrackService {
             statement.setInt(1, idTrack);
             statement.executeUpdate();
         } catch (SQLException e) {
-            WarningController.openMessageModal("Грешка при изтриването на колата от базата данни!", "Неуспешна операция", MessageType.WARNING);
+            WarningController.openMessageModal("Грешка при изтриването на пистата от базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
 

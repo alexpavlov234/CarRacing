@@ -6,7 +6,7 @@ import hristov.mihail.carracing.data.Database;
 import hristov.mihail.carracing.models.Car;
 import javafx.scene.image.Image;
 
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -179,13 +179,22 @@ public class CarService {
     }
 
     // Метод за задаване на снимка на кола в базата данни
-    public static PreparedStatement setImageCar() {
+    public static void setImageCar(File file, Car car) {
         try (PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.car SET imageCar = ?  WHERE idCar = ?;")) {
-            return store;
+            // Задаване на снимката на колата
+            FileInputStream fileInputStream = new FileInputStream(file);
+            store.setBinaryStream(1, fileInputStream, fileInputStream.available());
+            store.setInt(2, car.getIdCar());
+            store.execute();
         } catch (SQLException e) {
-            // Показване на предупреждение при грешка при задаването на снимката на колата
+            // Показване на предупреждение при грешка в базата данни
+            WarningController.openMessageModal("Грешка при задаване на снимката на колата! Грешка в базата данни!", "Грешка", MessageType.WARNING);
+        } catch (FileNotFoundException e) {
+            // Показване на предупреждение при грешка при намирането на файла
+            WarningController.openMessageModal("Грешка при задаване на снимката на колата! Файлът не е намерен!", "Грешка", MessageType.WARNING);
+        } catch (Exception e) {
+            // Показване на предупреждение при друг вид грешка
             WarningController.openMessageModal("Грешка при задаване на снимката на колата!", "Грешка", MessageType.WARNING);
-            return null;
         }
     }
 

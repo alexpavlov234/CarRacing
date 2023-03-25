@@ -8,6 +8,9 @@ import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.User;
 import javafx.scene.image.Image;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
@@ -93,14 +96,23 @@ public class PersonService {
 
     }
 
-    public static PreparedStatement setImagePerson() {
+    public static void setImagePerson(File file, Person person) {
         try (PreparedStatement store = Database.getConnection().prepareStatement("UPDATE carracers.person SET imagePerson = ?  WHERE idPerson = ?;")) {
-            return store;
+            // Задаване на снимката на колата
+            FileInputStream fileInputStream = new FileInputStream(file);
+            store.setBinaryStream(1, fileInputStream, fileInputStream.available());
+            store.setInt(2, person.getIdPerson());
+            store.execute();
         } catch (SQLException e) {
+            // Показване на предупреждение при грешка в базата данни
+            WarningController.openMessageModal("Грешка при задаване на снимката на човека! Грешка в базата данни!", "Грешка", MessageType.WARNING);
+        } catch (FileNotFoundException e) {
+            // Показване на предупреждение при грешка при намирането на файла
+            WarningController.openMessageModal("Грешка при задаване на снимката на човека! Файлът не е намерен!", "Грешка", MessageType.WARNING);
+        } catch (Exception e) {
+            // Показване на предупреждение при друг вид грешка
             WarningController.openMessageModal("Грешка при задаване на снимката на човека!", "Грешка", MessageType.WARNING);
-            return null;
         }
-
     }
 
     public static Person getLastPerson() {

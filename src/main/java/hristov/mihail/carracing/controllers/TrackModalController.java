@@ -31,8 +31,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TrackModalController {
-
-    static PreparedStatement storeImage;
     static File file;
     @FXML
     private ResourceBundle resources;
@@ -80,14 +78,7 @@ public class TrackModalController {
 
                     try {
                         if (!Objects.isNull(file)) {
-                            FileInputStream fileInputStream = new FileInputStream(file);
-                            //Подготвяме командата за задаване на изображение
-                            storeImage = TrackService.setImageTrack();
-                            //Попълваме върпостиелните в нея
-                            storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                            storeImage.setInt(2, this.track.getIdTrack());
-                            //Изпълняваме командата
-                            storeImage.execute();
+                           TrackService.setImageTrack(file, this.track);
                         }
                         //Задаваме полетата с данните на обекта
                         nameTrackField.setText(track.getNameTrack());
@@ -119,8 +110,6 @@ public class TrackModalController {
                         //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
                         applyChangeButton.setText("Приложи");
-                    } catch (SQLException e) {
-                        WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     } catch (IOException e) {
                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     }
@@ -141,14 +130,7 @@ public class TrackModalController {
 
                                 try {
                                     if (!Objects.isNull(file)) {
-                                        FileInputStream fileInputStream = new FileInputStream(file);
-                                        //Подготвяме командата за задаване на изображение
-                                        storeImage = TrackService.setImageTrack();
-                                        //Попълваме върпостиелните в нея
-                                        storeImage.setBinaryStream(1, fileInputStream, fileInputStream.available());
-                                        storeImage.setInt(2, this.track.getIdTrack());
-                                        //Изпълняваме командата
-                                        storeImage.execute();
+                                         TrackService.setImageTrack(file, this.track);
                                     }
                                 } catch (Exception e) {
                                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);

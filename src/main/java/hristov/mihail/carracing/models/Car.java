@@ -106,6 +106,5 @@ public class Car {
 
     public String getNameCar() {
         return this.brandCar + " " + this.modelCar;
-
     }
 }
