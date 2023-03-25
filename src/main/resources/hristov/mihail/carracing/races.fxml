@@ -30,7 +30,7 @@
         <TableView fx:id="table1" layoutX="13.0" layoutY="252.0" prefHeight="123.0" prefWidth="638.0" AnchorPane.bottomAnchor="52.0">
             <columns>
                 <TableColumn fx:id="race" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Писта" />
-                <TableColumn fx:id="car" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Коли" />
+                <TableColumn fx:id="car" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Кола" />
                 <TableColumn fx:id="driver" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Състезател" />
                 <TableColumn fx:id="actions1" editable="false" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" style="-fx-alignment: CENTER;" styleClass="table-colum" text="Действия" />
             </columns>
