@@ -99,11 +99,11 @@ use carracers;
 
 -- Insert data into car table
 INSERT INTO car (modelCar, brandCar, engineCar, fuelCar, horsepowerCar)
-VALUES ('GT-R', 'Nissan', 'V6', 'Бензин', 565),
-       ('911', 'Porsche', 'Flat 6', 'Бензин', 450),
-       ('Corvette', 'Chevrolet', 'V8', 'Бензин', 495),
-       ('Aventador', 'Lamborghini', 'V12', 'Бензин', 740),
-       ('Model S', 'Tesla', 'Електрически', 'Електричество', 670);
+VALUES ('GT-R', 'Nissan', '3.8 V6', 'Бензин', 565),
+       ('911', 'Porsche', '3.0 Flat 6', 'Бензин', 450),
+       ('Corvette', 'Chevrolet', '6.2 V8', 'Бензин', 495),
+       ('Aventador', 'Lamborghini', '6.5 V12', 'Бензин', 740),
+       ('Model S', 'Tesla', '0.0', 'Електричество', 670);
 
 -- Insert data into person table
 INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, carPerson)
@@ -115,11 +115,11 @@ VALUES ('Николай', 'Петров', 'Димитров', 25, 'Българ�
        ('Администратор','','',0,'',0,null);
 -- Insert data into user table
 INSERT INTO user (emailUser, passUser, typeUser, userHasPerson)
-VALUES ('nikolai.dimitrov@example.com', 'password1', 'User', 1),
-       ('maria.ivanova@example.com', 'password2', 'User', 2),
-       ('georgi.todorov@example.com', 'password3', 'User', 3),
-       ('anna.dimitrova@example.com', 'password4', 'User', 4),
-       ('dimitar.angelov@example.com', 'password5', 'User', 5),
+VALUES ('nikolai.dimitrov@gmail.com', 'nikolai1234', 'User', 1),
+       ('maria.ivanova@gmail.com', 'maria1234', 'User', 2),
+       ('georgi.todorov@gmail.com', 'georgi1234', 'User', 3),
+       ('anna.dimitrova@gmail.com', 'anna1234', 'User', 4),
+       ('dimitar.angelov@gmail.com', 'dimitar1234', 'User', 5),
        ('admin', 'admin', 'Admin', 6);
 
 -- Insert data into track table
@@ -132,11 +132,11 @@ VALUES ('Circuit de Spa-Francorchamps', 7004, 'Белгия'),
 
 -- Insert data into race table
 INSERT INTO race (trackRace, dateRace, lapsRace, pointsRace, participantsRace)
-VALUES (3, '2022-05-01', 3, 20, 5),
-       (1, '2022-07-15', 5, 30, 4),
-       (5, '2022-08-22', 4, 25, 3),
-       (2, '2022-09-10', 6, 35, 4),
-       (4, '2022-11-05', 4, 25, 5);
+VALUES (3, '2023-05-01', 3, 20, 5),
+       (1, '2023-07-15', 5, 30, 4),
+       (5, '2023-08-22', 4, 25, 3),
+       (2, '2023-09-10', 6, 35, 4),
+       (4, '2023-11-05', 4, 25, 5);
 
 -- Insert data into race_has_car_and_driver table
 INSERT INTO race_has_car_and_driver (idRace, idCar, idDriver, points)
