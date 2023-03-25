@@ -176,6 +176,7 @@ public class ProfileController {
                  try {
                      if (!Objects.isNull(file)) {
                          PersonService.setImagePerson(file, this.person);
+                         file = null;
                      }
                  } catch (Exception e) {
                      WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -223,6 +224,7 @@ public class ProfileController {
                                             try {
                                                 if (!Objects.isNull(file)) {
                                                     PersonService.setImagePerson(file, this.person);
+                                                    file = null;
                                                 }
                                             } catch (Exception e) {
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -293,6 +295,7 @@ public class ProfileController {
                                             try {
                                                 if (!Objects.isNull(file)) {
                                                     PersonService.setImagePerson(file, this.person);
+                                                    file = null;
                                                 }
                                             } catch (Exception e) {
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -435,7 +438,7 @@ public class ProfileController {
             if (!(Objects.isNull(person) || person.getCarPerson() == 0)) {
                 carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
             }
-
+            file = null;
             emailUserField.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent ke) {

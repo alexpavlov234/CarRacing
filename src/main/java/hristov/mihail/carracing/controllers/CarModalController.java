@@ -92,7 +92,7 @@ public class CarModalController {
                                 // Проверяваме дали има качено изображение.
                                 if (!Objects.isNull(file)) {
                                     CarService.setImageCar(file, this.car);
-
+                                    file = null;
                                 }
                                 // Задаваме нашите полета да бъдат равни на полетата от нашия обект. Нали след като записахме колата, изтеглихме отново от базата данни за всеки случай.
                                 modelCarField.setText(car.getModelCar());
@@ -150,12 +150,13 @@ public class CarModalController {
                             car.setModelCar(modelCarField.getText());
                             car.setBrandCar(brandCarField.getText());
                             car.setHorsepowerCar(Integer.parseInt(horsepowerCarField.getText()));
-                            car.setFuelCar(fuelCarField.getText());
+                             car.setFuelCar(fuelCarField.getText());
                             car.setEngineCar(engineCarField.getText());
                             // Зареждаме каченото изображение и го задаваме на нашия обект.
                             try {
                                 if (!Objects.isNull(file)) {
                                     CarService.setImageCar(file, this.car);
+                                    file = null;
                                 }
                             } catch (Exception e) {
                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -252,6 +253,7 @@ public class CarModalController {
             assert label3 != null : "fx:id=\"label3\" was not injected: check your FXML file 'car-modal.fxml'.";
             assert labelCarName != null : "fx:id=\"labelCarName\" was not injected: check your FXML file 'car-modal.fxml'.";
             assert modelCarField != null : "fx:id=\"modelCarField\" was not injected: check your FXML file 'car-modal.fxml'.";
+            file = null;
             modelCarField.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent ke) {
@@ -313,6 +315,7 @@ public class CarModalController {
                 }
                 labelCarName.setText("Добавяне на кола");
             }
+
         });
 
     }

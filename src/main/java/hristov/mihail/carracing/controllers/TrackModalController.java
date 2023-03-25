@@ -78,7 +78,8 @@ public class TrackModalController {
 
                     try {
                         if (!Objects.isNull(file)) {
-                           TrackService.setImageTrack(file, this.track);
+                            TrackService.setImageTrack(file, this.track);
+                            file = null;
                         }
                         //Задаваме полетата с данните на обекта
                         nameTrackField.setText(track.getNameTrack());
@@ -130,7 +131,8 @@ public class TrackModalController {
 
                                 try {
                                     if (!Objects.isNull(file)) {
-                                         TrackService.setImageTrack(file, this.track);
+                                        TrackService.setImageTrack(file, this.track);
+                                        file = null;
                                     }
                                 } catch (Exception e) {
                                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -172,9 +174,7 @@ public class TrackModalController {
     @FXML
     void uploadImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Файлове с изображения", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp")
-        );
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Файлове с изображения", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
         file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
         if (!Objects.isNull(file)) {
             try {
@@ -206,8 +206,6 @@ public class TrackModalController {
             trackImageView.setImage(TrackService.getImageTrack(track));
         }
     }
-
-
 
 
     public boolean isNumeric(String strNum) {
@@ -244,7 +242,7 @@ public class TrackModalController {
                 locationTrackField.setEditable(false);
                 uploadImageButton.setVisible(false);
             }
-
+            file = null;
             nameTrackField.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent ke) {
