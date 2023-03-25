@@ -357,6 +357,9 @@ public class ProfileController {
     @FXML
     void uploadImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Файлове с изображения", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp")
+        );
         // Отваря диалог за избор на файл от системата.
         file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
         // Ако файла не празен.

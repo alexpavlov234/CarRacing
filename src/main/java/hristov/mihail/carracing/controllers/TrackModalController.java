@@ -172,6 +172,9 @@ public class TrackModalController {
     @FXML
     void uploadImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Файлове с изображения", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp")
+        );
         file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
         if (!Objects.isNull(file)) {
             try {
