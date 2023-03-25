@@ -54,14 +54,7 @@ public class RaceService {
             statement.setInt(1, idRace);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                race = new Race(
-                        resultSet.getInt("idRace"),
-                        resultSet.getInt("trackRace"),
-                        resultSet.getString("dateRace"),
-                        resultSet.getInt("lapsRace"),
-                        resultSet.getInt("pointsRace"),
-                        resultSet.getInt("participantsRace")
-                );
+                race = new Race(resultSet.getInt("idRace"), resultSet.getInt("trackRace"), resultSet.getString("dateRace"), resultSet.getInt("lapsRace"), resultSet.getInt("pointsRace"), resultSet.getInt("participantsRace"));
             }
         } catch (SQLException e) {
             WarningController.openMessageModal("Не е намерена такова състезание!", "Лиспващо състезание", MessageType.WARNING);
@@ -71,7 +64,33 @@ public class RaceService {
     }
 
     public static void updateRace(Race race) {
-        String sql = "UPDATE race SET trackRace = ?, dateRace = ?, lapsRace = ?, pointsRace = ?, participantsRace = ? WHERE idRace = ?";
+        int racePoints = 0;
+        int raceParticipants = 0;
+
+        String sql = "SELECT SUM(points), COUNT(DISTINCT idDriver) FROM carracers.race_has_car_and_driver WHERE idRace = ?";
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, race.getIdRace());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                racePoints = resultSet.getInt(1);
+                raceParticipants = resultSet.getInt(2);
+            }
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при проверка на точките и участниците на състезанието!", "Неуспешна операция", MessageType.WARNING);
+            return;
+        }
+
+        if (race.getPointsRace() < racePoints) {
+            WarningController.openMessageModal("Точките на състезанието не могат да бъдат по-малко от общия брой точки на участниците!", "Неуспешна операция", MessageType.WARNING);
+            return;
+        }
+
+        if (race.getParticipantsRace() < raceParticipants) {
+            WarningController.openMessageModal("Броят на участниците в състезанието не може да бъде по-малък от участващите състезатели в състезанието!", "Неуспешна операция", MessageType.WARNING);
+            return;
+        }
+
+        sql = "UPDATE race SET trackRace = ?, dateRace = ?, lapsRace = ?, pointsRace = ?, participantsRace = ? WHERE idRace = ?";
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql)) {
             statement.setInt(1, race.getTrackRace());
             statement.setString(2, race.getDateRace());
@@ -111,10 +130,9 @@ public class RaceService {
         return allRaces;
     }
 
-    public static ArrayList<String> getAllRaceNames() {
+    public static ArrayList<String> getAllRacesNames() {
         ArrayList<String> allRaces = new ArrayList<>();
-        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM race");
-             ResultSet resultSet = statement.executeQuery()) {
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM race"); ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 allRaces.add(TrackService.getTrack(resultSet.getInt("trackRace")).getNameTrack() + " / " + resultSet.getString("dateRace"));
             }
@@ -126,8 +144,7 @@ public class RaceService {
 
     public static ArrayList<String> getAllFreeRacesNames() {
         ArrayList<String> allRaces = new ArrayList<>();
-        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM race");
-             ResultSet resultSet = statement.executeQuery()) {
+        try (PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM race"); ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 if (RaceHasCarAndDriverService.areTherePlacesAvailable(getRace(resultSet.getInt("idRace")))) {
                     allRaces.add(TrackService.getTrack(resultSet.getInt("trackRace")).getNameTrack() + " / " + resultSet.getString("dateRace"));
@@ -158,14 +175,7 @@ public class RaceService {
                 ResultSet resultSet = statement.executeQuery();
 
                 if (resultSet.next()) {
-                    Race race = new Race(
-                            resultSet.getInt("idRace"),
-                            resultSet.getInt("trackRace"),
-                            resultSet.getString("dateRace"),
-                            resultSet.getInt("lapsRace"),
-                            resultSet.getInt("pointsRace"),
-                            resultSet.getInt("participantsRace")
-                    );
+                    Race race = new Race(resultSet.getInt("idRace"), resultSet.getInt("trackRace"), resultSet.getString("dateRace"), resultSet.getInt("lapsRace"), resultSet.getInt("pointsRace"), resultSet.getInt("participantsRace"));
                     return race;
                 } else {
                     WarningController.openMessageModal("Не е намерено такова състезание!", "Лиспващо състезание", MessageType.WARNING);

@@ -40,7 +40,6 @@ public class WarningController {
     @FXML
     void setOkButton(ActionEvent event) {
         Stage stage = (Stage) okButton.getScene().getWindow();
-        stage.setResizable(false);
 
         stage.close();
     }
@@ -50,7 +49,8 @@ public class WarningController {
             Stage stage1 = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
 
-
+            stage1.setMinHeight(230);
+            stage1.setMinWidth(500);
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load());
@@ -68,7 +68,6 @@ public class WarningController {
 
             stage1.setTitle(windowTitle);
             stage1.setScene(scene);
-            stage1.setResizable(false);
             stage1.show();
         } else if (messageType == MessageType.SUCCESS){
             Stage stage1 = new Stage();
@@ -81,6 +80,9 @@ public class WarningController {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+
+            stage1.setMinHeight(230);
+            stage1.setMinWidth(500);
             //messageController.setLoggedUser(car.getIdCar());
             WarningController messageController = fxmlLoader.getController();
             messageController.setErrorMessage(text);
@@ -91,7 +93,6 @@ public class WarningController {
                 // Nothing
             }
             stage1.setScene(scene);
-            stage1.setResizable(false);
             stage1.show();
         }
     }

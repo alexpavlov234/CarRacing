@@ -1,6 +1,5 @@
 package hristov.mihail.carracing.controllers;
 
-import hristov.mihail.carracing.models.Person;
 import hristov.mihail.carracing.models.Race;
 import hristov.mihail.carracing.models.RaceHasCarAndDriver;
 import hristov.mihail.carracing.services.CarService;
@@ -63,8 +62,15 @@ public class RaceModalPointsController {
 
         // Проверка дали размерът на списъка с коли и състезатели за състезанието е по-голям от 0
         if (raceHasCarAndDriversObservableList.size() > 0) {
+            for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriversObservableList) {
+                    if(raceHasCarAndDriver.getPoints() < 0){
+                        WarningController.openMessageModal("Въведени са отрицателни точки!", "Невалидни данни", MessageType.WARNING);
+                        return;
+                    }
+                }
             // Проверка дали общият брой точки е по-малък или равен на точките за състезанието
             if (totalPoints <= race.getPointsRace()) {
+
                 // Актуализиране на списъка с коли и състезатели за състезанието
                 RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
 //                // Обхождане на всеки елемент от списъка с коли и състезатели за състезанието
@@ -251,7 +257,7 @@ public class RaceModalPointsController {
         lastName.setCellFactory(cellFactoryLastName);
         points.setCellFactory(cellFactoryPoints);
         if (racesCombobox.getItems().size() == 0) {
-            racesCombobox.getItems().addAll(RaceService.getAllFreeRacesNames());
+            racesCombobox.getItems().addAll(RaceService.getAllRacesNames());
         }
     }
 

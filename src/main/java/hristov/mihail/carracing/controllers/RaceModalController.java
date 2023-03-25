@@ -96,8 +96,6 @@ public class RaceModalController {
                         if (isNumeric(pointsRaceField.getText())) {
                             if (isNumeric(participantsRaceField.getText())) {
                                 if (isValidDate(dateRaceField.getText())) {
-
-
                                     try {
                                         // Ако всичко е наред с данните, значи може да запишем нашия нов обект в базата данни.
                                         // Запазваме информацията от нашите полета в нов обект и този обект го добавяме в базата данни.
@@ -108,7 +106,6 @@ public class RaceModalController {
 
                                         // Задаваме нашите полета да бъдат равни на полетата от нашия обект. Нали след като записахме колата, изтеглихме отново от базата данни за всеки случай.
                                         dateRaceField.setText(race.getDateRace());
-                                        System.out.println(race.getTrackRace());
                                         trackRaceCombobox.setValue(TrackService.getTrack(race.getTrackRace()).getNameTrack());
                                         participantsRaceField.setText(Integer.toString(race.getParticipantsRace()));
                                         lapsRaceField.setText(Integer.toString(race.getLapsRace()));
@@ -233,8 +230,12 @@ public class RaceModalController {
 
     // Проверка чрез regex дали даден низ е само от числа.
     public boolean isNumeric(String strNum) {
+        boolean isInRange = false;
         String regexPattern = "^[1-9]\\d*$";
-        return strNum.matches(regexPattern);
+        if(strNum.matches(regexPattern)){
+            isInRange = Integer.parseInt(strNum) < 2_147_483_647L;
+        }
+        return strNum.matches(regexPattern) && isInRange;
     }
 
     // Кметът, който се изпълнява при отварянето на нашия модел.

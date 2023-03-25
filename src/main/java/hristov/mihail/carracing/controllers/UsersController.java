@@ -89,9 +89,13 @@ public class UsersController {
                                     } else {
                                         // На нашия бутон за изтриване задаваме стил и какво да става като се цъкне.
                                         deleteButton.setStyle("-fx-background-color: #8b0000; -fx-text-fill: white; ");
+                                        User user = getTableView().getItems().get(getIndex());
+                                        if(user.getIdUser() == LoginService.getLoggedUser().getIdUser()){
+                                            deleteButton.setDisable(true);
+                                        }
                                         deleteButton.setOnAction(event -> {
                                             // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
-                                            User user = getTableView().getItems().get(getIndex());
+
                                             // Изтриваме колата
                                             // Премахваме състезателя, след това потребителя
                                             UserService.deleteUser(user.getIdUser());
@@ -103,7 +107,7 @@ public class UsersController {
                                         // Задаваме какво да се прави при натискантето на бутона за редакиране .
                                         editButton.setOnAction(event -> {
                                             // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
-                                            User user = getTableView().getItems().get(getIndex());
+
 
                                             try {
                                                 // Създаваме нов stage (нов прозорец)

@@ -53,17 +53,7 @@ public class PersonService {
             statement.setInt(1, idPerson);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new Person(
-                        resultSet.getInt("idPerson"),
-                        resultSet.getString("firstNamePerson"),
-                        resultSet.getString("middleNamePerson"),
-                        resultSet.getString("lastNamePerson"),
-                        resultSet.getInt("agePerson"),
-                        resultSet.getString("nationalityPerson"),
-                        resultSet.getInt("pointsPerson"),
-                        resultSet.getInt("carPerson"),
-                        resultSet.getString("imagePerson")
-                );
+                return new Person(resultSet.getInt("idPerson"), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getInt("agePerson"), resultSet.getString("nationalityPerson"), resultSet.getInt("pointsPerson"), resultSet.getInt("carPerson"), resultSet.getString("imagePerson"));
             } else {
                 WarningController.openMessageModal("Не е намерен такъв човек!", "Липсващ човек", MessageType.WARNING);
                 return null; // or throw an exception if you prefer
@@ -151,13 +141,6 @@ public class PersonService {
     public static void deletePerson(int idPerson) {
         String sql1 = "DELETE FROM carracers.person WHERE idPerson=?";
         String sql2 = "DELETE FROM carracers.race_has_car_and_driver WHERE carracers.race_has_car_and_driver.idDriver=?";
-        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql1)) {
-            statement.setInt(1, idPerson);
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            WarningController.openMessageModal("Грешка при изтриване на човек!", "Грешка", MessageType.WARNING);
-        }
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql2)) {
             statement.setInt(1, idPerson);
             statement.executeUpdate();
@@ -165,6 +148,15 @@ public class PersonService {
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при изтриване на човек!", "Грешка", MessageType.WARNING);
         }
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql1)) {
+
+            statement.setInt(1, idPerson);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            WarningController.openMessageModal("Грешка при изтриване на човек!", "Грешка", MessageType.WARNING);
+        }
+
     }
 
     public static void setCarPerson(Car car, Person person) {
@@ -182,8 +174,7 @@ public class PersonService {
     public static ArrayList<Person> getAllPerson() {
         ArrayList<Person> allPeople = new ArrayList<>();
         String sql = "SELECT * FROM carracers.person";
-        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(sql); ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 Person person = new Person(resultSet.getInt("idPerson"), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getInt("agePerson"), resultSet.getString("nationalityPerson"), resultSet.getInt("pointsPerson"), resultSet.getInt("carPerson"), resultSet.getString("imagePerson"));
                 User user = UserService.getUser(person);
@@ -205,17 +196,7 @@ public class PersonService {
             ResultSet resultSet = statement.executeQuery();
 
             while ((resultSet.next())) {
-                Person person = new Person(
-                        resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")),
-                        resultSet.getString("firstNamePerson"),
-                        resultSet.getString("middleNamePerson"),
-                        resultSet.getString("lastNamePerson"),
-                        resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")),
-                        resultSet.getString("nationalityPerson"),
-                        resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")),
-                        resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")),
-                        resultSet.getString("imagePerson")
-                );
+                Person person = new Person(resultSet.getString("idPerson") == null ? 0 : Integer.parseInt(resultSet.getString("idPerson")), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getString("agePerson") == null ? 0 : Integer.parseInt(resultSet.getString("agePerson")), resultSet.getString("nationalityPerson"), resultSet.getString("pointsPerson") == null ? 0 : Integer.parseInt(resultSet.getString("pointsPerson")), resultSet.getString("carPerson") == null ? 0 : Integer.parseInt(resultSet.getString("carPerson")), resultSet.getString("imagePerson"));
 
                 User user = UserService.getUser(person);
                 if (user != null && !user.getTypeUser().equals("Admin")) {
