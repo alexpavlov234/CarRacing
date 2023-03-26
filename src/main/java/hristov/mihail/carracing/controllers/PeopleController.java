@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -133,7 +134,8 @@ public class PeopleController {
                                             stage.setTitle("Редакция на " + person.getFirstNamePerson() + " " + person.getLastNamePerson());
                                             stage.setScene(scene);
                                             stage.setResizable(false);
-                                            stage.show();
+                                            stage.initModality(Modality.APPLICATION_MODAL);
+
                                             // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -144,6 +146,7 @@ public class PeopleController {
                                                     table.setItems(peopleObservableList);
                                                 }
                                             });
+                                            stage.showAndWait();
                                         } catch (Exception e) {
                                             // Ако нещо гръмне по трасето да се покаже грешка.
                                             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -188,7 +191,8 @@ public class PeopleController {
             stage.setTitle("Добавяне на състезател");
             stage.setResizable(false);
             stage.setScene(scene);
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -199,6 +203,7 @@ public class PeopleController {
                     table.setItems(peopleObservableList);
                 }
             });
+            stage.showAndWait();
         } catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
 

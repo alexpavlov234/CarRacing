@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -68,7 +69,8 @@ public class WarningController {
 
             stage1.setTitle(windowTitle);
             stage1.setScene(scene);
-            stage1.show();
+            stage1.initModality(Modality.APPLICATION_MODAL);
+            stage1.showAndWait();
         } else if (messageType == MessageType.SUCCESS){
             Stage stage1 = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("success-modal.fxml"));
@@ -93,7 +95,8 @@ public class WarningController {
                 // Nothing
             }
             stage1.setScene(scene);
-            stage1.show();
+            stage1.initModality(Modality.APPLICATION_MODAL);
+            stage1.showAndWait();
         }
     }
     @FXML

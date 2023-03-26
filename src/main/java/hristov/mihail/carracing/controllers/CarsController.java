@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -129,7 +130,8 @@ public class CarsController {
                                                 stage.setTitle("Редакция на " + car.getBrandCar() + " " + car.getModelCar());
                                                 stage.setScene(scene);
                                                 stage.setResizable(false);
-                                                stage.show();
+                                                stage.initModality(Modality.APPLICATION_MODAL);
+
                                                 // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -140,6 +142,7 @@ public class CarsController {
                                                         table.setItems(carObservableList);
                                                     }
                                                 });
+                                                stage.showAndWait();
                                             } catch (Exception e) {
                                                 // Ако нещо гръмне по трасето да се покаже грешка.
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -239,7 +242,8 @@ public class CarsController {
             stage.setTitle("Добавяне на кола");
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -249,6 +253,7 @@ public class CarsController {
                     table.setItems(carObservableList);
                 }
             });
+            stage.showAndWait();
         } catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
 

@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -300,7 +301,8 @@ public class RacesUserController {
                                                 stage.setTitle("Редакция на участие в състезание");
                                                 stage.setScene(scene);
                                                 stage.setResizable(false);
-                                                stage.show();
+                                                stage.initModality(Modality.APPLICATION_MODAL);
+
                                                 // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -313,6 +315,7 @@ public class RacesUserController {
                                                         table1.setItems(raceHasCarAndDriverObservableList);
                                                     }
                                                 });
+                                                stage.showAndWait();
 
                                         } catch (Exception e) {
 

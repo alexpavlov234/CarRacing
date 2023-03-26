@@ -183,22 +183,7 @@ public class TrackModalController {
                 //storeImage.execute();
                 trackImageView.setImage(new Image(fileInputStream));
             } catch (FileNotFoundException e) {
-                Stage stage1 = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-                Scene scene = null;
-                try {
-                    scene = new Scene(fxmlLoader.load());
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                //messageController.setLoggedUser(track.getIdTrack());
-                WarningController messageController = fxmlLoader.getController();
-                messageController.setErrorMessage(e.getMessage());
-                stage1.setTitle("Системна грешка");
-                stage1.setScene(scene);
-                stage1.show();
+                WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
             } catch (IOException e) {
                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
             }

@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -69,22 +70,7 @@ public class MainScreenAdminController {
             stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
-            Stage stage1 = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            //messageController.setLoggedUser(car.getIdCar());
-            WarningController messageController = fxmlLoader.getController();
-            messageController.setErrorMessage(e.getMessage());
-            stage1.setTitle("Системна грешка");
-            stage1.setScene(scene);
-            stage1.show();
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
@@ -103,7 +89,8 @@ public class MainScreenAdminController {
             stage.setTitle("Редакция на профил");
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
                 @Override
@@ -115,6 +102,7 @@ public class MainScreenAdminController {
                     }
                 }
             });
+            stage.showAndWait();
         } catch (Exception e) {
 
             WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
@@ -142,22 +130,7 @@ public class MainScreenAdminController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(url));
             mainBorderPane.setCenter(fxmlLoader.load());
         } catch (IOException e) {
-            Stage stage1 = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load());
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            //messageController.setLoggedUser(car.getIdCar());
-            WarningController messageController = fxmlLoader.getController();
-            messageController.setErrorMessage(e.getMessage());
-            stage1.setTitle("Системна грешка");
-            stage1.setScene(scene);
-            stage1.show();
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }
     }
 

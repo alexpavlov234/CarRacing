@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
@@ -84,7 +85,7 @@ public class TracksController {
             actions.minWidthProperty().bind(table.widthProperty().divide(4));
             locationTrack.minWidthProperty().bind(table.widthProperty().divide(4));
             addTrack.setVisible(false);
-            mainPane.setBottomAnchor(table, 14d);
+            AnchorPane.setBottomAnchor(table, 14d);
         }
         // Създаване на така наречения CellFactory - как ще се пълни с данни всяка клетка.
         // nameTrack.setCellValueFactory(new PropertyValueFactory<Track, String>("nameTrack"));
@@ -135,7 +136,8 @@ public class TracksController {
                                                 stage.setTitle("Редакция на " + track.getNameTrack());
                                                 stage.setScene(scene);
                                                 stage.setResizable(false);
-                                                stage.show();
+                                                stage.initModality(Modality.APPLICATION_MODAL);
+
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
                                                     @Override
@@ -144,23 +146,8 @@ public class TracksController {
                                                         table.setItems(tracksObservableList);
                                                     }
                                                 });
+                                                stage.showAndWait();
                                             } catch (Exception e) {
-                                                Stage stage1 = new Stage();
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-                                                Scene scene = null;
-                                                try {
-                                                    scene = new Scene(fxmlLoader.load());
-                                                } catch (IOException ex) {
-                                                    throw new RuntimeException(ex);
-                                                }
-                                                //messageController.setLoggedUser(track.getIdCar());
-                                                WarningController messageController = fxmlLoader.getController();
-                                                messageController.setErrorMessage(e.getMessage());
-                                                stage1.setTitle("Системна грешка");
-                                                stage1.setScene(scene);
-                                                stage1.show();
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                                 //TODO: Екран за грешка
                                             }
@@ -208,7 +195,8 @@ public class TracksController {
                                                 stage.setTitle("Преглед на " + track.getNameTrack());
                                                 stage.setScene(scene);
                                                 stage.setResizable(false);
-                                                stage.show();
+                                                stage.initModality(Modality.APPLICATION_MODAL);
+
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
                                                     @Override
@@ -217,23 +205,8 @@ public class TracksController {
                                                         table.setItems(tracksObservableList);
                                                     }
                                                 });
+                                                stage.showAndWait();
                                             } catch (Exception e) {
-                                                Stage stage1 = new Stage();
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
-
-                                                Scene scene = null;
-                                                try {
-                                                    scene = new Scene(fxmlLoader.load());
-                                                } catch (IOException ex) {
-                                                    throw new RuntimeException(ex);
-                                                }
-                                                //messageController.setLoggedUser(track.getIdCar());
-                                                WarningController messageController = fxmlLoader.getController();
-                                                messageController.setErrorMessage(e.getMessage());
-                                                stage1.setTitle("Системна грешка");
-                                                stage1.setScene(scene);
-                                                stage1.show();
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                                 //TODO: Екран за грешка
                                             }
@@ -273,7 +246,8 @@ public class TracksController {
             stage.setTitle("Добавяне на кола");
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
                 @Override
@@ -282,6 +256,7 @@ public class TracksController {
                     table.setItems(tracksObservableList);
                 }
             });
+            stage.showAndWait();
         } catch (Exception e) {
 
             //TODO: Екран за грешка
