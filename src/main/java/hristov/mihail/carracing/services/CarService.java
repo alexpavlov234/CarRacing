@@ -228,6 +228,7 @@ public class CarService {
         }
     }
 
+    // Метод за извличане на всички коли от базата данни
     public static ArrayList<Car> getAllCar() {
         // SQL query to retrieve all cars from the database
         String sql = "SELECT * FROM carracers.car";
@@ -236,23 +237,23 @@ public class CarService {
         try (PreparedStatement pstmt = Database.getConnection().prepareStatement(sql); ResultSet resultSet = pstmt.executeQuery()) {
             // Iterate over the results of the query
             while (resultSet.next()) {
-                // Extract data for each car
+                // Извличане на данните за всяка кола
                 int id = resultSet.getInt("idCar");
                 String model = resultSet.getString("modelCar");
                 String brand = resultSet.getString("brandCar");
                 String engine = resultSet.getString("engineCar");
                 String fuel = resultSet.getString("fuelCar");
                 int horsepower = resultSet.getInt("horsepowerCar");
-                // Create a Car object with the extracted data
+                // Създаване на обект от тип Car с извлечените данни
                 Car car = new Car(id, model, brand, engine, fuel, horsepower);
-                // Add the Car object to the list of all cars
+                // Добавяне на обекта към списъка с всички коли
                 allCars.add(car);
             }
         } catch (SQLException e) {
-            // Show an error message if there is a problem retrieving data from the database
+            // Показване на съобщение за грешка при възникване на проблем при извличането на данните
             WarningController.openMessageModal("Възникна грешка при извличането на всички коли!", "Грешка", MessageType.WARNING);
         }
-        // Return the list of all cars
+        // Връщане на списъка с всички коли
         return allCars;
     }
 

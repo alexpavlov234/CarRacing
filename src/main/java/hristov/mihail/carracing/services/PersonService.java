@@ -221,15 +221,15 @@ public class PersonService {
                 if (resultSet.next()) {
                     return new Person(resultSet.getInt("idPerson"), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getInt("agePerson"), resultSet.getString("nationalityPerson"), resultSet.getInt("pointsPerson"), resultSet.getInt("carPerson"), resultSet.getString("imagePerson"));
                 } else {
-                    WarningController.openMessageModal("Не е намерен такъв състезател!", "Лиспващ състезател", MessageType.WARNING);
+                    WarningController.openMessageModal("Не е намерен такъв човек!", "Лиспващ човек", MessageType.WARNING);
                     return null;
                 }
             } catch (SQLException e) {
-                WarningController.openMessageModal("Не е намерен такъв състезател!", "Лиспващ състезател", MessageType.WARNING);
+                WarningController.openMessageModal("Не е намерен такъв човек!", "Лиспващ човек", MessageType.WARNING);
                 return null;
             }
         } else {
-            WarningController.openMessageModal("Не е намерен такъв състезател!", "Лиспващ състезател", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерен такъв човек!", "Лиспващ човек", MessageType.WARNING);
             return null;
         }
 
