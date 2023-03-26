@@ -23,7 +23,6 @@ public class CarService {
             pstmt.setString(4, car.getFuelCar());
             pstmt.setInt(5, car.getHorsepowerCar());
             // Изпълнение на SQL заявката
-
             pstmt.executeUpdate();
         } catch (SQLException e) {
             // Показване на предупреждение при грешка при добавянето на кола в базата данни
@@ -98,6 +97,7 @@ public class CarService {
     }
 
 
+
     // Метод за извличане на последната добавена кола в базата данни
     public static Car getLastCar() {
         // SQL заявка за извличане на последния запис от таблицата car
@@ -120,6 +120,7 @@ public class CarService {
     }
 
 
+
     // Метод за актуализиране на кола в базата данни
     public static void updateCar(Car car) {
         // SQL заявка за актуализиране на запис в таблицата car
@@ -139,6 +140,7 @@ public class CarService {
             WarningController.openMessageModal("Грешка при обновяването на колата в базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
     }
+
 
     // Метод за изтриване на кола от базата данни
     public static void deleteCar(int idCar) {
@@ -230,12 +232,12 @@ public class CarService {
 
     // Метод за извличане на всички коли от базата данни
     public static ArrayList<Car> getAllCar() {
-        // SQL query to retrieve all cars from the database
+        // SQL заявка за извличане на всички коли от базата данни
         String sql = "SELECT * FROM carracers.car";
         // Create a list to store all cars
         ArrayList<Car> allCars = new ArrayList<>();
         try (PreparedStatement pstmt = Database.getConnection().prepareStatement(sql); ResultSet resultSet = pstmt.executeQuery()) {
-            // Iterate over the results of the query
+            // Обхождане на резултатите от заявката
             while (resultSet.next()) {
                 // Извличане на данните за всяка кола
                 int id = resultSet.getInt("idCar");
