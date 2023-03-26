@@ -49,7 +49,6 @@ public class WarningController {
         if(messageType == MessageType.WARNING) {
             Stage stage1 = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
-
             stage1.setMinHeight(230);
             stage1.setMinWidth(500);
             Scene scene = null;
@@ -64,9 +63,7 @@ public class WarningController {
             try {
                 stage1.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             } catch (FileNotFoundException e) {
-                // Nothing
             }
-
             stage1.setTitle(windowTitle);
             stage1.setScene(scene);
             stage1.initModality(Modality.APPLICATION_MODAL);

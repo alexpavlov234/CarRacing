@@ -64,46 +64,32 @@ public class CarModalController {
     private Car car;
     private int carId;
 
-    // Нашият метод, който приема обект, който ще се зареди в нашия модал. Тоест като цъкнеш редактирай този метод получава от таблицата обекта, който ще редактираме и го задава за нашия модал.
     public void setCar(Car car) {
         this.car = car;
     }
 
-    // Какво да се случва като цъкнеш бутона приложи.
     @FXML
     void applyChanges(ActionEvent event) {
-        // Програма да не би нашия обект да е празен. Ако е празен, значи е избран прозорец за добавяне на кола.
-        // Ако не е празен, значи ще променяме кола
         if (Objects.isNull(car)) {
-            // Проверяваме дали въведените полета са с коректни данни.
             if (!(Objects.isNull(modelCarField.getText()) || Objects.isNull(brandCarField.getText()) || Objects.isNull(engineCarField.getText()) || Objects.isNull(fuelCarField.getText()) || Objects.isNull(horsepowerCarField.getText()))) {
                 if (!(modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
-                    // Проверяваме дали нашият двигател е с валидно число.
                     if (isValidEngine(engineCarField.getText())) {
-                        // Проверяваме дали е въведено число за конски сили.
                         if (isNumeric(horsepowerCarField.getText())) {
-                            // Ако всичко е наред с данните, значи може да запишем нашия нов обект в базата данни.
-                            // Запазваме информацията от нашите полета в нов обект и този обект го добавяме в базата данни.
                             car = new Car(modelCarField.getText().trim().replace(" ", "-"), brandCarField.getText().trim(), engineCarField.getText().trim(), fuelCarField.getText().trim(), Integer.parseInt(horsepowerCarField.getText().trim()));
                             CarService.addCar(car);
-                            // Извличаме от базата данни новосъздадения обект, защото така е редно, ако има някакво форматиране на данните от нашата база данни.
                             car = CarService.getLastCar();
                             try {
-                                // Проверяваме дали има качено изображение.
                                 if (!Objects.isNull(file)) {
                                     CarService.setImageCar(file, this.car);
                                     file = null;
                                 }
-                                // Задаваме нашите полета да бъдат равни на полетата от нашия обект. Нали след като записахме колата, изтеглихме отново от базата данни за всеки случай.
                                 modelCarField.setText(car.getModelCar());
                                 brandCarField.setText(car.getBrandCar());
                                 fuelCarField.setText(car.getFuelCar());
                                 engineCarField.setText(car.getEngineCar());
                                 horsepowerCarField.setText(Integer.toString(car.getHorsepowerCar()));
                                 labelCarName.setText(car.getBrandCar() + " " + car.getModelCar());
-                                // Задаваме изображение на ImageView-то
                                 carImageView.setImage(CarService.getImageCar(car));
-                                // Обновяваме нашия модел и го отваряме като модал за редакция на вече създадената кола.
                                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
                                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));
                                 stage.setResizable(false);
@@ -122,8 +108,6 @@ public class CarModalController {
                                 stage.setScene(scene);
                                 stage.setResizable(false);
                                 stage.show();
-                                //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
                                 applyChangeButton.setText("Приложи");
                             } catch (Exception e) {
                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -138,21 +122,15 @@ public class CarModalController {
                 WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
             }
         } else {
-            // Ако обектът съдържащ колата, не е празен, това значи, че искаме да бъде актуализиран в базата данни.
-            // Извършваме нужните проверки на въведените данни.
             if (!(Objects.isNull(modelCarField.getText()) || Objects.isNull(brandCarField.getText()) || Objects.isNull(engineCarField.getText()) || Objects.isNull(fuelCarField.getText()) || Objects.isNull(horsepowerCarField.getText()))) {
                 if (!(modelCarField.getText().equals("") || brandCarField.getText().equals("") || engineCarField.getText().equals("") || fuelCarField.getText().equals("") || horsepowerCarField.getText().equals(""))) {
-                    // Проверяваме дали нашият двигател е с валидно число.
                     if (isValidEngine(engineCarField.getText())) {
-                        // Проверяваме дали е въведено число за конски сили.
                         if (isNumeric(horsepowerCarField.getText())) {
-                            // Актуализираме данните на нашата кола.
                             car.setModelCar(modelCarField.getText());
                             car.setBrandCar(brandCarField.getText());
                             car.setHorsepowerCar(Integer.parseInt(horsepowerCarField.getText()));
-                             car.setFuelCar(fuelCarField.getText());
+                            car.setFuelCar(fuelCarField.getText());
                             car.setEngineCar(engineCarField.getText());
-                            // Зареждаме каченото изображение и го задаваме на нашия обект.
                             try {
                                 if (!Objects.isNull(file)) {
                                     CarService.setImageCar(file, this.car);
@@ -172,15 +150,10 @@ public class CarModalController {
                             } catch (IOException e) {
                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                             }
-                            // Обновяваме нашето прозорче за всеки случай.
-                            //dialogController.setLoggedUser(car.getIdCar());
                             CarModalController dialogController = fxmlLoader.getController();
                             dialogController.setCar(car);
                             stage.setScene(scene);
                             stage.show();
-                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
-
                         }
                     }
 
@@ -193,21 +166,15 @@ public class CarModalController {
         }
     }
 
-    // Метод, който се извиква при натискане на бутона за качване на изображение.
     @FXML
     void uploadImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Файлове с изображения", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp")
-        );
-        // Отваря диалог за избор на файл от системата.
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Файлове с изображения", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
         file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
-        // Ако файла не празен.
         if (!Objects.isNull(file)) {
             try {
 
                 FileInputStream fileInputStream = new FileInputStream(file);
-                // Задаваме изображение на нашия ImageView.
                 carImageView.setImage(new Image(fileInputStream));
             } catch (Exception e) {
                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -217,7 +184,6 @@ public class CarModalController {
         }
     }
 
-    // Проверка чрез regex дали двигателят е валиден.
     public boolean isValidEngine(String name) {
         String regexPattern = "^[0-9].[0-9].*$";
 
@@ -227,7 +193,6 @@ public class CarModalController {
         return name.matches(regexPattern);
     }
 
-    // Проверка чрез regex дали даден низ е само от числа.
     public boolean isNumeric(String strNum) {
         String regexPattern = "^[1-9]\\d*$";
         if (!strNum.matches(regexPattern)) {
@@ -236,7 +201,6 @@ public class CarModalController {
         return strNum.matches(regexPattern);
     }
 
-    // Кметът, който се изпълнява при отварянето на нашия модел.
     @FXML
     void initialize() {
 
@@ -294,9 +258,7 @@ public class CarModalController {
                     }
                 }
             });
-            // Ако колата не е празна, прозорецът ще се зададе като такъв за редактиране на данни и ако е - за добавяне на кола.
             if (!Objects.isNull(car)) {
-                //do stuff
                 modelCarField.setText(car.getModelCar());
                 brandCarField.setText(car.getBrandCar());
                 fuelCarField.setText(car.getFuelCar());
