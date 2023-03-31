@@ -121,7 +121,6 @@ public class MainScreenUserController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(url));
             mainBorderPane.setCenter(fxmlLoader.load());
         } catch (IOException e) {
-
             WarningController.openMessageModal(e.getMessage(),"Системна грешка",MessageType.WARNING);
         }
     }
@@ -135,7 +134,6 @@ public class MainScreenUserController {
 
     @FXML
     private void handleShowView3(ActionEvent event) {
-
         try {loadFXML("ranking.fxml");} catch (Exception e) {
              WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
         }

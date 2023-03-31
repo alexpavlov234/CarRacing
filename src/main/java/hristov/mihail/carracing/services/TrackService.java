@@ -70,10 +70,10 @@ public class TrackService {
             if (resultSet.next()) {
                 track = new Track(Integer.parseInt(resultSet.getString("idTrack")), resultSet.getString("nameTrack"), Integer.parseInt(resultSet.getString("lengthTrack")), resultSet.getString("locationTrack"));
             } else {
-                WarningController.openMessageModal("Не е намерена такава писта!", "Лиспваща писта", MessageType.WARNING);
+                WarningController.openMessageModal("Не е намерена такава писта!", "Липсваща писта", MessageType.WARNING);
             }
         } catch (SQLException e) {
-            WarningController.openMessageModal("Не е намерена такава писта!", "Лиспваща писта", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерена такава писта!", "Липсваща писта", MessageType.WARNING);
         }
         return track;
     }
@@ -89,7 +89,7 @@ public class TrackService {
                 track = new Track(resultSet.getInt("idTrack"), resultSet.getString("nameTrack"), resultSet.getInt("lengthTrack"), resultSet.getString("locationTrack"));
             }
         } catch (SQLException e) {
-            WarningController.openMessageModal("Не е намерена такава писта!", "Лиспваща писта", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерена такава писта!", "Липсваща писта", MessageType.WARNING);
         }
 
         return track;

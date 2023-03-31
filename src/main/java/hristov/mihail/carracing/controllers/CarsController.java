@@ -60,8 +60,8 @@ public class CarsController {
         model.setCellValueFactory(new PropertyValueFactory<Car, String>("modelCar"));
 
         table.setPlaceholder(new Label("Няма записи в таблицата"));
-        // Проверяваме дали логнат потребител е администратор.
 
+        // Проверяваме дали логнат потребител е администратор.
         if (LoginService.isLoggedUserAdmin()) {
             brand.maxWidthProperty().bind(table.widthProperty().divide(3));
             model.maxWidthProperty().bind(table.widthProperty().divide(3));
@@ -193,9 +193,9 @@ public class CarsController {
                                             try {
                                                 // Задаваме избраната кола за дадения състезател.
                                                 PersonService.setCarPerson(car, PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson()));
-                                                WarningController.openMessageModal("Вие успешно избрахте своята кола за състезания!", "Успшено избрана кола", MessageType.SUCCESS);
+                                                WarningController.openMessageModal("Вие успешно избрахте своята кола за състезания!", "Успешно избрана кола", MessageType.SUCCESS);
                                             } catch (Exception e) {
-                                                WarningController.openMessageModal("Неуспешно избрана кола за състезания!", "Неуспшено избрана кола", MessageType.WARNING);
+                                                WarningController.openMessageModal("Неуспешно избрана кола за състезания!", "Неуспешно избрана кола", MessageType.WARNING);
 
                                             }
                                             // Обновяваме нашата таблица.
@@ -229,8 +229,6 @@ public class CarsController {
     // Метод, който ще се изпълнява при натискане на бутона добавяне на нов обект.
     @FXML
     void addCar(ActionEvent event) {
-
-
         try {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("car-modal.fxml"));

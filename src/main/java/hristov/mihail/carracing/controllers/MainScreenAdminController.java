@@ -148,7 +148,6 @@ public class MainScreenAdminController {
         try {
             loadFXML("tracks.fxml");
         } catch (Exception e) {
-
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }

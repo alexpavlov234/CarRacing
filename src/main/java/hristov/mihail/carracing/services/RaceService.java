@@ -178,7 +178,7 @@ public class RaceService {
                     Race race = new Race(resultSet.getInt("idRace"), resultSet.getInt("trackRace"), resultSet.getString("dateRace"), resultSet.getInt("lapsRace"), resultSet.getInt("pointsRace"), resultSet.getInt("participantsRace"));
                     return race;
                 } else {
-                    WarningController.openMessageModal("Не е намерено такова състезание!", "Лиспващо състезание", MessageType.WARNING);
+                    WarningController.openMessageModal("Не е намерено такова състезание!", "Липсващо състезание", MessageType.WARNING);
                     return null;
                 }
 
@@ -188,7 +188,7 @@ public class RaceService {
             }
 
         } else {
-            WarningController.openMessageModal("Не е намерено такова състезание!", "Лиспващо състезание", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерено такова състезание!", "Липсващо състезание", MessageType.WARNING);
             return null;
         }
 

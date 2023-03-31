@@ -50,12 +50,12 @@ public class CarService {
                 return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
             } else {
                 // Показване на предупреждение при липсваща кола с посочения ID
-                WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+                WarningController.openMessageModal("Не е намерена такава кола!", "Липсваща кола", MessageType.WARNING);
                 return null;
             }
         } catch (SQLException e) {
             // Показване на предупреждение при грешка при извличането на колата от базата данни
-            WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерена такава кола!", "Липсваща кола", MessageType.WARNING);
             return null;
         }
     }
@@ -81,7 +81,7 @@ public class CarService {
                     return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
                 } else {
                     // Показване на предупреждение при липсваща кола с посоченото име
-                    WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+                    WarningController.openMessageModal("Не е намерена такава кола!", "Липсваща кола", MessageType.WARNING);
                     return null;
                 }
             } catch (SQLException e) {
@@ -91,7 +91,7 @@ public class CarService {
             }
         } else {
             // Показване на предупреждениe при ненамиране на кола
-            WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерена такава кола!", "Липсваща кола", MessageType.WARNING);
             return null;
         }
     }
@@ -109,7 +109,7 @@ public class CarService {
                 return new Car(resultSet.getInt("idCar"), resultSet.getString("modelCar"), resultSet.getString("brandCar"), resultSet.getString("engineCar"), resultSet.getString("fuelCar"), resultSet.getInt("horsepowerCar"));
             } else {
                 // Показване на предупреждение при липсваща кола
-                WarningController.openMessageModal("Не е намерена такава кола!", "Лиспваща кола", MessageType.WARNING);
+                WarningController.openMessageModal("Не е намерена такава кола!", "Липсваща кола", MessageType.WARNING);
                 return null;
             }
         } catch (SQLException e) {
