@@ -31,6 +31,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TrackModalController {
+
     static File file;
     @FXML
     private ResourceBundle resources;
@@ -46,7 +47,6 @@ public class TrackModalController {
     private TextField lengthTrackField;
     @FXML
     private TextField locationTrackField;
-
     @FXML
     private Label label;
     @FXML
@@ -61,21 +61,18 @@ public class TrackModalController {
     private Button uploadImageButton;
     private Track track;
 
-
     public void setTrack(Track track) {
         this.track = track;
     }
 
     @FXML
     void applyChanges(ActionEvent event) {
-
         if (Objects.isNull(track)) {
             if (!(nameTrackField.getText().equals(null) || nameTrackField.getText().equals(null) || lengthTrackField.getText().equals(null) || locationTrackField.getText().equals(null) || nameTrackField.getText().equals("") || lengthTrackField.getText().equals("") || locationTrackField.getText().equals(""))) {
                 if (isNumeric(lengthTrackField.getText())) {
                     track = new Track(nameTrackField.getText(), Integer.parseInt(lengthTrackField.getText()), locationTrackField.getText());
                     TrackService.addTrack(track);
                     track = TrackService.getLastTrack();
-
                     try {
                         if (!Objects.isNull(file)) {
                             TrackService.setImageTrack(file, this.track);
@@ -88,11 +85,10 @@ public class TrackModalController {
                         labelTrackName.setText(track.getNameTrack());
                         trackImageView.setImage(TrackService.getImageTrack(track));
                         //Обновяваме прозореца
-
                         applyChangeButton.setText("Приложи");
                         Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
+                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
                         Scene scene = null;
                         try {
@@ -100,7 +96,6 @@ public class TrackModalController {
                         } catch (IOException e) {
                             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                         }
-                        //dialogController.setLoggedUser(car.getIdCar());
                         TrackModalController dialogController = fxmlLoader.getController();
                         dialogController.setTrack(track);
                         stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
@@ -108,13 +103,10 @@ public class TrackModalController {
                         stage.setScene(scene);
                         stage.setResizable(false);
                         stage.show();
-                        //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
                         applyChangeButton.setText("Приложи");
                     } catch (IOException e) {
                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     }
-
                 }
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
@@ -128,7 +120,6 @@ public class TrackModalController {
                             track.setLocationTrack(locationTrackField.getText());
                             track.setLengthTrack(Integer.parseInt(lengthTrackField.getText()));
                             try {
-
                                 try {
                                     if (!Objects.isNull(file)) {
                                         TrackService.setImageTrack(file, this.track);
@@ -138,10 +129,9 @@ public class TrackModalController {
                                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                 }
                                 TrackService.updateTrack(track);
-
                                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
+                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
                                 Scene scene = null;
                                 try {
@@ -149,7 +139,6 @@ public class TrackModalController {
                                 } catch (IOException e) {
                                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                 }
-                                //dialogController.setLoggedUser(car.getIdCar());
                                 TrackModalController dialogController = fxmlLoader.getController();
                                 dialogController.setTrack(track);
                                 stage.setScene(scene);
@@ -159,7 +148,6 @@ public class TrackModalController {
                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                             }
                         }
-
                     }
                 } else {
                     WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
@@ -168,7 +156,6 @@ public class TrackModalController {
                 WarningController.openMessageModal("Попълнете всички данни за пистата!", "Празни данни", MessageType.WARNING);
             }
         }
-
     }
 
     @FXML
@@ -179,8 +166,6 @@ public class TrackModalController {
         if (!Objects.isNull(file)) {
             try {
                 FileInputStream fileInputStream = new FileInputStream(file);
-
-                //storeImage.execute();
                 trackImageView.setImage(new Image(fileInputStream));
             } catch (FileNotFoundException e) {
                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
@@ -192,7 +177,6 @@ public class TrackModalController {
         }
     }
 
-
     public boolean isNumeric(String strNum) {
         String regexPattern = "^[1-9]\\d*$";
         if (!strNum.matches(regexPattern)) {
@@ -203,7 +187,6 @@ public class TrackModalController {
 
     @FXML
     void initialize() {
-
         Platform.runLater(() -> {
             assert applyChangeButton != null : "fx:id=\"applyChangeButton\" was not injected: check your FXML file 'track-modal.fxml'.";
             assert nameTrackField != null : "fx:id=\"nameTrackField\" was not injected: check your FXML file 'track-modal.fxml'.";
@@ -257,9 +240,7 @@ public class TrackModalController {
                 nameTrackField.setText(track.getNameTrack());
                 locationTrackField.setText(track.getLocationTrack());
                 lengthTrackField.setText(Integer.toString(track.getLengthTrack()));
-
                 labelTrackName.setText(track.getNameTrack());
-
                 trackImageView.setImage(TrackService.getImageTrack(track));
             } else {
                 applyChangeButton.setText("Добави");

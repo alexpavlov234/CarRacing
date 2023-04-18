@@ -31,53 +31,37 @@ public class RegisterController {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
     @FXML
     private ImageView backgroundImageView;
-
     @FXML
     private PasswordField confirmPasswordField;
-
     @FXML
     private TextField emailField;
-
     @FXML
     private TextField firstNameField;
-
     @FXML
     private ImageView imageView;
-
     @FXML
     private Button loginButton;
-
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private Button registerButton;
-
     @FXML
     private TextField lastNameField;
     @FXML
     private Label wrongConfirmPasswordLabel;
-
     @FXML
     private Label wrongEmailLabel;
-
     @FXML
     private Label wrongNameLabel;
-
     @FXML
     private Label wrongPasswordLabel;
 
-
     public boolean isValidPassword(String password) {
-        //String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         String regexPattern = "^(?=.*[0-9])(?=\\S+$).{8,}$";
-
         if (!password.matches(regexPattern)) {
             passwordField.setStyle("-fx-border-color: red");
             confirmPasswordField.setStyle("-fx-border-color: red");
@@ -88,8 +72,6 @@ public class RegisterController {
 
     public boolean isValidName(String name) {
         String regexPattern = "[А-ЯЁ][-А-яЁё]+|[A-Z][a-z]+";
-
-
         if (!name.matches(regexPattern)) {
             firstNameField.setStyle("-fx-border-color: red");
             lastNameField.setStyle("-fx-border-color: red");
@@ -120,27 +102,25 @@ public class RegisterController {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-
         } catch (IOException e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
     @FXML
     void registerUser(ActionEvent event) {
         try {
-           if (isValidEmail(emailField.getText().trim()) && isValidPassword(passwordField.getText())) {
+            if (isValidEmail(emailField.getText().trim()) && isValidPassword(passwordField.getText())) {
                 if (isValidName(firstNameField.getText().trim()) && isValidName(lastNameField.getText().trim())) {
                     if (passwordField.getText().equals(confirmPasswordField.getText())) {
                         PersonService.addPerson(firstNameField.getText().trim(), lastNameField.getText().trim());
                         User user = new User(emailField.getText().trim(), passwordField.getText(), "User", PersonService.getLastPerson().getIdPerson());
-                        if(Objects.isNull(UserService.getUser(user.getEmailUser()))) {
+                        if (Objects.isNull(UserService.getUser(user.getEmailUser()))) {
                             UserService.addUser(user);
                             openLoginScreen(event);
                         } else {
-                            WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител",MessageType.WARNING);
+                            WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител", MessageType.WARNING);
                         }
-
                     } else {
                         passwordField.setStyle("-fx-border-color: red");
                         confirmPasswordField.setStyle("-fx-border-color: red");
@@ -149,10 +129,8 @@ public class RegisterController {
                 }
             }
         } catch (Exception e) {
-
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
-
     }
 
     @FXML
@@ -246,14 +224,16 @@ public class RegisterController {
                     registerUser(new ActionEvent());
                 }
             }
-        }); lastNameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        });
+        lastNameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
                 if (ke.getCode().equals(KeyCode.ENTER)) {
                     registerUser(new ActionEvent());
                 }
             }
-        }); firstNameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        });
+        firstNameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
                 if (ke.getCode().equals(KeyCode.ENTER)) {
@@ -270,5 +250,4 @@ public class RegisterController {
         Image image2 = new Image(file2.toURI().toString());
         backgroundImageView.setImage(image2);
     }
-
 }

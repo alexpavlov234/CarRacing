@@ -31,34 +31,24 @@ public class LoginController {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
     @FXML
     private ImageView backgroundImageView;
-
     @FXML
     private TextField emailField;
-
     @FXML
     private ImageView imageView;
-
     @FXML
     private Label lblErrors;
-
     @FXML
     private Button loginButton;
-
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private Button registerButton;
-
     @FXML
     private Label wrongPasswordLabel;
-
     @FXML
     private Label wrongEmailLabel;
 
@@ -69,13 +59,13 @@ public class LoginController {
 
     @FXML
     void login(ActionEvent event) {
-        if (passwordField.getText().equals(null) || passwordField.getText().equals("") || emailField.getText().equals(null) || emailField.getText().equals("")){
+        if (passwordField.getText().equals(null) || passwordField.getText().equals("") || emailField.getText().equals(null) || emailField.getText().equals("")) {
             passwordField.setStyle("-fx-border-color: red;");
             emailField.setStyle("-fx-border-color: red");
             wrongPasswordLabel.setText("Моля въведете данни за вход!");
         } else {
             User user = UserService.getUser(emailField.getText().trim());
-            if(Objects.isNull(user)){
+            if (Objects.isNull(user)) {
                 emailField.setStyle("-fx-border-color: red;");
 
                 wrongEmailLabel.setText("Грешен имейл!");
@@ -103,13 +93,12 @@ public class LoginController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
 
     @FXML
-        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert backgroundImageView != null : "fx:id=\"backgroundImageView\" was not injected: check your FXML file 'login.fxml'.";
         assert emailField != null : "fx:id=\"emailField\" was not injected: check your FXML file 'login.fxml'.";
@@ -118,14 +107,15 @@ public class LoginController {
         assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'login.fxml'.";
         assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'login.fxml'.";
         assert registerButton != null : "fx:id=\"registerButton\" was not injected: check your FXML file 'login.fxml'.";
-       emailField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        emailField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
                 if (ke.getCode().equals(KeyCode.ENTER)) {
-                login(new ActionEvent());
+                    login(new ActionEvent());
                 }
             }
-        });passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        });
+        passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
                 if (ke.getCode().equals(KeyCode.ENTER)) {

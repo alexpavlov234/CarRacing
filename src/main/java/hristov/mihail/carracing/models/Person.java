@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.models;
 
 public class Person {
+
     private int idPerson;
     private String firstNamePerson;
     private String middleNamePerson;
@@ -9,7 +10,6 @@ public class Person {
     private String nationalityPerson;
     private int pointsPerson;
     private String imagePathPerson;
-
     private int carPerson;
 
     public Person(int idPerson, String firstNamePerson, String middleNamePerson, String lastNamePerson, int agePerson, String nationalityPerson, int pointsPerson, int carPerson, String imagePathPerson) {

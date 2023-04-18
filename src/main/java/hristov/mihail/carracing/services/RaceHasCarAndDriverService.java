@@ -90,9 +90,8 @@ public class RaceHasCarAndDriverService {
              PreparedStatement deleteStmt = conn.prepareStatement("DELETE FROM race_has_car_and_driver WHERE id = ?");
              PreparedStatement updateStmt = conn.prepareStatement("UPDATE person SET pointsPerson = ? WHERE idPerson = ?")) {
 
-            conn.setAutoCommit(false); // Disable auto-commit to improve performance
+            conn.setAutoCommit(false);
 
-            // Get the driver's ID and current total points before deleting the race result
             int driverId = 0;
             int pointsPerson = 0;
             String selectSql = "SELECT idDriver, SUM(points) AS pointsPerson FROM race_has_car_and_driver WHERE id = ?";
@@ -105,17 +104,15 @@ public class RaceHasCarAndDriverService {
                 }
             }
 
-            // Delete the race result
             deleteStmt.setInt(1, idRaceHasCarAndDriver);
             deleteStmt.executeUpdate();
 
-            // Update the driver's total points
-            pointsPerson = getTotalPointsForDriver(conn, driverId); // Recalculate total points
+            pointsPerson = getTotalPointsForDriver(conn, driverId);
             updateStmt.setInt(1, pointsPerson);
             updateStmt.setInt(2, driverId);
             updateStmt.executeUpdate();
 
-            conn.commit(); // Commit the changes to the database
+            conn.commit();
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при изтриването на участие от базата данни!", "Неуспешна операция", MessageType.WARNING);
         }
@@ -227,7 +224,7 @@ public class RaceHasCarAndDriverService {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int number = resultSet.getInt("Number");
-                arePlacesAvailable = number + 1 <= race.getParticipantsRace() ;
+                arePlacesAvailable = number + 1 <= race.getParticipantsRace();
             }
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при търсенето на свободни места в състезанието!", "Грешка", MessageType.WARNING);
@@ -242,9 +239,8 @@ public class RaceHasCarAndDriverService {
         String updatePersonSql = "UPDATE person SET pointsPerson = ? WHERE idPerson = ?";
 
         try (Connection conn = Database.getConnection()) {
-            conn.setAutoCommit(false); // Disable auto-commit to improve performance
+            conn.setAutoCommit(false);
 
-            // Insert or update the race results
             try (PreparedStatement updateStmt = conn.prepareStatement(updateSql);
                  PreparedStatement insertStmt = conn.prepareStatement(insertSql);
                  PreparedStatement updatePersonStmt = conn.prepareStatement(updatePersonSql)) {
@@ -258,26 +254,23 @@ public class RaceHasCarAndDriverService {
                     int updatedRows = updateStmt.executeUpdate();
 
                     if (updatedRows == 0) {
-                        // No rows were updated, so we need to insert a new record
                         insertStmt.setInt(1, r.getIdRace());
                         insertStmt.setInt(2, r.getIdCar());
                         insertStmt.setInt(3, r.getIdDriver());
                         insertStmt.setInt(4, r.getPoints());
-                        insertStmt.addBatch(); // Add the prepared statement to a batch
+                        insertStmt.addBatch();
                     }
 
-                    // Update the driver's total points in the person table
                     updatePersonStmt.setInt(1, getTotalPointsForDriver(conn, r.getIdDriver()));
                     updatePersonStmt.setInt(2, r.getIdDriver());
                     updatePersonStmt.executeUpdate();
                 }
 
-                // Execute the batch of prepared statements for inserting new records
                 insertStmt.executeBatch();
 
-                conn.commit(); // Commit the changes to the database
+                conn.commit();
             } catch (SQLException e) {
-                conn.rollback(); // Rollback the changes if an exception occurs
+                conn.rollback();
                 WarningController.openMessageModal("Грешка при актуализирането на точките!", "Грешка", MessageType.WARNING);
             }
         } catch (SQLException e) {
@@ -297,7 +290,6 @@ public class RaceHasCarAndDriverService {
             }
         }
     }
-
 
 }
 

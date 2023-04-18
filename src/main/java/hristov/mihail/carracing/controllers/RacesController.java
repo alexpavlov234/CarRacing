@@ -36,46 +36,32 @@ public class RacesController {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
     @FXML
     private TableColumn<Race, String> actions;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, String> actions1;
-
     @FXML
     private TableColumn<Race, String> date;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, String> car;
-
     @FXML
     private TableColumn<Race, String> participants;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, String> driver;
-
     @FXML
     private TableView<Race> table;
-
     @FXML
     private TableView<RaceHasCarAndDriver> table1;
-
     @FXML
     private TableColumn<Race, String> track;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, String> race;
-
     @FXML
     private Button addParticipation;
-
     @FXML
     private Button addPoints;
-
     @FXML
     private Button addRace;
 
@@ -100,7 +86,6 @@ public class RacesController {
         table.setPlaceholder(new Label("Няма записи в таблицата"));
         table1.setPlaceholder(new Label("Няма записи в таблицата"));
 
-        // Проверяваме дали логнатият потребител е администратор.
 
         track.maxWidthProperty().bind(table.widthProperty().divide(4));
         date.maxWidthProperty().bind(table.widthProperty().divide(4));
@@ -279,19 +264,16 @@ public class RacesController {
                                     // На нашия бутон за изтриване задаваме стил и какво да става като се цъкне.
                                     deleteButton.setStyle("-fx-background-color: #8b0000; -fx-text-fill: white; ");
                                     deleteButton.setOnAction(event -> {
-                                        // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                         RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
-                                        // Изтриваме колата
-                                        //TODO: Колата принадлежи на
                                         RaceHasCarAndDriverService.deleteRaceHasCarAndDriver(raceHasCarAndDriver.getId());
-
                                         // Обновяваме таблицата
                                         raceObservableList = FXCollections.observableList(RaceService.getAllRace());
                                         table.setItems(raceObservableList);
                                         raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
                                         table1.setItems(raceHasCarAndDriverObservableList);
                                     });
-                                    // Задаваме какво да се прави при натискантето на бутона за редакиране .
+
+                                    // Задаваме какво да се прави при натискантето на бутона за редакиране.
                                     editButton.setOnAction(event -> {
                                         // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                         RaceHasCarAndDriver raceHasCarAndDriver = getTableView().getItems().get(getIndex());
@@ -302,7 +284,7 @@ public class RacesController {
                                             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
                                             // Зареждане на сцената.
                                             Scene scene = new Scene(fxmlLoader.load());
-                                            // Подаваме на контролера на модала нашата кола за да може да я отвори
+                                            // Подаваме на контролера на модала нашата кола, за да може да я отвори
                                             RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                                             dialogController.setRaceHasCarAndDriver(RaceHasCarAndDriverService.getRaceHasCarAndDriver(raceHasCarAndDriver.getId()));
                                             // Промяна на прозореца да изглежда като такъв за редакция.
@@ -314,7 +296,6 @@ public class RacesController {
 
                                             // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
                                             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                                                 @Override
                                                 public void handle(WindowEvent paramT) {
                                                     // Обновяване на елементите в нашата таблица.
@@ -325,13 +306,10 @@ public class RacesController {
                                                 }
                                             });
                                             stage.showAndWait();
-
                                         } catch (Exception e) {
-
-                                            // Ако нещо гръмне по трасето да се покаже грешка.
+                                            // Ако нещо гръмне да се покаже грешка.
                                             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                         }
-
                                     });
                                     // Настройване на бутоните да бъдат в центъра на колоната и да са един до друг
                                     HBox pane = new HBox(deleteButton, editButton);
@@ -339,7 +317,6 @@ public class RacesController {
                                     pane.setAlignment(Pos.CENTER);
                                     setGraphic(pane);
                                     setText(null);
-
                                 }
                             }
                         };
@@ -369,7 +346,6 @@ public class RacesController {
 
                             final Button editButton = new Button("Редактирай");
 
-                            // Override-ваме някакъв метод бе не го мисли
                             @Override
                             public void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
@@ -380,28 +356,22 @@ public class RacesController {
                                     // На нашия бутон за изтриване задаваме стил и какво да става като се цъкне.
                                     deleteButton.setStyle("-fx-background-color: #8b0000; -fx-text-fill: white; ");
                                     deleteButton.setOnAction(event -> {
-                                        // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
                                         Race race = getTableView().getItems().get(getIndex());
-
                                         ArrayList<RaceHasCarAndDriver> raceHasCarAndDriverArrayList = RaceHasCarAndDriverService.getAllRaceHasCarAndDriver(race.getIdRace());
                                         for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriverArrayList) {
                                             RaceHasCarAndDriverService.deleteRaceHasCarAndDriver(raceHasCarAndDriver.getId());
                                         }
-                                        // Изтриваме колата
-                                        //TODO: Колата принадлежи на
                                         RaceService.deleteRace(race.getIdRace());
-
                                         // Обновяваме таблицата
                                         raceObservableList = FXCollections.observableList(RaceService.getAllRace());
                                         table.setItems(raceObservableList);
                                         raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
                                         table1.setItems(raceHasCarAndDriverObservableList);
                                     });
-                                    // Задаваме какво да се прави при натискантето на бутона за редакиране .
-                                    editButton.setOnAction(event -> {
-                                        // Взимаме нашата кола от таблицата с обекти по индекса ѝ. Например, ако колата е BMW M5, ще вземе нейния индекс и по този индекс от нашата заредена вече от базата данни таблица ще вземе обекта и ще го запамети.
-                                        Race race = getTableView().getItems().get(getIndex());
 
+                                    // Задаваме какво да се прави при натискането на бутона за редакиране.
+                                    editButton.setOnAction(event -> {
+                                        Race race = getTableView().getItems().get(getIndex());
                                         try {
                                             // Създаваме нов stage (нов прозорец)
                                             Stage stage = new Stage();
@@ -419,9 +389,8 @@ public class RacesController {
                                             stage.setResizable(false);
                                             stage.initModality(Modality.APPLICATION_MODAL);
 
-                                            // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране на кола.
+                                            // Какво да се случва когато затворим нашия прозорец, който е отворил модал за редактиране.
                                             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                                                 @Override
                                                 public void handle(WindowEvent paramT) {
                                                     // Обновяване на елементите в нашата таблица.
@@ -433,12 +402,9 @@ public class RacesController {
                                             });
                                             stage.showAndWait();
                                         } catch (Exception e) {
-
-                                            // Ако нещо гръмне по трасето да се покаже грешка.
+                                            // Ако нещо гръмне да се покаже грешка.
                                             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                         }
-
-
                                     });
                                     // Настройване на бутоните да бъдат в центъра на колоната и да са един до друг
                                     HBox pane = new HBox(deleteButton, editButton);
@@ -466,10 +432,9 @@ public class RacesController {
     @FXML
     void addParticipation(ActionEvent event) {
         try {
-
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
 
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
@@ -480,10 +445,9 @@ public class RacesController {
             stage.initModality(Modality.APPLICATION_MODAL);
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                 @Override
                 public void handle(WindowEvent paramT) {
-                    // Обновяване на елементите в нашата таблица.
+                    // Обновяване на елементите в таблицата.
                     raceObservableList = FXCollections.observableList(RaceService.getAllRace());
                     table.setItems(raceObservableList);
                     raceHasCarAndDriverObservableList = FXCollections.observableList(RaceHasCarAndDriverService.getAllRaceHasCarAndDriver());
@@ -493,19 +457,17 @@ public class RacesController {
             stage.showAndWait();
         } catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-
         }
     }
 
     @FXML
     void addRacePoints(ActionEvent event) {
         try {
-
             Stage stage = new Stage();
+
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-points-modal.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
-            //dialogController.setLoggedUser(car.getIdCar());
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на точки от състезания");
             stage.setScene(scene);
@@ -514,7 +476,6 @@ public class RacesController {
 
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                 @Override
                 public void handle(WindowEvent paramT) {
                     // Обновяване на елементите в нашата таблица.
@@ -527,19 +488,17 @@ public class RacesController {
             stage.showAndWait();
         } catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-
         }
     }
 
     @FXML
     void addRace(ActionEvent event) {
         try {
-
             Stage stage = new Stage();
+
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-modal.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
-            //dialogController.setLoggedUser(car.getIdCar());
             stage.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             stage.setTitle("Добавяне на състезание");
             stage.setScene(scene);
@@ -548,7 +507,6 @@ public class RacesController {
 
             // Когато се затвори нашия отворен прозорец да се обнови таблица.
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                 @Override
                 public void handle(WindowEvent paramT) {
                     // Обновяване на елементите в нашата таблица.
@@ -561,7 +519,6 @@ public class RacesController {
             stage.showAndWait();
         } catch (Exception e) {
             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-
         }
     }
 }

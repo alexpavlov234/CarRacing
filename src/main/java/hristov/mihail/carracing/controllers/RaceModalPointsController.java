@@ -28,24 +28,17 @@ public class RaceModalPointsController {
     private URL location;
     @FXML
     private Button addPoints;
-
     private RaceHasCarAndDriver raceHasCarAndDriver;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, String> car;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, String> firstName;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, String> lastName;
-
     @FXML
     private TableColumn<RaceHasCarAndDriver, Integer> points;
-
     @FXML
     private ComboBox<String> racesCombobox;
-
     @FXML
     private TableView<RaceHasCarAndDriver> table;
     private ObservableList<RaceHasCarAndDriver> originalRaceHasCarAndDriversObservableList;
@@ -60,11 +53,11 @@ public class RaceModalPointsController {
         }
         if (raceHasCarAndDriversObservableList.size() > 0) {
             for (RaceHasCarAndDriver raceHasCarAndDriver : raceHasCarAndDriversObservableList) {
-                    if(raceHasCarAndDriver.getPoints() < 0){
-                        WarningController.openMessageModal("Въведени са отрицателни точки!", "Невалидни данни", MessageType.WARNING);
-                        return;
-                    }
+                if (raceHasCarAndDriver.getPoints() < 0) {
+                    WarningController.openMessageModal("Въведени са отрицателни точки!", "Невалидни данни", MessageType.WARNING);
+                    return;
                 }
+            }
             if (totalPoints <= race.getPointsRace()) {
                 RaceHasCarAndDriverService.updateRaceHasCarAndDriverList(raceHasCarAndDriversObservableList);
                 WarningController.openMessageModal("Вие успешно въведохте точките на всички състезатели!", "Успешно въведени точки", MessageType.SUCCESS);
@@ -74,7 +67,6 @@ public class RaceModalPointsController {
             }
         }
         this.initialize();
-
     }
 
     @FXML
@@ -98,17 +90,16 @@ public class RaceModalPointsController {
         points.maxWidthProperty().bind(table.widthProperty().divide(4));
         points.minWidthProperty().bind(table.widthProperty().divide(4));
 
-
         Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>> cellFactoryCar = //
                 new Callback<TableColumn<RaceHasCarAndDriver, String>, TableCell<RaceHasCarAndDriver, String>>() {
 
                     @Override
                     public TableCell call(final TableColumn<RaceHasCarAndDriver, String> param) {
-
                         final TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
 
                             @Override
                             public void updateItem(Integer item, boolean empty) {
+
                                 super.updateItem(item, empty);
                                 if (empty) {
                                     setGraphic(null);
@@ -190,6 +181,7 @@ public class RaceModalPointsController {
                     public TableCell<RaceHasCarAndDriver, Integer> call(TableColumn<RaceHasCarAndDriver, Integer> param) {
                         TableCell<RaceHasCarAndDriver, Integer> cell = new TableCell<RaceHasCarAndDriver, Integer>() {
                             private final TextField textField = new TextField();
+
                             {
                                 textField.textProperty().addListener((obs, oldText, newText) -> {
                                     if (newText.isEmpty()) {
@@ -217,7 +209,6 @@ public class RaceModalPointsController {
                                     } else {
                                         textField.setText("");
                                     }
-
                                     setGraphic(textField);
                                 }
                                 setText(null);
@@ -227,7 +218,6 @@ public class RaceModalPointsController {
                         return cell;
                     }
                 };
-
 
         car.setCellFactory(cellFactoryCar);
         firstName.setCellFactory(cellFactoryFirstName);
@@ -255,5 +245,4 @@ public class RaceModalPointsController {
             }
         });
     }
-
 }

@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.models;
 
 public class RaceHasCarAndDriver {
+
     private int id;
     private int idRace;
     private int idCar;

@@ -29,7 +29,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CarModalController {
-
     static File file;
     @FXML
     private ResourceBundle resources;
@@ -117,7 +116,6 @@ public class CarModalController {
                 } else {
                     WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
                 }
-
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за колата!", "Празни данни", MessageType.WARNING);
             }
@@ -173,7 +171,6 @@ public class CarModalController {
         file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
         if (!Objects.isNull(file)) {
             try {
-
                 FileInputStream fileInputStream = new FileInputStream(file);
                 carImageView.setImage(new Image(fileInputStream));
             } catch (Exception e) {
@@ -203,7 +200,6 @@ public class CarModalController {
 
     @FXML
     void initialize() {
-
         Platform.runLater(() -> {
             assert applyChangeButton != null : "fx:id=\"applyChangeButton\" was not injected: check your FXML file 'car-modal.fxml'.";
             assert brandCarField != null : "fx:id=\"brandCarField\" was not injected: check your FXML file 'car-modal.fxml'.";

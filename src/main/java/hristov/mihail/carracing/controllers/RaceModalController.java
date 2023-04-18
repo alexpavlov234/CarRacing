@@ -43,7 +43,6 @@ public class RaceModalController {
     private Button applyChangeButton;
     @FXML
     private ComboBox<String> trackRaceCombobox;
-
     @FXML
     private TextField lapsRaceField;
     @FXML
@@ -62,7 +61,6 @@ public class RaceModalController {
     private Label labelRaceName;
     @FXML
     private TextField dateRaceField;
-
     private Race race;
 
     public boolean isValidDate(String dateStr) {
@@ -84,15 +82,13 @@ public class RaceModalController {
     // Какво да се случва като цъкнеш бутона приложи.
     @FXML
     void applyChanges(ActionEvent event) {
-        // Програма проверява да не би нашия обект да е празен. Ако е празен, значи е избран прозорец за добавяне на кола.
-        // Ако не е празен, значи ще променяме кола
+        // Програма проверява да не би нашия обект да е празен. Ако е празен, значи е избран прозорец за добавяне.
+        // Ако не е празен, значи ще променяме
         if (Objects.isNull(race)) {
             // Проверяваме дали въведените полета са с коректни данни.
             if (!(Objects.isNull(dateRaceField.getText()) || Objects.isNull(lapsRaceField.getText()) || Objects.isNull(participantsRaceField.getText()) || Objects.isNull(pointsRaceField.getText()))) {
                 if (!(dateRaceField.getText().equals("") || lapsRaceField.getText().equals("") || participantsRaceField.getText().equals("") || pointsRaceField.getText().equals(""))) {
-                    // Проверяваме дали нашият двигател е с валидно число.
                     if (isNumeric(lapsRaceField.getText())) {
-                        // Проверяваме дали е въведено число за конски сили.
                         if (isNumeric(pointsRaceField.getText())) {
                             if (isNumeric(participantsRaceField.getText())) {
                                 if (isValidDate(dateRaceField.getText())) {
@@ -101,22 +97,19 @@ public class RaceModalController {
                                         // Запазваме информацията от нашите полета в нов обект и този обект го добавяме в базата данни.
                                         race = new Race(TrackService.getTrack(trackRaceCombobox.getValue()).getIdTrack(), dateRaceField.getText(), Integer.parseInt(lapsRaceField.getText()), Integer.parseInt(pointsRaceField.getText()), Integer.parseInt(participantsRaceField.getText()));
                                         RaceService.addRace(race);
-                                        // Извличаме от базата данни новосъздадения обект, защото така е редно, ако има някакво форматиране на данните от нашата база данни.
+                                        // Извличаме от базата данни новосъздадения обект, ако има някакво форматиране на данните от нашата база данни.
                                         race = RaceService.getLastRace();
-
-                                        // Задаваме нашите полета да бъдат равни на полетата от нашия обект. Нали след като записахме колата, изтеглихме отново от базата данни за всеки случай.
+                                        // Задаваме нашите полета да бъдат равни на полетата от нашия обект.
                                         dateRaceField.setText(race.getDateRace());
                                         trackRaceCombobox.setValue(TrackService.getTrack(race.getTrackRace()).getNameTrack());
                                         participantsRaceField.setText(Integer.toString(race.getParticipantsRace()));
                                         lapsRaceField.setText(Integer.toString(race.getLapsRace()));
                                         pointsRaceField.setText(Integer.toString(race.getPointsRace()));
                                         labelRaceName.setText(race.getNameRace());
-                                        // Задаваме изображение на ImageView-то
-
-                                        // Обновяваме нашия модел и го отваряме като модал за редакция на вече създадената кола.
+                                        // Обновяваме нашия модел и го отваряме като модал за редакция.
                                         Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-modal.fxml"));
 
+                                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-modal.fxml"));
 
                                         Scene scene = null;
                                         try {
@@ -132,59 +125,47 @@ public class RaceModalController {
                                         stage.setScene(scene);
                                         stage.setResizable(false);
                                         stage.show();
-                                        //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
                                         applyChangeButton.setText("Приложи");
                                     } catch (Exception e) {
-
                                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                     }
                                 } else {
                                     WarningController.openMessageModal("Въведена е невалидна дата!", "Невалидна дата", MessageType.WARNING);
-
                                 }
                             } else {
                                 WarningController.openMessageModal("Въведено е невалидно число за брой участници!", "Невалиден брой участници", MessageType.WARNING);
                             }
                         } else {
                             WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
-
                         }
                     } else {
                         WarningController.openMessageModal("Въведено е невалидно число за обиколки!", "Невалидни обиколки", MessageType.WARNING);
-
                     }
                 } else {
                     WarningController.openMessageModal("Попълнете всички данни за състезанието!", "Празни данни", MessageType.WARNING);
                 }
-
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за състезанието!", "Празни данни", MessageType.WARNING);
             }
         } else {
-            // Ако обектът съдържащ колата, не е празен, това значи, че искаме да бъде актуализиран в базата данни.
+            // Ако обектът не е празен, това значи, че искаме да бъде актуализиран в базата данни.
             // Извършваме нужните проверки на въведените данни.
             if (!(Objects.isNull(dateRaceField.getText()) || Objects.isNull(lapsRaceField.getText()) || Objects.isNull(participantsRaceField.getText()) || Objects.isNull(pointsRaceField.getText()))) {
                 if (!(dateRaceField.getText().equals("") || lapsRaceField.getText().equals("") || participantsRaceField.getText().equals("") || pointsRaceField.getText().equals(""))) {
-                    // Проверяваме дали нашият двигател е с валидно число.
                     if (isNumeric(lapsRaceField.getText())) {
-                        // Проверяваме дали е въведено число за конски сили.
                         if (isNumeric(pointsRaceField.getText())) {
                             if (isNumeric(participantsRaceField.getText())) {
                                 if (isValidDate(dateRaceField.getText())) {
-                                    // Актуализираме данните на нашата кола.
-
+                                    // Актуализираме данните.
                                     race.setDateRace(dateRaceField.getText());
                                     race.setLapsRace(Integer.parseInt(lapsRaceField.getText()));
                                     race.setPointsRace(Integer.parseInt(pointsRaceField.getText()));
                                     race.setParticipantsRace(Integer.parseInt(participantsRaceField.getText()));
                                     race.setTrackRace(TrackService.getTrack(trackRaceCombobox.getValue()).getIdTrack());
-                                    // Зареждаме каченото изображение и го задаваме на нашия обект.
-
                                     RaceService.updateRace(race);
                                     Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-modal.fxml"));
 
+                                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-modal.fxml"));
 
                                     Scene scene = null;
                                     try {
@@ -192,15 +173,11 @@ public class RaceModalController {
                                     } catch (IOException e) {
                                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                     }
-                                    // Обновяваме нашето прозорче за всеки случай.
-                                    //dialogController.setLoggedUser(car.getIdCar());
                                     RaceModalController dialogController = fxmlLoader.getController();
                                     dialogController.setRace(race);
                                     stage.setScene(scene);
                                     stage.setResizable(false);
                                     stage.show();
-                                    //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
                                 } else {
                                     WarningController.openMessageModal("Въведено е невалидна дата!", "Невалидна дата", MessageType.WARNING);
                                 }
@@ -209,39 +186,31 @@ public class RaceModalController {
                             }
                         } else {
                             WarningController.openMessageModal("Въведено е невалидно число за точки!", "Невалидни точки", MessageType.WARNING);
-
                         }
                     } else {
                         WarningController.openMessageModal("Въведено е невалидно число за обиколки!", "Невалидни обиколки", MessageType.WARNING);
-
                     }
-
                 } else {
                     WarningController.openMessageModal("Попълнете всички данни за състезанието!", "Празни данни", MessageType.WARNING);
                 }
-
-
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за състезанието!", "Празни данни", MessageType.WARNING);
             }
         }
     }
 
-
     // Проверка чрез regex дали даден низ е само от числа.
     public boolean isNumeric(String strNum) {
         boolean isInRange = false;
         String regexPattern = "^[1-9]\\d*$";
-        if(strNum.matches(regexPattern)){
+        if (strNum.matches(regexPattern)) {
             isInRange = Integer.parseInt(strNum) < 2_147_483_647L;
         }
         return strNum.matches(regexPattern) && isInRange;
     }
 
-    // Кметът, който се изпълнява при отварянето на нашия модел.
     @FXML
     void initialize() {
-
         Platform.runLater(() -> {
             assert applyChangeButton != null : "fx:id=\"applyChangeButton\" was not injected: check your FXML file 'car-modal.fxml'.";
             assert trackRaceCombobox != null : "fx:id=\"trackRaceField\" was not injected: check your FXML file 'car-modal.fxml'.";
@@ -304,8 +273,6 @@ public class RaceModalController {
                 lapsRaceField.setText(Integer.toString(race.getLapsRace()));
                 pointsRaceField.setText(Integer.toString(race.getPointsRace()));
                 labelRaceName.setText(race.getNameRace());
-
-
             } else {
                 applyChangeButton.setText("Добави");
                 ((Stage) applyChangeButton.getScene().getWindow()).setTitle("Добавяне на състезание");
@@ -317,7 +284,5 @@ public class RaceModalController {
                 labelRaceName.setText("Добавяне на състезание");
             }
         });
-
     }
-
 }

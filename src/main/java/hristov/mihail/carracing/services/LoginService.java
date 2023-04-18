@@ -38,14 +38,11 @@ public class LoginService {
                     return true;
                 }
             } else {
-
                 return false;
             }
         } catch (Exception e) {
-
             return false;
         }
-
     }
 
     public static boolean isLoggedUserAdmin() {

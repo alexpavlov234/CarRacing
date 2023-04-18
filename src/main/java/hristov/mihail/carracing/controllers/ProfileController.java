@@ -36,83 +36,56 @@ import java.util.regex.Pattern;
 public class ProfileController {
 
     static File file;
-
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
     @FXML
     private TextField agePersonField;
-
     @FXML
     private Button applyChangeButton;
-
-
     @FXML
     private ComboBox<String> carPersonCombobox;
-
     @FXML
     private TextField emailUserField;
-
     @FXML
     private TextField firstNamePersonField;
-
     @FXML
     private Label label;
-
     @FXML
     private Label label1;
-
     @FXML
     private Label label11;
-
     @FXML
     private Label label4;
-
     @FXML
     private Label label41;
-
     @FXML
     private Label label42;
-
     @FXML
     private Label label43;
-
     @FXML
     private Label label431;
-
     @FXML
     private Label label432;
-
     @FXML
     private Label label433;
-
     @FXML
     private Label labelUserName;
-
     @FXML
     private TextField lastNamePersonField;
-
     @FXML
     private TextField middleNamePersonField;
-
     @FXML
     private ComboBox<String> nationalityPersonCombobox;
-
     @FXML
     private TextField passwordUserField;
-
     @FXML
     private TextField pointsPersonField;
-
     @FXML
     private ComboBox<String> roleCombobox;
-
     @FXML
     private Button uploadImageButton;
-
     @FXML
     private ImageView userImageView;
     private User user;
@@ -133,9 +106,7 @@ public class ProfileController {
     }
 
     public boolean isValidPassword(String password) {
-//        String regexPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         String regexPattern = "^(?=.*[0-9])(?=\\S+$).{8,}$";
-
         if (!password.matches(regexPattern)) {
             WarningController.openMessageModal("Въведете валидна парола!", "Невалидни данни", MessageType.WARNING);
         }
@@ -144,7 +115,6 @@ public class ProfileController {
 
     public boolean isValidName(String name) {
         String regexPattern = "[А-ЯЁ][-А-яЁё]+|[A-Z][a-z]+";
-
         if (!name.matches(regexPattern)) {
             WarningController.openMessageModal("Въведете коректни имена!", "Невалдини данни", MessageType.WARNING);
         }
@@ -154,53 +124,48 @@ public class ProfileController {
     // Какво да се случва като цъкнеш бутона приложи.
     @FXML
     void applyChanges(ActionEvent event) {
-
-        // Програма да не би нашия обект да е празен. Ако е празен, значи е избран прозорец за добавяне на кола.
+        // Проверява да не би нашия обект да е празен. Ако е празен, значи е избран прозорец за добавяне на кола.
         // Ако не е празен, значи ще променяме кола
-
         // Ако обектът съдържащ колата, не е празен, това значи, че искаме да бъде актуализиран в базата данни.
         // Извършваме нужните проверки на въведените данни.
-         if (!Objects.isNull(user)) {
-             if (user.getEmailUser().equals("admin") && user.getPassUser().equals("admin") && person.getFirstNamePerson().equals("Администратор")) {
-                 user.setEmailUser(emailUserField.getText());
-                 user.setPassUser(passwordUserField.getText());
-                 user.setTypeUser(roleCombobox.getValue());
+        if (!Objects.isNull(user)) {
+            if (user.getEmailUser().equals("admin") && user.getPassUser().equals("admin") && person.getFirstNamePerson().equals("Администратор")) {
+                user.setEmailUser(emailUserField.getText());
+                user.setPassUser(passwordUserField.getText());
+                user.setTypeUser(roleCombobox.getValue());
+                person.setAgePerson(Integer.parseInt(agePersonField.getText()));
+                person.setFirstNamePerson(firstNamePersonField.getText());
+                person.setMiddleNamePerson(middleNamePersonField.getText());
+                person.setLastNamePerson(lastNamePersonField.getText());
+                person.setNationalityPerson(nationalityPersonCombobox.getValue());
+                person.setPointsPerson(Integer.parseInt(pointsPersonField.getText()));
+                // Зареждаме каченото изображение и го задаваме на нашия обект.
+                try {
+                    if (!Objects.isNull(file)) {
+                        PersonService.setImagePerson(file, this.person);
+                        file = null;
+                    }
+                } catch (Exception e) {
+                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                }
+                PersonService.updatePerson(person);
+                UserService.updateUser(user);
+                Stage stage = (Stage) applyChangeButton.getScene().getWindow();
 
-                 person.setAgePerson(Integer.parseInt(agePersonField.getText()));
-                 person.setFirstNamePerson(firstNamePersonField.getText());
-                 person.setMiddleNamePerson(middleNamePersonField.getText());
-                 person.setLastNamePerson(lastNamePersonField.getText());
-                 person.setNationalityPerson(nationalityPersonCombobox.getValue());
-                 person.setPointsPerson(Integer.parseInt(pointsPersonField.getText()));
-                 // Зареждаме каченото изображение и го задаваме на нашия обект.
-                 try {
-                     if (!Objects.isNull(file)) {
-                         PersonService.setImagePerson(file, this.person);
-                         file = null;
-                     }
-                 } catch (Exception e) {
-                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-                 }
-                 PersonService.updatePerson(person);
-                 UserService.updateUser(user);
-                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
-
-                 Scene scene = null;
-                 try {
-                     scene = new Scene(fxmlLoader.load());
-                 } catch (IOException e) {
-                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-                 }
-                 // Обновяваме нашето прозорче за всеки случай.
-                 //dialogController.setLoggedUser(user.getIdCar());
-                 ProfileController dialogController = fxmlLoader.getController();
-                 dialogController.setUser(user);
-                 stage.setResizable(false);
-                 stage.setScene(scene);
-                 stage.show();
-             } else if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(firstNamePersonField.getText()) || Objects.isNull(middleNamePersonField.getText()) || Objects.isNull(lastNamePersonField.getText()) || Objects.isNull(agePersonField.getText()))) {
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
+                }
+                ProfileController dialogController = fxmlLoader.getController();
+                dialogController.setUser(user);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.show();
+            } else if (!(Objects.isNull(emailUserField.getText()) || Objects.isNull(passwordUserField.getText()) || Objects.isNull(firstNamePersonField.getText()) || Objects.isNull(middleNamePersonField.getText()) || Objects.isNull(lastNamePersonField.getText()) || Objects.isNull(agePersonField.getText()))) {
                 if (!(emailUserField.getText().equals("") || passwordUserField.getText().equals("") || firstNamePersonField.getText().equals("") || middleNamePersonField.getText().equals("") || lastNamePersonField.getText().equals("") || agePersonField.getText().equals(""))) {
                     // Проверяваме дали имейлът е валиден
                     if (isValidEmail(emailUserField.getText())) {
@@ -209,7 +174,7 @@ public class ProfileController {
                                 if (isValidAge(agePersonField.getText())) {
                                     if (isNumeric(pointsPersonField.getText())) {
                                         if (!(Objects.isNull(carPersonCombobox.getValue()) || Objects.isNull(nationalityPersonCombobox.getValue()))) {
-                                            // Актуализираме данните на нашата кола.
+                                            // Актуализираме данните.
                                             user.setEmailUser(emailUserField.getText());
                                             user.setPassUser(passwordUserField.getText());
                                             user.setTypeUser(roleCombobox.getValue());
@@ -232,8 +197,8 @@ public class ProfileController {
                                             PersonService.updatePerson(person);
                                             UserService.updateUser(user);
                                             Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
+                                            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
                                             Scene scene = null;
                                             try {
@@ -241,27 +206,19 @@ public class ProfileController {
                                             } catch (IOException e) {
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                             }
-                                            // Обновяваме нашето прозорче за всеки случай.
-                                            //dialogController.setLoggedUser(user.getIdCar());
                                             ProfileController dialogController = fxmlLoader.getController();
                                             dialogController.setUser(user);
                                             stage.setResizable(false);
                                             stage.setScene(scene);
                                             stage.show();
-
-                                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
                                         } else {
                                             WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
                                         }
                                     }
                                 }
                             }
-
                         }
-
                     }
-
                 } else {
                     WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
                 }
@@ -278,7 +235,7 @@ public class ProfileController {
                                 if (isValidAge(agePersonField.getText())) {
                                     if (isNumeric(pointsPersonField.getText())) {
                                         if (!(Objects.isNull(carPersonCombobox.getValue()) || Objects.isNull(nationalityPersonCombobox.getValue()))) {
-                                            // Актуализираме данните на нашата кола.
+                                            // Актуализираме данните.
                                             user = new User();
                                             person = new Person();
                                             user.setEmailUser(emailUserField.getText());
@@ -306,8 +263,8 @@ public class ProfileController {
                                                 UserService.addUser(user);
                                                 this.user = UserService.getLastUser();
                                                 Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
+                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
 
                                                 Scene scene = null;
                                                 try {
@@ -315,8 +272,6 @@ public class ProfileController {
                                                 } catch (IOException e) {
                                                     WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                                                 }
-                                                // Обновяваме нашето прозорче за всеки случай.
-                                                //dialogController.setLoggedUser(user.getIdCar());
                                                 ProfileController dialogController = fxmlLoader.getController();
                                                 dialogController.setUser(this.user);
                                                 stage.setScene(scene);
@@ -325,20 +280,14 @@ public class ProfileController {
                                             } else {
                                                 WarningController.openMessageModal("Вече съществува потребител със същия имейл!", "Съществуващ потребител", MessageType.WARNING);
                                             }
-
-                                            //Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-
                                         } else {
                                             WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
                                         }
                                     }
                                 }
                             }
-
                         }
-
                     }
-
                 } else {
                     WarningController.openMessageModal("Попълнете всички данни за потребителя!", "Празни данни", MessageType.WARNING);
                 }
@@ -363,12 +312,11 @@ public class ProfileController {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Файлове с изображения", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp")
         );
-        // Отваря диалог за избор на файл от системата.
+        // Отваря диалогов прозорец за избор на файл от системата.
         file = fileChooser.showOpenDialog(uploadImageButton.getScene().getWindow());
-        // Ако файла не празен.
+        // Ако файла не е празен.
         if (!Objects.isNull(file)) {
             try {
-
                 FileInputStream fileInputStream = new FileInputStream(file);
                 // Задаваме изображение на нашия ImageView.
                 userImageView.setImage(new Image(fileInputStream));
@@ -377,10 +325,8 @@ public class ProfileController {
             }
         } else {
             userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
-
         }
     }
-
 
     // Проверка чрез regex дали даден низ е само от числа.
     public boolean isValidAge(String strNum) {
@@ -391,18 +337,14 @@ public class ProfileController {
         } else {
             int age = Integer.parseInt(strNum);
             if (!(age >= 18 && age <= 150)) {
-
                 WarningController.openMessageModal("Въведена е невалидна възраст!", "Невалидни данни", MessageType.WARNING);
             }
             return age >= 18 && age <= 150;
         }
-
     }
 
-    // Кметът, който се изпълнява при отварянето на нашия модел.
     @FXML
     void initialize() {
-
         Platform.runLater(() -> {
             assert agePersonField != null : "fx:id=\"agePersonField\" was not injected: check your FXML file 'profile.fxml'.";
             assert applyChangeButton != null : "fx:id=\"applyChangeButton\" was not injected: check your FXML file 'profile.fxml'.";
@@ -505,24 +447,20 @@ public class ProfileController {
                         passwordUserField.setDisable(true);
                         carPersonCombobox.setDisable(true);
                     }
-
-                        person = PersonService.getPerson(user.getUserHasPerson());
-                        emailUserField.setText(user.getEmailUser());
-                        passwordUserField.setText(user.getPassUser());
-                        agePersonField.setText(Integer.toString(person.getAgePerson()));
-                        firstNamePersonField.setText(person.getFirstNamePerson());
-                        middleNamePersonField.setText(person.getMiddleNamePerson());
-                        lastNamePersonField.setText(person.getLastNamePerson());
-                        nationalityPersonCombobox.setValue(person.getNationalityPerson());
-                        pointsPersonField.setText(Integer.toString(person.getPointsPerson()));
-
-                        roleCombobox.setValue(user.getTypeUser());
-                        if (!(Objects.isNull(person) || person.getCarPerson() == 0)) {
-                            carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
-                        }
-
-                        userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
-
+                    person = PersonService.getPerson(user.getUserHasPerson());
+                    emailUserField.setText(user.getEmailUser());
+                    passwordUserField.setText(user.getPassUser());
+                    agePersonField.setText(Integer.toString(person.getAgePerson()));
+                    firstNamePersonField.setText(person.getFirstNamePerson());
+                    middleNamePersonField.setText(person.getMiddleNamePerson());
+                    lastNamePersonField.setText(person.getLastNamePerson());
+                    nationalityPersonCombobox.setValue(person.getNationalityPerson());
+                    pointsPersonField.setText(Integer.toString(person.getPointsPerson()));
+                    roleCombobox.setValue(user.getTypeUser());
+                    if (!(Objects.isNull(person) || person.getCarPerson() == 0)) {
+                        carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
+                    }
+                    userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
                 } else {
                     emailUserField.setText(user.getEmailUser());
                     passwordUserField.setText(user.getPassUser());
@@ -533,17 +471,12 @@ public class ProfileController {
                     nationalityPersonCombobox.setValue(person.getNationalityPerson());
                     pointsPersonField.setText(Integer.toString(person.getPointsPerson()));
                     roleCombobox.setValue(user.getTypeUser());
-
-
                     if (!(Objects.isNull(person) || person.getCarPerson() == 0)) {
                         carPersonCombobox.setValue(CarService.getCarName(CarService.getCar(person.getCarPerson())));
                     }
-
                     userImageView.setImage(PersonService.getImagePerson(PersonService.getPerson(user.getUserHasPerson())));
-
                     pointsPersonField.setEditable(false);
                     roleCombobox.setDisable(true);
-
                 }
             } else {
                 roleCombobox.setValue("User");
@@ -553,7 +486,5 @@ public class ProfileController {
                 labelUserName.setText("Добавяне на състезател");
             }
         });
-
     }
-
 }

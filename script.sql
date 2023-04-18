@@ -106,13 +106,14 @@ VALUES ('GT-R', 'Nissan', '3.8 V6', 'Бензин', 565),
        ('Model S', 'Tesla', '0.0', 'Електричество', 670);
 
 -- Insert data into person table
-INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson, carPerson)
-VALUES ('Николай', 'Петров', 'Димитров', 25, 'България', 32,1),
-       ('Мария', 'Стоянова', 'Иванова', 30, 'България', 24,2),
-       ('Георги', 'Ангелов', 'Тодоров', 27, 'България', 28,3),
-       ('Анна', 'Василева', 'Димитрова', 22, 'България', 5,4),
-       ('Димитър', 'Петров', 'Ангелов', 28, 'България', 0,5),
-       ('Администратор','','',0,'',0,null);
+INSERT INTO person (firstNamePerson, middleNamePerson, lastNamePerson, agePerson, nationalityPerson, pointsPerson,
+                    carPerson)
+VALUES ('Николай', 'Петров', 'Димитров', 25, 'България', 32, 1),
+       ('Мария', 'Стоянова', 'Иванова', 30, 'България', 24, 2),
+       ('Георги', 'Ангелов', 'Тодоров', 27, 'България', 28, 3),
+       ('Анна', 'Василева', 'Димитрова', 22, 'България', 5, 4),
+       ('Димитър', 'Петров', 'Ангелов', 28, 'България', 0, 5),
+       ('Администратор', '', '', 0, '', 0, null);
 -- Insert data into user table
 INSERT INTO user (emailUser, passUser, typeUser, userHasPerson)
 VALUES ('nikolai.dimitrov@gmail.com', 'nikolai1234', 'User', 1),

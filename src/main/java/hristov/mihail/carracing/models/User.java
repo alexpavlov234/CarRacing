@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.models;
 
 public class User {
+
     private int idUser;
     private String emailUser;
     private String passUser;

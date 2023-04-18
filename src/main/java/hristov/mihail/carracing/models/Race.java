@@ -3,6 +3,7 @@ package hristov.mihail.carracing.models;
 import hristov.mihail.carracing.services.TrackService;
 
 public class Race {
+
     private int idRace;
     private int trackRace;
     private String dateRace;

@@ -64,7 +64,6 @@ public class PersonService {
         }
     }
 
-
     public static Image getImagePerson(Person person) {
         try (PreparedStatement retrieve = Database.getConnection().prepareStatement("SELECT imagePerson FROM carracers.person WHERE (idPerson = " + person.getIdPerson() + ");")) {
             //retrieve.setInt(1, 1);
@@ -78,12 +77,10 @@ public class PersonService {
             } else {
                 return null;
             }
-
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при зареждане на снимката на човека!", "Грешка", MessageType.WARNING);
             return null;
         }
-
     }
 
     public static void setImagePerson(File file, Person person) {
@@ -144,15 +141,12 @@ public class PersonService {
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql2)) {
             statement.setInt(1, idPerson);
             statement.executeUpdate();
-
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при изтриване на човек!", "Грешка", MessageType.WARNING);
         }
         try (PreparedStatement statement = Database.getConnection().prepareStatement(sql1)) {
-
             statement.setInt(1, idPerson);
             statement.executeUpdate();
-
         } catch (SQLException e) {
             WarningController.openMessageModal("Грешка при изтриване на човек!", "Грешка", MessageType.WARNING);
         }
@@ -170,7 +164,6 @@ public class PersonService {
         }
     }
 
-
     public static ArrayList<Person> getAllPerson() {
         ArrayList<Person> allPeople = new ArrayList<>();
         String sql = "SELECT * FROM carracers.person";
@@ -181,7 +174,6 @@ public class PersonService {
                 if (user != null && !user.getTypeUser().equals("Admin")) {
                     allPeople.add(person);
                 }
-
             }
         } catch (SQLException e) {
             WarningController.openMessageModal("Възникна грешка при извличането на всички хора!", "Грешка", MessageType.WARNING);
@@ -221,15 +213,15 @@ public class PersonService {
                 if (resultSet.next()) {
                     return new Person(resultSet.getInt("idPerson"), resultSet.getString("firstNamePerson"), resultSet.getString("middleNamePerson"), resultSet.getString("lastNamePerson"), resultSet.getInt("agePerson"), resultSet.getString("nationalityPerson"), resultSet.getInt("pointsPerson"), resultSet.getInt("carPerson"), resultSet.getString("imagePerson"));
                 } else {
-                    WarningController.openMessageModal("Не е намерен такъв човек!", "Лиспващ човек", MessageType.WARNING);
+                    WarningController.openMessageModal("Не е намерен такъв човек!", "Липсващ човек", MessageType.WARNING);
                     return null;
                 }
             } catch (SQLException e) {
-                WarningController.openMessageModal("Не е намерен такъв човек!", "Лиспващ човек", MessageType.WARNING);
+                WarningController.openMessageModal("Не е намерен такъв човек!", "Липсващ човек", MessageType.WARNING);
                 return null;
             }
         } else {
-            WarningController.openMessageModal("Не е намерен такъв човек!", "Лиспващ човек", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерен такъв човек!", "Липсващ човек", MessageType.WARNING);
             return null;
         }
 

@@ -3,6 +3,7 @@ package hristov.mihail.carracing.models;
 import java.sql.Blob;
 
 public class Car {
+
     private int idCar;
     private String modelCar;
     private String brandCar;

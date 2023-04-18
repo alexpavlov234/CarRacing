@@ -21,16 +21,12 @@ public class WarningController {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
     @FXML
     private Button okButton;
-
     @FXML
     private Label errorMessage;
-
     @FXML
     private Label labelCarName;
 
@@ -41,12 +37,11 @@ public class WarningController {
     @FXML
     void setOkButton(ActionEvent event) {
         Stage stage = (Stage) okButton.getScene().getWindow();
-
         stage.close();
     }
 
-    public static void openMessageModal(String text, String windowTitle, MessageType messageType){
-        if(messageType == MessageType.WARNING) {
+    public static void openMessageModal(String text, String windowTitle, MessageType messageType) {
+        if (messageType == MessageType.WARNING) {
             Stage stage1 = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("warning-modal.fxml"));
             stage1.setMinHeight(230);
@@ -57,7 +52,6 @@ public class WarningController {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-            //messageController.setLoggedUser(car.getIdCar());
             WarningController messageController = fxmlLoader.getController();
             messageController.setErrorMessage(text);
             try {
@@ -68,10 +62,10 @@ public class WarningController {
             stage1.setScene(scene);
             stage1.initModality(Modality.APPLICATION_MODAL);
             stage1.showAndWait();
-        } else if (messageType == MessageType.SUCCESS){
+        } else if (messageType == MessageType.SUCCESS) {
             Stage stage1 = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("success-modal.fxml"));
 
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("success-modal.fxml"));
 
             Scene scene = null;
             try {
@@ -82,26 +76,23 @@ public class WarningController {
 
             stage1.setMinHeight(230);
             stage1.setMinWidth(500);
-            //messageController.setLoggedUser(car.getIdCar());
             WarningController messageController = fxmlLoader.getController();
             messageController.setErrorMessage(text);
             stage1.setTitle(windowTitle);
             try {
                 stage1.getIcons().add(new Image(new FileInputStream("src/main/resources/hristov/mihail/carracing/icon.png")));
             } catch (FileNotFoundException e) {
-                // Nothing
             }
             stage1.setScene(scene);
             stage1.initModality(Modality.APPLICATION_MODAL);
             stage1.showAndWait();
         }
     }
+
     @FXML
     void initialize() {
         assert okButton != null : "fx:id=\"okButton\" was not injected: check your FXML file 'warning-modal.fxml'.";
         assert errorMessage != null : "fx:id=\"errorMessage\" was not injected: check your FXML file 'warning-modal.fxml'.";
         assert labelCarName != null : "fx:id=\"labelCarName\" was not injected: check your FXML file 'warning-modal.fxml'.";
-
     }
-
 }

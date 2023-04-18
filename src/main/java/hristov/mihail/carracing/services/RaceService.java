@@ -57,7 +57,7 @@ public class RaceService {
                 race = new Race(resultSet.getInt("idRace"), resultSet.getInt("trackRace"), resultSet.getString("dateRace"), resultSet.getInt("lapsRace"), resultSet.getInt("pointsRace"), resultSet.getInt("participantsRace"));
             }
         } catch (SQLException e) {
-            WarningController.openMessageModal("Не е намерена такова състезание!", "Лиспващо състезание", MessageType.WARNING);
+            WarningController.openMessageModal("Не е намерена такова състезание!", "Липсващо състезание", MessageType.WARNING);
         }
 
         return race;

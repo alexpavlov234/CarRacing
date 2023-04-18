@@ -26,32 +26,24 @@ public class MainScreenAdminController {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
     @FXML
     private BorderPane mainBorderPane;
     @FXML
     private Button carScreenButton;
-
     @FXML
     private Button exitUserButton;
-
     @FXML
     private Button profileUserButton;
-
     @FXML
     private Button personScreenButton;
-
     @FXML
     private Label profileNameLabel;
-
     @FXML
     private Button raceScreenButton;
-
     @FXML
     private Button tracksScreenButton;
-
     @FXML
     private Button rankingScreenButton;
 
@@ -77,7 +69,6 @@ public class MainScreenAdminController {
     @FXML
     void editProfile(ActionEvent event) {
         try {
-
             Stage stage = new Stage();
 
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
@@ -92,7 +83,6 @@ public class MainScreenAdminController {
             stage.initModality(Modality.APPLICATION_MODAL);
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                 @Override
                 public void handle(WindowEvent paramT) {
                     Person loggedPerson = PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson());
@@ -104,16 +94,17 @@ public class MainScreenAdminController {
             });
             stage.showAndWait();
         } catch (Exception e) {
-
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
+
     @FXML
     void handleShowView(ActionEvent event) {
-        try {loadFXML("cars.fxml");} catch (Exception e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+        try {
+            loadFXML("cars.fxml");
+        } catch (Exception e) {
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
-
     }
 
     @FXML
@@ -130,7 +121,7 @@ public class MainScreenAdminController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(url));
             mainBorderPane.setCenter(fxmlLoader.load());
         } catch (IOException e) {
-            WarningController.openMessageModal(e.getMessage(), "Системна грешка",MessageType.WARNING);
+            WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
         }
     }
 
@@ -174,5 +165,4 @@ public class MainScreenAdminController {
         Person loggedPerson = PersonService.getPerson(LoginService.getLoggedUser().getUserHasPerson());
         profileNameLabel.setText("Здравей, \n" + loggedPerson.getFirstNamePerson() + " " + loggedPerson.getLastNamePerson());
     }
-
 }

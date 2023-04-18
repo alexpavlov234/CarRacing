@@ -17,33 +17,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
 public class RaceHasCarAndDriverModalController {
 
     @FXML
     private Button applyChangeButton;
-
     @FXML
     private ComboBox<String> carCombobox;
-
     @FXML
     private ComboBox<String> driverCombobox;
-
     @FXML
     private Label label;
-
     @FXML
     private Label label1;
-
     @FXML
     private Label label11;
-
     @FXML
     private Label label4;
-
     @FXML
     private Label labelUserName;
-
     private RaceHasCarAndDriver raceHasCarAndDriver;
     @FXML
     private ComboBox<String> raceCombobox;
@@ -55,7 +46,6 @@ public class RaceHasCarAndDriverModalController {
 
     public boolean isNumeric(String strNum) {
         String regexPattern = "^[1-9]\\d*$";
-
         return strNum.matches(regexPattern);
     }
 
@@ -68,10 +58,9 @@ public class RaceHasCarAndDriverModalController {
                 raceHasCarAndDriver.setIdRace(RaceService.getRace(raceCombobox.getValue()).getIdRace());
                 raceHasCarAndDriver.setPoints(0);
                 if ((raceHasCarAndDriver.getIdCar() == CarService.getCar(carCombobox.getValue()).getIdCar() && raceHasCarAndDriver.getIdDriver() == PersonService.getPerson(driverCombobox.getValue()).getIdPerson())) {
-
-
                     RaceHasCarAndDriverService.updateRaceHasCarAndDriver(raceHasCarAndDriver);
                     Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
 
                     Scene scene = null;
@@ -80,8 +69,6 @@ public class RaceHasCarAndDriverModalController {
                     } catch (IOException e) {
                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     }
-                    // Обновяваме нашето прозорче за всеки случай.
-                    //dialogController.setLoggedUser(car.getIdCar());
                     RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                     dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
                     stage.setScene(scene);
@@ -91,6 +78,7 @@ public class RaceHasCarAndDriverModalController {
                     if (!(RaceHasCarAndDriverService.isParticipatingInRace(raceHasCarAndDriver.getIdRace(), raceHasCarAndDriver.getIdDriver()))) {
                         RaceHasCarAndDriverService.updateRaceHasCarAndDriver(raceHasCarAndDriver);
                         Stage stage = (Stage) applyChangeButton.getScene().getWindow();
+
                         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
 
                         Scene scene = null;
@@ -99,8 +87,6 @@ public class RaceHasCarAndDriverModalController {
                         } catch (IOException e) {
                             WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                         }
-                        // Обновяваме нашето прозорче за всеки случай.
-                        //dialogController.setLoggedUser(car.getIdCar());
                         RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                         dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
                         stage.setScene(scene);
@@ -112,7 +98,6 @@ public class RaceHasCarAndDriverModalController {
                 }
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за участието!", "Празни данни", MessageType.WARNING);
-
             }
         } else {
             if (carCombobox.getValue() != null && raceCombobox.getValue() != null && driverCombobox.getValue() != null) {
@@ -122,11 +107,10 @@ public class RaceHasCarAndDriverModalController {
                 raceHasCarAndDriver.setIdRace(RaceService.getRace(raceCombobox.getValue()).getIdRace());
                 raceHasCarAndDriver.setPoints(0);
                 if (!RaceHasCarAndDriverService.isParticipatingInRace(raceHasCarAndDriver.getIdRace(), raceHasCarAndDriver.getIdDriver())) {
-
                     RaceHasCarAndDriverService.addRaceHasCarAndDriver(raceHasCarAndDriver);
                     Stage stage = (Stage) applyChangeButton.getScene().getWindow();
-                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
 
+                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("race-has-car-and-driver-modal.fxml"));
 
                     Scene scene = null;
                     try {
@@ -134,8 +118,6 @@ public class RaceHasCarAndDriverModalController {
                     } catch (IOException e) {
                         WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
                     }
-                    // Обновяваме нашето прозорче за всеки случай.
-                    //dialogController.setLoggedUser(car.getIdCar());
                     RaceHasCarAndDriverModalController dialogController = fxmlLoader.getController();
                     dialogController.setRaceHasCarAndDriver(raceHasCarAndDriver);
                     stage.setScene(scene);
@@ -146,10 +128,8 @@ public class RaceHasCarAndDriverModalController {
                 }
             } else {
                 WarningController.openMessageModal("Попълнете всички данни за участието!", "Празни данни", MessageType.WARNING);
-
             }
         }
-
     }
 
     @FXML
@@ -172,7 +152,6 @@ public class RaceHasCarAndDriverModalController {
             driverCombobox.setDisable(false);
         }
         carCombobox.setDisable(false);
-
     }
 
     @FXML
@@ -187,7 +166,6 @@ public class RaceHasCarAndDriverModalController {
             assert label4 != null : "fx:id=\"label4\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
             assert labelUserName != null : "fx:id=\"labelUserName\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
             assert raceCombobox != null : "fx:id=\"raceCombobox\" was not injected: check your FXML file 'race-has-car-and-driver-modal.fxml'.";
-
 
             isNotEditModal = Objects.isNull(raceHasCarAndDriver);
             if (!Objects.isNull(raceHasCarAndDriver)) {
@@ -219,5 +197,4 @@ public class RaceHasCarAndDriverModalController {
             }
         });
     }
-
 }

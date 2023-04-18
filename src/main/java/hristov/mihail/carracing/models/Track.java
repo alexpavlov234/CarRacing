@@ -1,6 +1,7 @@
 package hristov.mihail.carracing.models;
 
 public class Track {
+
     private int idTrack;
     private String nameTrack;
     private int lengthTrack;

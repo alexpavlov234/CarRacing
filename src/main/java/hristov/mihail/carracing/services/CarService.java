@@ -97,7 +97,6 @@ public class CarService {
     }
 
 
-
     // Метод за извличане на последната добавена кола в базата данни
     public static Car getLastCar() {
         // SQL заявка за извличане на последния запис от таблицата car
@@ -118,7 +117,6 @@ public class CarService {
             return null;
         }
     }
-
 
 
     // Метод за актуализиране на кола в базата данни
@@ -152,7 +150,6 @@ public class CarService {
             String raceSql = "SELECT * FROM carracers.race_has_car_and_driver WHERE idCar=?";
             String driverSql = "SELECT * FROM carracers.person WHERE carPerson=?";
             try (PreparedStatement racePstmt = conn.prepareStatement(raceSql); PreparedStatement driverPstmt = conn.prepareStatement(driverSql)) {
-
                 // Проверка дали колата се използва в състезания
                 racePstmt.setInt(1, idCar);
                 ResultSet raceResultSet = racePstmt.executeQuery();
@@ -160,7 +157,6 @@ public class CarService {
                     isCarUsed = true;
                     WarningController.openMessageModal("Колата се използва в състезание и не може да бъде изтрита!", "Неуспешно изтриване", MessageType.WARNING);
                 } else {
-
                     // Проверка дали колата се използва от други състезатели
                     driverPstmt.setInt(1, idCar);
                     ResultSet driverResultSet = driverPstmt.executeQuery();
@@ -234,7 +230,6 @@ public class CarService {
     public static ArrayList<Car> getAllCar() {
         // SQL заявка за извличане на всички коли от базата данни
         String sql = "SELECT * FROM carracers.car";
-        // Create a list to store all cars
         ArrayList<Car> allCars = new ArrayList<>();
         try (PreparedStatement pstmt = Database.getConnection().prepareStatement(sql); ResultSet resultSet = pstmt.executeQuery()) {
             // Обхождане на резултатите от заявката

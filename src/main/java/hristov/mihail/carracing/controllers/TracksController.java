@@ -31,15 +31,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TracksController {
-    // Нашата таблица с данни, която се визуализира.
-    // Получаваме данните за нея от service, който взима всички записи от базата данни като ArrayList.
-    // Този лист се преобразува в ObservableList - изгъзен лист, който само той е свъместим с TableView.
+
     ObservableList<Track> tracksObservableList = FXCollections.observableList(TrackService.getAllTrack());
     @FXML
     private ResourceBundle resources;
     @FXML
     private URL location;
-
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -62,7 +59,6 @@ public class TracksController {
         nameTrack.setCellValueFactory(new PropertyValueFactory<Track, String>("nameTrack"));
         lengthTrack.setCellValueFactory(new PropertyValueFactory<Track, String>("lengthTrack"));
         locationTrack.setCellValueFactory(new PropertyValueFactory<Track, String>("locationTrack"));
-
 
         // Проверка дали логнатия потребител е администратор
         // Ако е администратор прозорецът ще се визуализира по един начин, ако не е по друг.
@@ -87,16 +83,16 @@ public class TracksController {
             addTrack.setVisible(false);
             AnchorPane.setBottomAnchor(table, 14d);
         }
+
         // Създаване на така наречения CellFactory - как ще се пълни с данни всяка клетка.
-        // nameTrack.setCellValueFactory(new PropertyValueFactory<Track, String>("nameTrack"));
         Callback<TableColumn<Track, String>, TableCell<Track, String>> cellFactory = //
                 new Callback<TableColumn<Track, String>, TableCell<Track, String>>() {
 
                     @Override
                     public TableCell call(final TableColumn<Track, String> param) {
-                        //Ако потребителя е админ, ще се покажат едни бутони, ако не е - други.
+                        //Ако потребителя е администратор, ще се покажат едни бутони, ако не е - други.
                         if (LoginService.isLoggedUserAdmin()) {
-                            //Деклариране на нашата клетка от таблицата - тя е нещо като pane.
+                            //Деклариране на нашата клетка от таблицата.
                             //Този обект казва как всяка клетка ще се създава в тази колона.
                             final TableCell<Track, String> cell = new TableCell<Track, String>() {
 
@@ -122,11 +118,10 @@ public class TracksController {
 
                                         editButton.setOnAction(event -> {
                                             Track track = getTableView().getItems().get(getIndex());
-
                                             try {
                                                 Stage stage = new Stage();
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
+                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
                                                 Scene scene = new Scene(fxmlLoader.load());
                                                 //dialogController.setLoggedUser(track.getIdCar());
@@ -139,7 +134,6 @@ public class TracksController {
                                                 stage.initModality(Modality.APPLICATION_MODAL);
 
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                                                     @Override
                                                     public void handle(WindowEvent paramT) {
                                                         tracksObservableList = FXCollections.observableList(TrackService.getAllTrack());
@@ -149,10 +143,7 @@ public class TracksController {
                                                 stage.showAndWait();
                                             } catch (Exception e) {
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-                                                //TODO: Екран за грешка
                                             }
-
-
                                         });
                                         HBox pane = new HBox(deleteButton, editButton);
                                         pane.setSpacing(5);
@@ -163,13 +154,11 @@ public class TracksController {
                                 }
                             };
                             cell.setAlignment(Pos.CENTER);
-
                             return cell;
                         } else {
                             final TableCell<Track, String> cell = new TableCell<Track, String>() {
 
                                 final Button chooseButton = new Button("Преглед");
-
 
                                 @Override
                                 public void updateItem(String item, boolean empty) {
@@ -181,11 +170,10 @@ public class TracksController {
                                         chooseButton.setStyle("-fx-background-color: #e5aa00; -fx-text-fill: white; ");
                                         chooseButton.setOnAction(event -> {
                                             Track track = getTableView().getItems().get(getIndex());
-
                                             try {
                                                 Stage stage = new Stage();
-                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
+                                                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
                                                 Scene scene = new Scene(fxmlLoader.load());
                                                 //dialogController.setLoggedUser(track.getIdCar());
@@ -198,7 +186,6 @@ public class TracksController {
                                                 stage.initModality(Modality.APPLICATION_MODAL);
 
                                                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                                                     @Override
                                                     public void handle(WindowEvent paramT) {
                                                         tracksObservableList = FXCollections.observableList(TrackService.getAllTrack());
@@ -208,11 +195,8 @@ public class TracksController {
                                                 stage.showAndWait();
                                             } catch (Exception e) {
                                                 WarningController.openMessageModal(e.getMessage(), "Системна грешка", MessageType.WARNING);
-                                                //TODO: Екран за грешка
                                             }
                                         });
-
-
                                         HBox pane = new HBox(chooseButton);
                                         pane.setSpacing(5);
                                         pane.setAlignment(Pos.CENTER);
@@ -230,15 +214,12 @@ public class TracksController {
         table.setItems(tracksObservableList);
     }
 
-
     @FXML
     void addTrack(ActionEvent event) {
-
-
         try {
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("track-modal.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
             //dialogController.setLoggedUser(car.getIdCar());
@@ -249,7 +230,6 @@ public class TracksController {
             stage.initModality(Modality.APPLICATION_MODAL);
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
                 @Override
                 public void handle(WindowEvent paramT) {
                     tracksObservableList = FXCollections.observableList(TrackService.getAllTrack());
@@ -258,8 +238,6 @@ public class TracksController {
             });
             stage.showAndWait();
         } catch (Exception e) {
-
-            //TODO: Екран за грешка
         }
     }
 }
