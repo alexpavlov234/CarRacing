@@ -17,8 +17,9 @@
 
 ```
 mysql -u [username] -p < [path_to_script.sql]
-```
-Заменете `[username]` с вашето MySQL потребителско име и `[path_to_script.sql]` с пътя до файла `script.sql`. Ще бъдете подканени да въведете паролата си за MySQL.
+``` 
+  Заменете `[username]` с вашето MySQL потребителско име и `[path_to_script.sql]` с пътя до файла `script.sql`. Ще бъдете подканени да въведете паролата си за MySQL.
+
 5. В IntelliJ IDEA отворете прозореца `Project Structure`, като отидете на `File > Project Structure`.
 6. В прозореца `Project Structure` отидете на `Modules` и се уверете, че библиотеката `JavaFX` е добавена към изискваните модули. Ако не е, добавете я, като щракнете върху бутона `+` и изберете `Library > JavaFX`.
 7. Стартирайте приложението от IntelliJ IDEA, като изберете `Run > Run 'Main'`.
