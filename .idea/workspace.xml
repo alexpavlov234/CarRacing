@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Поправени коментари.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="09d1e151-4e82-4a9e-94f2-2251435d1317" name="Changes" comment="Променено README.">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -237,14 +236,7 @@
       <workItem from="1681844502453" duration="281000" />
       <workItem from="1681844952962" duration="12000" />
       <workItem from="1682007404896" duration="40000" />
-      <workItem from="1682017711701" duration="264000" />
-    </task>
-    <task id="LOCAL-00003" summary="Поправен бъг в HelloApplication.java.">
-      <created>1665730206354</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1665730206354</updated>
+      <workItem from="1682017711701" duration="400000" />
     </task>
     <task id="LOCAL-00004" summary="Създаден е клас за връзка с база данни и добавена библиотека в Maven.">
       <created>1665731941149</created>
@@ -582,7 +574,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681838088912</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Променено README.">
+      <created>1682018019915</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1682018019915</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +623,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Вече се зареждат почти като хората точките в прозореца за добавяне на точки." />
     <MESSAGE value="Създадена е функционалност на бутона, приложи в модалът за добавяне на точки." />
     <MESSAGE value="Направена е проверка за въвеждане на невалидни точки в модалът за добавяне на точки на участници." />
     <MESSAGE value="Премахнато е въвеждането на точки при добавяне на участие, променен е дизайнът на прозорчето за участие. Поправени са бъгове. В скрипта на базата данни са добавени данни за инициализирането ѝ." />
@@ -649,7 +647,8 @@
     <MESSAGE value="Вече не ти дава да редактираш при изкочил модал или екран за грешка. :)" />
     <MESSAGE value="Поправени малки грешки." />
     <MESSAGE value="Поправени коментари." />
-    <option name="LAST_COMMIT_MESSAGE" value="Поправени коментари." />
+    <MESSAGE value="Променено README." />
+    <option name="LAST_COMMIT_MESSAGE" value="Променено README." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
